@@ -125,52 +125,19 @@ public class SignUp {
     
     public void submit(){
         System.out.println("Submit Function");
-//        try {
-//            insertRecordIntoTable();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            Users user = new Users();
+            user.setName(name);
+            user.setFamily(lastname);
+            user.setEmail(email);
+            user.setUsername(userName);
+            user.setPasword(password);
+            user.setPhoneNum(mobile);
+            UserServices.insertRecordIntoTable(user);
+        } catch (SQLException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void insertRecordIntoTable() throws SQLException {
-
-        Connection dbConnection = null;
-        PreparedStatement preparedStatement = null;
-
-        String insertTableSQL = "INSERT INTO users (name,family,username,pasword,email,phone_num,access_level) VALUES (?,?,?,?,?,?,?)";
-
-        try {
-            dbConnection = DataConnect.getConnection();
-            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, lastname);
-            preparedStatement.setString(3, userName);
-            preparedStatement.setString(4, password);
-            preparedStatement.setString(5, email);
-            preparedStatement.setString(6, mobile);
-            preparedStatement.setString(7, "0");
-
-            // execute insert SQL stetement
-            preparedStatement.executeUpdate();
-            System.out.println("Record is inserted into DBUSER table!");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connection status", "ezafe shod"));
-
-        } catch (SQLException e) {
-
-            System.out.println(e.getMessage());
-
-        } finally {
-
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-
-        }
-
-    }
+    
 }
