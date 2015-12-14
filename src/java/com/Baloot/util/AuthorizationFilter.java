@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.login;
+package com.Baloot.util;
 
 /**
  *
@@ -44,6 +44,7 @@ public class AuthorizationFilter implements Filter {
  
             String reqURI = reqt.getRequestURI();
             if (reqURI.indexOf("/index.xhtml") >= 0
+                    || reqURI.indexOf("/signup.xhtml") >= 0
                     || (ses != null && ses.getAttribute("username") != null)
                     || reqURI.indexOf("/public/") >= 0
                     || reqURI.contains("javax.faces.resource"))

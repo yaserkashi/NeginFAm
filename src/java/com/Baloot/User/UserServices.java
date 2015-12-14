@@ -4,42 +4,41 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.login;
+package com.Baloot.User;
+
+import com.Baloot.util.DataConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author FK
  */
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
- 
-public class LoginDAO {
- 
-    public static boolean validate(String user, String password) {
+public class UserServices {
+    public static Integer validate(String user, String password) {
         Connection con = null;
         PreparedStatement ps = null;
  
         try {
             con = DataConnect.getConnection();
-            ps = con.prepareStatement("Select username, pasword from Users where username = ? and pasword = ?");
+            ps = con.prepareStatement("Select username, pasword, access_level from Users where username = ? and pasword = ?");
             ps.setString(1, user);
             ps.setString(2, password);
  
             ResultSet rs = ps.executeQuery();
  
             if (rs.next()) {
-                //result found, means valid inputs
-                return true;
+                String accessLevel = rs.getString("access_level");
+                return Integer.valueOf(accessLevel);
             }
         } catch (SQLException ex) {
             System.out.println("Login error -->" + ex.getMessage());
-            return false;
+            return 0;
         } finally {
             DataConnect.close(con);
         }
-        return false;
+        return 0;
     }
 }
-
