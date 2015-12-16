@@ -1,5 +1,6 @@
-package com.Baloot.login;
+package com.Baloot.User;
 
+import com.Baloot.util.SessionBean;
 import java.io.Serializable;
  
 import javax.faces.application.FacesMessage;
@@ -44,25 +45,34 @@ public class Login implements Serializable {
  
     //validate login
     public String validateUsernamePassword() {
-        boolean valid = LoginDAO.validate(user, pwd);
-        if (valid) {
-            HttpSession session = SessionBean.getSession();
-            session.setAttribute("username", user);
-            return "admin";
-        } else {
-            FacesContext.getCurrentInstance().addMessage(
+        Integer valid = UserServices.validate(user, pwd);
+        switch (valid) {
+            case 0 : {
+                FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Incorrect Username and Passowrd",
                             "Please enter correct username and Password"));
-            return "login";
+                return "index";
+            }
+            case 1 : {
+                HttpSession session = SessionBean.getSession();
+                session.setAttribute("username", user);
+                return "admin";
+            }
+            case 2 : {
+                HttpSession session = SessionBean.getSession();
+                session.setAttribute("username", user);
+                return "user";
+            }
         }
+        return "index";
     }
  
     //logout event, invalidate session
     public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        return "login";
+        return "index";
     }
 }

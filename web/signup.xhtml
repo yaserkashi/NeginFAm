@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/ui.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <div dir="rtl">
+                <p:outputLabel value="فیلد های ستاره دار اجباری می باشد"/>
+                <p:panelGrid id="panel">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="نام کاربری*"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.userName}" required="true" requiredMessage="نام کاربری را وارد کنید."/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="رمز عبور*"/>
+                        </p:column>
+                        <p:column>
+                            <p:password value="#{signUp.password}" match="pass" required="true" requiredMessage="رمز عبور را ورد کنید."/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="تکرار رمز عبور*"/>
+                        </p:column>
+                        <p:column>
+                            <p:password id="pass" value="#{signUp.password}" required="true" requiredMessage="رمز عبور را ورد کنید."/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="رایانامه*:"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.email}" required="true" requiredMessage="رمز عبور را ورد کنید."/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="نام"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.name}"/>
+                        </p:column>                
+                    </p:row>                    
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="نام خانوادگی"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.lastname}"/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="تلفن"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.mobile}"/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="نحوه اشنایی با سایت "/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.introduction}"/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="کد همکار:"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.partnerCode}"/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="کد امنیتی"/>
+                            <p:graphicImage value="#{captchaUtil.image}" width="150" height="75" ></p:graphicImage>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{signUp.secCode}"/>
+                        </p:column>                
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="قوانین سایت"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectBooleanCheckbox value="#{signUp.lowCheck}" ></p:selectBooleanCheckbox>
+                            <p:outputLabel value="تمامی قوانین نگین فام را قبول دارم"/>
+                            <br/>
+                            <a href="/resources/1.jpg">دانلود قوانین شرکت</a>
+                        </p:column>                
+                    </p:row>                    
+                    <p:row>
+                        <p:column>
+                            <p:commandButton value="ثبت" update="panel" actionListener="#{signUp.submit()}" ></p:commandButton>
+                        </p:column>
+                        <p:column>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>   
+
