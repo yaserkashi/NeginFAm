@@ -85,4 +85,50 @@ public class UserServices {
         }
 
     }
+    
+    public static Boolean isUsernameUsed(String user) {
+        Connection con = null;
+        PreparedStatement ps;
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from Users where username = ?");
+            ps.setString(1, user);
+ 
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return false;
+        } finally {
+            DataConnect.close(con);
+        }
+        return false;
+    }
+    
+    public static Boolean isEmailUsed(String email) {
+        Connection con = null;
+        PreparedStatement ps;
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from Users where email = ?");
+            ps.setString(1, email);
+ 
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return false;
+        } finally {
+            DataConnect.close(con);
+        }
+        return false;
+    }
 }

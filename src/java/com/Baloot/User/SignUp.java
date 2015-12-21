@@ -6,15 +6,23 @@
 
 package com.Baloot.User;
 
-import com.Baloot.util.DataConnect;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import com.Baloot.util.CaptchaUtil;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import javax.validation.constraints.Size;
+import nl.captcha.Captcha;
+import org.hibernate.validator.constraints.Email;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 
 /**
@@ -23,9 +31,12 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 public class SignUp {
+    @Size(min = 4,message = "نام کاربری نباید کمتر از چهار حرف باشد.")
     private String userName;
+    @Size(min = 6,message = "رمز عبور نباید کمتر از شش حرف باشد.")
     private String password;
     private String rePassword;
+    @Email(message = "رایانامه باید معتبر باشد.")
     private String email;
     private String name;
     private String lastname;
@@ -34,6 +45,21 @@ public class SignUp {
     private String partnerCode;
     private String secCode;
     private boolean lowCheck;
+    private Captcha captcha;
+    private StreamedContent image;
+    private String answer;
+    
+    @PostConstruct
+    public void init() {
+        generateNewCaptcha();
+    }
+   
+    public Captcha getCaptcha() {
+        return captcha;
+    }
+    public StreamedContent getImage() {
+        return image;
+    }
 
     public String getUserName() {
         return userName;
@@ -123,21 +149,44 @@ public class SignUp {
         this.lowCheck = lowCheck;
     }
     
-    public void submit(){
-        System.out.println("Submit Function");
+    public void generateNewCaptcha() {
         try {
-            Users user = new Users();
-            user.setName(name);
-            user.setFamily(lastname);
-            user.setEmail(email);
-            user.setUsername(userName);
-            user.setPasword(password);
-            user.setPhoneNum(mobile);
-            UserServices.insertRecordIntoTable(user);
-        } catch (SQLException ex) {
-            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            captcha = CaptchaUtil.generateNewCaptcha();
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(captcha.getImage(), "png", os);
+            image = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png"); 
+            answer = captcha.getAnswer();
+            System.out.println("answer = " + answer);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
     }
     
-    
+    public void submit(){
+        System.out.println("Submit Function");
+        if (!answer.equals(secCode)) {
+            System.out.println(answer + " " + secCode);
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("کدامنیتی را اشتباه وارد کرده اید!"));
+        } else if (UserServices.isUsernameUsed(userName)) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("نام کاربری که انتخاب کرده اید قبلا استفاده شده است!"));
+        } else if (UserServices.isEmailUsed(email)) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("کاربری با این رایانامه در سایت ثبت نام کرده است!"));
+        } else 
+            try {
+                Users user = new Users();
+                user.setName(name);
+                user.setFamily(lastname);
+                user.setEmail(email);
+                user.setUsername(userName);
+                user.setPasword(password);
+                user.setPhoneNum(mobile);
+                UserServices.insertRecordIntoTable(user);
+            } catch (SQLException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     
+    }
 }
