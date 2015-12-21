@@ -8,13 +8,14 @@
         <h:form>
             <div dir="rtl">
                 <p:outputLabel value="فیلد های ستاره دار اجباری می باشد"/>
+                <p:messages autoUpdate="true"/>
                 <p:panelGrid id="panel">
                     <p:row>
                         <p:column>
                             <p:outputLabel value="نام کاربری*"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{signUp.userName}" required="true" requiredMessage="نام کاربری را وارد کنید."/>
+                            <p:inputText id="firstname" value="#{signUp.userName}" required="true" requiredMessage="نام کاربری را وارد کنید."/>
                         </p:column>                
                     </p:row>
                     <p:row>
@@ -22,7 +23,7 @@
                             <p:outputLabel value="رمز عبور*"/>
                         </p:column>
                         <p:column>
-                            <p:password value="#{signUp.password}" match="pass" required="true" requiredMessage="رمز عبور را ورد کنید."/>
+                            <p:password id="pass1" value="#{signUp.password}" match="pass2" validatorMessage="رمز عبور و تکرار آن مطابقت ندارند." required="true" requiredMessage="رمز عبور را وارد کنید."/>
                         </p:column>                
                     </p:row>
                     <p:row>
@@ -30,7 +31,7 @@
                             <p:outputLabel value="تکرار رمز عبور*"/>
                         </p:column>
                         <p:column>
-                            <p:password id="pass" value="#{signUp.password}" required="true" requiredMessage="رمز عبور را ورد کنید."/>
+                            <p:password id="pass2" value="#{signUp.password}" required="true" requiredMessage="رمز عبور را تکرار کنید."/>
                         </p:column>                
                     </p:row>
                     <p:row>
@@ -38,7 +39,7 @@
                             <p:outputLabel value="رایانامه*:"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{signUp.email}" required="true" requiredMessage="رمز عبور را ورد کنید."/>
+                            <p:inputText id="mail" value="#{signUp.email}" required="true" requiredMessage="رایانامه را وارد کنید."/>
                         </p:column>                
                     </p:row>
                     <p:row>
@@ -46,7 +47,7 @@
                             <p:outputLabel value="نام"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{signUp.name}"/>
+                            <p:inputText id="name" value="#{signUp.name}"/>
                         </p:column>                
                     </p:row>                    
                     <p:row>
@@ -62,7 +63,7 @@
                             <p:outputLabel value="تلفن"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{signUp.mobile}"/>
+                            <p:inputText id="mobile" value="#{signUp.mobile}"/>
                         </p:column>                
                     </p:row>
                     <p:row>
@@ -84,10 +85,10 @@
                     <p:row>
                         <p:column>
                             <p:outputLabel value="کد امنیتی"/>
-                            <p:graphicImage value="#{captchaUtil.image}" width="150" height="75" ></p:graphicImage>
+                            <p:graphicImage value="#{signUp.image}" width="150" height="75" ></p:graphicImage>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{signUp.secCode}"/>
+                            <p:inputText id="captcha" value="#{signUp.secCode}"/>
                         </p:column>                
                     </p:row>
                     <p:row>
@@ -103,7 +104,7 @@
                     </p:row>                    
                     <p:row>
                         <p:column>
-                            <p:commandButton value="ثبت" update="panel" actionListener="#{signUp.submit()}" ></p:commandButton>
+                            <p:commandButton value="ثبت" update="panel" actionListener="#{signUp.submit()}" ajax="false" ></p:commandButton>
                         </p:column>
                         <p:column>
                         </p:column>

@@ -1,44 +1,16 @@
 package com.Baloot.util;
 
 import java.awt.Color;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Random;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.imageio.ImageIO;
 import nl.captcha.Captcha;
 import nl.captcha.backgrounds.BackgroundProducer;
 import nl.captcha.backgrounds.GradiatedBackgroundProducer;
 import nl.captcha.noise.CurvedLineNoiseProducer;
 import nl.captcha.text.producer.DefaultTextProducer;
 import nl.captcha.text.producer.TextProducer;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
-@ManagedBean
 public class CaptchaUtil {
-        private Captcha captcha;
-        private StreamedContent image;
-        @PostConstruct
-        public void init() {
-            try {
-                captcha = generateNewCaptcha();
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            ImageIO.write(captcha.getImage(), "png", os);
-            image = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png"); 
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-            
-        }
-        public Captcha getCaptcha() {
-            return captcha;
-        }
-        public StreamedContent getImage() {
-            return image;
-        }
+        
 	public static Captcha generateNewCaptcha() {
 		Captcha captcha = null;
 		Random random = new Random();
