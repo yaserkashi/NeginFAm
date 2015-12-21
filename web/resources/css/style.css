@@ -1,0 +1,98 @@
+@font-face {
+    font-family: "BBCNassim";
+    src: url("../resources/font/BBCNassim.eot");
+    src: local("☺"),
+    url("../resources/font/BBCNassim.woff") format("woff"),
+    url("../resources/font/BBCNassim.ttf") format("truetype");
+}
+
+body {
+    margin: 0;
+}
+
+body * {
+    font-family: "BBCNassim", Helvetica, sans-serif;
+}
+
+body a{
+    text-decoration: none;
+    color: #222222;
+}
+
+body a:hover{
+    text-decoration: none;
+    color: rgba(190, 27, 22, 0.83);
+}
+
+.sticky {
+    position: fixed;
+    height: 48px;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    z-index: 2;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.logo {
+    width: 10%;
+    height: inherit;
+    display: inline-block;
+    text-align: center;
+}
+
+.company {
+    background-image: url('../resources/images/slide3.jpg');
+    width: 90%;
+    height: inherit;
+    display: inline-block;
+    position: absolute;
+}
+
+.headerMenu {
+    width: 100%;
+    direction: rtl;
+}
+
+.content {
+    width: 100%;
+    padding-top: 10px;
+    float: right;
+}
+
+.sidePanel {
+    width: 20%;
+    height: 410px;
+    padding-top: 5px;
+
+    display: inline-block;
+    position: absolute;
+    direction: rtl;
+}
+
+.sidePanel a {
+    display: block;
+}
+
+.contentPanel {
+    width: 80%;
+    height: 500px;
+    display: inline-block;
+    direction: rtl;
+}
+
+.footer {
+    background-color: slategray;
+    width: 100%;
+    height: 50px;
+    bottom: 0px;
+    position: fixed;
+}
+
+.footer *{
+    font-size: 14px;
+}

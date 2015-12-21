@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <ui:composition template="/template/template.xhtml">
+        <ui:define name="header">
+            <title> صفحه اصلی </title>
+        </ui:define>
+        <ui:define name="sidePanel">
+            <div style="width: 20%">
+                <p:panelGrid columns="2" style="background-color: antiquewhite">
+                    <p:outputLabel style="float: right;width: 100px" value="نام کاربری :"/>
+                    <p:inputText style="float: right ;width: 100px" required="true" value="#{loginBean.userName}"
+                                 requiredMessage="Please enter username"/>
+                    <p:outputLabel style="float: right" value="کلمه عبور :"/>
+                    <p:password style="float: right;width: 100px" value="#{loginBean.password}"/>
+                    <p:outputLabel></p:outputLabel>
+                    <p:graphicImage id="capimg"
+                                    value="#{facesContext.externalContext.requestContextPath}/../Captcha.jpg"/>
+                    <p:outputLabel style="float: right " value="کد امنیتی :"/>
+                    <p:inputText required="true" style="width: 100px" requiredMessage=""
+                                 value="#{loginBean.validate}"/>
+                    <p:commandButton action="#{loginBean.cancel}"
+                                     styleClass="loginPanelBtn"
+                                     value="انصراف"/>
+                    <p:commandButton action="#{loginBean.login}"
+                                     styleClass="loginPanelBtn" value="ورود"/>
+                </p:panelGrid>
+            </div>
+        </ui:define>
+
+        <ui:define name="content">
+            <!--here is place of code-->
+            <p:galleria value="#{loginBean.images}" var="image" panelWidth="1000" panelHeight="313" showCaption="true">
+                <p:graphicImage name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+            </p:galleria>
+        </ui:define>
+        <ui:define name="footer">
+
+        </ui:define>
+
+    </ui:composition>
+</h:head>
+
+</html>
