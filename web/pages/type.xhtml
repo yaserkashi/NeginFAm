@@ -5,26 +5,21 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../templates/ui.xhtml">
     <ui:define name="content">
-         <h:form>
-            <p:panelGrid columns="2" style="float: right">
+         <h:form id="form">
+            <p:messages autoUpdate="true"/>
+            <p:panelGrid id="panel" columns="2" style="float: right">
                 <f:facet name="header" >
                     ثبت سفارش تایپ
                 </f:facet>
 
                 <p:selectOneMenu id="lang" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
-                    <f:selectItem itemLabel="انگلیسی" itemValue="" />
-                    <f:selectItem itemLabel=" فرانسه" itemValue="Xbox One" />
-                    <f:selectItem itemLabel="ژاپنی" itemValue="PS4" />
-                    <f:selectItem itemLabel=" اسپانیایی" itemValue="Wii U" />
+                    <f:selectItems value="#{typeForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
                 </p:selectOneMenu>
                 
                 <p:outputLabel value="زبان "  style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px  "></p:outputLabel>
 
                 <p:selectOneMenu id="feild" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                    <f:selectItem itemLabel="تخصصی" itemValue="" />
-                    <f:selectItem itemLabel=" عمومی" itemValue="Xbox One" />
-                    <f:selectItem itemLabel="پزشکی" itemValue="PS4" />
-                    <f:selectItem itemLabel=" مهندسی" itemValue="Wii U" />
+                    <f:selectItems value="#{typeForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
                 </p:selectOneMenu>              
                 
                 <p:outputLabel value="زمینه " style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
@@ -67,7 +62,8 @@
                <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                 
                 <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
-               <p:button  value="ثبت" style="background: #2F84B1; color: window ; float: right ; font-size: 16px" />
+                <p:commandButton  value="ثبت" actionListener="#{typeForm.submit()}" style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
+                </p:commandButton>
 
    
 

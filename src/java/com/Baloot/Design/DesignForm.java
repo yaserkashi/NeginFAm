@@ -6,8 +6,14 @@
 
 package com.Baloot.Design;
 
+import com.Baloot.Coding.Coding;
+import com.Baloot.Coding.CodingServices;
+import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
+import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -16,15 +22,40 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class DesignForm {
     private Integer designType;
+    private List<Coding> designTypes = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.design_type.ordinal());
     private String size;
+    private List<Coding> sizes = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.size.ordinal());
     private String optionalSize;
     private String printType;
+    private List<Coding> printTypes = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.print_type.ordinal());
     private String printOption;
+    private List<Coding> printOptions = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.print_option.ordinal());
     private String designOption;
+    private List<Coding> designOptions = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.design_option.ordinal());
     private String explian;
     private String endDate;
     private String attachFile;
 
+    public List<Coding> getDesignTypes() {
+        return designTypes;
+    }
+
+    public List<Coding> getSizes() {
+        return sizes;
+    }
+
+    public List<Coding> getPrintTypes() {
+        return printTypes;
+    }
+
+    public List<Coding> getPrintOptions() {
+        return printOptions;
+    }
+
+    public List<Coding> getDesignOptions() {
+        return designOptions;
+    }
+      
     public void setDesignType(Integer designType) {
         this.designType = designType;
     }
@@ -98,6 +129,8 @@ public class DesignForm {
     }
     
     public void submit() {
-        Integer i = OrderTypesEnum.design.ordinal(); 
+        System.out.println("SUBMIT FUNCTION!");
+        FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("درسته ......"));
     }
 }

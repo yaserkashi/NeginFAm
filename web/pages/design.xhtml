@@ -12,27 +12,22 @@
             <title>Facelet Title</title>
         </h:head>
         <h:body>
-            <h:form>
-                <p:panelGrid columns="2" style="float: right">
+            <h:form id="form">
+                <p:messages autoUpdate="true"/>
+                <p:panelGrid id="panel" columns="2" style="float: right">
                     <f:facet name="header" >
                         فرم طراحی
                     </f:facet>
 
                     <p:selectOneMenu id="lang" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
-                        <f:selectItem itemLabel="گرافیکی" itemValue="" />
-                        <f:selectItem itemLabel=" انیمیشنی" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="ساده" itemValue="PS4" />
-                        <f:selectItem itemLabel=" سیاه سفید" itemValue="Wii U" />
+                        <f:selectItems value="#{designForm.designTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="نوع طراحی "  style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px  "></p:outputLabel>
 
 
                     <p:selectOneMenu id="feild" value="" style="width:100px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItem itemLabel="26*26" itemValue="" />
-                        <f:selectItem itemLabel=" 48*48" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="72*72" itemValue="PS4" />
-                        <f:selectItem itemLabel=" 96*96" itemValue="Wii U" />
+                        <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
                     </p:selectOneMenu> 
 
 
@@ -45,17 +40,12 @@
                     <p:outputLabel value="سایزدلخواه" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
                     <p:selectOneMenu id="feild1" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItem itemLabel="سفید" itemValue="" />
-                        <f:selectItem itemLabel=" شیشه ای" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="ابی" itemValue="PS4" />
-                        <f:selectItem itemLabel=" مشکی" itemValue="Wii U" />
+                        <f:selectItems value="#{designForm.printTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
                     </p:selectOneMenu>  
                     <p:outputLabel value="رنگ چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
                     <p:selectOneMenu id="feild2" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItem itemLabel="حاشیه دار" itemValue="" />
-                        <f:selectItem itemLabel=" تصویر دار" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="ساده" itemValue="PS4" />
+                        <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
 
                     </p:selectOneMenu>            
                     
@@ -63,8 +53,7 @@
                     <p:outputLabel value="نوع چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
                     <p:selectOneMenu id="feild3" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItem itemLabel="تک رو" itemValue="" />
-                        <f:selectItem itemLabel="دو رو" itemValue="two face" />
+                        <f:selectItems value="#{designForm.printOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
 
                     </p:selectOneMenu>
 
@@ -83,7 +72,8 @@
                     <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
                     <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
-                    <p:button  value="ثبت" style="background: #2F84B1; color: window ; float: right ; font-size: 16px" />
+                    <p:commandButton  value="ثبت" actionListener="#{designForm.submit()}" style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
+                    </p:commandButton>
 
 
 

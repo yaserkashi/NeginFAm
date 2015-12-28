@@ -6,7 +6,14 @@
 
 package com.Baloot.Type;
 
+import com.Baloot.Coding.Coding;
+import com.Baloot.Coding.CodingServices;
+import com.Baloot.Enum.CombosEnum;
+import com.Baloot.Enum.OrderTypesEnum;
+import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -15,7 +22,9 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class TypeForm {
     private Integer language;
+    private List<Coding> languges = CodingServices.getCodings(OrderTypesEnum.type.ordinal(), CombosEnum.language.ordinal());
     private Integer field;
+    private List<Coding> fields = CodingServices.getCodings(OrderTypesEnum.type.ordinal(), CombosEnum.field.ordinal());
     private String title;
     private boolean formulation;
     private boolean layout;
@@ -29,6 +38,14 @@ public class TypeForm {
     private boolean delivery;
     private String attachFile;
 
+    public List<Coding> getLanguges() {
+        return languges;
+    }
+
+    public List<Coding> getFields() {
+        return fields;
+    }
+    
     public void setLanguage(Integer language) {
         this.language = language;
     }
@@ -142,6 +159,8 @@ public class TypeForm {
     }
     
     public void submit() {
-        
+        System.out.println("Submit Function!");
+        FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("درسته ......"));
     }
 }
