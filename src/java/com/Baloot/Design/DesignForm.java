@@ -10,10 +10,29 @@ import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
+import com.Baloot.User.UserServices;
+import com.Baloot.util.SessionBean;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -34,7 +53,7 @@ public class DesignForm {
     private List<Coding> designOptions = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.design_option.ordinal());
     private String explian;
     private String endDate;
-    private String attachFile;
+    private UploadedFile attachFile;
 
     public List<Coding> getDesignTypes() {
         return designTypes;
@@ -83,10 +102,6 @@ public class DesignForm {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-
-    public void setAttachFile(String attachFile) {
-        this.attachFile = attachFile;
-    }
     
     public Integer getDesignType() {
         return designType;
@@ -115,10 +130,6 @@ public class DesignForm {
     public String getEndDate() {
         return endDate;
     }
-
-    public String getAttachFile() {
-        return attachFile;
-    }
     
     public String getDesignOption() {
         return designOption;
@@ -127,10 +138,74 @@ public class DesignForm {
     public void setDesignOption(String designOption) {
         this.designOption = designOption;
     }
+
+    public UploadedFile getAttachFile() {
+        return attachFile;
+    }
+
+    public void setAttachFile(UploadedFile attachFile) {
+        this.attachFile = attachFile;
+    }
+    
+    public void uploaded(FileUploadEvent event) {
+        System.out.println("ghghghh");
+        try {
+            attachFile = event.getFile();
+            save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void save(String filename, InputStream input) {
+        System.out.println(filename);
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                .getExternalContext().getRequest();
+        String path = httpServletRequest.getSession().getServletContext()
+                .getRealPath("/resources/downloadFile/");
+        System.out.println(path);
+        try {
+            OutputStream output = new FileOutputStream(new File(path, filename));
+            IOUtils.copy(input, output);
+//            int read;
+//            byte[] bytes = new byte[1024];
+//
+//            while ((read = input.read(bytes)) != -1) {
+//                    output.write(bytes, 0, read);
+//            }
+            
+            System.out.println("Done!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(input);
+        }
+    }
     
     public void submit() {
         System.out.println("SUBMIT FUNCTION!");
-        FacesContext.getCurrentInstance().addMessage(null,
+        Design design = new Design();
+        design.setDesignType(designType);
+        design.setSize(size);
+        if (!optionalSize.equals(""))
+            design.setSize(optionalSize);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        design.setRegisterDate(dateFormat.format(date));
+        design.setPrintType(printType);
+        design.setDesingOption(designOption);
+        design.setPrintOption(printOption);
+        design.setEndDate(endDate);
+        design.setExplain(explian);
+        design.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()));
+        try {
+            DesignServices.insertRecordIntoTable(design);
+            FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("درسته ......"));
+        } catch (SQLException ex) {
+            Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

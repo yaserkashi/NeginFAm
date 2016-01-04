@@ -19,15 +19,15 @@
                         فرم طراحی
                     </f:facet>
 
-                    <p:selectOneMenu id="lang" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
-                        <f:selectItems value="#{designForm.designTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
+                    <p:selectOneMenu id="lang" value="#{designForm.designType}" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
+                        <f:selectItems value="#{designForm.designTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="نوع طراحی "  style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px  "></p:outputLabel>
 
 
-                    <p:selectOneMenu id="feild" value="" style="width:100px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
+                    <p:selectOneMenu id="feild" value="#{designForm.size}" style="width:100px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                        <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
                     </p:selectOneMenu> 
 
 
@@ -35,40 +35,41 @@
 
 
 
-                    <p:inputText  style="width: 200px;float: right;direction: rtl ;padding-right: 15px" />
+                    <p:inputText value="#{designForm.optionalSize}"  style="width: 200px;float: right;direction: rtl ;padding-right: 15px" />
 
                     <p:outputLabel value="سایزدلخواه" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
-                    <p:selectOneMenu id="feild1" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItems value="#{designForm.printTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
+                    <p:selectOneMenu id="feild1" value="#{designForm.printType}" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                        <f:selectItems value="#{designForm.printTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
                     </p:selectOneMenu>  
                     <p:outputLabel value="رنگ چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
-                    <p:selectOneMenu id="feild2" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
+                    <p:selectOneMenu id="feild2" value="#{designForm.designOption}" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                        <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
 
                     </p:selectOneMenu>            
                     
 
                     <p:outputLabel value="نوع چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
-                    <p:selectOneMenu id="feild3" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                        <f:selectItems value="#{designForm.printOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding}"/>
+                    <p:selectOneMenu id="feild3" value="#{designForm.printOption}" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                        <f:selectItems value="#{designForm.printOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
 
                     </p:selectOneMenu>
 
                     <p:outputLabel value="مشخصات چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel> 
 
 
-                    <p:inputTextarea rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                    <p:inputTextarea value="#{designForm.explian}" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
                     <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
-                    <p:calendar style="width:200px;float: right;direction: rtl"/>
+                    <p:calendar value="#{designForm.endDate}" style="width:200px;float: right;direction: rtl"/>
                     <p:outputLabel value=" تاریخ و ساعت درخواستی " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
 
 
-                    <p:button  value="آپلود فایل" style="background: #679843 ; color: window ; float: right ; font-size: 16px" />
+                    <p:fileUpload  value="#{designForm.attachFile}" dragDropSupport="true" mode="advanced"
+                                                   fileUploadListener="#{designForm.uploaded}"/>
                     <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
                     <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>

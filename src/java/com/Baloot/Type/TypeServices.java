@@ -23,7 +23,7 @@ public class TypeServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertTableSQL = "INSERT INTO type (languge,field,title,date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO type (language,field,title,date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();

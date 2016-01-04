@@ -10,7 +10,12 @@ import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
+import com.Baloot.User.UserServices;
+import com.Baloot.util.SessionBean;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -158,9 +163,55 @@ public class TypeForm {
         return attachFile;
     }
     
+    public String getOption(boolean f,boolean l,boolean i, boolean t, boolean c, boolean s, boolean e) {
+        String options = "";
+        if (f)
+            options += '1';
+        else
+            options += '0';
+        if (l)
+            options += '1';
+        else
+            options += '0';
+        if (i)
+            options += '1';
+        else
+            options += '0';
+        if (t)
+            options += '1';
+        else
+            options += '0';
+        if (c)
+            options += '1';
+        else
+            options += '0';
+        if (s)
+            options += '1';
+        else
+            options += '0';
+        if (e)
+            options += '1';
+        else
+            options += '0';
+        return options;
+    }
+    
     public void submit() {
         System.out.println("Submit Function!");
-        FacesContext.getCurrentInstance().addMessage(null,
+        Type type = new Type();
+        type.setLanguage(language);
+        type.setField(field);
+        type.setTitle(title);
+        type.setExplain(explain);
+        type.setDateTime(dateTime);
+        type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
+        type.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()).getId());
+        try {
+            TypeServices.insertRecordIntoTable(type);
+            FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("درسته ......"));
+        } catch (SQLException ex) {
+            Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

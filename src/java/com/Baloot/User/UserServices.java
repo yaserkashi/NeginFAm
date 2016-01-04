@@ -21,7 +21,7 @@ import javax.faces.context.FacesContext;
 public class UserServices {
     public static Integer validate(String user, String password) {
         Connection con = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps;
  
         try {
             con = DataConnect.getConnection();
@@ -66,7 +66,46 @@ public class UserServices {
             // execute insert SQL stetement
             preparedStatement.executeUpdate();
             System.out.println("Record is inserted into DBUSER table!");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connection status", "ezafe shod"));
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+    
+    public static void updateTable(Users user) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateTableSQL = "UPDATE users SET name = ?,family = ?,username = ?,email = ?,phone_num = ? WHERE id = ?";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getFamily());
+            preparedStatement.setString(3, user.getUsername());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getPhoneNum());
+            preparedStatement.setInt(6, user.getId());
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("Record updated in DBUSER table!");
 
         } catch (SQLException e) {
 
@@ -107,6 +146,38 @@ public class UserServices {
             DataConnect.close(con);
         }
         return false;
+    }
+    
+    public static Users getUserByUsername(String username) {
+        Connection con = null;
+        PreparedStatement ps;
+        Users user = new Users();
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from Users where username = ?");
+            ps.setString(1, username);
+ 
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setUsername(username);
+                user.setPasword(rs.getString("pasword"));
+                user.setName(rs.getString("name"));
+                user.setFamily(rs.getString("family"));
+                user.setEmail(rs.getString("email"));
+                user.setPhoneNum(rs.getString("phone_num"));
+                user.setAccessLevel(rs.getInt("access_level"));
+                return user;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
+        return null;
     }
     
     public static Boolean isEmailUsed(String email) {
