@@ -3,7 +3,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="templates/ui.xhtml">
+                xmlns:botDetect="botDetectFacelets"
+                template="../../template/signuptemplate.xhtml">
     <ui:define name="content">
         <h:form>
             <div dir="rtl">
@@ -73,19 +74,14 @@
                         <p:column>
                             <p:inputText value="#{signUp.introduction}"/>
                         </p:column>                
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="کد همکار:"/>
-                        </p:column>
-                        <p:column>
-                            <p:inputText value="#{signUp.partnerCode}"/>
-                        </p:column>                
-                    </p:row>
+                    </p:row>                    
                     <p:row>
                         <p:column>
                             <p:outputLabel value="کد امنیتی"/>
-                            <p:graphicImage value="#{signUp.image}" width="150" height="75" ></p:graphicImage>
+                            <h:form prependId="false">
+                                <botDetect:jsfCaptcha id="faceletsExampleCaptcha" 
+                                                      binding="#{signUp.captcha}"  />
+                            </h:form>
                         </p:column>
                         <p:column>
                             <p:inputText id="captcha" value="#{signUp.secCode}"/>

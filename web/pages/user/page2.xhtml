@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/ui.xhtml">
+    <ui:define name="content">
+        <h:form> 
+
+            <p:outputLabel value="تغییر رمز عبور" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+
+
+            <p:outputPanel style="float: right;text-align: center;">
+                <h:panelGrid columns="3" cellpadding="5"  >
+
+
+                    <h:inputText value="1234" style="font-weight: bold" disabled="true"/>
+
+                    <h:outputLabel value="*" style="color: red"/>
+                    <h:outputText value="پسورد فعلی" />
+
+                    
+ 
+
+                    <p:password id="pwd1" value="" match="pwd2" label="Password 1" required="true" feedback="true" />
+                    <h:outputLabel value="*" style="color: red"/>
+                    <h:outputLabel for="pwd1" value="رمز عبور" />
+
+
+
+                    <p:password id="pwd2" value="" label="Password 2" required="true" feedback="true" />
+                    <h:outputLabel value="*" style="color: red"/>
+                    <h:outputLabel for="pwd2" value="رمز عبور را مجددا وارد کنید" />
+
+                </h:panelGrid>
+            </p:outputPanel>
+               <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>   
+

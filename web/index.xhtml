@@ -1,37 +1,102 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
-                template="templates/ui.xhtml">
-    <ui:define name="content">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="header">
+                <title> صفحه اصلی </title>
+            </ui:define>
+            <ui:define name="galleria">
+                <div style="margin-right: 90px">
+                    <p:galleria value="#{mainPage.images}" var="image" panelWidth="1100" panelHeight="280"
+                                showCaption="true">
+                        <p:graphicImage name="#{image}" alt="" title="" height="1320"/>
+                    </p:galleria>
+                </div>
+            </ui:define>
+            <ui:define name="sidePanel">
+                <div style="width:230px;background-color: #ffffff;padding-right: 10px;padding-top: 5px;margin-right: 23px">
+                    <p:panelGrid columns="1" style="background-color: antiquewhite">
+                        <p:inputText placeholder="نام کاربری" style="float: right ;width: 150px" required="true"
+                                     id="username"
+                                     value="#{login.user}"
+                                     requiredMessage="Please enter username"/>
+                        <p:password placeholder="کلمه عبور " style="float: right;width: 150px" id="password"
+                                    value="#{login.pwd}"/>
+                        <p:outputLabel></p:outputLabel>
+
+
+                        <p:commandButton action="#{login.validateUsernamePassword}"
+                                         styleClass="loginPanelBtn" value="ورود"/>
+                    </p:panelGrid>
+                    <p:panelGrid columns="1" styleClass="news" >
+                        <p:outputLabel style="font-size: 1em !important;" styleClass="news-link" value="آخرین اخبار سایت"/>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                    </p:panelGrid>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <!--here is place of code-->
+
+                <div style="background-color: #fff;margin-top: 50px; padding: 25px; text-align: center;">
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/register.png"/>
+                    </h:link>
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+                    <h:link outcome="signup" value="">
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/Apply-Now-icon.png"></p:graphicImage>
+                    </h:link>
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+                    <h:link outcome="signup" value="">
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/pen.png"></p:graphicImage>
+                    </h:link>
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+                    <h:link outcome="signup" value="">
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/arrow-down-icon.png"></p:graphicImage>
+                    </h:link>
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+                    <h:link outcome="signup" value="">
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/register.png"></p:graphicImage>
+                    </h:link>
+
+                </div>
+                <div>
+                    <iframe class="iFrameClass" src="resources/html/test.html"/>
+                </div>
+            </ui:define>
+
+        </ui:composition>
     </h:head>
-    <h:body>
-        this is my change
-        Hello from Facelets
-        this is ali asty test <br />
-        i change aline in index.xhtml
-        i,m yaser and change aline
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <h:form id="form">
-            <h3>Login Logout</h3>
-            <h:outputText value="Username" />
-            <h:inputText id="username" value="#{login.user}"></h:inputText>
-            <h:message for="username"></h:message>
-            <br /><br />
 
-            <h:outputText value="Password" />
-            <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
-            <h:message for="password"></h:message>
-            <br /><br />
-
-            <h:commandButton action="#{login.validateUsernamePassword}"
-                value="Login"></h:commandButton>
-        </h:form>
-    </h:body>
-
-    </ui:define>
-</ui:composition>
+</html>

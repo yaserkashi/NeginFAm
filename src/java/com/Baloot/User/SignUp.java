@@ -6,23 +6,15 @@
 
 package com.Baloot.User;
 
-import com.Baloot.util.CaptchaUtil;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import botdetect.web.jsf.JsfCaptcha;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 import javax.validation.constraints.Size;
-import nl.captcha.Captcha;
 import org.hibernate.validator.constraints.Email;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 
 /**
@@ -42,25 +34,22 @@ public class SignUp {
     private String lastname;
     private String mobile;
     private String introduction;
-    private String partnerCode;
     private String secCode;
     private boolean lowCheck;
-    private Captcha captcha;
-    private StreamedContent image;
-    private String answer;
-    
-    @PostConstruct
-    public void init() {
-        generateNewCaptcha();
-    }
-   
-    public Captcha getCaptcha() {
+    private JsfCaptcha captcha;
+
+    public JsfCaptcha getCaptcha() {
         return captcha;
     }
-    public StreamedContent getImage() {
-        return image;
+    
+    public SignUp() {
     }
 
+    public void setCaptcha(JsfCaptcha captcha) {
+        this.captcha = captcha;
+    }
+    
+    
     public String getUserName() {
         return userName;
     }
@@ -125,13 +114,6 @@ public class SignUp {
         this.introduction = introduction;
     }
 
-    public String getPartnerCode() {
-        return partnerCode;
-    }
-
-    public void setPartnerCode(String partnerCode) {
-        this.partnerCode = partnerCode;
-    }
 
     public String getSecCode() {
         return secCode;
@@ -148,24 +130,9 @@ public class SignUp {
     public void setLowCheck(boolean lowCheck) {
         this.lowCheck = lowCheck;
     }
-    
-    public void generateNewCaptcha() {
-        try {
-            captcha = CaptchaUtil.generateNewCaptcha();
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            ImageIO.write(captcha.getImage(), "png", os);
-            image = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png"); 
-            answer = captcha.getAnswer();
-            System.out.println("answer = " + answer);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-    }
-    
     public void submit(){
         System.out.println("Submit Function");
-        if (!answer.equals(secCode)) {
-            System.out.println(answer + " " + secCode);
+        if (!captcha.validate(secCode)) {
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("کدامنیتی را اشتباه وارد کرده اید!"));
         } else if (UserServices.isUsernameUsed(userName)) {

@@ -17,7 +17,6 @@ public class LoginBean {
     private String userName;
     private String password;
     private String validate;
-    private List<String> images;
 
 
     public String login() throws Exception {
@@ -50,20 +49,6 @@ public class LoginBean {
     public String goToAnotherPage() {
         return "go";
     }
-
-    public void init1() {
-        images = new ArrayList<String>();
-        images.add("images/slide1.jpg");
-        images.add("images/slide2.jpg");
-        images.add("images/slide3.jpg");
-        images.add("images/slide4.jpg");
-    }
-
-    public List<String> getImages() {
-        init1();
-        return images;
-    }
-
 
     public String cancel() {
         return null;

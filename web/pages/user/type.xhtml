@@ -3,67 +3,71 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="../templates/ui.xhtml">
+                template="../../templates/ui.xhtml">
     <ui:define name="content">
-         <h:form id="form">
-            <p:messages autoUpdate="true"/>
-            <p:panelGrid id="panel" columns="2" style="float: right">
+         <h:form>
+            <p:panelGrid columns="2" style="float: right">
                 <f:facet name="header" >
                     ثبت سفارش تایپ
                 </f:facet>
 
-                <p:selectOneMenu id="lang" value="#{typeForm.language}" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
-                    <f:selectItems value="#{typeForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                <p:selectOneMenu id="lang" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
+                    <f:selectItem itemLabel="انگلیسی" itemValue="" />
+                    <f:selectItem itemLabel=" فرانسه" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="ژاپنی" itemValue="PS4" />
+                    <f:selectItem itemLabel=" اسپانیایی" itemValue="Wii U" />
                 </p:selectOneMenu>
                 
                 <p:outputLabel value="زبان "  style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px  "></p:outputLabel>
 
-                <p:selectOneMenu id="feild" value="#{typeForm.field}" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
-                    <f:selectItems value="#{typeForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                <p:selectOneMenu id="feild" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                    <f:selectItem itemLabel="تخصصی" itemValue="" />
+                    <f:selectItem itemLabel=" عمومی" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="پزشکی" itemValue="PS4" />
+                    <f:selectItem itemLabel=" مهندسی" itemValue="Wii U" />
                 </p:selectOneMenu>              
                 
                 <p:outputLabel value="زمینه " style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
-                <p:inputText value="#{typeForm.title}"  style="width:200px;float: right;direction: rtl;padding-right: 15px"/>
+                <p:inputText  style="width:200px;float: right;direction: rtl;padding-right: 15px"/>
                
  
                 <p:outputLabel value=" موضوع" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                   
-                <p:selectBooleanCheckbox value="#{typeForm.formulation}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" فرمول نویسی" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                     
-                <p:selectBooleanCheckbox value="#{typeForm.layout}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" صفحه آرایی " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                       
-                <p:selectBooleanCheckbox value="#{typeForm.illustrations}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" تصویرگری " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
-                <p:selectBooleanCheckbox value="#{typeForm.table}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" رسم جدول" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                     
-                <p:selectBooleanCheckbox value="#{typeForm.charts}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" رسم نمودار" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                     
-                <p:selectBooleanCheckbox value="#{typeForm.shape}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" رسم شکل " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                     
-                <p:selectBooleanCheckbox value="#{typeForm.editorial}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" ویراستاری" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                    
-                <p:inputTextarea value="#{typeForm.explain}" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                <p:inputTextarea rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
                 <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                 
-                <p:calendar value="#{typeForm.dateTime}" style="width:200px;float: right;direction: rtl"/>
+                <p:calendar style="width:200px;float: right;direction: rtl"/>
                 <p:outputLabel value=" تاریخ و ساعت درخواستی " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
-                <p:selectBooleanCheckbox value="#{typeForm.delivery}" style="float: right" />
+                <p:selectBooleanCheckbox value="" style="float: right" />
                 <p:outputLabel value=" تحویل حضوری" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                    
                <p:button  value="آپلود فایل" style="background: #679843 ; color: window ; float: right ; font-size: 16px" />
                <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                 
                 <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
-                <p:commandButton  value="ثبت" actionListener="#{typeForm.submit()}" style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
-                </p:commandButton>
+               <p:button  value="ثبت" style="background: #2F84B1; color: window ; float: right ; font-size: 16px" />
 
    
 

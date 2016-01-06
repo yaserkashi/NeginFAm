@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <script type="text/javascript" src="resources/jquery-1.11.3.js"></script>
+            <link href='http://www.fontonline.ir/css/BYekan.css' rel='stylesheet' type='text/css'/> 
+            <style>
+                .ui-panelmenu .ui-panelmenu-header .ui-icon {
+                    margin-top: -8px;
+                    position: absolute;
+                    right: 0.5em;
+                    top: 50%;
+                }
+                .ui-panelmenu .ui-panelmenu-header a {
+                    display: block;
+                    font-size: 1em;
+                    margin-right: 15px;
+                    padding: 0.5em 0.5em 0.5em 2.2em;
+
+                }
+
+                .ui-panelmenu .ui-icon {
+                    display: inline-block;
+                    float: right;
+                }
+                submenu .ui-menu-child{
+                    left: -60px !important;
+                    width: 8.5em !important;
+                }
+
+                .submenu > ul{
+                    left: -60px !important;
+                    width: 8.5em !important;
+                }
+                .ui-widget-content.ui-menu-list.ui-corner-all.ui-helper-clearfix.ui-menu-child.ui-shadow{
+                    left: -60px !important;
+                    width: 8.5em !important;
+                }
+
+
+                .ui-menuitem-text {
+                    float: right !important;
+                }
+                /*                .ui-widget-content {
+                                    border: 1px solid #A8A8A8;
+                                    background: #fff none repeat scroll 0% 0%;
+                                    color: #4F4F4F;
+                                    height: 30px;
+                                }*/
+
+
+
+                .center {
+                    display: block;
+                    margin: auto;
+                }
+
+                .logo{
+                    transition: all 0.4s ease;
+                    // position: fixed;
+                    width: 30%;
+                    height: 200px;
+                    float: left ;
+                }
+                .stickylogo{
+                    transition: all 0.4s ease;
+                    //position: fixed;
+                    width: 48px;
+                    height: 48px;
+                    float: right;
+                }
+
+                header{
+                    transition: all 0.4s ease 0s;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 72px;
+                    line-height: 108px;
+                    height: 200px;
+                    background: #2b78a1 none repeat scroll 0% 0%;
+                    background-color: #2B78A1;
+                    background-image: none;
+                    background-repeat: repeat;
+                    background-attachment: scroll;
+                    background-position: 0% 0%;
+                    background-clip: border-box;
+                    background-origin: padding-box;
+                    background-size: auto auto;
+                    color: #FFF;
+                    font-family: BYekan,"BYekan",tahoma;
+                }
+
+                header.sticky {
+                    transition: all 0.4s ease;
+                    // position: fixed;
+                    font-size: 24px;
+                    line-height: 48px;
+                    height: 48px;
+                    background: #1A4861;
+                    text-align: center;
+                    margin-left: 48px ;
+                    font-family: BYekan,'BYekan',tahoma; 
+                    z-index: +1;
+                } 
+
+                .headerMenu{
+                    float: right;
+                    width: 100%;
+                }
+
+
+
+
+
+                .section {
+                    width: 75%;
+                    height: 100%;
+                    margin-top: .5%;
+                    border: 5px solid blueviolet;
+                    float: right;
+                    background: aqua;
+
+
+                }
+                .rmenu{
+                    float: right;
+
+                    width: 23%; 
+                    height: 100%;
+                    margin-right: 2%;
+                    background: lightgreen;
+                    border: 5px solid darkgreen;
+                }
+                .yasermenu{
+                    direction: rtl;
+                    float: right;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    /*overflow: auto;*/
+                    position: relative;
+                    background: lightgreen;
+                    width: 740px;
+                    max-width: 23%;
+                    /*height: 400px;*/
+                    -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+                }                
+                .hmenu{           
+                    width: 100%;                
+                    height: 45px;
+                    // background:#E2341D;
+
+                }
+                .footer{
+                    width: 100%;
+                    height: 100px;
+                    background: #000000;
+
+                    margin-top: 80%;
+                    position: relative;
+                    margin-bottom: 0px;
+                }
+
+            </style>
+            <script>
+                $(window).scroll(function() {
+                    if ($(this).scrollTop() > 1) {
+                        $('header').addClass("sticky");
+                        $('#image').addClass("stickylogo");
+                        $('p').hide();
+                    }
+                    else {
+                        $('header').removeClass("sticky");
+                        $('#image').removeClass("stickylogo");
+
+                        $('p').show();
+                    }
+                });
+            </script>                    
+            <div class="logo">
+                <img id='image' class="logo" src="resources/ac.jpg"/>
+            </div>
+            <header>    
+                <p:outputLabel style="text-align: center; font-family: BYekan,'BYekan',tahoma; " value="گروه تبلیغاتی طیف"/>
+            </header>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>گروه تبلیغاتی طیف</title>                
+            </f:facet>
+            <!--            <div class="headermenu">
+                         <p:menubar style="">
+                                <p:submenu label="خانه"></p:submenu>
+                                <p:submenu label="خدمات آموزشی">
+                                    <p:menuitem value="آموزش تایپ سریع" url="#"/>
+                                    <p:menuitem value="آموزش ترجمه پیشرفته" url="#"/>
+                                    <p:menuitem value="آموزش ترجمه تخصصی" url="#"/>
+                                </p:submenu>
+            
+                                <p:submenu label="خدمات تایپ">
+                                    <p:menuitem value="تایپ فوری" url="#"/>
+                                    <p:menuitem value="تایپ عادی" url="#"/>
+                                </p:submenu>
+            
+                                <p:submenu label="درخواست مقاله">
+                                    <p:menuitem value="مقاله علمی">
+                                    </p:menuitem>
+                                    <p:menuitem value="مقاله غیر علمی">
+                                    </p:menuitem>
+                                </p:submenu>
+            
+                                <p:menuitem value="ثبت نام"/>
+                            </p:menubar>
+                            </div>-->
+        </h:head>
+        <h:body>
+            <!--            <div class="headermenu">
+                         <p:menubar style="">
+                                <p:submenu label="خانه"></p:submenu>
+                                <p:submenu label="خدمات آموزشی">
+                                    <p:menuitem value="آموزش تایپ سریع" url="#"/>
+                                    <p:menuitem value="آموزش ترجمه پیشرفته" url="#"/>
+                                    <p:menuitem value="آموزش ترجمه تخصصی" url="#"/>
+                                </p:submenu>
+            
+                                <p:submenu label="خدمات تایپ">
+                                    <p:menuitem value="تایپ فوری" url="#"/>
+                                    <p:menuitem value="تایپ عادی" url="#"/>
+                                </p:submenu>
+            
+                                <p:submenu label="درخواست مقاله">
+                                    <p:menuitem value="مقاله علمی">
+                                    </p:menuitem>
+                                    <p:menuitem value="مقاله غیر علمی">
+                                    </p:menuitem>
+                                </p:submenu>
+            
+                                <p:menuitem value="ثبت نام"/>
+                            </p:menubar>
+                            </div>-->
+            <p:menubar style="height: 40px">
+                <p:submenu label="خانه"></p:submenu>
+                 <p:submenu label="خدمات اموزشی"></p:submenu>
+                  <p:submenu label="خدمات تایپ"></p:submenu>
+                   <p:submenu label="درخواست مقاله"></p:submenu>
+                    <p:submenu label="ثبت نام"></p:submenu>
+
+            </p:menubar>
+
+
+            <p:layout style="min-width:600px;min-height:150px;margin-top: 5px ;">
+                <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
+
+                    <h:form  >
+                        <p:outputLabel style=" font-family: BYekan,'BYekan',tahoma;padding-left: 30px;padding-top: 40px " value="کاربر گرامی خوش امدید"/>
+                        <p:growl autoUpdate="true" />
+                        <p:panelMenu style="float: right;width: 100%;padding-top: 60px;" >
+
+                            <p:submenu label="پروفایل کاربری" >
+                                <p:menuitem value="مشاهده و ویرایش "  icon="ui-icon-disk" url="page3.xhtml"  />
+
+                                <p:menuitem value="تغییر کلمه عبور" icon="ui-icon-disk" url="page2.xhtml"/>
+                            </p:submenu>
+
+                            <p:submenu label="ثبت سفارش">
+                                <p:menuitem value="سفارش ترجمه"   ajax="false" icon="ui-icon-close" url="page5.xhtml"/>
+                                <p:menuitem value="سفارش تایپ"  ajax="false"  icon="ui-icon-home" />
+                                <p:menuitem value="سفارش پایان نامه" ajax="false"  icon="ui-icon-heart"/>
+                                <p:menuitem value="سفارش مقاله" ajax="false" icon="ui-icon-document" />
+                            </p:submenu>
+                            <p:separator />
+
+
+                            <p:submenu label="پیگیری سفارش">
+                                <p:menuitem value="پیگیری ترجمه"   ajax="false" icon="ui-icon-close"/>
+                                <p:menuitem value="پیگیری تایپ"  ajax="false"  icon="ui-icon-home" />
+                                <p:menuitem value="پیگیری پایان نامه" ajax="false"  icon="ui-icon-heart"/>
+                                <p:menuitem value="پیگیری مقاله" ajax="false" icon="ui-icon-document" />
+                            </p:submenu>
+                            <p:separator />
+
+
+
+
+                            <p:submenu label="پیام ها">
+                                <p:menuitem value="ارسال پیام"   ajax="false" icon="ui-icon-close" url="page4.xhtml"/>
+                                <p:menuitem value="صندوق پیام"  ajax="false"  icon="ui-icon-home" />
+                            </p:submenu> 
+
+
+                        </p:panelMenu>
+                        <p:button value="گزارشات مالی" style="width: 100% ;" />
+                        <p:button value="خروج" style="width: 100%"/>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <ui:insert name="content"> </ui:insert>
+                </p:layoutUnit>
+            </p:layout>
+
+
+        </h:body>
+    </f:view>
+</html>
