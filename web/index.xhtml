@@ -9,6 +9,9 @@
             <ui:define name="header">
                 <title> صفحه اصلی </title>
             </ui:define>
+            <script type="text/javascript">
+                onload perView();
+            </script>
             <ui:define name="galleria">
                 <div style="margin-right: 90px">
                     <p:galleria value="#{imagesView.images}" var="image" panelWidth="1100" panelHeight="280"
@@ -39,6 +42,30 @@
                         </h:link>
                         <h:link outcome="/pages/guest/news" value="">
                             <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
                         </h:link>
                     </p:panelGrid>
                 </div>
@@ -74,7 +101,14 @@
 
                 </div>
                 <div>
-                    <iframe class="iFrameClass" src="resources/html/test.html"/>
+                    <!--                    <p:commandButton onclick="perView()" />
+                                        <script type="text/javascript" >
+                                            function perView() {
+                                                $("#myeditable").load("resources/html/test.html");
+                                            }
+                                        </script>
+                                        <div dir="ltr" style="float: right;" id="myeditable" ></div>-->
+                    <iframe class="iFrameClass" src="resources/html/test.html" scrolling="no" height="1200"/>
                 </div>
             </ui:define>
 

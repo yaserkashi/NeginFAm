@@ -1,16 +1,24 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-    <title>Facelet Title</title>
-</h:head>
-<h:body>
-    <h:form>
-        are you admin
-        <p>Welcome #{login.user}</p>
-        <h:commandLink action="#{login.logout}" value="Logout"></h:commandLink>
-    </h:form>
-</h:body>
-</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <div style="margin-top: 30px;text-align: right; padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px ">
+                مدیر محترم
+                <br/>
+                 جناب آقای#{login.user}
+                 <br/>
+                شما با موفقیت وارد شدید
+                <br/>
+            </div>s
+
+        </h:form>
+
+
+    </ui:define>
+</ui:composition> 

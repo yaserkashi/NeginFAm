@@ -86,7 +86,7 @@
                 </div>
                 <div class="headerMenu">
                     <p:menubar >
-                        <p:menuitem value="خانه" url="index.xhtml"/>
+                        <p:menuitem value="خانه" url="/index.xhtml"/>
                         <p:submenu label="خدمات آموزشی">
                             <p:menuitem value="آموزش تایپ سریع" url="#"/>
                             <p:menuitem value="آموزش ترجمه پیشرفته" url="#"/>
@@ -109,7 +109,6 @@
                 </div>
             </div>
             <div class="content">
-
                 <div class="contentPanel">
                     <ui:insert name="content">
                         <ui:include src="/template/commonContent.xhtml"/>
@@ -119,12 +118,9 @@
                     <ui:insert name="sidePanel">
                         <div>
                             <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
-
                                 <h:form  >
-                                    <p:outputLabel style=" font-family: BYekan,'BYekan',tahoma;padding-left: 10px;padding-top: 40px " value="   خوش امدید#{login.user}کاربر گرامی"/>
-                                    <p:growl autoUpdate="true" />
-                                    <p:panelMenu style="float: right;width: 100%;padding-top: 60px;" >
-
+                                    <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px " value="کاربر گرامی#{login.user}خوش آمدید"/>
+                                    <p:panelMenu style="float: right;width: 100%;padding-top: 15px;" >
                                         <p:submenu label="پروفایل کاربری" >
                                             <p:menuitem value="مشاهده و ویرایش "  icon="ui-icon-disk" url="/pages/user/profile.xhtml"  />
 
@@ -155,7 +151,7 @@
 
                                     </p:panelMenu>
                                     <p:button value="گزارشات مالی" style="width: 100% ;" />
-                                    <p:commandButton value="خروج" action="#{login.logout()}"/>
+                                    <p:commandButton value="خروج" style="width: 100% ;" action="#{login.logout()}"/>
                                 </h:form>
                             </p:layoutUnit>
                         </div>  
