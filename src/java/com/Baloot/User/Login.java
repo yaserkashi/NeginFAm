@@ -63,7 +63,7 @@ public class Login implements Serializable {
             case 2 : {
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username", user);
-                return "/pages/user/user";
+                return "/pages/user/index1.xhtml";
             }
         }
         return "index";
@@ -73,6 +73,6 @@ public class Login implements Serializable {
     public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        return "../index";
+        return "/index.xhtml";
     }
 }

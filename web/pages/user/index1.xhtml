@@ -5,26 +5,12 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="../../template/ui.xhtml">
+                template="../../template/usertemplate.xhtml">
     <ui:define name="content">
         <h:form id="form">
             <p:galleria style="margin: auto!important; 	z-index: 0;" value="#{imagesView.images}" var="image" showCaption="true">
                 <p:graphicImage name="/#{image}" alt="Image Description for #{image}" title="#{image}"/>
             </p:galleria>
-
-            <h:outputText value="Username" />
-            <h:inputText id="username" value="#{login.user}"></h:inputText>
-            <h:message for="username"></h:message>
-            <br /><br />
-
-            <h:outputText value="Password" />
-            <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
-            <h:message for="password"></h:message>
-            <br /><br />
-
-            <h:commandButton action="#{login.validateUsernamePassword}"
-                             value="Login"></h:commandButton>
-
 
         </h:form>
 
