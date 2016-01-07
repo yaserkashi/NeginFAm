@@ -11,7 +11,7 @@
             </ui:define>
             <ui:define name="galleria">
                 <div style="margin-right: 90px">
-                    <p:galleria value="#{mainPage.images}" var="image" panelWidth="1100" panelHeight="280"
+                    <p:galleria value="#{imagesView.images}" var="image" panelWidth="1100" panelHeight="280"
                                 showCaption="true">
                         <p:graphicImage name="#{image}" alt="" title="" height="1320"/>
                     </p:galleria>
@@ -34,29 +34,11 @@
                     </p:panelGrid>
                     <p:panelGrid columns="1" styleClass="news" >
                         <p:outputLabel style="font-size: 1em !important;" styleClass="news-link" value="آخرین اخبار سایت"/>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>      
                         </h:link>
-                        <h:link outcome="news" value="">
+                        <h:link outcome="/pages/guest/news" value="">
                             <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
-                        </h:link>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
-                        </h:link>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
-                        </h:link>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
-                        </h:link>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
-                        </h:link>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
-                        </h:link>
-                        <h:link outcome="news" value="">
-                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
                         </h:link>
                     </p:panelGrid>
                 </div>
@@ -70,22 +52,22 @@
                         <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/register.png"/>
                     </h:link>
                     <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
-                    <h:link outcome="signup" value="">
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <p:graphicImage styleClass="registerImg" width="80px"
                                         url="/resources/images/Apply-Now-icon.png"></p:graphicImage>
                     </h:link>
                     <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
-                    <h:link outcome="signup" value="">
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <p:graphicImage styleClass="registerImg" width="80px"
                                         url="/resources/images/pen.png"></p:graphicImage>
                     </h:link>
                     <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
-                    <h:link outcome="signup" value="">
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <p:graphicImage styleClass="registerImg" width="80px"
                                         url="/resources/images/arrow-down-icon.png"></p:graphicImage>
                     </h:link>
                     <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
-                    <h:link outcome="signup" value="">
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <p:graphicImage styleClass="registerImg" width="80px"
                                         url="/resources/images/register.png"></p:graphicImage>
                     </h:link>
