@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -102,6 +100,42 @@ public class UserServices {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getPhoneNum());
             preparedStatement.setInt(6, user.getId());
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("Record updated in DBUSER table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+    
+    public static void changePassword(Integer id, String pass) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateTableSQL = "UPDATE users SET pasword = ? WHERE id = ?";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+
+            preparedStatement.setString(1, pass);
+            preparedStatement.setInt(2, id);
 
             // execute insert SQL stetement
             preparedStatement.executeUpdate();

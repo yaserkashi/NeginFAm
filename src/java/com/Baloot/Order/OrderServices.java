@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.Type;
+package com.Baloot.Order;
 
+import com.Baloot.Design.Design;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,29 +18,27 @@ import javax.faces.context.FacesContext;
  *
  * @author FK
  */
-public class TypeServices {
-    public static void insertRecordIntoTable(Type type) throws SQLException {
+public class OrderServices {
+    public static void insertRecordIntoTable(Order order) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertTableSQL = "INSERT INTO type (language,field,title,date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO public.order (table_name,table_id,user_id,order_date,condition) VALUES (?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
             preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 
-            preparedStatement.setInt(1, type.getLanguage());
-            preparedStatement.setInt(2, type.getField());
-            preparedStatement.setString(3, type.getTitle());
-            preparedStatement.setString(4, type.getDateTime());
-            preparedStatement.setString(5, type.getExplain());
-            preparedStatement.setString(6, type.getOption());
-            preparedStatement.setInt(7, type.getUserId().getId());
+            preparedStatement.setString(1, order.getTableName());
+            preparedStatement.setInt(2, order.getTableId());
+            preparedStatement.setInt(3, order.getUserId().getId());
+            preparedStatement.setString(4, order.getOrderDate());
+            preparedStatement.setInt(5, order.getCondition());
 
             // execute insert SQL stetement
             preparedStatement.executeUpdate();
-            System.out.println("Record is inserted into DBType table!");
+            System.out.println("Record is inserted into DBDesign table!");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connection status", "ezafe shod"));
 
         } catch (SQLException e) {

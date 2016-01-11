@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.Coding;
+package com.Baloot.TextSmsMessage;
 
+import com.Baloot.SmsMessage.SmsMessage;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,42 +17,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author FK
  */
 @Entity
-@Table(name = "coding")
+@Table(name = "text_sms_message")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Coding.findAll", query = "SELECT c FROM Coding c"),
-    @NamedQuery(name = "Coding.findByText", query = "SELECT c FROM Coding c WHERE c.text = :text"),
-    @NamedQuery(name = "Coding.findByOrderId", query = "SELECT c FROM Coding c WHERE c.orderId = :orderId"),
-    @NamedQuery(name = "Coding.findByTypeId", query = "SELECT c FROM Coding c WHERE c.typeId = :typeId"),
-    @NamedQuery(name = "Coding.findById", query = "SELECT c FROM Coding c WHERE c.id = :id")})
-public class Coding implements Serializable {
+    @NamedQuery(name = "TextSmsMessage.findAll", query = "SELECT t FROM TextSmsMessage t"),
+    @NamedQuery(name = "TextSmsMessage.findByText", query = "SELECT t FROM TextSmsMessage t WHERE t.text = :text"),
+    @NamedQuery(name = "TextSmsMessage.findById", query = "SELECT t FROM TextSmsMessage t WHERE t.id = :id")})
+public class TextSmsMessage implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Size(max = 2147483647)
+    @Size(max = 250)
     @Column(name = "text")
     private String text;
-    @Column(name = "order_id")
-    private Integer orderId;
-    @Column(name = "type_id")
-    private Integer typeId;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @OneToMany(mappedBy = "textId")
+    private Collection<SmsMessage> smsMessageCollection;
 
-    public Coding() {
+    public TextSmsMessage() {
     }
 
-    public Coding(Integer id) {
+    public TextSmsMessage(Integer id) {
         this.id = id;
     }
 
@@ -62,28 +62,21 @@ public class Coding implements Serializable {
         this.text = text;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @XmlTransient
+    public Collection<SmsMessage> getSmsMessageCollection() {
+        return smsMessageCollection;
+    }
+
+    public void setSmsMessageCollection(Collection<SmsMessage> smsMessageCollection) {
+        this.smsMessageCollection = smsMessageCollection;
     }
 
     @Override
@@ -96,10 +89,10 @@ public class Coding implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Coding)) {
+        if (!(object instanceof TextSmsMessage)) {
             return false;
         }
-        Coding other = (Coding) object;
+        TextSmsMessage other = (TextSmsMessage) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +101,7 @@ public class Coding implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Coding[ id=" + id + " ]";
+        return "Entity.TextSmsMessage[ id=" + id + " ]";
     }
     
 }

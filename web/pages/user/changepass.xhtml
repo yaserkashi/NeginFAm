@@ -14,23 +14,23 @@
                 <h:panelGrid columns="3" cellpadding="5"  >
 
 
-                    <h:inputText value="1234" style="font-weight: bold" disabled="true"/>
+                    <p:password value="#{changePass.currentPass}" required="true" requiredMessage="رمز عبور قبلی را وارد کنید."/>
 
                     <h:outputLabel value="*" style="color: red"/>
-                    <h:outputText value="پسورد فعلی" />
+                    <h:outputText value="رمزعبور فعلی" />
 
                     
  
 
-                    <p:password id="pwd1" value="" match="pwd2" label="Password 1" required="true" feedback="true" />
+                    <p:password id="pwd1" value="#{changePass.pass}" match="pwd2" validatorMessage="رمز عبور و تکرار آن مطابقت ندارند." required="true" requiredMessage="رمز عبور را وارد کنید." feedback="true" />
                     <h:outputLabel value="*" style="color: red"/>
-                    <h:outputLabel for="pwd1" value="رمز عبور" />
+                    <h:outputLabel for="pwd1" value="رمز عبور جدید" />
 
 
 
-                    <p:password id="pwd2" value="" label="Password 2" required="true" feedback="true" />
+                    <p:password id="pwd2" value="#{changePass.pass}" label="Password 2" required="true" requiredMessage="رمز عبور را تکرار کنید." feedback="true" />
                     <h:outputLabel value="*" style="color: red"/>
-                    <h:outputLabel for="pwd2" value="رمز عبور را مجددا وارد کنید" />
+                    <h:outputLabel for="pwd2" value="تکرار رمز عبور جدید" />
 
                 </h:panelGrid>
             </p:outputPanel>

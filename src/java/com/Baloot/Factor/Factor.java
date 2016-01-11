@@ -13,6 +13,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,18 +35,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Factor.findAll", query = "SELECT f FROM Factor f"),
-    @NamedQuery(name = "Factor.findById", query = "SELECT f FROM Factor f WHERE f.id = :id"),
     @NamedQuery(name = "Factor.findBySumPrice", query = "SELECT f FROM Factor f WHERE f.sumPrice = :sumPrice"),
     @NamedQuery(name = "Factor.findByOff", query = "SELECT f FROM Factor f WHERE f.off = :off"),
     @NamedQuery(name = "Factor.findByPayCondition", query = "SELECT f FROM Factor f WHERE f.payCondition = :payCondition"),
-    @NamedQuery(name = "Factor.findByPrforma", query = "SELECT f FROM Factor f WHERE f.prforma = :prforma")})
+    @NamedQuery(name = "Factor.findByPFactor", query = "SELECT f FROM Factor f WHERE f.pFactor = :pFactor"),
+    @NamedQuery(name = "Factor.findByDateTime", query = "SELECT f FROM Factor f WHERE f.dateTime = :dateTime"),
+    @NamedQuery(name = "Factor.findById", query = "SELECT f FROM Factor f WHERE f.id = :id")})
 public class Factor implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "sum_price")
     private Double sumPrice;
@@ -52,8 +50,16 @@ public class Factor implements Serializable {
     private Double off;
     @Column(name = "pay_condition")
     private Integer payCondition;
-    @Column(name = "prforma")
-    private Boolean prforma;
+    @Column(name = "p_factor")
+    private Boolean pFactor;
+    @Size(max = 30)
+    @Column(name = "date_time")
+    private String dateTime;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @OneToMany(mappedBy = "factorId")
     private Collection<FactorItem> factorItemCollection;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -64,14 +70,6 @@ public class Factor implements Serializable {
     }
 
     public Factor(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -99,12 +97,28 @@ public class Factor implements Serializable {
         this.payCondition = payCondition;
     }
 
-    public Boolean getPrforma() {
-        return prforma;
+    public Boolean getPFactor() {
+        return pFactor;
     }
 
-    public void setPrforma(Boolean prforma) {
-        this.prforma = prforma;
+    public void setPFactor(Boolean pFactor) {
+        this.pFactor = pFactor;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @XmlTransient

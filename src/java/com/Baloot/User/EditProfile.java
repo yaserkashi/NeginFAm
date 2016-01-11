@@ -15,7 +15,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
-import org.primefaces.context.RequestContext;
 
 /**
  *

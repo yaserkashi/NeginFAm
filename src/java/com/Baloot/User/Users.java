@@ -8,6 +8,11 @@ package com.Baloot.User;
 
 import com.Baloot.Design.Design;
 import com.Baloot.Factor.Factor;
+import com.Baloot.Message.Message;
+import com.Baloot.Order.Order;
+import com.Baloot.SmsMessage.SmsMessage;
+import com.Baloot.Translate.Translate;
+import com.Baloot.Type.Type;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -72,7 +77,19 @@ public class Users implements Serializable {
     @OneToMany(mappedBy = "userId")
     private Collection<Design> designCollection;
     @OneToMany(mappedBy = "userId")
+    private Collection<SmsMessage> smsMessageCollection;
+    @OneToMany(mappedBy = "userId")
     private Collection<Factor> factorCollection;
+    @OneToMany(mappedBy = "userIdGet")
+    private Collection<Message> messageCollection;
+    @OneToMany(mappedBy = "userIdSend")
+    private Collection<Message> messageCollection1;
+    @OneToMany(mappedBy = "userId")
+    private Collection<Type> typeCollection;
+    @OneToMany(mappedBy = "userId")
+    private Collection<Translate> translateCollection;
+    @OneToMany(mappedBy = "userId")
+    private Collection<Order> orderCollection;
 
     public Users() {
     }
@@ -155,12 +172,66 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
+    public Collection<SmsMessage> getSmsMessageCollection() {
+        return smsMessageCollection;
+    }
+
+    public void setSmsMessageCollection(Collection<SmsMessage> smsMessageCollection) {
+        this.smsMessageCollection = smsMessageCollection;
+    }
+
+    @XmlTransient
     public Collection<Factor> getFactorCollection() {
         return factorCollection;
     }
 
     public void setFactorCollection(Collection<Factor> factorCollection) {
         this.factorCollection = factorCollection;
+    }
+
+    @XmlTransient
+    public Collection<Message> getMessageCollection() {
+        return messageCollection;
+    }
+
+    public void setMessageCollection(Collection<Message> messageCollection) {
+        this.messageCollection = messageCollection;
+    }
+
+    @XmlTransient
+    public Collection<Message> getMessageCollection1() {
+        return messageCollection1;
+    }
+
+    public void setMessageCollection1(Collection<Message> messageCollection1) {
+        this.messageCollection1 = messageCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Type> getTypeCollection() {
+        return typeCollection;
+    }
+
+    public void setTypeCollection(Collection<Type> typeCollection) {
+        this.typeCollection = typeCollection;
+    }
+
+    @XmlTransient
+    public Collection<Translate> getTranslateCollection() {
+        return translateCollection;
+    }
+
+    public void setTranslateCollection(Collection<Translate> translateCollection) {
+        this.translateCollection = translateCollection;
+    }
+
+    @XmlTransient
+    public Collection<Order> getOrderCollection() {
+        return orderCollection;
+    }
+
+    public void setOrderCollection(Collection<Order> orderCollection) {
+        this.orderCollection = orderCollection;
     }
 
     @Override

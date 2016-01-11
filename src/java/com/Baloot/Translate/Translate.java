@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.Type;
+package com.Baloot.Translate;
 
 import com.Baloot.User.Users;
 import java.io.Serializable;
@@ -27,39 +27,43 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author FK
  */
 @Entity
-@Table(name = "type")
+@Table(name = "translate")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Type.findAll", query = "SELECT t FROM Type t"),
-    @NamedQuery(name = "Type.findByLanguage", query = "SELECT t FROM Type t WHERE t.language = :language"),
-    @NamedQuery(name = "Type.findByField", query = "SELECT t FROM Type t WHERE t.field = :field"),
-    @NamedQuery(name = "Type.findByTitle", query = "SELECT t FROM Type t WHERE t.title = :title"),
-    @NamedQuery(name = "Type.findByDateTime", query = "SELECT t FROM Type t WHERE t.dateTime = :dateTime"),
-    @NamedQuery(name = "Type.findByExplain", query = "SELECT t FROM Type t WHERE t.explain = :explain"),
-    @NamedQuery(name = "Type.findByOption", query = "SELECT t FROM Type t WHERE t.option = :option"),
-    @NamedQuery(name = "Type.findByAttachFile", query = "SELECT t FROM Type t WHERE t.attachFile = :attachFile"),
-    @NamedQuery(name = "Type.findById", query = "SELECT t FROM Type t WHERE t.id = :id")})
-public class Type implements Serializable {
+    @NamedQuery(name = "Translate.findAll", query = "SELECT t FROM Translate t"),
+    @NamedQuery(name = "Translate.findByLanguage", query = "SELECT t FROM Translate t WHERE t.language = :language"),
+    @NamedQuery(name = "Translate.findByField", query = "SELECT t FROM Translate t WHERE t.field = :field"),
+    @NamedQuery(name = "Translate.findByDateTime", query = "SELECT t FROM Translate t WHERE t.dateTime = :dateTime"),
+    @NamedQuery(name = "Translate.findByEndDateTime", query = "SELECT t FROM Translate t WHERE t.endDateTime = :endDateTime"),
+    @NamedQuery(name = "Translate.findByTitle", query = "SELECT t FROM Translate t WHERE t.title = :title"),
+    @NamedQuery(name = "Translate.findByOption", query = "SELECT t FROM Translate t WHERE t.option = :option"),
+    @NamedQuery(name = "Translate.findByAttachFile", query = "SELECT t FROM Translate t WHERE t.attachFile = :attachFile"),
+    @NamedQuery(name = "Translate.findByExplain", query = "SELECT t FROM Translate t WHERE t.explain = :explain"),
+    @NamedQuery(name = "Translate.findById", query = "SELECT t FROM Translate t WHERE t.id = :id")})
+public class Translate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "language")
     private Integer language;
     @Column(name = "field")
     private Integer field;
     @Size(max = 2147483647)
-    @Column(name = "title")
-    private String title;
-    @Size(max = 2147483647)
     @Column(name = "date_time")
     private String dateTime;
     @Size(max = 2147483647)
-    @Column(name = "explain")
-    private String explain;
+    @Column(name = "end_date_time")
+    private String endDateTime;
+    @Size(max = 2147483647)
+    @Column(name = "title")
+    private String title;
     @Size(max = 2147483647)
     @Column(name = "option")
     private String option;
     @Size(max = 2147483647)
-    @Column(name = "attach_file")
+    @Column(name = "attach-file")
     private String attachFile;
+    @Size(max = 2147483647)
+    @Column(name = "explain")
+    private String explain;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -69,10 +73,10 @@ public class Type implements Serializable {
     @ManyToOne
     private Users userId;
 
-    public Type() {
+    public Translate() {
     }
 
-    public Type(Integer id) {
+    public Translate(Integer id) {
         this.id = id;
     }
 
@@ -92,14 +96,6 @@ public class Type implements Serializable {
         this.field = field;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDateTime() {
         return dateTime;
     }
@@ -108,12 +104,20 @@ public class Type implements Serializable {
         this.dateTime = dateTime;
     }
 
-    public String getExplain() {
-        return explain;
+    public String getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setExplain(String explain) {
-        this.explain = explain;
+    public void setEndDateTime(String endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getOption() {
@@ -130,6 +134,14 @@ public class Type implements Serializable {
 
     public void setAttachFile(String attachFile) {
         this.attachFile = attachFile;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
     }
 
     public Integer getId() {
@@ -158,10 +170,10 @@ public class Type implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Type)) {
+        if (!(object instanceof Translate)) {
             return false;
         }
-        Type other = (Type) object;
+        Translate other = (Translate) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -170,7 +182,7 @@ public class Type implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Type[ id=" + id + " ]";
+        return "Entity.Translate[ id=" + id + " ]";
     }
     
 }

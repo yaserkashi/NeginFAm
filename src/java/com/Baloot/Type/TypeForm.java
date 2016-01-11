@@ -205,7 +205,7 @@ public class TypeForm {
         type.setExplain(explain);
         type.setDateTime(dateTime);
         type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
-        type.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()).getId());
+        type.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()));
         try {
             TypeServices.insertRecordIntoTable(type);
             FacesContext.getCurrentInstance().addMessage(null,

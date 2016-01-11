@@ -11,13 +11,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,18 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FactorItem.findAll", query = "SELECT f FROM FactorItem f"),
-    @NamedQuery(name = "FactorItem.findById", query = "SELECT f FROM FactorItem f WHERE f.id = :id"),
     @NamedQuery(name = "FactorItem.findByOrderId", query = "SELECT f FROM FactorItem f WHERE f.orderId = :orderId"),
     @NamedQuery(name = "FactorItem.findByUnit", query = "SELECT f FROM FactorItem f WHERE f.unit = :unit"),
     @NamedQuery(name = "FactorItem.findByNumber", query = "SELECT f FROM FactorItem f WHERE f.number = :number"),
-    @NamedQuery(name = "FactorItem.findByUnitPrice", query = "SELECT f FROM FactorItem f WHERE f.unitPrice = :unitPrice")})
+    @NamedQuery(name = "FactorItem.findByUnitPrice", query = "SELECT f FROM FactorItem f WHERE f.unitPrice = :unitPrice"),
+    @NamedQuery(name = "FactorItem.findById", query = "SELECT f FROM FactorItem f WHERE f.id = :id")})
 public class FactorItem implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Column(name = "order_id")
     private Integer orderId;
     @Size(max = 250)
@@ -52,6 +48,11 @@ public class FactorItem implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "unit_price")
     private Double unitPrice;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @JoinColumn(name = "factor_id", referencedColumnName = "id")
     @ManyToOne
     private Factor factorId;
@@ -60,14 +61,6 @@ public class FactorItem implements Serializable {
     }
 
     public FactorItem(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -101,6 +94,14 @@ public class FactorItem implements Serializable {
 
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Factor getFactorId() {
