@@ -10,16 +10,21 @@ import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
+import com.Baloot.Order.Order;
+import com.Baloot.Order.OrderServices;
+import com.Baloot.User.Users;
 import com.Baloot.User.UserServices;
+import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,7 +56,7 @@ public class DesignForm {
     private String designOption;
     private List<Coding> designOptions = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.design_option.ordinal());
     private String explian;
-    private String endDate;
+    private Date endDate;
     private UploadedFile attachFile;
 
     public List<Coding> getDesignTypes() {
@@ -98,7 +103,7 @@ public class DesignForm {
         this.explian = explian;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
     
@@ -126,7 +131,7 @@ public class DesignForm {
         return explian;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
     
@@ -146,61 +151,69 @@ public class DesignForm {
         this.attachFile = attachFile;
     }
     
-    public void uploaded(FileUploadEvent event) {
-        System.out.println("ghghghh");
-        try {
-            attachFile = event.getFile();
-            save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void upload() {
+        if (attachFile != null) {
+            try {
+                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            } catch (IOException ex) {
+                Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
-    private static void save(String filename, InputStream input) {
-        System.out.println(filename);
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest httpServletRequest = (HttpServletRequest) context
-                .getExternalContext().getRequest();
-        String path = httpServletRequest.getSession().getServletContext()
-                .getRealPath("/resources/downloadFile/");
-        System.out.println(path);
-        try {
-            OutputStream output = new FileOutputStream(new File(path, filename));
-            IOUtils.copy(input, output);
-//            int read;
-//            byte[] bytes = new byte[1024];
-//
-//            while ((read = input.read(bytes)) != -1) {
-//                    output.write(bytes, 0, read);
-//            }
-            
-            System.out.println("Done!");
 
+    private void save(String filename, InputStream input) {
+        try {
+            String filePath = "\\web\\resources\\downloadfile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;
+            if (!Files.exists(Paths.get(filePath))) {
+                Files.createDirectories(Paths.get(filePath));
+            }
+            File finalFile = new File(filePath, filename);
+            Files.copy(input, finalFile.toPath());
+            System.out.println(filePath);
+            System.out.println("Done!");
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            IOUtils.closeQuietly(input);
+            Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
     public void submit() {
         System.out.println("SUBMIT FUNCTION!");
         Design design = new Design();
+        Order order = new Order();
         design.setDesignType(designType);
         design.setSize(size);
         if (!optionalSize.equals(""))
             design.setSize(optionalSize);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        design.setRegisterDate(dateFormat.format(date));
+        PersianCalendar pc = new PersianCalendar();
+        String currentDate = pc.getIranianDateTime();
+        design.setRegisterDate(currentDate);
         design.setPrintType(printType);
         design.setDesingOption(designOption);
         design.setPrintOption(printOption);
-        design.setEndDate(endDate);
+        design.setEndDate(pc.DateToString(pc.getIranianDateFromDate(endDate)));
         design.setExplain(explian);
-        design.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()));
+        Users user = UserServices.getUserByUsername(SessionBean.getUserName());
+        design.setUserId(user);
+        if(attachFile != null)
+            design.setAttachFile(attachFile.getFileName());
+        
+        order.setTableName("design");
+        order.setCondition(0);
+        order.setOrderDate(currentDate);
+        order.setUserId(user);
         try {
-            DesignServices.insertRecordIntoTable(design);
+            int id = DesignServices.insertRecordIntoTable(design);
+            order.setTableId(id);
+            OrderServices.insertRecordIntoTable(order);
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("درسته ......"));
         } catch (SQLException ex) {

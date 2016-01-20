@@ -1,4 +1,4 @@
-package services.captcha;
+package captcha;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;

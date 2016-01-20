@@ -9,23 +9,25 @@ package com.Baloot.Translate;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author FK
  */
 public class TranslateServices {
-    public static void insertRecordIntoTable(Translate translate) throws SQLException {
+    public static int insertRecordIntoTable(Translate translate) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-
+        int id = 0;
         String insertTableSQL = "INSERT INTO translate (language,field,title,date_time,end_date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
-            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, translate.getLanguage());
             preparedStatement.setInt(2, translate.getField());
@@ -39,7 +41,11 @@ public class TranslateServices {
             // execute insert SQL stetement
             preparedStatement.executeUpdate();
             System.out.println("Record is inserted into DBTranslate table!");
-
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            rs.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -55,6 +61,6 @@ public class TranslateServices {
             }
 
         }
-
+        return id;
     }
 }

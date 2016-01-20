@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+        <h:form> 
+  
+         <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+
+            <p:panelGrid columns="8" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
+
+                <h:outputText value="ردیف" style="width: 10px"/>
+                <p:panelGrid columns="1">
+                    <h:outputText value="کداعضا" />
+                    <p:inputText id="filter" style="width: 40px"/>
+                </p:panelGrid>
+
+              <h:outputText value="شغل" style="width: 10px"/>
+                
+                <p:panelGrid columns="1" >
+                    <h:outputText value="شماره سفارش" />
+                    <p:inputText id="filter1" style="width: 40px" />
+                </p:panelGrid>
+
+                <h:outputText value="تاریخ دریافت" style="width: 10px"/>
+                <h:outputText value="تاریخ تحویل" style="width: 10px"/>
+                <h:outputText value="هزینه سفارش" style="width: 10px"/>
+              
+             
+                    <h:outputText value="وضعیت"/>
+                   
+
+
+              <h:outputText value="1" />
+               <h:outputText value="1234" />
+                <h:outputText value=" تایپیست" />
+                <h:outputText value="21789" />
+                <h:outputText value="94/5/5"/>
+                <h:outputText value="94/5/10"/>
+                <h:outputText value="90000ریال" />
+                <h:outputText value="پرداخت نشده" style="color: red"/>
+
+               
+                
+              
+
+            </p:panelGrid>
+</h:form>
+
+        
+
+    </ui:define>
+</ui:composition>  

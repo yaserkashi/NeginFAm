@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -214,6 +216,38 @@ public class UserServices {
         return null;
     }
     
+    public static Users getUserById(int id) {
+        Connection con = null;
+        PreparedStatement ps;
+        Users user = new Users();
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from Users where id = ?");
+            ps.setInt(1, id);
+ 
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                user.setId(id);
+                user.setUsername(rs.getString("username"));
+                user.setPasword(rs.getString("pasword"));
+                user.setName(rs.getString("name"));
+                user.setFamily(rs.getString("family"));
+                user.setEmail(rs.getString("email"));
+                user.setPhoneNum(rs.getString("phone_num"));
+                user.setAccessLevel(rs.getInt("access_level"));
+                return user;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
+        return null;
+    }
+    
     public static Boolean isEmailUsed(String email) {
         Connection con = null;
         PreparedStatement ps;
@@ -235,5 +269,54 @@ public class UserServices {
             DataConnect.close(con);
         }
         return false;
+    }
+    
+    public static List<Users> getALLUsers() {
+        Connection con = null;
+        PreparedStatement ps;
+        List<Users> list = new ArrayList<>();
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from Users");
+ 
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Users user = new Users();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setName(rs.getString("name"));
+                user.setFamily(rs.getString("family"));
+                user.setEmail(rs.getString("email"));
+                user.setPhoneNum(rs.getString("phone_num"));
+                user.setAccessLevel(rs.getInt("access_level"));
+                list.add(user);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
+    }
+    
+    public static void deleteUserById(int id) {
+        Connection con = null;
+        PreparedStatement ps;
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("DELETE From Users where id = ?");
+            ps.setInt(1, id);
+ 
+            ps.executeQuery();
+            System.out.println("Record is deleted!");
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+        } finally {
+            DataConnect.close(con);
+        }
     }
 }

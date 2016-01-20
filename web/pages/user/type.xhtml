@@ -58,7 +58,10 @@
                 <p:selectBooleanCheckbox value="#{typeForm.delivery}" style="float: right" />
                 <p:outputLabel value=" تحویل حضوری" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                    
-               <p:button  value="آپلود فایل" style="background: #679843 ; color: window ; float: right ; font-size: 16px" />
+               <h:form enctype="multipart/form-data" >
+                    <p:fileUpload  value="#{typeForm.attachFile}" dragDropSupport="true" mode="advanced"
+                                                   fileUploadListener="#{typeForm.uploaded}"/>
+                </h:form>
                <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                 
                 <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>

@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+        <h:form id="form"> 
+            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" style="direction: rtl">
+                <f:facet name="header">
+                    لیست کاربران
+                </f:facet>
+                <p:column headerText="کد" >
+                    <h:outputText value="#{user.id}" />
+                </p:column>
+                <p:column headerText="نام کاربری">
+                    <h:outputText value="#{user.username}" />
+                </p:column>
+                <p:column headerText="ایمیل">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column headerText="نام">
+                    <h:outputText value="#{user.name}" />
+                </p:column>
+                <p:column headerText="نام خانوادگی">
+                    <h:outputText value="#{user.family}" />
+                </p:column>
+                 <p:column style="width:32px;text-align: center">
+                    <p:commandButton  icon="ui-icon-document">
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton  icon="ui-icon-close" action="#{usersManagement.deleteUser(user.id)}" update="@form" ajax="true">
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>  

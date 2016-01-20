@@ -10,15 +10,30 @@ import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
+import com.Baloot.Order.Order;
+import com.Baloot.Order.OrderServices;
+import com.Baloot.User.Users;
 import com.Baloot.User.UserServices;
+import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -39,9 +54,9 @@ public class TypeForm {
     private boolean shape;
     private boolean editorial;
     private String explain;
-    private String dateTime;
+    private Date dateTime;
     private boolean delivery;
-    private String attachFile;
+    private UploadedFile attachFile;
 
     public List<Coding> getLanguges() {
         return languges;
@@ -95,7 +110,7 @@ public class TypeForm {
         this.explain = explain;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -103,7 +118,7 @@ public class TypeForm {
         this.delivery = delivery;
     }
 
-    public void setAttachFile(String attachFile) {
+    public void setAttachFile(UploadedFile attachFile) {
         this.attachFile = attachFile;
     }
 
@@ -151,7 +166,7 @@ public class TypeForm {
         return explain;
     }
 
-    public String getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -159,7 +174,7 @@ public class TypeForm {
         return delivery;
     }
 
-    public String getAttachFile() {
+    public UploadedFile getAttachFile() {
         return attachFile;
     }
     
@@ -196,18 +211,63 @@ public class TypeForm {
         return options;
     }
     
+    public void uploaded(FileUploadEvent event) {
+        System.out.println("Uploaded Function!");
+        try {
+            attachFile = event.getFile();
+            save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void save(String filename, InputStream input) {
+        System.out.println(filename);
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                .getExternalContext().getRequest();
+        String path = httpServletRequest.getSession().getServletContext()
+                .getRealPath("/resources/downloadFile/");
+        System.out.println(path);
+        try {
+            OutputStream output = new FileOutputStream(new File(path, filename));
+            IOUtils.copy(input, output);
+            
+            System.out.println("Done!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(input);
+        }
+    }
+    
     public void submit() {
         System.out.println("Submit Function!");
         Type type = new Type();
+        Order order = new Order();
         type.setLanguage(language);
         type.setField(field);
         type.setTitle(title);
         type.setExplain(explain);
-        type.setDateTime(dateTime);
+        PersianCalendar pc = new PersianCalendar();
+        String currentDate = pc.getIranianDateTime();
+        type.setDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
         type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
-        type.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()));
+        Users user = UserServices.getUserByUsername(SessionBean.getUserName());
+        type.setUserId(user);
+        if(attachFile != null)
+            type.setAttachFile(attachFile.getFileName());
+ 
+        order.setTableName("type");
+        order.setCondition(0);
+        
+        order.setOrderDate(currentDate);
+        order.setUserId(user);
         try {
-            TypeServices.insertRecordIntoTable(type);
+            int id = TypeServices.insertRecordIntoTable(type);
+            order.setTableId(id);
+            OrderServices.insertRecordIntoTable(order);
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("درسته ......"));
         } catch (SQLException ex) {

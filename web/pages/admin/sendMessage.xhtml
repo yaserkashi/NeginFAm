@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+        <h:form> 
+            <p:dataTable id="checkboxDT"  value=""  selection="single" style="margin-bottom:0">
+                <f:facet name="header">
+                   ارسال پیام
+                </f:facet>
+<!--                <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
+                <p:column headerText="کد">
+                    <h:outputText value="1111" />
+                </p:column>
+                <p:column headerText="نام کاربری">
+                    <h:outputText value="user" />
+                </p:column>
+                <p:column headerText="وضعیت">
+                    <h:outputText value="انلاین" />
+                </p:column>
+                <p:column headerText="تلفن">
+                    <h:outputText value="09131110022" />
+                </p:column>
+                
+                  <p:column headerText="ایمیل">
+                    <h:outputText value="aaaa@yahoo.com" />
+                </p:column>
+              
+                <f:facet name="footer">
+            <p:commandButton process=""  value="ارسال پیام" />
+        </f:facet>
+            </p:dataTable>
+
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>  

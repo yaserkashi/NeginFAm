@@ -1,6 +1,6 @@
 package login;
 
-import services.captcha.MyCaptcha;
+import captcha.MyCaptcha;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;

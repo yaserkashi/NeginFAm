@@ -251,13 +251,57 @@
             </p:menubar>
 
 
-            <p:layout style="min-width:600px;min-height:500 px;margin-top: 5px ;">
-                
+            <p:layout style="min-width:600px;min-height:150px;margin-top: 5px ;">
+                <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
+
+                    <h:form  >
+                        <p:outputLabel style=" font-family: BYekan,'BYekan',tahoma;padding-left: 30px;padding-top: 40px " value="کاربر گرامی خوش امدید"/>
+                        <p:growl autoUpdate="true" />
+                        <p:panelMenu style="float: right;width: 100%;padding-top: 60px;" >
+
+                            <p:submenu label="پروفایل کاربری" >
+                                <p:menuitem value="مشاهده و ویرایش "  icon="ui-icon-disk" url="page3.xhtml"  />
+
+                                <p:menuitem value="تغییر کلمه عبور" icon="ui-icon-disk" url="page2.xhtml"/>
+                            </p:submenu>
+
+                            <p:submenu label="ثبت سفارش">
+                                <p:menuitem value="سفارش ترجمه"   ajax="false" icon="ui-icon-close" url="page5.xhtml"/>
+                                <p:menuitem value="سفارش تایپ"  ajax="false"  icon="ui-icon-home" />
+                                <p:menuitem value="سفارش پایان نامه" ajax="false"  icon="ui-icon-heart"/>
+                                <p:menuitem value="سفارش مقاله" ajax="false" icon="ui-icon-document" />
+                            </p:submenu>
+                            <p:separator />
+
+
+                            <p:submenu label="پیگیری سفارش">
+                                <p:menuitem value="پیگیری ترجمه"   ajax="false" icon="ui-icon-close"/>
+                                <p:menuitem value="پیگیری تایپ"  ajax="false"  icon="ui-icon-home" />
+                                <p:menuitem value="پیگیری پایان نامه" ajax="false"  icon="ui-icon-heart"/>
+                                <p:menuitem value="پیگیری مقاله" ajax="false" icon="ui-icon-document" />
+                            </p:submenu>
+                            <p:separator />
+
+
+
+
+                            <p:submenu label="پیام ها">
+                                <p:menuitem value="ارسال پیام"   ajax="false" icon="ui-icon-close" url="page4.xhtml"/>
+                                <p:menuitem value="صندوق پیام"  ajax="false"  icon="ui-icon-home" />
+                            </p:submenu> 
+
+
+                        </p:panelMenu>
+                        <p:button value="گزارشات مالی" style="width: 100% ;" />
+                        <p:button value="خروج" style="width: 100%"/>
+                    </h:form>
+                </p:layoutUnit>
 
                 <p:layoutUnit position="center">
                     <ui:insert name="content"> </ui:insert>
                 </p:layoutUnit>
             </p:layout>
+
 
         </h:body>
     </f:view>

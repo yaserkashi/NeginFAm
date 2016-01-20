@@ -86,6 +86,7 @@ body a:hover {
 
 .iFrameClass{
     width: 850px;
+    height: 300px;
     margin-top: 5px;
     margin-bottom: 20px;
 }
@@ -108,7 +109,8 @@ body a:hover {
 .sidePanel {
     width: 20%;
     height: 410px;
-    padding-top: 55px;
+    padding-top: 5px;
+    margin-top: 48px;
     margin-right: 20px;
     display: inline-block;
     position: absolute;
@@ -128,7 +130,7 @@ body a:hover {
     width: 80%;
     height: 500px;
     display: inline-block;
-    margin-top: 5px;
+    direction: rtl;
 }
 
 .footer {

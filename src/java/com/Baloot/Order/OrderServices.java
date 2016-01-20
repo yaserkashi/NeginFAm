@@ -6,13 +6,10 @@
 
 package com.Baloot.Order;
 
-import com.Baloot.Design.Design;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -38,8 +35,7 @@ public class OrderServices {
 
             // execute insert SQL stetement
             preparedStatement.executeUpdate();
-            System.out.println("Record is inserted into DBDesign table!");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connection status", "ezafe shod"));
+            System.out.println("Record is inserted into DBOrder table!");
 
         } catch (SQLException e) {
 

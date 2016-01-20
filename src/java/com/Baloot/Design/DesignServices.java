@@ -9,7 +9,9 @@ package com.Baloot.Design;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -18,16 +20,16 @@ import javax.faces.context.FacesContext;
  * @author FK
  */
 public class DesignServices {
-    public static void insertRecordIntoTable(Design design) throws SQLException {
+    public static int insertRecordIntoTable(Design design) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-
+        int id = 0;
         String insertTableSQL = "INSERT INTO design (design_type,size,register_date,print_type,design_option,print_option,user_id,end_date,explain,attach_file) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
-            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, design.getDesignType());
             preparedStatement.setString(2, design.getSize());
@@ -43,8 +45,11 @@ public class DesignServices {
             // execute insert SQL stetement
             preparedStatement.executeUpdate();
             System.out.println("Record is inserted into DBDesign table!");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connection status", "ezafe shod"));
-
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            rs.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -60,6 +65,6 @@ public class DesignServices {
             }
 
         }
-
+        return id;
     }
 }

@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+        <h:form> 
+      <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+
+            <p:panelGrid columns="9" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
+
+                <h:outputText value="ردیف" style="width: 10px"/>
+                 <h:outputText value="کدکاربر" />
+
+                <p:panelGrid columns="1">
+                    <h:outputText value="نام بانک" />
+                    <p:selectOneMenu id="console2" style="padding-right: 15px;width: 60px" >
+                        <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
+                        <f:selectItem itemLabel=" سامان" itemValue="Xbox One" />
+                        <f:selectItem itemLabel=" ملت" itemValue="PS4" />
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                    <h:outputText value="شماره فاکتور" />
+                    <p:inputText id="filter" style="width: 40px"/>
+                </p:panelGrid>
+                <p:panelGrid columns="1" >
+                    <h:outputText value="شماره سفارش" />
+                    <p:inputText id="filter1" style="width: 40px" />
+                </p:panelGrid>
+
+                <p:panelGrid columns="1">
+                    <h:outputText value="مرحله"/>
+                    <p:selectOneMenu id="console3" style="padding-right: 15px;width: 40px" >
+                        <f:selectItem itemLabel="" itemValue=""  />
+                        <f:selectItem itemLabel="پیش پرداخت" itemValue="Xbox One" />
+                        <f:selectItem itemLabel="پرداخت نهایی" itemValue="PS4" />
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                    <h:outputText value="مجموعه" />
+                    <p:inputText id="filter2" style="width: 40px"/>
+                </p:panelGrid>
+
+                 <h:outputText value="تاریخ" style="width: 40px" />
+                <h:outputText value="وضعیت" style="width: 40px" />
+
+
+              <h:outputText value="1" />
+               <h:outputText value="1234" />
+                <h:outputText value=" سامان" />
+                <h:outputText value="21789" />
+                <h:outputText value="862"/>
+                <h:outputText value="پیش پرداخت"/>
+                <h:outputText value="90000ریال" />
+                <h:outputText value="94/1/2"/>
+               <p:selectOneMenu id="console8" style="padding-right: 15px;width: 40px" >
+                        <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
+                        <f:selectItem itemLabel=" تایید" itemValue="Xbox One" />
+                        <f:selectItem itemLabel="عدم تایید" itemValue="PS4" />
+
+                    </p:selectOneMenu>
+
+            </p:panelGrid>
+        </h:form>
+
+
+        
+
+    </ui:define>
+</ui:composition>  

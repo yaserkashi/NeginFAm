@@ -9,25 +9,25 @@ package com.Baloot.Type;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import java.sql.Statement;
 
 /**
  *
  * @author FK
  */
 public class TypeServices {
-    public static void insertRecordIntoTable(Type type) throws SQLException {
+    public static int insertRecordIntoTable(Type type) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-
+        int id = 0;
         String insertTableSQL = "INSERT INTO type (language,field,title,date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
-            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, type.getLanguage());
             preparedStatement.setInt(2, type.getField());
@@ -38,9 +38,13 @@ public class TypeServices {
             preparedStatement.setInt(7, type.getUserId().getId());
 
             // execute insert SQL stetement
-            preparedStatement.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
             System.out.println("Record is inserted into DBType table!");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connection status", "ezafe shod"));
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            rs.close();
 
         } catch (SQLException e) {
 
@@ -57,6 +61,6 @@ public class TypeServices {
             }
 
         }
-
+        return id;
     }
 }

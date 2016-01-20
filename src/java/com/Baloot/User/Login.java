@@ -58,7 +58,7 @@ public class Login implements Serializable {
             case 1 : {
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username", user);
-                return "/pages/admin/admin";
+                return "/pages/admin/admin.xhtml";
             }
             case 2 : {
                 HttpSession session = SessionBean.getSession();

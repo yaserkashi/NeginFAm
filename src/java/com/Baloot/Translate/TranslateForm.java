@@ -10,8 +10,12 @@ import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
+import com.Baloot.Order.Order;
+import com.Baloot.Order.OrderServices;
 import com.Baloot.Type.TypeForm;
+import com.Baloot.User.Users;
 import com.Baloot.User.UserServices;
+import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,7 +52,7 @@ public class TranslateForm {
     private boolean chart;
     private boolean shape;
     private String explain;
-    private String dateTime;
+    private Date dateTime;
     private boolean delivery;
     private UploadedFile attachFile;
 
@@ -94,7 +96,7 @@ public class TranslateForm {
         this.explain = explain;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -138,7 +140,7 @@ public class TranslateForm {
         return explain;
     }
 
-    public String getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -205,19 +207,29 @@ public class TranslateForm {
     public void submit() {
         System.out.println("Submit Function!");
         Translate translate = new Translate();
+        Order order = new Order();
         translate.setLanguage(language);
         translate.setField(field);
         translate.setTitle(title);
         translate.setExplain(explain);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        translate.setDateTime(dateFormat.format(date));
-        translate.setEndDateTime(dateTime);
+        PersianCalendar pc = new PersianCalendar();
+        String currentDate = pc.getIranianDateTime();
+        translate.setDateTime(currentDate);
+        translate.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
         translate.setOption(getOption(table, subtable, chart, shape));
-        translate.setAttachFile(attachFile.getFileName());
-        translate.setUserId(UserServices.getUserByUsername(SessionBean.getUserName()));
+        if(attachFile != null)
+            translate.setAttachFile(attachFile.getFileName());
+        Users user = UserServices.getUserByUsername(SessionBean.getUserName());
+        translate.setUserId(user);
+        
+        order.setTableName("translate");
+        order.setCondition(0);
+        order.setOrderDate(currentDate);
+        order.setUserId(user);
         try {
-            TranslateServices.insertRecordIntoTable(translate);
+            int id = TranslateServices.insertRecordIntoTable(translate);
+            order.setTableId(id);
+            OrderServices.insertRecordIntoTable(order);
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("درسته ......"));
         } catch (SQLException ex) {
