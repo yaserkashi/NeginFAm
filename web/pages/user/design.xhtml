@@ -5,13 +5,13 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-               template="../../template/usertemplate.xhtml">
+                template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-  <h:head>
+        <h:head>
             <title>Facelet Title</title>
         </h:head>
         <h:body>
-            <h:form id="form">
+            <h:form id="form" >
                 <p:messages autoUpdate="true"/>
                 <p:panelGrid id="panel" columns="2" style="float: right">
                     <f:facet name="header" >
@@ -47,7 +47,7 @@
                         <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
 
                     </p:selectOneMenu>            
-                    
+
 
                     <p:outputLabel value="نوع چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
@@ -58,20 +58,16 @@
 
                     <p:outputLabel value="مشخصات چاپ" style="width:200px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel> 
 
-
                     <p:inputTextarea value="#{designForm.explian}" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
                     <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
 
                     <p:calendar value="#{designForm.endDate}" style="width:200px;float: right;direction: rtl"/>
                     <p:outputLabel value=" تاریخ و ساعت درخواستی " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
-
-
-                    <h:form enctype="multipart/form-data" >
-                    <p:fileUpload  value="#{designForm.attachFile}" dragDropSupport="true" mode="advanced"
-                                   fileUploadListener="#{designForm.upload()}"/>
+                    <h:form enctype="multipart/form-data">
+                        <p:fileUpload value="#{designForm.attachFile}" mode="simple" />
+                        <p:commandButton value="Submit" ajax="false" actionListener="#{designForm.upload}" />
+                        <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                     </h:form>
-                    <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
-
                     <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
                     <p:commandButton  value="ثبت" actionListener="#{designForm.submit()}" style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
                     </p:commandButton>
@@ -79,9 +75,9 @@
 
 
                 </p:panelGrid>
-                
+
             </h:form>
-           
+
 
         </h:body>
     </ui:define>
