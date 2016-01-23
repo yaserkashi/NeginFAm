@@ -54,4 +54,40 @@ public class OrderServices {
         }
 
     }
+    
+    public static void updateCondition(int id, int newCondition) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateTableSQL = "UPDATE order SET condition = ? WHERE id = ?";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+
+            preparedStatement.setInt(1, newCondition);
+            preparedStatement.setInt(2, id);
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("Condition updated in DBOrder table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
 }

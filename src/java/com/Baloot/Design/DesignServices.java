@@ -35,7 +35,7 @@ public class DesignServices {
             preparedStatement.setString(2, design.getSize());
             preparedStatement.setString(3, design.getRegisterDate());
             preparedStatement.setString(4, design.getPrintType());
-            preparedStatement.setString(5, design.getDesingOption());
+            preparedStatement.setString(5, design.getDesignOption());
             preparedStatement.setString(6, design.getPrintOption());
             preparedStatement.setInt(7, design.getUserId().getId());
             preparedStatement.setString(8, design.getEndDate());

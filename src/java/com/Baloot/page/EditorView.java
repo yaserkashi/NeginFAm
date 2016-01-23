@@ -5,10 +5,11 @@
  */
 package com.Baloot.page;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -30,20 +31,16 @@ public class EditorView {
 
     public void createFile() {
         try {
-            File file = new File("test.html");
+            
+            File newTextFile = new File("thetextfile.html");
 
-            // if file doesnt exists, then create it 
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(text);
-            bw.close();
-            //System.out.println("Done writing to " + fileName); //For testing 
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
+            FileWriter fw = new FileWriter(newTextFile);
+            fw.write(text);
+            fw.close();
+            System.out.println("File Created!");
+        } catch (IOException iox) {
+            //do stuff with exception
+            iox.printStackTrace();
         }
     }
 }

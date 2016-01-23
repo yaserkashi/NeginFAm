@@ -20,7 +20,7 @@ import java.util.List;
  * @author FK
  */
 public class MessageServices {
-    public List<Message> getInbox(int id) {
+    public static List<Message> getInbox(int id) {
         List<Message> list = new ArrayList<>();
         Connection dbConnection;
         PreparedStatement ps;
@@ -48,7 +48,7 @@ public class MessageServices {
         return list;
     }
     
-    public List<Message> getOutbox(int id) {
+    public static List<Message> getOutbox(int id) {
         List<Message> list = new ArrayList<>();
         Connection dbConnection;
         PreparedStatement ps;
@@ -74,5 +74,45 @@ public class MessageServices {
             System.out.println(e);
         }
         return list;
+    }
+    
+    public static void insertRecordIntoTable(Message message) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String insertTableSQL = "INSERT INTO message (text,user_id_send,user_id_get,date_time,read,title) VALUES (?,?,?,?,?,?)";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+
+            preparedStatement.setString(1, message.getText());
+            preparedStatement.setInt(2, message.getUserIdSend().getId());
+            preparedStatement.setInt(3, message.getUserIdGet().getId());
+            preparedStatement.setString(4, message.getDateTime());
+            preparedStatement.setBoolean(5, message.getRead());
+            preparedStatement.setString(6, message.getTitle());
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("Record is inserted into DBMessage table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
     }
 }

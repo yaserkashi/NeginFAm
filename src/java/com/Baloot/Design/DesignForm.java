@@ -17,10 +17,8 @@ import com.Baloot.User.UserServices;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,8 +32,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -58,6 +54,7 @@ public class DesignForm {
     private String explian;
     private Date endDate;
     private UploadedFile attachFile;
+    private Boolean delivery;
 
     public List<Coding> getDesignTypes() {
         return designTypes;
@@ -150,7 +147,15 @@ public class DesignForm {
     public void setAttachFile(UploadedFile attachFile) {
         this.attachFile = attachFile;
     }
-    
+
+    public Boolean isDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Boolean delivery) {
+        this.delivery = delivery;
+    }
+          
     public void upload() {
         if (attachFile != null) {
             try {
@@ -197,7 +202,7 @@ public class DesignForm {
         String currentDate = pc.getIranianDateTime();
         design.setRegisterDate(currentDate);
         design.setPrintType(printType);
-        design.setDesingOption(designOption);
+        design.setDesignOption(designOption);
         design.setPrintOption(printOption);
         design.setEndDate(pc.DateToString(pc.getIranianDateFromDate(endDate)));
         design.setExplain(explian);
@@ -205,6 +210,7 @@ public class DesignForm {
         design.setUserId(user);
         if(attachFile != null)
             design.setAttachFile(attachFile.getFileName());
+        design.setDeliveryType(delivery);
         
         order.setTableName("design");
         order.setCondition(0);

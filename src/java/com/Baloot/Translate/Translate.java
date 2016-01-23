@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Translate.findByOption", query = "SELECT t FROM Translate t WHERE t.option = :option"),
     @NamedQuery(name = "Translate.findByAttachFile", query = "SELECT t FROM Translate t WHERE t.attachFile = :attachFile"),
     @NamedQuery(name = "Translate.findByExplain", query = "SELECT t FROM Translate t WHERE t.explain = :explain"),
-    @NamedQuery(name = "Translate.findById", query = "SELECT t FROM Translate t WHERE t.id = :id")})
+    @NamedQuery(name = "Translate.findById", query = "SELECT t FROM Translate t WHERE t.id = :id"),
+    @NamedQuery(name = "Translate.findByDeliveryType", query = "SELECT t FROM Translate t WHERE t.deliveryType = :deliveryType")})
 public class Translate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "language")
@@ -59,7 +60,7 @@ public class Translate implements Serializable {
     @Column(name = "option")
     private String option;
     @Size(max = 2147483647)
-    @Column(name = "attach-file")
+    @Column(name = "attach_file")
     private String attachFile;
     @Size(max = 2147483647)
     @Column(name = "explain")
@@ -69,6 +70,8 @@ public class Translate implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "delivery_type")
+    private Boolean deliveryType;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
@@ -150,6 +153,14 @@ public class Translate implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Boolean deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
     public Users getUserId() {

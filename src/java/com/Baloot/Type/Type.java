@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Type.findByExplain", query = "SELECT t FROM Type t WHERE t.explain = :explain"),
     @NamedQuery(name = "Type.findByOption", query = "SELECT t FROM Type t WHERE t.option = :option"),
     @NamedQuery(name = "Type.findByAttachFile", query = "SELECT t FROM Type t WHERE t.attachFile = :attachFile"),
-    @NamedQuery(name = "Type.findById", query = "SELECT t FROM Type t WHERE t.id = :id")})
+    @NamedQuery(name = "Type.findById", query = "SELECT t FROM Type t WHERE t.id = :id"),
+    @NamedQuery(name = "Type.findByDeliveryType", query = "SELECT t FROM Type t WHERE t.deliveryType = :deliveryType"),
+    @NamedQuery(name = "Type.findByEndDateTime", query = "SELECT t FROM Type t WHERE t.endDateTime = :endDateTime")})
 public class Type implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "language")
@@ -65,6 +67,11 @@ public class Type implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "delivery_type")
+    private Boolean deliveryType;
+    @Size(max = 30)
+    @Column(name = "end_date_time")
+    private String endDateTime;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
@@ -138,6 +145,22 @@ public class Type implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Boolean deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public String getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(String endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public Users getUserId() {

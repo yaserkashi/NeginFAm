@@ -63,6 +63,10 @@
 
                     <p:calendar value="#{designForm.endDate}" style="width:200px;float: right;direction: rtl"/>
                     <p:outputLabel value=" تاریخ و ساعت درخواستی " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+                    
+                    <p:selectBooleanCheckbox value="#{designForm.delivery}" />
+                    <h:outputText value="تحویل حضوری " />
+                    
                     <h:form enctype="multipart/form-data">
                         <p:fileUpload value="#{designForm.attachFile}" mode="simple" />
                         <p:commandButton value="Submit" ajax="false" actionListener="#{designForm.upload}" />

@@ -12,7 +12,7 @@
               <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="800" height="290" style="margin-top: 29px"/>
  
     <h:panelGrid columns="2" style="margin-top: 10px">
-        <p:commandButton value="ثبت" update="display"  icon="ui-icon-disk" />
+        <p:commandButton value="ثبت" action="#{editorView.createFile()}"  icon="ui-icon-disk" />
  
         <p:commandButton value="حذف" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
     </h:panelGrid>

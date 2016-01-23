@@ -61,28 +61,26 @@ public class sendemail {
     public void setMessage(String message) {
         this.message = message;
     }
+    //"ardakannegin""09134512648@@";
+    private String mailName="neginfamardakan";
+    private String passWord="09134512648";
     private String mail;
     private List<String> mailList;
     private String title;
     private String message;
-    public  void mailSendHand() {
-        groupSendEmail(mailList, "نگین فام", message);
+    public  void mailSendHand() {      
+        groupSendEmail(mailList, title, message);
     }
 
     public void  groupSendEmail(List<String> mailAddress,String title,String message) {
-        Object[] mailAddressA=mailAddress.toArray();
        
-      
-       
-       
-        
-        for (int i = 0; i <mailAddress.size(); i++) {
+               for (int i = 0; i <mailAddress.size(); i++) {
             
         
         try {
             
-            Send("ali41asti", "4440041388", mailAddress.get(i).toString(), title, message);
-            System.out.println("okkkkkkkkkkkkk");
+            Send(mailName, passWord, mailAddress.get(i).toString(), title, message);
+           
            
         } catch (MessagingException ex) {
            
@@ -91,14 +89,17 @@ public class sendemail {
         }
         }   
     }
-    public void  sendEmail(String mailAddress,String title,String message) {
+    public void  sendEmail(String mailAddress1,String title1,String message1)
+    {
+        
         try {
+           
+            Send(mailName, passWord, mailAddress1, title1, message1);
             
-            Send("ali41asti", "4440041388", mailAddress, title, message);
            
         } catch (MessagingException ex) {
            
-          
+            System.out.println(ex.getMessage());
             
         }
            

@@ -221,6 +221,7 @@ public class TranslateForm {
             translate.setAttachFile(attachFile.getFileName());
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         translate.setUserId(user);
+        translate.setDeliveryType(delivery);
         
         order.setTableName("translate");
         order.setCondition(0);

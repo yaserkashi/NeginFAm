@@ -35,12 +35,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Design.findBySize", query = "SELECT d FROM Design d WHERE d.size = :size"),
     @NamedQuery(name = "Design.findByRegisterDate", query = "SELECT d FROM Design d WHERE d.registerDate = :registerDate"),
     @NamedQuery(name = "Design.findByPrintType", query = "SELECT d FROM Design d WHERE d.printType = :printType"),
-    @NamedQuery(name = "Design.findByDesingOption", query = "SELECT d FROM Design d WHERE d.desingOption = :desingOption"),
+    @NamedQuery(name = "Design.findByDesignOption", query = "SELECT d FROM Design d WHERE d.designOption = :designOption"),
     @NamedQuery(name = "Design.findByPrintOption", query = "SELECT d FROM Design d WHERE d.printOption = :printOption"),
     @NamedQuery(name = "Design.findByEndDate", query = "SELECT d FROM Design d WHERE d.endDate = :endDate"),
     @NamedQuery(name = "Design.findByExplain", query = "SELECT d FROM Design d WHERE d.explain = :explain"),
     @NamedQuery(name = "Design.findByAttachFile", query = "SELECT d FROM Design d WHERE d.attachFile = :attachFile"),
-    @NamedQuery(name = "Design.findById", query = "SELECT d FROM Design d WHERE d.id = :id")})
+    @NamedQuery(name = "Design.findById", query = "SELECT d FROM Design d WHERE d.id = :id"),
+    @NamedQuery(name = "Design.findByDeliveryType", query = "SELECT d FROM Design d WHERE d.deliveryType = :deliveryType")})
 public class Design implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "design_type")
@@ -55,8 +56,8 @@ public class Design implements Serializable {
     @Column(name = "print_type")
     private String printType;
     @Size(max = 30)
-    @Column(name = "desing_option")
-    private String desingOption;
+    @Column(name = "design_option")
+    private String designOption;
     @Size(max = 30)
     @Column(name = "print_option")
     private String printOption;
@@ -74,6 +75,8 @@ public class Design implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "delivery_type")
+    private Boolean deliveryType;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
@@ -117,12 +120,12 @@ public class Design implements Serializable {
         this.printType = printType;
     }
 
-    public String getDesingOption() {
-        return desingOption;
+    public String getDesignOption() {
+        return designOption;
     }
 
-    public void setDesingOption(String desingOption) {
-        this.desingOption = desingOption;
+    public void setDesignOption(String designOption) {
+        this.designOption = designOption;
     }
 
     public String getPrintOption() {
@@ -163,6 +166,14 @@ public class Design implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(Boolean deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
     public Users getUserId() {

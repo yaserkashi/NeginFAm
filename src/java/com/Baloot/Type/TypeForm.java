@@ -258,6 +258,7 @@ public class TypeForm {
         type.setUserId(user);
         if(attachFile != null)
             type.setAttachFile(attachFile.getFileName());
+        type.setDeliveryType(delivery);
  
         order.setTableName("type");
         order.setCondition(0);

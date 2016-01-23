@@ -19,7 +19,7 @@ import java.util.List;
  * @author FK
  */
 public class FactorServices {
-    public List<ReportList> getReportList() {
+    public static List<ReportList> getReportList() {
         List<ReportList> list = new ArrayList<>();
         Connection dbConnection;
         Statement statement;
