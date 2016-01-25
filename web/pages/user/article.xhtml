@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        
+        
+      
+            <p:messages autoUpdate="true"/>
+            <p:panelGrid id="panel" columns="2" style="float: right;margin:  30px">
+                <f:facet name="header" >
+                    ثبت سفارش مقاله
+                </f:facet>
+
+                <p:selectOneMenu id="lang" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ; font-weight: normal ; font-size: 17px">
+                    <f:selectItems value="" var="coding" itemLabel="" itemValue=""/>
+                </p:selectOneMenu>
+                <p:outputLabel value="انتخاب گروه "  style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px  "></p:outputLabel>
+
+                <p:selectOneMenu id="feild" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                    <f:selectItems value="" var="coding" itemLabel="" itemValue=""/>
+                </p:selectOneMenu>              
+                <p:outputLabel value="انتخاب رشته " style="width:400px;float: right;direction: rtl; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectOneMenu id="feild" value="" style="width:200px;float: right;direction: rtl;padding-right: 15px ;font-weight: normal ; font-size: 17px">
+                    <f:selectItems value="" var="coding" itemLabel="" itemValue=""/>
+                </p:selectOneMenu>
+                <p:outputLabel value=" انتخاب گرایش" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله " style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value="ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری " style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" نگارش مقاله بدون دریافت اطلاعات اولیه" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:outputLabel value=" " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+                <p:outputLabel value=" مایل به انتخاب کدام یک از طرح های زیر برای دریافت خدمات هستید؟ " style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+
+                <p:outputLabel value=" " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+                <p:selectOneRadio id="console15" columns="3" style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 12px" >
+                    <f:selectItem itemLabel="متون عمومی" itemValue="PS4" />
+                    <f:selectItem itemLabel="متون تخصصی" itemValue="PS4" />
+                    <f:selectItem itemLabel="متون تخصصی ویژه " itemValue="PS4" />
+
+                </p:selectOneRadio>
+
+                <p:inputText value=""  style="width:200px;float: right;direction: rtl;padding-right: 15px"/>     
+                <p:outputLabel value=" ارجاع به محقق" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:inputText value=""  style="width:200px;float: right;direction: rtl;padding-right: 15px"/>     
+                <p:outputLabel value=" موضوع" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:inputTextarea value="" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                <p:outputLabel value=" توضیحات " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:selectBooleanCheckbox value="" style="float: right" />
+                <p:outputLabel value=" تحویل حضوری" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:calendar  style="width:200px;float: right;direction: rtl"/>
+                <p:outputLabel value=" تاریخ و ساعت درخواستی " style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:button  value="آپلود فایل" style="background: #679843 ; color: window ; float: right ; font-size: 16px" />
+                <p:outputLabel value="آپلود فایل سفارش" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+                <p:outputLabel value="جهت دریافت اطلاعات از طریق ایمیل خود ، علاوه بر چک کردن پوشه inbox ،پوشه spam ایمیل خود را نیز چک کنید.
+                               ( توجه : در برخی از سرویس دهنده های ایمیل ، به جای نام spam از نام هایی نظیر Bulk , junk استفاده شده است )" 
+                               style="width:400px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+
+                <p:outputLabel value="" style="width:200px;float: right;direction: rtl ; font-weight: normal ; font-size: 17px "></p:outputLabel>
+                <p:commandButton  value="ثبت"  style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
+                </p:commandButton>
+
+
+
+            </p:panelGrid>
+      
+
+
+    </ui:define>
+</ui:composition>  

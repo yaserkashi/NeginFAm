@@ -18,7 +18,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ali-M
  */
 @ManagedBean
-public class sendSMS {
+public class SendSMS {
 private String userName="9138758450";
 private String passWord="9138758450";
 private String fromNumber="";

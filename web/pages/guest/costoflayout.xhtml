@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <style>
+            p {
+                margin: 0px 0px 10px;
+                line-height: 2;
+                font-size: 14px;
+                text-align: justify;
+            }
+            .table-responsive {
+                min-height: 0.01%;
+                overflow-x: auto;
+            }
+            l, ol {
+                margin-top: 0px;
+                margin-bottom: 10px;
+
+            }
+        </style>
+        <h:form>
+<!--            <p:outputLabel value=" هزینه خدمات ویراستاری" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>-->
+            <p:panelGrid columns="1">
+                <f:facet name="header">هزینه خدمات صفحه ارایی</f:facet>
+                
+                <p:graphicImage   url="/resources/images/cost layout.jpg"/>
+
+                <p dir="RTL">
+                    <span style="color:#00f;"><span style="font-size:20px;"><strong>خدمات صفحه آرایی متون در شبکه ایران فرتاک شامل</strong></span></span></p>
+
+                <ul style="direction: rtl">
+                    <li>
+                        <strong>مرتب نمودن متن</strong></li>
+                    <li>
+                        <strong>تنظیم متن بر اساس شیوه نامه</strong>( شیوه نامه دانشگاه یا انتشارات )</li>
+                    <li>
+                        <strong>پاراگراف بندی</strong></li>
+                    <li>
+                        <strong>اصلاح نیم فاصله</strong></li>
+                    <li>
+                        <strong>شماره صفحه</strong></li>
+                    <li>
+                        <strong>تنظیم فاصله چپ و راست متن</strong></li>
+                    <li>
+                        <strong>تنظیم فاصله بالا و پایین متن</strong></li>
+                    <li>
+                        <strong>فهرست نویسی</strong></li>
+                    <li>
+                        <strong><span dir="RTL">تنظیم شماره اشکال ، جداول و نمودار های موجود در متن</span></strong></li>
+                </ul>
+                <table class="table-responsive" dir="rtl" align="center" border="1" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="width:638px;height:13px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong><span style="font-size:22px;">هزینه <span style="color:#00f;">صفحه آرایی</span> متون به ازای هر صفحه</span></strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:379px;height:18px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#f00;"><span style="font-size:20px;"><strong>زمینه</strong></span></span></p>
+                            </td>
+                            <td style="width:259px;height:18px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:20px;"><span style="color:#f00;"><strong>قیمت</strong></span></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:379px;height:27px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>صفحه آرایی</strong><strong>پایان نامه</strong></p>
+                            </td>
+                            <td style="width:259px;height:27px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1000 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:379px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>صفحه آرایی</strong><strong>مقالات تخصصی </strong>( <span dir="LTR">isi</span>-<span dir="LTR">isc</span>-مقالات علمی پژوهشی )</p>
+                            </td>
+                            <td style="width:259px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    2000 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:379px;height:26px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>صفحه آرایی</strong><strong>موضوعات تحقیقاتی</strong></p>
+                            </td>
+                            <td style="width:259px;height:26px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    800 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:379px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>صفحه آرایی</strong><strong>جزوه</strong></p>
+                            </td>
+                            <td style="width:259px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    900 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:379px;height:20px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>صفحه آرایی</strong><strong>کتاب</strong></p>
+                            </td>
+                            <td style="width:259px;height:20px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1500 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width:638px;height:13px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong><span style="font-size:20px;"><span style="color:#008000;">در سایت ثبت نام کرده و سفارش آنلاین خود را ثبت کنید تا در کمتر از 10 دقیقه پیش فاکتور به صورت رایگان برای شما صادر و ارسال گردد<span dir="LTR">.</span></span></span></strong></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition> 

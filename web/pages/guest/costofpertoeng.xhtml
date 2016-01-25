@@ -1,0 +1,324 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <style>
+            p {
+                margin: 0px 0px 10px;
+                line-height: 2;
+                font-size: 14px;
+                text-align: justify;
+            }
+            .table-responsive {
+                min-height: 0.01%;
+                overflow-x: auto;
+
+            }
+            ul, ol {
+                margin-top: 0px;
+                margin-bottom: 10px;
+                 margin-right: 10px;
+            }
+        </style>
+        <h:form>
+<!--            <p:outputLabel value="هزینه ترجمه فارسی به انگلیسی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>-->
+            <p:panelGrid columns="1">
+                <f:facet name="header">هزینه ترجمه فارسی به انگلیسی</f:facet>
+                    <p:graphicImage   url="/resources/images/hazine fa be en.jpg"/>
+
+           
+                <p dir="RTL" >
+                    از آنجایی که ترجمه فارسی به انگلیسی دارای پیچیدگی و حساسیت بالایی می باشد ، ما را بر آن داشت تا با تشکیل کارگروه های ویژه در این حوزه ، متشکل از اساتید برجسته دانشگاهی که دارای مقالات بین المللی بوده و همچنین تسلط کاملی به قواعد و نکات گرامری و نگارشی ترجمه متن فارسی به انگلیسی دارند،استفاده کنیم تا تضمین کننده کیفیت ترجمه متن شما باشیم .
+                </p>
+                <p dir="RTL">
+                    <strong>هزینه ترجمه فارسی به انگلیسی</strong> با توجه به جداول زیر محاسبه می کردد.
+                </p>
+                <table class="table-responsive" dir="rtl" align="center" border="1" cellpadding="0" cellspacing="0" width="715" >
+                    <tbody>
+                        <tr>
+                            <td colspan="6" style="width:716px;height:34px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#ff8c00;"><span style="font-size:22px;">هزینه پایه ترجمه یک صفحه </span></span><span style="font-size:22px;"><strong>فارسی به انگلیسی</strong></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;height:14px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong><span style="font-size:18px;"><span style="color:#f00;">تعداد صفحات</span></span></strong></p>
+                            </td>
+                            <td style="width:114px;height:14px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#f00;"><span style="font-size:18px;"><strong>زمان تحویل</strong></span></span></p>
+                            </td>
+                            <td style="width:90px;height:14px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#f00;"><span style="font-size:18px;"><strong>درصد تخفیف</strong></span></span></p>
+                            </td>
+                            <td style="width:102px;height:14px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#0000cd;"><span style="font-size: 22px;"><b>متون </b></span></span></p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#0000cd;"><span style="font-size: 22px;"><b>عمومی</b></span></span></p>
+                            </td>
+                            <td style="width:108px;height:14px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#0000cd;"><span style="font-size: 22px;"><b>متون </b></span></span></p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#0000cd;"><span style="font-size: 22px;"><b>تخصصی</b></span></span></p>
+                            </td>
+                            <td style="width:114px;height:14px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#0000cd;"><span style="font-size: 22px;"><b>متون</b></span></span></p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#0000cd;"><span style="font-size: 22px;"><b>ویژه</b></span></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1 تا 9 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (250 تا 2250 کلمه)</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    5/0 تا 3 روز</p>
+                            </td>
+                            <td style="width:90px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    0 %</p>
+                            </td>
+                            <td style="width:102px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    12000 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 48 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    10 تا 25 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (2500 تا 6250 کلمه )</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    5 تا 7 روز</p>
+                            </td>
+                            <td style="width:90px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    5 %</p>
+                            </td>
+                            <td style="width:102px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    11400 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 45/6 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    26 تا 50 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (6500 تا 12500 کلمه)</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    8 تا 14 روز</p>
+                            </td>
+                            <td style="width:90px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    10 %</p>
+                            </td>
+                            <td style="width:102px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    10800 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 43/2 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    51 تا 100 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (12750 تا 25000 کلمه)</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    15 تا 24 روز</p>
+                            </td>
+                            <td style="width:90px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    15 %</p>
+                            </td>
+                            <td style="width:102px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    10200 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 40/8 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    101 تا 200 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (25250 تا 500000 کلمه)</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    25 تا 55 روز</p>
+                            </td>
+                            <td style="width:90px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    20 %</p>
+                            </td>
+                            <td style="width:102px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    9600 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 38/4 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    201 تا 500 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (50250 تا 125000 کلمه)</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    56 تا 85 روز</p>
+                            </td>
+                            <td style="width:90px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    25 %</p>
+                            </td>
+                            <td style="width:102px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    9000 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 36 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:187px;height:.5in;">
+                                <p dir="RTL" style="text-align: center;">
+                                    501 تا 2000 صفحه</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    (125250 تا 500000 کلمه)</p>
+                            </td>
+                            <td style="width:114px;height:.5in;">
+                                <p dir="RTL" style="text-align: center;">
+                                    86 تا 200 روز</p>
+                            </td>
+                            <td style="width:90px;height:.5in;">
+                                <p dir="RTL" style="text-align: center;">
+                                    28 %</p>
+                            </td>
+                            <td style="width:102px;height:.5in;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:108px;height:.5in;">
+                                <p dir="RTL" style="text-align: center;">
+                                    ----------</p>
+                            </td>
+                            <td style="width:114px;height:.5in;">
+                                <p dir="RTL" style="text-align: center;">
+                                    8640 تومان</p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:10px;">(کلمه ای 34/56 تومان)</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="width:716px;height:31px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:22px;"><strong><span style="color:#00f;">در ترجمه فارسی به انگلیسی خدمات تنها به صورت ویژه ارائه میگردد.</span></strong></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="width:716px;height:50px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong><span style="font-size:26px;"><span style="color:#f00;">توجه داشته باشید</span> که با افزایش تعداد صفحات هزینه کاهش می یابد.</span></strong></p>
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong><span style="background-color: rgb(255, 255, 0);">قیمت های مندرج در جدول بالا به صورت پایه ی قیمت برای هر رشته در نظر گرفته شده است</span></strong></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+                <div>
+                    <ul style="text-align: center;">
+                        <li style="text-align: justify;direction: rtl">
+                            <strong>متون عمومی: متونی که فاقد کلمات تخصصی باشند</strong></li>
+                        <li style="text-align: justify;direction: rtl">
+                            <strong>متون تخصصی: شامل کلیه رشته گرایش ها</strong></li>
+                        <li style="text-align: justify;direction: rtl">
+                            <strong>متون ویژه: شامل ترجمه مقالات<span dir="LTR">isi</span>یا<span dir="LTR">isc</span>و ترجمه جهت چاپ کتاب</strong></li>
+                    </ul>
+                </div>
+            </p:panelGrid>
+
+
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition> 

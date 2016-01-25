@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+          <style>
+            p {
+                margin: 0px 0px 10px;
+                line-height: 2;
+                font-size: 14px;
+                text-align: justify;
+            }
+             </style>
+             <h:form>
+<!--            <p:outputLabel value="خدمات تایپ فارسی و انگلیسی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>-->
+            <p:panelGrid columns="1">
+                <f:facet name="header">خدمات تایپ فارسی و انگلیسی</f:facet>
+                     <p:graphicImage   url="/resources/Untitled1.png"/>
+            
+                <p dir="RTL" >
+                    چنانچه تمایل دارید سفارش 
+                    <strong>تایپ</strong>
+                    مطمئن و کم هزینه ای داشته باشید و فارغ از هر دردسری متن دستنویس ، عکس ، فایل  pdf، فایل صوتی و ... خود را تایپ کنید، وارد صفحه ثبت سفارش شوید و بعد از پرنمودن فیلدهای ضروری، فایل موردنظرتان را آپلود نموده و منتظر پیش فاکتور بمانید. اپراتورهای ما پس از بررسی فایل ارسالی شما، قیمت هر صفحه از تایپ را محاسبه و مبلغی را جهت بیعانه برای شروع تایپ پیش فاکتور خواهند نمود. در صورتیکه از مبلغ برآورد شده برای هر صفحه تمایل دارید رضایت دارید، با فشردن دکمه پرداخت بیعانه وارد عملیات بانکی شوید.
+                </p>
+             
+                
+                </p:panelGrid>
+              </h:form>
+         </ui:define>
+</ui:composition> 

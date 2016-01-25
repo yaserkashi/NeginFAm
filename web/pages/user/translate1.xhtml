@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <!--            <p:panelGrid columns="4" style="border: none; direction: rtl ; margin-bottom: 30px; margin-top: 56px;margin-right: 30px;font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;font-size: 14px" >
+                            <h:outputText style="padding: 20px" value="شماره سفارش" />
+                              <h:outputText style="padding: 20px" value="شماره سفارش" />
+                               <h:outputText style="padding: 20px"  value="شماره سفارش" />
+                                <h:outputText style="padding: 20px" value="شماره سفارش" />
+                                 <h:outputText style="padding: 20px" value="شماره سفارش" />
+                                  <h:outputText style="padding: 20px" value="شماره سفارش" />
+                                   <h:outputText style="padding: 20px" value="شماره سفارش" />
+                                    <h:outputText style="padding: 20px"  value="شماره سفارش" />
+                              
+                        </p:panelGrid>-->
+
+            <h:outputText value="سفارش شما با موفقیت ثبت شد و به زودی توسط اپراتورهای سایت بررسی و نتیجه به اطلاع شما خواهد رسید." style="padding: 20px;  background:#339900 ;padding-left: 235px;"/>
+            <p:dataTable value="#{translateTable.bookList}" var="translate" 
+                         style="border: none;direction: rtl ; margin-bottom: 10px; margin-top: 30px;margin-right: 30px;font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;font-size: 14px" >
+
+
+              
+                    <p:column  headerText="شماره سفارش : 1228" style="padding: 10px">
+                        <h:outputText value="#{translate.name1}" />
+                    </p:column>
+                    <p:column  >
+                        <h:outputText value="ندارد" style="color: red"/>
+                    </p:column> 
+                    <p:column >
+                        <h:outputText value="#{translate.name2}" />
+                    </p:column>
+                    <p:column  >
+                        <h:outputText value="ندارد" style="color: red" />
+
+                    </p:column> 
+                
+            </p:dataTable>
+            <!--            <p:commandButton value="کنسل نمودن سفارش" 
+                                         style="color: #FFF ;background:#ff0033;float: right ; font-size: 16px ;margin: 35px;margin-top: 10px"/>-->
+
+            <p:commandButton value="کنسل نمودن سفارش"  actionListener="#{dialogView.message()}"
+                             style="color: #FFF ;background:#ff0033;float: right ; font-size: 16px ;margin: 35px;margin-top: 10px;direction: rtl">
+                <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
+            </p:commandButton>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Dialog2').show()" />
+                <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
+            </p:confirmDialog>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition> 
+
+

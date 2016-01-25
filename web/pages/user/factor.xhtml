@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <p:dataTable id="radioDT" var="factor" value="#{factorTable.bookList}" selection="#{factorTable.selected}" rowKey="#{factor.time}" 
+                         style="border: none;direction: rtl ; margin-bottom: 10px; margin-top: 56px;margin-right: 30px;font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;font-size: 14px;direction: rtl">
+                
+                <f:facet name="header">
+                    فاکتور سفارش
+                </f:facet>
+                <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                <p:column headerText="زمان">
+                    <h:outputText value="#{factor.time}" />
+                </p:column>
+                <p:column headerText="قیمت">
+                    <h:outputText value="#{factor.price}" />
+                </p:column>
+
+
+            </p:dataTable>
+
+
+            <p:commandButton value="پرداخت فاکتور" action="payment"
+                             style="color: #FFF ;background:#0066ff;float: right ; font-size: 16px ;margin: 35px;margin-top: 10px"/>
+
+        </h:form>
+
+
+    </ui:define>
+</ui:composition> 
+
+

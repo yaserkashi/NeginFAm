@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  * @author Erdeshir
  */
 @ManagedBean
-public class sendemail {
+public class Sendemail {
 
     public String getMail() {
         return mail;
@@ -105,7 +105,7 @@ public class sendemail {
            
     }
     public static void Send(final String username, final String password, String recipientEmail, String title, String message) throws AddressException, MessagingException {
-        sendemail.Send(username, password, recipientEmail, "", title, message);
+        Sendemail.Send(username, password, recipientEmail, "", title, message);
     }
 
    

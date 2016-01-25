@@ -1,0 +1,235 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <style>
+            p {
+                margin: 0px 0px 10px;
+                line-height: 2;
+                font-size: 14px;
+                text-align: justify;
+            }
+            .table-responsive {
+                min-height: 0.01%;
+                overflow-x: auto;
+            }
+            l, ol {
+                margin-top: 0px;
+                margin-bottom: 10px;
+
+            }
+        </style>
+        <h:form>
+<!--            <p:outputLabel value=" هزینه خدمات ویراستاری" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>-->
+            <p:panelGrid columns="1">
+                <f:facet name="header">هزینه خدمات ویراستاری</f:facet>
+                
+                <p:graphicImage   url="/resources/images/technical edit.jpg"/>
+                <p dir="RTL">
+                    <span style="color:#00f;"><span style="font-size:18px;"><strong>خدمات ویرایش فنی متون در شبکه ایران فرتاک شامل</strong></span></span></p>
+                <p> </p>
+                <ul  style="direction: rtl">
+                    <li>
+                        <strong>یک‌دست کردن رسم‌الخط کلمات</strong></li>
+                    <li>
+                        <strong>اصلاح غلط‌های املایی</strong></li>
+                    <li>
+                        <strong>اعمال نشانه‌گذاری‌های متن</strong></li>
+                    <li>
+                        <strong>یک‌دست کردن ضبط اعلام، اصطلاحات، آوانگاشت آن‌ها در صورت لزوم و آوردن معادل لاتین کلمات</strong></li>
+                    <li>
+                        <strong>اعمال قواعد عددنویسی، فرمول‌نویسی، اعراب‌گذاری و اختصارهای متنی</strong></li>
+                    <li>
+                        <strong>کنترل اندازه و قلم حروف، عنوان فصل‌ها، بخش‌ها و زیربخش‌ها، سربرگ‌ها و نمونه‌خوانی</strong>(منظور از نمونه‌خوانی، غلط‌ گیری تایپی است.)</li>
+                </ul>
+
+                <table class="table-responsive" dir="rtl" align="center" border="1" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="width:638px;height:13px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:20px;"><strong>هزینه <span style="color:#00f;">ویرایش فنی متون</span> به ازای هر صفحه</strong></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:18px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#f00;"><strong><span style="font-size:18px;">زمینه</span></strong></span></p>
+                            </td>
+                            <td style="width:289px;height:18px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong><span style="color:#f00;"><span style="font-size:18px;">قیمت</span></span></strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:27px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش فنی پایان نامه</strong></p>
+                            </td>
+                            <td style="width:289px;height:27px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1000 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش فنی مقالات تخصصی </strong>( <span dir="LTR">isi</span>-<span dir="LTR">isc</span>-مقالات علمی پژوهشی )</p>
+                            </td>
+                            <td style="width:289px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1100 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:26px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش فنی موضوعات تحقیقاتی</strong></p>
+                            </td>
+                            <td style="width:289px;height:26px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    750 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش فنی جزوه</strong></p>
+                            </td>
+                            <td style="width:289px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    800 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:20px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش فنی کتاب</strong></p>
+                            </td>
+                            <td style="width:289px;height:20px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    900 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width:638px;height:13px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:18px;"><strong><span style="color:#008000;">در سایت ثبت نام کرده و سفارش آنلاین خود را ثبت کنید تا در کمتر از 10 دقیقه پیش فاکتور به صورت رایگان برای شما صادر و ارسال گردد<span dir="LTR">.</span></span></strong></span></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p:graphicImage   url="/resources/images/academic edit.jpg"/>
+
+                <p dir="RTL">
+                    <span style="color:#00f;"><span style="font-size:20px;"><strong>خدمات ویرایش علمی متون در شبکه ایران فرتاک شامل</strong></span></span></p>
+
+                <ul style="direction: rtl">
+                    <li>
+                        <strong>بررسی کالبدشناسی اثر</strong>(شامل تمامی نمایه‌ها، جدول‌ها، نمودارها، تصاویر، عکس‌ها، فهرست مطالب، واژه‌نامه و غیره) 2</li>
+                    <li>
+                        <strong>کوتاه کردن جمله‌های طولانی</strong></li>
+                    <li>
+                        <strong>اصلاح انحراف از زبان معیار و یک‌دست کردن زبان نوشته</strong></li>
+                    <li>
+                        <strong>ساده‌سازی و روان‌سازی متن از نظر جمله‌بندی</strong></li>
+                    <li>
+                        <strong>ابهام‌زدایی از عبارت‌های نارسا، مبهم، متناقض، نامفهوم و عامیانه</strong></li>
+                    <li>
+                        <strong>گزینش واژگان فارسی و برابرهای مناسب</strong></li>
+                    <li>
+                        <strong>حذف، کاهش یا تلخیص مطالب تکراری، غیرضروری، غیرمستند، مبتذل، نامتعارف، سست و ضعیف </strong>8</li>
+                    <li>
+                        <strong>اصلاح، تنظیم و جابه‌جایی مطالب برای انسجام و یک‌دستی نوشتار</strong></li>
+                    <li>
+                        <strong>افزایش برخی نکات فراموش‌شده، جافتاده در متن یا پاورقی</strong>( البته باید با ذکر کلمه «ویراستار» و با اجازه از نویسنده کتاب یا مقاله باشد ) </li>
+                    <li>
+                        <strong>توضیح، یادآوری یا پیشنهاد ضروری در پاورقی</strong>( البته باید با ذکر کلمه «ویراستار» و با اجازه از نویسنده کتاب یا مقاله باشد )</li>
+                    <li>
+                        <strong>بازبینی و تصحیح مطالب نادرست، متناقض و غیرعلمی</strong></li>
+                </ul>
+
+                <table class="table-responsive" dir="rtl" align="center" border="1" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="width:638px;height:13px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="font-size:20px;"><strong>هزینه <span style="color:#00f;">ویرایش علمی متون</span> به ازای هر صفحه</strong></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:18px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#f00;"><span style="font-size:18px;"><strong>زمینه</strong></span></span></p>
+                            </td>
+                            <td style="width:289px;height:18px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#f00;"><span style="font-size:18px;"><strong>قیمت</strong></span></span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:27px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش علمی پایان نامه</strong></p>
+                            </td>
+                            <td style="width:289px;height:27px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1700 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش علمی مقالات تخصصی </strong>( <span dir="LTR">isi</span>-<span dir="LTR">isc</span>-مقالات علمی پژوهشی )</p>
+                            </td>
+                            <td style="width:289px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    2000 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:26px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش علمی موضوعات تحقیقاتی</strong></p>
+                            </td>
+                            <td style="width:289px;height:26px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1600 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش علمی جزوه</strong></p>
+                            </td>
+                            <td style="width:289px;height:22px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1600 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:349px;height:20px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <strong>ویرایش علمی کتاب</strong></p>
+                            </td>
+                            <td style="width:289px;height:20px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    1900 تومان</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width:638px;height:13px;">
+                                <p dir="RTL" style="text-align: center;">
+                                    <span style="color:#008000;"><span style="font-size:20px;">در سایت ثبت نام کرده و سفارش آنلاین خود را ثبت کنید تا در کمتر از 10 دقیقه پیش فاکتور به صورت رایگان برای شما صادر و ارسال گردد<span dir="LTR">.</span></span></span></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>  
+
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition> 

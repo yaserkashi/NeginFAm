@@ -84,29 +84,58 @@
                                    value="گروه تبلیغاتی طیف"/>
 
                 </div>
-<!--                <div class="headerMenu">
+ <div class="headerMenu">
                     <p:menubar >
-                        <p:menuitem value="خانه" url="/index.xhtml"/>
-                        <p:submenu label="خدمات آموزشی">
-                            <p:menuitem value="آموزش تایپ سریع" url="#"/>
-                            <p:menuitem value="آموزش ترجمه پیشرفته" url="#"/>
-                            <p:menuitem value="آموزش ترجمه تخصصی" url="#"/>
+                        <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
+                        <p:menuitem value="ثبت سفارش انلاین" url="/pages/guest/signup.xhtml" />
+
+                        <p:submenu label="هزینه و زمان تحویل">
+                            <p:submenu label="هزینه خدمات ترجمه">
+                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/head menu/traslate english to perstion.xhtml"  />
+                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/head menu/cost of per to eng.xhtml" />
+                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/head menu/cost of transe file.xhtml" />
+
+                            </p:submenu>
+
+                            <p:submenu label="هزینه خدمات تایپ">
+                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/head menu/cost type per.xhtml"  />
+                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/head menu/cost type other.xhtml" />
+
+                            </p:submenu>
+
+
+                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/head menu/cost of editer.xhtml"  />
+
+
+
+                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/head menu/cost of layout.xhtml"/>
+
+
+                        </p:submenu>
+                        <p:submenu label="لیست خدمات">
+                            <p:submenu label="خدمات تایپ">
+                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/head menu/type per and eng.xhtml"  />
+                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/head menu/Contracts with companies.xhtml" />
+                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/head menu/help service type.xhtml" />
+
+                            </p:submenu>
+
+                            <p:submenu label="خدمات ترجمه">
+                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/head menu/traslate per and eng.xhtml"  />
+
+                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/head menu/traslate book.xhtml" />
+                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/head menu/traslate Article.xhtml" />
+                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/head menu/help service traslate.xhtml" />
+
+                            </p:submenu>
+
+
                         </p:submenu>
 
-                        <p:submenu label="خدمات تایپ">
-                            <p:menuitem value="تایپ فوری" url="#"/>
-                            <p:menuitem value="تایپ عادی" url="#"/>
-                        </p:submenu>
-
-                        <p:submenu label="درخواست مقاله">
-                            <p:menuitem value="مقاله علمی">
-                            </p:menuitem>
-                            <p:menuitem value="مقاله غیر علمی">
-                            </p:menuitem>
-                        </p:submenu>
-                        <p:menuitem value="ثبت نام" url="/pages/guest/signup.xhtml" />
+                        <p:menuitem value="تماس با ما" url="/pages/head menu/contact us.xhtml"/>
+                        <p:menuitem value="استخدام مترجم" url="/pages/guest/Employment Translator.xhtml"/>
                     </p:menubar>
-                </div>-->
+                </div>
            
                 
                 
@@ -143,6 +172,7 @@
                                         <p:submenu label="مدیریت کاربران">
                                             <p:menuitem value="مدیریت اعضا "   ajax="true" icon="" url="/pages/admin/usersManagement.xhtml"/>
                                             <p:menuitem value="ارسال پیامک به اعضا"  ajax="true"  icon="" url="/pages/admin/sendMessage.xhtml"/>
+                                            <p:menuitem value="صندوق پیامک"  ajax="true"  icon="" url="/pages/admin/listmassage.xhtml"/>
                                        </p:submenu>
                                         
                                         <p:separator />
@@ -183,13 +213,13 @@
 
 
 
-            <footer>
+<!--            <footer>
                 <div class="footer">
                     <ui:insert name="footer">
                     </ui:insert>
-                    <!--                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
+                                    <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
                                         <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
-                                    </div>-->
+                                    </div>
                     <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
                          padding-top: 22px;margin-right: -6px;margin-left: -5px">
                         <p:outputLabel value="a"></p:outputLabel>
@@ -207,7 +237,7 @@
                         </p:commandLink>
                     </div>
                 </div>
-            </footer>
+            </footer>-->
         </h:form>
     </h:body>
 

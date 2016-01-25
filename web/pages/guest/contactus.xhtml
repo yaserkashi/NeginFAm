@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+
+        <h:form> 
+
+            <p:outputLabel value="تماس باما" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+
+            <p:panelGrid columns="3" style="float: right;direction: rtl;margin-top: 10px">
+                <f:facet name="header">
+                   فیلدهای ستاره دار الزامی می باشد
+                </f:facet>
+
+                <h:outputText value="نام و نام خانوادگی" />
+                <h:outputText value="" />
+                <p:inputText />
+                
+                <h:outputText value="نام شرکت یا ارگان" />
+                <h:outputText value="" />
+                <p:inputText />
+                
+                <h:outputText value="پست الکترونیک" />
+                <h:outputText value="*" style="color: red" />
+                <p:inputText />
+                
+                <h:outputText value="پیغام" />
+                <h:outputText value="*" style="color: red" />
+                 <p:inputTextarea rows="10" cols="50"  queryDelay="750" minQueryLength="4" />
+                 
+                 <h:outputText value="تصویر امنیتی" />
+                <p:outputLabel value="12345" />
+                <p:inputText />
+                
+                
+            </p:panelGrid>  
+
+             <p:commandButton  value="ذخیره" icon="ui-icon-start" style=";margin-left: 100px;background: #4EA2D0"/>
+
+        </h:form>
+ </ui:define>
+</ui:composition> 

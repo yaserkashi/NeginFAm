@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <p:messages autoUpdate="true"/>
+            <p:panelGrid id="panel" columns="1" 
+                         style="border: none;direction: rtl ; margin-bottom: 10px; margin-top: 30px;margin-left:  300px;font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;font-size: 20px">
+                <f:facet name="header"  >
+                    رسید پرداخت
+                </f:facet>
+                <h:outputText value="با تشکر از شما" style="padding: 20px;   ;padding-left: 235px;font-size: 24px"/>
+                <h:outputText value="تراکنش با موفقیت انجام شد" style="padding: 20px;  ;padding-left: 235px;font-size: 20px"/>
+                <h:outputText value="شماره پیگیری:1123" style="padding: 20px;   ;padding-left: 235px;font-size: 20px"/>
+
+
+
+
+
+                <p:commandButton value="تکمیل سفارش" 
+                                 style="color: #FFF ;background:#339900;float: right ; font-size: 16px ;alignment-adjust: central"/>
+
+            </p:panelGrid>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition> 
+
+

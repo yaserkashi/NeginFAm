@@ -6,33 +6,56 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:form> 
-            <p:dataTable id="checkboxDT"  value=""  selection="single" style="margin-bottom:0">
-                <f:facet name="header">
-                   ارسال پیام
-                </f:facet>
-<!--                <p:column selectionMode="single" style="width:16px;text-align:center"/>-->
-                <p:column headerText="کد">
-                    <h:outputText value="1111" />
-                </p:column>
-                <p:column headerText="نام کاربری">
-                    <h:outputText value="user" />
-                </p:column>
-                <p:column headerText="وضعیت">
-                    <h:outputText value="انلاین" />
-                </p:column>
-                <p:column headerText="تلفن">
-                    <h:outputText value="09131110022" />
-                </p:column>
-                
-                  <p:column headerText="ایمیل">
-                    <h:outputText value="aaaa@yahoo.com" />
-                </p:column>
-              
-                <f:facet name="footer">
-            <p:commandButton process=""  value="ارسال پیام" />
-        </f:facet>
-            </p:dataTable>
+            <p:outputLabel value="ارسال پیام" style="float:left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
 
+
+            <p:outputPanel style=" float: right;text-align: center;margin-top: 50px">
+                <h:panelGrid dir="rtl" columns="1" cellpadding="5">  
+                    <p:row>
+                        <p:column>
+                            <h:outputText value="نوع پیام" />
+                        </p:column>
+                        <p:column>
+                            <p:selectOneRadio id="m" >
+                                <f:selectItem itemLabel="ایمیل" itemValue="PS4" />
+                                <f:selectItem itemLabel="تلفن" itemValue="PS4" />
+                            </p:selectOneRadio>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:commandButton value="انتخاب مخاطب" style="width: 130px;" />
+                        </p:column>
+                        <p:column>
+                            <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
+                        </p:column>
+                        <!--                        <p:column>
+                                                    <h:outputText value="مخاطبین" />
+                                                </p:column>-->
+                    </p:row>
+                    <p:row> 
+                        <p:column>
+                            <h:outputText value="موضوع" />
+                        </p:column>   
+                        <p:column>
+                            <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <h:outputText value="پیام" />
+                        </p:column>
+                        <p:column>
+                            <p:inputTextarea style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                        </p:column>              
+                    </p:row>
+
+
+
+                </h:panelGrid>
+            </p:outputPanel>
+
+            <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 300px;margin-left: 100px;background: #4EA2D0"/>
         </h:form>
 
 

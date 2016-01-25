@@ -73,7 +73,7 @@
         </ui:insert>
     </h:head>
     <h:body style="background-color: #fffffe">
-        <h:form prependId="false"  enctype="multipart/form-data">
+        <h:form prependId="false">
             <div id="header" class="header">
                 <div class="logo">
                     <p:graphicImage style="height: inherit;min-height: 70px"
@@ -86,25 +86,54 @@
                 </div>
                 <div class="headerMenu">
                     <p:menubar >
-                        <p:menuitem value="خانه" url="/index.xhtml"/>
-                        <p:submenu label="خدمات آموزشی">
-                            <p:menuitem value="آموزش تایپ سریع" url="#"/>
-                            <p:menuitem value="آموزش ترجمه پیشرفته" url="#"/>
-                            <p:menuitem value="آموزش ترجمه تخصصی" url="#"/>
+                        <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
+                        <p:menuitem value="ثبت سفارش انلاین" url="/pages/guest/signup.xhtml" />
+
+                        <p:submenu label="هزینه و زمان تحویل">
+                            <p:submenu label="هزینه خدمات ترجمه">
+                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/head menu/traslate english to perstion.xhtml"  />
+                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/head menu/cost of per to eng.xhtml" />
+                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/head menu/cost of transe file.xhtml" />
+
+                            </p:submenu>
+
+                            <p:submenu label="هزینه خدمات تایپ">
+                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/head menu/cost type per.xhtml"  />
+                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/head menu/cost type other.xhtml" />
+
+                            </p:submenu>
+
+
+                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/head menu/cost of editer.xhtml"  />
+
+
+
+                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/head menu/cost of layout.xhtml"/>
+
+
+                        </p:submenu>
+                        <p:submenu label="لیست خدمات">
+                            <p:submenu label="خدمات تایپ">
+                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/head menu/type per and eng.xhtml"  />
+                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/head menu/Contracts with companies.xhtml" />
+                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/head menu/help service type.xhtml" />
+
+                            </p:submenu>
+
+                            <p:submenu label="خدمات ترجمه">
+                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/head menu/traslate per and eng.xhtml"  />
+
+                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/head menu/traslate book.xhtml" />
+                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/head menu/traslate Article.xhtml" />
+                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/head menu/help service traslate.xhtml" />
+
+                            </p:submenu>
+
+
                         </p:submenu>
 
-                        <p:submenu label="خدمات تایپ">
-                            <p:menuitem value="تایپ فوری" url="#"/>
-                            <p:menuitem value="تایپ عادی" url="#"/>
-                        </p:submenu>
-
-                        <p:submenu label="درخواست مقاله">
-                            <p:menuitem value="مقاله علمی">
-                            </p:menuitem>
-                            <p:menuitem value="مقاله غیر علمی">
-                            </p:menuitem>
-                        </p:submenu>
-                        <p:menuitem value="ثبت نام" url="/pages/guest/signup.xhtml" />
+                        <p:menuitem value="تماس با ما" url="/pages/head menu/contact us.xhtml"/>
+                        <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml"/>
                     </p:menubar>
                 </div>
             </div>
@@ -131,12 +160,13 @@
                                             <p:menuitem value="سفارش ترجمه"   ajax="false" icon="ui-icon-close" url="/pages/user/trans.xhtml"/>
                                             <p:menuitem value="سفارش تایپ"  ajax="false"  icon="ui-icon-home" url="/pages/user/type.xhtml"/>
                                             <p:menuitem value="سفارش طراحی" ajax="false"  icon="ui-icon-heart" url="/pages/user/design.xhtml"/>
+                                            <p:menuitem value="سفارش مقاله" ajax="false"  icon="ui-icon-heart" url="/pages/user/article.xhtml"/>
                                         </p:submenu>
                                         <p:separator />
 
 
                                         <p:submenu label="پیگیری سفارش">
-                                            <p:menuitem value="پیگیری"   ajax="false" icon="ui-icon-close"/>
+                                            <p:menuitem value="پیگیری"   ajax="false" icon="ui-icon-close" url="/pages/user/followuporder.xhtml"/>
                                         </p:submenu>
                                         <p:separator />
 
@@ -145,13 +175,13 @@
 
                                         <p:submenu label="پیام ها">
                                             <p:menuitem value="ارسال پیام"   ajax="false" icon="ui-icon-close" url="/pages/user/sendtext.xhtml"/>
-                                            <p:menuitem value="صندوق پیام های دریافتی"  ajax="false"  icon="ui-icon-home" url="/pages/user/listrecievedmessages.xhtml"/>
-                                            <p:menuitem value="صندوق پیام های ارسالی"  ajax="false"  icon="ui-icon-home" url="/pages/user/listsentmessages.xhtml"/>
+                                            <p:menuitem value="صندوق پیام"  ajax="false"  icon="ui-icon-home" url="/pages/user/listmassage.xhtml" />
+                                        </p:submenu> 
+                                        <p:submenu label="گزرشات مالی">
+                                            <p:menuitem value="گزارش مالی "   ajax="false" icon="ui-icon-close" url="/pages/user/financialmanagement.xhtml"/>
                                         </p:submenu> 
 
-
                                     </p:panelMenu>
-                                    <p:button value="گزارشات مالی" style="width: 100% ;" />
                                     <p:commandButton value="خروج" style="width: 100% ;" action="#{login.logout()}"/>
                                 </h:form>
                             </p:layoutUnit>
@@ -164,31 +194,31 @@
 
 
 
-            <footer>
-                <div class="footer">
-                    <ui:insert name="footer">
-                    </ui:insert>
-                    <!--                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
-                                        <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
-                                    </div>-->
-                    <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                         padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                        <p:outputLabel value="a"></p:outputLabel>
-                    </div>
-                    <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                         padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                        <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
-                    </div>
-                    <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
-                        <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                            <h:outputText value="صفحه نخست"></h:outputText>
-                        </p:commandLink>
-                        <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                            <h:outputText value="درباره ما"> </h:outputText>
-                        </p:commandLink>
-                    </div>
-                </div>
-            </footer>
+            <!--            <footer>
+                            <div class="footer">
+                                <ui:insert name="footer">
+                                </ui:insert>
+                                                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
+                                                    <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
+                                                </div>
+                                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
+                                     padding-top: 22px;margin-right: -6px;margin-left: -5px">
+                                    <p:outputLabel value="a"></p:outputLabel>
+                                </div>
+                                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
+                                     padding-top: 22px;margin-right: -6px;margin-left: -5px">
+                                    <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
+                                </div>
+                                <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
+                                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
+                                        <h:outputText value="صفحه نخست"></h:outputText>
+                                    </p:commandLink>
+                                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
+                                        <h:outputText value="درباره ما"> </h:outputText>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </footer>-->
         </h:form>
     </h:body>
 

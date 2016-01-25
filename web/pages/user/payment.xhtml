@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <h:head>
+
+        </h:head>
+        <h:body>
+            <h:form id="form">
+                <p:messages autoUpdate="true"/>
+                <p:panelGrid id="panel" columns="1" 
+                             style="border: none;direction: rtl ; margin-bottom: 10px; margin-top: 30px;margin-right: 30px;font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;font-size: 14px">
+                    <f:facet name="header" >
+                        مبلغ پردااختی شما 40000 ریال می باشد.
+                    </f:facet>
+
+                    <p:selectOneRadio id="console15" >
+                        <f:selectItem itemLabel="بانک ملت" itemValue="PS4" />
+                        <f:selectItem itemLabel="بانک پاسارگاد" itemValue="PS4" />
+                        <f:selectItem itemLabel="بانک ملی " itemValue="PS4" />
+                        <f:selectItem itemLabel="بانک سپه" itemValue="PS4" />
+                        <f:selectItem itemLabel="بانک تجارت" itemValue="PS4" />
+                    </p:selectOneRadio>
+
+
+                    <p:commandButton value="پرداخت" action="bank"
+                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 16px ;alignment-adjust: central"/>
+
+                </p:panelGrid>
+
+            </h:form>
+
+
+        </h:body>
+    </ui:define>
+</ui:composition> 
+
+
+
+

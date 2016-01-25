@@ -5,18 +5,16 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-      
-  
-          This is Content Management Page
-          <h:form>           
-              <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="800" height="290" style="margin-top: 29px"/>
- 
-    <h:panelGrid columns="2" style="margin-top: 10px">
-        <p:commandButton value="ثبت" action="#{editorView.createFile()}"  icon="ui-icon-disk" />
- 
-        <p:commandButton value="حذف" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
-    </h:panelGrid>
-</h:form> 
+        This is Content Management Page
+        This is Content Management Page
+        <h:form>           
+            <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="800" height="290" style="margin-top: 29px"/>
 
+            <h:panelGrid columns="2" style="margin-top: 10px">
+                <p:commandButton value="ثبت" action="#{editorView.createFile()}"  icon="ui-icon-disk" />
+
+                <p:commandButton value="حذف" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+            </h:panelGrid>
+        </h:form> 
     </ui:define>
 </ui:composition>  
