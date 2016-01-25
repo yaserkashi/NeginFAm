@@ -10,9 +10,7 @@
             <p:outputLabel value="پروفایل کاربری" style="float:left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
         
            
-            <p:outputPanel style="float: right;text-align: center;margin-top: 50px">
-               
-                <h:panelGrid columns="3" cellpadding="5"  >
+            <p:panelGrid columns="3" style="float: right;margin-top: 40px" >
                  
                     <h:outputText value="111" style="font-weight: bold;"/>
                
@@ -57,11 +55,7 @@
                      <h:outputLabel value="" style="color: red"/>
                      <h:outputText value="نحوه اشنایی باسایت" />
                      
-                     <p:inplace id="ajax7" editor="true">
-                     <h:inputText value="1234" style="font-weight: bold" required="true"/>
-                     </p:inplace>
-                     <h:outputLabel value="" style="color: red"/>
-                     <h:outputText value="کدمعرف" />
+
                      
                      <p:inplace id="ajax8" editor="true">
                      <h:inputText value="aaa@yahoo.com" style="font-weight: bold"  required="true"/>
@@ -76,15 +70,12 @@
                      <h:outputText value="تاریخ ثبت نام" />
                      
                      
-                     <h:outputText value="انلاین" style="font-weight: bold"  />
-                    
-                      <h:outputLabel value="" style="color: red"/>
-                     <h:outputText value="وضعیت" />
-                </h:panelGrid>
+
+                </p:panelGrid>
                    
-            </p:outputPanel>
-        
-            <p:button  value="ثبت" icon="ui-icon-star" style="margin-top: 500px;margin-left: 100px;background: #5D8A3D"/>
+            
+           
+            <p:commandButton  value="ثبت" icon="ui-icon-star" style="margin-top: 300px;margin-left: 100px;background: #5D8A3D" disabled="true"/>
 </h:form>
 
         

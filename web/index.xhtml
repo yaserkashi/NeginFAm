@@ -12,6 +12,7 @@
             <script type="text/javascript">
                 onload perView();
             </script>
+
             <ui:define name="galleria">
                 <div style="margin-right: 90px">
                     <p:galleria value="#{imagesView.images}" var="image" panelWidth="1100" panelHeight="280"
@@ -22,19 +23,43 @@
             </ui:define>
             <ui:define name="sidePanel">
                 <div style="width:230px;background-color: #ffffff;padding-right: 10px;padding-top: 5px;margin-right: 23px">
-                    <p:panelGrid columns="1" style="background-color: antiquewhite">
+                    <p:panelGrid columns="1" style="background-color: antiquewhite; margin-right: 20px">
                         <p:inputText placeholder="نام کاربری" style="float: right ;width: 150px" required="true"
                                      id="username"
                                      value="#{login.user}"
                                      requiredMessage="Please enter username"/>
                         <p:password placeholder="کلمه عبور " style="float: right;width: 150px" id="password"
                                     value="#{login.pwd}"/>
-                        <p:outputLabel></p:outputLabel>
+                        <!--<p:outputLabel></p:outputLabel>-->
+
+                        <p:commandButton 
+                            style="font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px; " value="کلمه عبور را فراموش کردم"/>
 
 
                         <p:commandButton action="#{login.validateUsernamePassword}"
-                                         styleClass="loginPanelBtn" value="ورود"/>
+                                         style="margin-right: 40px" styleClass="loginPanelBtn" value="ورود"/>
                     </p:panelGrid>
+
+
+                    <h:link outcome="/pages/guest/signup.xhtml" >
+                        <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33" >
+                            <p:graphicImage width="80px" style="margin: 2px;size: 200px;" url="/resources/images/signup-icon.png"/>
+                            <p:outputLabel style="font-size: 24px !important;" styleClass="news-link" value="ثبت نام کنید."/>
+
+                        </p:panelGrid>
+                    </h:link>
+
+
+
+                    <h:link outcome="/pages/guest/signup-help.xhtml" >
+                        <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
+                            <p:graphicImage width="80px" style="margin: 2px;size: 200px;" url="/resources/images/help-icon.jpg"/>
+                            <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
+
+                        </p:panelGrid>
+                    </h:link>
+
+
                     <p:panelGrid columns="1" styleClass="news" >
                         <p:outputLabel style="font-size: 1em !important;" styleClass="news-link" value="آخرین اخبار سایت"/>
                         <h:link outcome="/pages/guest/news" value="">

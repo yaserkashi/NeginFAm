@@ -58,28 +58,56 @@
                                    value="گروه تبلیغاتی طیف"/>
 
                 </div>
-                <div class="headerMenu">
+                 <div class="headerMenu">
                     <p:menubar >
-                        <p:menuitem value="خانه" url="/index.xhtml"/>
-                        <p:submenu label="خدمات آموزشی">
-                            <p:menuitem value="آموزش تایپ سریع" url="#"/>
-                            <p:menuitem value="آموزش ترجمه پیشرفته" url="#"/>
-                            <p:menuitem value="آموزش ترجمه تخصصی" url="#"/>
+                        <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
+                        <p:menuitem value="ثبت سفارش انلاین" url="/pages/guest/signup.xhtml" />
+
+                        <p:submenu label="هزینه و زمان تحویل">
+                            <p:submenu label="هزینه خدمات ترجمه">
+                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/guest/traslateenglishtoperstion.xhtml"  />
+                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/guest/costofpertoeng.xhtml" />
+                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/guest/costoftransefile.xhtml" />
+
+                            </p:submenu>
+
+                            <p:submenu label="هزینه خدمات تایپ">
+                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/guest/costtypeper.xhtml"  />
+                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/guest/costtypeother.xhtml" />
+
+                            </p:submenu>
+
+
+                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/guest/costofediter.xhtml"  />
+
+
+
+                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/guest/costoflayout.xhtml"/>
+
+
+                        </p:submenu>
+                        <p:submenu label="لیست خدمات">
+                            <p:submenu label="خدمات تایپ">
+                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/guest/typeperandeng.xhtml"  />
+                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/guest/contractswithcompanies.xhtml" />
+                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/guest/helpservicetype.xhtml" />
+
+                            </p:submenu>
+
+                            <p:submenu label="خدمات ترجمه">
+                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/guest/traslateperandeng.xhtml"  />
+
+                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/guest/traslatebook.xhtml" />
+                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/guest/traslateArticle.xhtml" />
+                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/guest/helpservicetraslate.xhtml" />
+
+                            </p:submenu>
+
+
                         </p:submenu>
 
-                        <p:submenu label="خدمات تایپ">
-                            <p:menuitem value="تایپ فوری" url="#"/>
-                            <p:menuitem value="تایپ عادی" url="#"/>
-                        </p:submenu>
-
-                        <p:submenu label="درخواست مقاله">
-                            <p:menuitem value="مقاله علمی">
-                            </p:menuitem>
-                            <p:menuitem value="مقاله غیر علمی">
-                            </p:menuitem>
-                        </p:submenu>
-
-                        <p:menuitem value="ثبت نام" url="/pages/guest/signup.xhtml" />
+                        <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml"/>
+                        <p:menuitem value="استخدام مترجم" url="/pages/guest/EmploymentTranslator.xhtml"/>
                     </p:menubar>
                 </div>
             </div>

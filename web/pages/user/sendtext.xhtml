@@ -9,24 +9,32 @@
 
             <p:outputLabel value="ارسال پیام" style="float:left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
 
+
             <p:outputPanel style=" float: right;text-align: center;margin-top: 50px">
                 <h:panelGrid columns="3" cellpadding="5"  >
 
-                    <h:inputText  style="font-weight: bold;width: 320px;" required="true" value="#{sendMessageFromUser.title}"/>
+
+                    <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
 
                     <h:outputLabel value="*" style="color: red"/>
                     <h:outputText value="موضوع" />
 
-                    <p:inputTextarea style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" value="#{sendMessageFromUser.text}"/>
+
+                    <p:inputTextarea style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+
+
 
                     <h:outputLabel value="*" style="color: red"/>
                     <h:outputText value="پیام" />
 
+
                 </h:panelGrid>
             </p:outputPanel>
 
-            <p:commandButton action="#{sendMessageFromUser.submit()}"  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
+            <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
         </h:form>
+
+
 
     </ui:define>
 </ui:composition> 

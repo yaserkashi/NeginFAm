@@ -73,7 +73,7 @@ public class EmploymentServices {
 
     }
     
-    public static List<Employment> getALLUsers() {
+    public static List<Employment> getALLEmployments() {
         Connection con = null;
         PreparedStatement ps;
         List<Employment> list = new ArrayList<>();
