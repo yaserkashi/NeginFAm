@@ -32,12 +32,14 @@
                                     value="#{login.pwd}"/>
                         <!--<p:outputLabel></p:outputLabel>-->
 
-                        <p:commandButton 
-                            style="font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px; " value="کلمه عبور را فراموش کردم"/>
 
 
                         <p:commandButton action="#{login.validateUsernamePassword}"
                                          style="margin-right: 40px" styleClass="loginPanelBtn" value="ورود"/>
+
+                        <p:commandButton 
+                            style="font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px; " value="کلمه عبور را فراموش کردم"/>
+
                     </p:panelGrid>
 
 
@@ -53,7 +55,7 @@
 
                     <h:link outcome="/pages/guest/signup-help.xhtml" >
                         <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
-                            <p:graphicImage width="80px" style="margin: 2px;size: 200px;" url="/resources/images/help-icon.jpg"/>
+                            <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
                             <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
 
                         </p:panelGrid>

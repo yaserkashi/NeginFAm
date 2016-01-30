@@ -11,5 +11,5 @@ package com.Baloot.Enum;
  * @author FK
  */
 public enum CombosEnum {
-    language, field, design_type, size, print_type, design_option, print_option;
+    language, field, design_type, size, print_type, design_option, print_option, group, orientation;
 }

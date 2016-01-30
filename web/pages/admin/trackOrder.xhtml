@@ -7,7 +7,47 @@
     <ui:define name="content">
         <h:form> 
   
-          This is Track Order Page
+            <p:dataTable value="" var="trackorder" styleClass="dataTable" style="direction: rtl">
+
+                <p:ajax event="rowSelect"  update=""  />
+                 <p:column headerText="ردیف">
+                    <h:outputText value="1" />
+                </p:column> 
+                
+                 <p:column headerText="نام کاربری">
+                    <h:outputText value="تست" />
+                </p:column> 
+                
+                <p:column headerText="نوع سفارش" >
+                    <h:outputText value="سفارش طراحی" />
+                </p:column> 
+                
+                <p:column headerText="شماره سفارش">
+                    <h:outputText value="862" />
+                </p:column>  
+                <p:column headerText="نوع تحویل">
+                    <h:outputText value="عادی"/>
+                </p:column> 
+                <p:column headerText="وضعیت" >
+                    <h:outputText value="اعلام نشده"/>
+                </p:column>
+                <p:column headerText="موضوع">
+                    <h:outputText value="ریاضی" />
+                </p:column>
+                <p:column headerText="مشاهده">
+                    <p:commandButton  icon="ui-icon-document" onclick="PF('followupDialog').show()">
+                    </p:commandButton>
+                </p:column> 
+            </p:dataTable>
+
+            <p:dialog widgetVar="followupDialog" dynamic="true"
+                      style="direction:rtl"
+                      header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="40%">
+                <ui:include src="/pages/admin/preparefactor.xhtml"></ui:include>
+               
+            </p:dialog>
+
+
 </h:form>
 
         

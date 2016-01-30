@@ -5,70 +5,114 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-      
-            <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
 
-            <p:panelGrid columns="10" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
+        <!--            <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+        
+                    <p:panelGrid columns="10" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
+        
+                        <h:outputText value="ردیف" style="width: 10px"/>
+        
+                        <p:panelGrid columns="1">
+                            <h:outputText value="کدکاربر" />
+                            <p:inputText id="filter2" style="width: 40px"/>
+                        </p:panelGrid>
+        
+                        <h:outputText value="نام" />
+                        <h:outputText value="نام خانوادگی" />
+        
+                        <p:panelGrid columns="1">
+                            <h:outputText value="نام بانک" />
+                            <p:selectOneMenu id="console2" style="padding-right: 15px;width: 60px" >
+                                <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
+                                <f:selectItem itemLabel=" سامان" itemValue="Xbox One" />
+                                <f:selectItem itemLabel=" ملت" itemValue="PS4" />
+        
+                            </p:selectOneMenu>
+        
+                        </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <h:outputText value="شماره فاکتور" />
+                            <p:inputText id="filter" style="width: 40px"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="1" >
+                            <h:outputText value="شماره سفارش" />
+                            <p:inputText id="filter1" style="width: 40px" />
+                        </p:panelGrid>
+        
+        
+        
+        
+                        <p:panelGrid columns="1">
+                            <h:outputText value="مجموعه" />
+                            <p:inputText id="filter2" style="width: 40px"/>
+                        </p:panelGrid>
+        
+                        <h:outputText value="تاریخ" style="width: 40px" />
+                        <h:outputText value="وضعیت" style="width: 40px" />
+        
+        
+                        <h:outputText value="1" />
+                        <h:outputText value="1234" />
+                        <h:outputText value="کاربر" />
+                        <h:outputText value="کاربر" />
+                        <h:outputText value=" سامان" />
+                        <h:outputText value="21789" />
+                        <h:outputText value="862"/>
+                        <h:outputText value="90000ریال" />
+                        <h:outputText value="94/1/2"/>
+                        <p:selectOneMenu id="console8" style="padding-right: 15px;width: 40px" >
+                            <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
+                            <f:selectItem itemLabel=" تایید" itemValue="Xbox One" />
+                            <f:selectItem itemLabel="عدم تایید" itemValue="PS4" />
+        
+                        </p:selectOneMenu>
+        
+                    </p:panelGrid>-->
 
-                <h:outputText value="ردیف" style="width: 10px"/>
 
-                <p:panelGrid columns="1">
-                    <h:outputText value="کدکاربر" />
-                    <p:inputText id="filter2" style="width: 40px"/>
-                </p:panelGrid>
+        <p:dataTable value="" var="financialM" styleClass="dataTable">
 
-                <h:outputText value="نام" />
-                <h:outputText value="نام خانوادگی" />
+            <p:ajax event="rowSelect"  update=""  />
 
-                <p:panelGrid columns="1">
-                    <h:outputText value="نام بانک" />
-                    <p:selectOneMenu id="console2" style="padding-right: 15px;width: 60px" >
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
-                        <f:selectItem itemLabel=" سامان" itemValue="Xbox One" />
-                        <f:selectItem itemLabel=" ملت" itemValue="PS4" />
-
-                    </p:selectOneMenu>
-
-                </p:panelGrid>
-                <p:panelGrid columns="1">
-                    <h:outputText value="شماره فاکتور" />
-                    <p:inputText id="filter" style="width: 40px"/>
-                </p:panelGrid>
-                <p:panelGrid columns="1" >
-                    <h:outputText value="شماره سفارش" />
-                    <p:inputText id="filter1" style="width: 40px" />
-                </p:panelGrid>
-
-
-
-
-                <p:panelGrid columns="1">
-                    <h:outputText value="مجموعه" />
-                    <p:inputText id="filter2" style="width: 40px"/>
-                </p:panelGrid>
-
-                <h:outputText value="تاریخ" style="width: 40px" />
-                <h:outputText value="وضعیت" style="width: 40px" />
-
-
+            <p:column headerText="ردیف">
                 <h:outputText value="1" />
+            </p:column>  
+            <p:column headerText="کد کاربر">
                 <h:outputText value="1234" />
+            </p:column>  
+            <p:column headerText="نام">
                 <h:outputText value="کاربر" />
-                <h:outputText value="کاربر" />
+            </p:column> 
+            <p:column headerText="نام خانوادگی" >
+                 <h:outputText value="کاربر" />
+            </p:column>
+            <p:column headerText="نام بانک">
                 <h:outputText value=" سامان" />
-                <h:outputText value="21789" />
-                <h:outputText value="862"/>
+            </p:column>
+            <p:column headerText="شماره فاکتور">
+                 <h:outputText value="21789" />
+            </p:column>
+             <p:column headerText="شماره سفارش">
+               <h:outputText value="862"/>
+            </p:column>
+             <p:column headerText="مجموعه">
                 <h:outputText value="90000ریال" />
-                <h:outputText value="94/1/2"/>
+            </p:column>
+             <p:column headerText="تاریخ">
+               <h:outputText value="94/1/2"/>
+            </p:column> 
+            <p:column headerText="وضعیت">
                 <p:selectOneMenu id="console8" style="padding-right: 15px;width: 40px" >
-                    <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
-                    <f:selectItem itemLabel=" تایید" itemValue="Xbox One" />
-                    <f:selectItem itemLabel="عدم تایید" itemValue="PS4" />
+                            <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
+                            <f:selectItem itemLabel=" تایید" itemValue="Xbox One" />
+                            <f:selectItem itemLabel="عدم تایید" itemValue="PS4" />
+        
+                        </p:selectOneMenu>
+            </p:column>
+            
+             
+        </p:dataTable>
 
-                </p:selectOneMenu>
-
-            </p:panelGrid>
-  
 
 
 

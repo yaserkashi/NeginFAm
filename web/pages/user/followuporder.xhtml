@@ -5,61 +5,53 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-        
- <h:form> 
-       <p:outputLabel value="پیگیری سفارش" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
-            <p:panelGrid columns="7" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
 
-
-                <p:panelGrid columns="1">
-                    <h:outputText value="نوع سفارش" />
-                    <p:selectOneMenu id="console" style="padding-right: 15px" >
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
-                        <f:selectItem itemLabel="تایپ" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="ترجمه" itemValue="PS4" />
-                        <f:selectItem itemLabel="پایان نامه" itemValue="Wii U" />
-                        <f:selectItem itemLabel="مقاله" itemValue="Wii U" />
-
-                    </p:selectOneMenu>
-
-                </p:panelGrid>
-
-
-                <h:outputText value="ردیف" />
-                <h:outputText value="شماره سفارش" />
-                <h:outputText value="نوع تحویل" />
-
-                <p:panelGrid columns="1">
-                    <h:outputText value="وضعیت"/>
-                    <p:selectOneMenu id="console1" style="padding-right: 15px" >
-                        
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
-                         <f:selectItem itemLabel="درحال بررسی" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="اعلام فاکتور" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="درحال انجام کار" itemValue="PS4" />
-                       <f:selectItem itemLabel="در انتظار پرداخت نهایی" itemValue="Wii U" />
-                        <f:selectItem itemLabel="اتمام شده" itemValue="Wii U" />
-                       <f:selectItem itemLabel="انصرافی" itemValue="Wii U" />
-
-                    </p:selectOneMenu>
-
-                </p:panelGrid>
-
-                <h:outputText value="موضوع" />
-                <h:outputText value="مشاهده" />
+        <h:form id="form"> 
 
 
 
-                <h:outputText value="سفاش ترجمه" />
-                <h:outputText value="1" />
-                <h:outputText value="862" />
-                <h:outputText value="عادی"/>
-                <h:outputText value="اعلام نشده"/>
-                <h:outputText value="ریاضی" />
-                <p:button icon="ui-icon-document"/>
+            <p:dataTable value="" var="followup" styleClass="dataTable">
+
+                <p:ajax event="rowSelect"  update=""  />
+                <p:column headerText="نوع سفارش" filterBy="#{followup.id}">
+                    <h:outputText value="سفارش طراحی" />
+                </p:column> 
+                <p:column headerText="ردیف">
+                    <h:outputText value="1" />
+                </p:column>  
+                <p:column headerText="شماره سفارش">
+                    <h:outputText value="862" />
+                </p:column>  
+                <p:column headerText="نوع تحویل">
+                    <h:outputText value="عادی"/>
+                </p:column> 
+                <p:column headerText="وضعیت" filterBy="#{followup.id}">
+                    <h:outputText value="اعلام نشده"/>
+                </p:column>
+                <p:column headerText="موضوع">
+                    <h:outputText value="ریاضی" />
+                </p:column>
+                <p:column headerText="مشاهده">
+                    <p:commandButton  icon="ui-icon-document" onclick="PF('followupDialog').show()">
+                    </p:commandButton>
+                </p:column> 
+            </p:dataTable>
+
+            <p:dialog widgetVar="followupDialog" dynamic="true"
+                      style="direction:rtl"
+                      header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
+                <ui:include src="/pages/user/design1.xhtml"></ui:include>
+                <!--<ui:include src="/pages/user/article1.xhtml"></ui:include>-->
+                <!--<ui:include src="/pages/user/type1.xhtml"></ui:include>-->
+                <!--<ui:include src="/pages/user/translate1.xhtml"></ui:include>-->
 
 
-            </p:panelGrid>
+
+
+            </p:dialog>
+
+
+
         </h:form>
-        </ui:define>
+    </ui:define>
 </ui:composition> 

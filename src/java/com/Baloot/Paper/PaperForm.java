@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.Type;
+package com.Baloot.Paper;
 
 import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
@@ -12,8 +12,9 @@ import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
 import com.Baloot.Order.Order;
 import com.Baloot.Order.OrderServices;
-import com.Baloot.User.Users;
+import com.Baloot.Type.TypeForm;
 import com.Baloot.User.UserServices;
+import com.Baloot.User.Users;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
@@ -40,26 +41,23 @@ import org.primefaces.model.UploadedFile;
  * @author FK
  */
 @ManagedBean
-public class TypeForm {
-    private Integer language;
-    private List<Coding> languges = CodingServices.getCodings(OrderTypesEnum.type.ordinal(), CombosEnum.language.ordinal());
+public class PaperForm {
+    private Integer group;
+    private List<Coding> groups = CodingServices.getCodings(OrderTypesEnum.paper.ordinal(), CombosEnum.group.ordinal());
     private Integer field;
-    private List<Coding> fields = CodingServices.getCodings(OrderTypesEnum.type.ordinal(), CombosEnum.field.ordinal());
+    private List<Coding> fields = CodingServices.getCodings(OrderTypesEnum.paper.ordinal(), CombosEnum.field.ordinal());
+    private Integer orientation;
+    private List<Coding> orientations = CodingServices.getCodings(OrderTypesEnum.paper.ordinal(), CombosEnum.orientation.ordinal());
     private String title;
-    private boolean formulation;
-    private boolean layout;
-    private boolean illustrations;
-    private boolean table;
-    private boolean charts;
-    private boolean shape;
-    private boolean editorial;
+    private List<Boolean> options;
+    private String plan;
     private String explain;
     private Date dateTime;
     private boolean delivery;
     private UploadedFile attachFile;
 
-    public List<Coding> getLanguges() {
-        return languges;
+    public List<Coding> getGroups() {
+        return groups;
     }
 
     public List<Coding> getFields() {
@@ -67,7 +65,7 @@ public class TypeForm {
     }
     
     public void setLanguage(Integer language) {
-        this.language = language;
+        this.group = language;
     }
 
     public void setField(Integer field) {
@@ -77,35 +75,7 @@ public class TypeForm {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public void setFormulation(boolean formulation) {
-        this.formulation = formulation;
-    }
-
-    public void setLayout(boolean layout) {
-        this.layout = layout;
-    }
-
-    public void setIllustrations(boolean illustrations) {
-        this.illustrations = illustrations;
-    }
-
-    public void setTable(boolean table) {
-        this.table = table;
-    }
-
-    public void setCharts(boolean charts) {
-        this.charts = charts;
-    }
-
-    public void setShape(boolean shape) {
-        this.shape = shape;
-    }
-
-    public void setEditorial(boolean editorial) {
-        this.editorial = editorial;
-    }
-
+   
     public void setExplain(String explain) {
         this.explain = explain;
     }
@@ -122,8 +92,8 @@ public class TypeForm {
         this.attachFile = attachFile;
     }
 
-    public Integer getLanguage() {
-        return language;
+    public Integer getGroup() {
+        return group;
     }
 
     public Integer getField() {
@@ -132,34 +102,6 @@ public class TypeForm {
 
     public String getTitle() {
         return title;
-    }
-
-    public boolean isFormulation() {
-        return formulation;
-    }
-
-    public boolean isLayout() {
-        return layout;
-    }
-
-    public boolean isIllustrations() {
-        return illustrations;
-    }
-
-    public boolean isTable() {
-        return table;
-    }
-
-    public boolean isCharts() {
-        return charts;
-    }
-
-    public boolean isShape() {
-        return shape;
-    }
-
-    public boolean isEditorial() {
-        return editorial;
     }
 
     public String getExplain() {
@@ -177,47 +119,42 @@ public class TypeForm {
     public UploadedFile getAttachFile() {
         return attachFile;
     }
-    
-    public String getOption(boolean f,boolean l,boolean i, boolean t, boolean c, boolean s, boolean e) {
-        String options = "";
-        if (f)
-            options += '1';
-        else
-            options += '0';
-        if (l)
-            options += '1';
-        else
-            options += '0';
-        if (i)
-            options += '1';
-        else
-            options += '0';
-        if (t)
-            options += '1';
-        else
-            options += '0';
-        if (c)
-            options += '1';
-        else
-            options += '0';
-        if (s)
-            options += '1';
-        else
-            options += '0';
-        if (e)
-            options += '1';
-        else
-            options += '0';
+
+    public Integer getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(Integer orientation) {
+        this.orientation = orientation;
+    }
+
+    public List<Coding> getOrientations() {
+        return orientations;
+    }
+
+    public List<Boolean> getOptions() {
         return options;
     }
-    
+
+    public void setOptions(List<Boolean> options) {
+        this.options = options;
+    }
+
+    public String getPlan() {
+        return plan;
+    }
+
+    public void setPlan(String plan) {
+        this.plan = plan;
+    }
+           
     public void uploaded(FileUploadEvent event) {
-        System.out.println(TypeForm.class.getName() + ":Uploaded Function!");
+        System.out.println(PaperForm.class.getName() + "Uploaded Function!");
         try {
             attachFile = event.getFile();
             save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
         } catch (IOException e) {
-            System.out.println(TypeForm.class.getName() + e.getMessage());
+            System.out.println(PaperForm.class.getName() + e.getMessage());
         }
     }
     
@@ -231,40 +168,50 @@ public class TypeForm {
             OutputStream output = new FileOutputStream(new File(path, filename));
             IOUtils.copy(input, output);
             
-            System.out.println(TypeForm.class.getName() + ":Done!");
+            System.out.println(PaperForm.class.getName() + "Done!");
 
         } catch (IOException e) {
-            System.out.println(TypeForm.class.getName() + e.getMessage());
+            System.out.println(PaperForm.class.getName() + e.getMessage());
         } finally {
             IOUtils.closeQuietly(input);
         }
     }
     
+    public String getOption(List<Boolean> opt) {
+        String opts = "";
+        for (Boolean opt1 : opt) {
+            if (opt1)
+                opts += '1';
+            else
+                opts += '0';
+        }
+        return opts;
+    }
+    
     public void submit() {
-        System.out.println(TypeForm.class.getName() + ":Submit Function!");
-        Type type = new Type();
+        System.out.println(PaperForm.class.getName() + ":Submit Function!");
+        Paper paper = new Paper();
         Order order = new Order();
-        type.setLanguage(language);
-        type.setField(field);
-        type.setTitle(title);
-        type.setExplain(explain);
+        paper.setGroup(group);
+        paper.setField(field);
+        paper.setOrientationOfField(orientation);
+        paper.setTitle(title);
+        paper.setExplain(explain);
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
-        type.setDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
-        type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
-        Users user = UserServices.getUserByUsername(SessionBean.getUserName());
-        type.setUserId(user);
+        paper.setDate(currentDate);
+        paper.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        paper.setOption(getOption(options)+plan);
         if(attachFile != null)
-            type.setAttachFile(attachFile.getFileName());
-        type.setDeliveryType(delivery);
- 
-        order.setTableName("type");
+            paper.setAttachFile(attachFile.getFileName());
+        paper.setDeliveryType(delivery);
+        Users user = UserServices.getUserByUsername(SessionBean.getUserName());
+        order.setTableName("paper");
         order.setCondition(0);
-        
         order.setOrderDate(currentDate);
         order.setUserId(user);
         try {
-            int id = TypeServices.insertRecordIntoTable(type);
+            int id = PaperServices.insertRecordIntoTable(paper);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
             FacesContext.getCurrentInstance().addMessage(null,
@@ -273,4 +220,5 @@ public class TypeForm {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

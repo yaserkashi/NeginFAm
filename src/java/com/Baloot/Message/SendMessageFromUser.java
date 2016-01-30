@@ -55,7 +55,7 @@ public class SendMessageFromUser {
         try {
             MessageServices.insertRecordIntoTable(msg);
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("پیام ارسال شد."));
+                    new FacesMessage(SendMessageFromUser.class.getName() + "پیام ارسال شد."));
         } catch (SQLException ex) {
             Logger.getLogger(SendMessageFromUser.class.getName()).log(Level.SEVERE, null, ex);
         }

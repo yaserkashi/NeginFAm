@@ -151,6 +151,8 @@ public class SignUp {
                 user.setPasword(password);
                 user.setPhoneNum(mobile);
                 UserServices.insertRecordIntoTable(user);
+                FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("ثبت نام شما با موفقیت انجام شد."));
             } catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }

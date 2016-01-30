@@ -5,58 +5,56 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-        <h:form> 
-            <p:outputLabel value="ارسال پیام" style="float:left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+        <header>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+        </header>
+        <!--<h:form id="form">--> 
 
 
-            <p:outputPanel style=" float: right;text-align: center;margin-top: 50px">
-                <h:panelGrid dir="rtl" columns="1" cellpadding="5">  
-                    <p:row>
-                        <p:column>
-                            <h:outputText value="نوع پیام" />
-                        </p:column>
-                        <p:column>
-                            <p:selectOneRadio id="m" >
-                                <f:selectItem itemLabel="ایمیل" itemValue="PS4" />
-                                <f:selectItem itemLabel="تلفن" itemValue="PS4" />
-                            </p:selectOneRadio>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:commandButton value="انتخاب مخاطب" style="width: 130px;" />
-                        </p:column>
-                        <p:column>
-                            <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
-                        </p:column>
-                        <!--                        <p:column>
-                                                    <h:outputText value="مخاطبین" />
-                                                </p:column>-->
-                    </p:row>
-                    <p:row> 
-                        <p:column>
-                            <h:outputText value="موضوع" />
-                        </p:column>   
-                        <p:column>
-                            <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <h:outputText value="پیام" />
-                        </p:column>
-                        <p:column>
-                            <p:inputTextarea style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
-                        </p:column>              
-                    </p:row>
+        <p:panelGrid id="panel" columns="2" styleClass="panel">
+
+            <p:selectOneRadio id="m" >
+                <f:selectItem itemLabel="ایمیل" itemValue="PS4" />
+                <f:selectItem itemLabel="تلفن" itemValue="PS4" />
+            </p:selectOneRadio>
+            <h:outputText value="نوع پیام" />
+
+            <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
+            <p:commandButton value="انتخاب مخاطب"  onclick="PF('multiUserserDialog').show()" style="width: 130px;" />
+
+
+            <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
+            <h:outputText value="موضوع" />
+
+            <p:inputTextarea style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+            <h:outputText value="پیام" />
 
 
 
-                </h:panelGrid>
-            </p:outputPanel>
+        </p:panelGrid>
 
-            <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 300px;margin-left: 100px;background: #4EA2D0"/>
-        </h:form>
+
+
+
+        <p:dialog widgetVar="multiUserserDialog" dynamic="true"
+                  style="direction:rtl"
+                  header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
+               
+            </p:dialog>
+        <!--</p:dialog>-->
+
+
+
+
+        <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 300px;margin-left: 100px;background: #4EA2D0"/>
+        <!--</h:form>-->
 
 
 

@@ -42,7 +42,7 @@ public class ChangePass {
     }
     
     public void submit() {
-        System.out.println("Submit Function!");
+        System.out.println(ChangePass.class.getName() + ":Submit Function!");
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         if (!currentPass.equals(user.getPasword())) {
             FacesContext.getCurrentInstance().addMessage(null,
@@ -50,6 +50,8 @@ public class ChangePass {
         } else {
             try {
                 UserServices.changePassword(user.getId(), pass);
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("رمز عبور شما با موفقیت تغییر کرد."));
             } catch (SQLException ex) {
                 Logger.getLogger(ChangePass.class.getName()).log(Level.SEVERE, null, ex);
             }

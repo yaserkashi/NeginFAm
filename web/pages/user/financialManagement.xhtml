@@ -5,55 +5,58 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-        
- <h:form> 
-      <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+        <header>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+        </header>
 
-            <p:panelGrid columns="7" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
+        <h:head>
+            <title>مدیریت مالی</title>
+        </h:head>
+        <h:body>
 
-                <h:outputText value="ردیف" />
-
-                <p:panelGrid columns="1">
-                    <h:outputText value="نام بانک" />
-                    <p:selectOneMenu id="console2" style="padding-right: 15px;width: 80px" >
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
-                        <f:selectItem itemLabel="بانک سامان" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="بانک ملت" itemValue="PS4" />
-
-                    </p:selectOneMenu>
-
-                </p:panelGrid>
-                <p:panelGrid columns="1">
-                    <h:outputText value="شماره فاکتور" />
-                    <p:inputText id="filter" style="width: 60px"/>
-                </p:panelGrid>
-                <p:panelGrid columns="1" >
-                    <h:outputText value="شماره سفارش" />
-                    <p:inputText id="filter1" style="width: 60px" />
-                </p:panelGrid>
-
-               
-                <p:panelGrid columns="1">
-                    <h:outputText value="مجموعه" />
-                    <p:inputText id="filter2" style="width: 60px"/>
-                </p:panelGrid>
-
-                <h:outputText value="تاریخ" />
-                <h:outputText value="وضعیت" />
+            <h:form> 
 
 
-              <h:outputText value="1" />
-                <h:outputText value="بانک سامان" />
-                <h:outputText value="21789" />
-                <h:outputText value="862"/>
-               
-                <h:outputText value="90000ریال" />
-                <h:outputText value="1394/10/22"/>
-                <h:outputText value="تایید نشده" style="color: red"/>
 
-            </p:panelGrid>
-        </h:form>
+                <p:dataTable value="" var="financialM" styleClass="dataTable">
 
+                    <p:ajax event="rowSelect"  update=""  />
+
+                    <p:column headerText="ردیف">
+                        <h:outputText value="1" />
+                    </p:column>  
+                    <p:column headerText="نام بانک" filterBy="#{financialM.id}">
+                        <h:outputText value="بانک سامان" />
+                    </p:column>  
+                    <p:column headerText="شماره فاکتور" filterBy="#{financialM.id}">
+                        <h:outputText value="21789" />
+                    </p:column> 
+                    <p:column headerText="شماره سفارش" filterBy="#{financialM.id}">
+                        <h:outputText value="862"/>
+                    </p:column>
+                    <p:column headerText="مجموعه" filterBy="#{financialM.id}">
+                        <h:outputText value="90000ریال" />
+                    </p:column>
+                    <p:column headerText="تاریخ">
+                        <h:outputText value="1394/10/22"/>
+                    </p:column>
+                    <p:column headerText="وضعیت">
+                        <h:outputText value="تایید نشده" style="color: red"/>
+                    </p:column>
+
+                </p:dataTable>
+
+
+
+            </h:form>
+        </h:body>
 
 
     </ui:define>

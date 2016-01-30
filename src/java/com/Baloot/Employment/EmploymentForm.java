@@ -228,7 +228,7 @@ public class EmploymentForm {
     }
          
     public void submit() {
-        System.out.println("Submit Function!");
+        System.out.println(EmploymentForm.class.getName() + ":Submit Function!");
         Employment empl = new Employment();
         empl.setAddress(address);
         empl.setBankCardNumber(bankCardNum);

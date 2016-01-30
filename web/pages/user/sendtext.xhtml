@@ -5,36 +5,49 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-        <h:form> 
+        <header>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+        </header>
 
-            <p:outputLabel value="ارسال پیام" style="float:left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
-
-
-            <p:outputPanel style=" float: right;text-align: center;margin-top: 50px">
-                <h:panelGrid columns="3" cellpadding="5"  >
-
-
-                    <h:inputText  style="font-weight: bold;width: 320px;" required="true" />
-
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:outputText value="موضوع" />
-
-
-                    <p:inputTextarea style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
-
-
-
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:outputText value="پیام" />
+        <h:head>
+            <title>ارسال پیام</title>
+        </h:head>
+        <h:body>
+            <h:form> 
 
 
-                </h:panelGrid>
-            </p:outputPanel>
 
-            <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
-        </h:form>
+                <p:panelGrid columns="2" styleClass="form" style="float: right" >
+                        <f:facet name="header" >
+                            ارسال پیام
+                        </f:facet>
+
+                        <h:outputText value="موضوع" style="width: 400px"/>
+                        <h:inputText   required="true" style="width: 400px" />
 
 
+
+                        <h:outputText value="پیام" />
+                        <p:inputTextarea required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false"  style="width: 400px"/>
+
+
+
+
+
+
+                    </p:panelGrid>
+
+                <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
+            </h:form>
+
+        </h:body>
 
     </ui:define>
 </ui:composition> 

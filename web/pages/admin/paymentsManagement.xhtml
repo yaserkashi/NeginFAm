@@ -6,8 +6,8 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:form> 
-  
-         <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+
+<!--            <p:outputLabel value="مدیریت مالی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
 
             <p:panelGrid columns="8" style="float: right;direction: rtl;margin-top: 40px;width: 100%">
 
@@ -17,8 +17,8 @@
                     <p:inputText id="filter" style="width: 40px"/>
                 </p:panelGrid>
 
-              <h:outputText value="شغل" style="width: 10px"/>
-                
+                <h:outputText value="شغل" style="width: 10px"/>
+
                 <p:panelGrid columns="1" >
                     <h:outputText value="شماره سفارش" />
                     <p:inputText id="filter1" style="width: 40px" />
@@ -27,14 +27,14 @@
                 <h:outputText value="تاریخ دریافت" style="width: 10px"/>
                 <h:outputText value="تاریخ تحویل" style="width: 10px"/>
                 <h:outputText value="هزینه سفارش" style="width: 10px"/>
-              
-             
-                    <h:outputText value="وضعیت"/>
-                   
 
 
-              <h:outputText value="1" />
-               <h:outputText value="1234" />
+                <h:outputText value="وضعیت"/>
+
+
+
+                <h:outputText value="1" />
+                <h:outputText value="1234" />
                 <h:outputText value=" تایپیست" />
                 <h:outputText value="21789" />
                 <h:outputText value="94/5/5"/>
@@ -42,14 +42,53 @@
                 <h:outputText value="90000ریال" />
                 <h:outputText value="پرداخت نشده" style="color: red"/>
 
-               
-                
-              
 
-            </p:panelGrid>
-</h:form>
 
-        
+
+
+            </p:panelGrid>-->
+
+
+                         <p:dataTable value="" var="payment" styleClass="dataTable">
+            
+                            <p:ajax event="rowSelect"  update=""  />
+            
+                            <p:column headerText="ردیف">
+                                <h:outputText value="1" />
+                            </p:column>  
+                            <p:column headerText="کد اعضا" filterBy="#{payment.id}">
+                                <h:outputText value="1234" />
+                            </p:column>  
+                            <p:column headerText="شغل">
+                                 <h:outputText value=" تایپیست" />
+                            </p:column> 
+                            <p:column headerText="شماره سفارش" filterBy="#{payment.id}" >
+                                <h:outputText value="21789" />
+                            </p:column>
+                            <p:column headerText="تاریخ دریافت"><h:outputText value="94/5/5"/>
+                                <h:outputText value="1394/10/17" />
+                            </p:column>
+                            <p:column headerText="تاریخ تحویل">
+                                <h:outputText value="94/5/10"/>
+                            </p:column>
+                            <p:column headerText="هزینه سفارش">
+                                <h:outputText value="90000ریال" />
+                            </p:column>
+                            <p:column headerText="وضعیت">
+                                 <h:outputText value="پرداخت نشده" style="color: red"/>
+                            </p:column>
+                           
+                        </p:dataTable>
+            
+<!--                        <p:dialog widgetVar="messageDialog" dynamic="true"
+                                  style="direction:rtl"
+                                  header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
+                            <h:outputText value="سوال من به این دلیل بود زیرا یکی از استادانم برا ترجمه ای که قبلا ایران فرتاک برای من انجام داده بود."  styleClass="font"/>
+            
+                        </p:dialog>-->
+        </h:form>
+
+
 
     </ui:define>
 </ui:composition>  

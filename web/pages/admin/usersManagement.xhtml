@@ -6,7 +6,7 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:form> 
-            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" style="direction: rtl">
+            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" styleClass="dataTable">
                 <f:facet name="header">
                     لیست کاربران
                 </f:facet>
@@ -36,7 +36,7 @@
             </p:dataTable>
             <p:dialog header="اطلاعات کاربر" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2"  columnClasses="label,value">
+                    <p:panelGrid  columns="2"  columnClasses="label,value" >
                         <f:facet name="header">
                         </f:facet>
                         <h:outputText value="111" style="font-weight: bold;"/>

@@ -6,11 +6,40 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:form> 
-  
-          This is Request Review Page
-</h:form>
 
-        
+            <p:dataTable value="" style="direction: rtl" styleClass="form">
+
+                <f:facet name="header">
+                    لیست
+                </f:facet>
+                <p:column headerText="نام">
+                    <h:outputText value="تست" />
+                </p:column>
+
+                <p:column headerText="نام کاربری">
+                    <h:outputText value="تست" />
+                </p:column>
+
+                <p:column headerText="رشته تحصیلی">
+                    <h:outputText value="تست" />
+                </p:column>
+
+                <p:column headerText="مقطع">
+                    <h:outputText value="تست" />
+                </p:column>
+
+                <p:column headerText="">
+                    <p:commandButton icon="ui-icon-search" onclick="PF('list').show()"/>
+                </p:column>
+            </p:dataTable>
+            <p:dialog widgetVar="list" dynamic="true"
+                      style="direction:rtl" resizable="false" closable="true" position="center" width="56%">
+                <ui:include src="/pages/admin/translatorList.xhtml"></ui:include>
+
+            </p:dialog>
+        </h:form>
+
+
 
     </ui:define>
 </ui:composition>  

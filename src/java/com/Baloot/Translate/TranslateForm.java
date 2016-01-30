@@ -153,31 +153,29 @@ public class TranslateForm {
     }
     
     public void uploaded(FileUploadEvent event) {
-        System.out.println("Uploaded Function!");
+        System.out.println(TranslateForm.class.getName()+":Uploaded Function!");
         try {
             attachFile = event.getFile();
             save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(TranslateForm.class.getName() + e.getMessage());
         }
     }
     
     private static void save(String filename, InputStream input) {
-        System.out.println(filename);
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest httpServletRequest = (HttpServletRequest) context
                 .getExternalContext().getRequest();
         String path = httpServletRequest.getSession().getServletContext()
                 .getRealPath("/resources/downloadFile/");
-        System.out.println(path);
         try {
             OutputStream output = new FileOutputStream(new File(path, filename));
             IOUtils.copy(input, output);
             
-            System.out.println("Done!");
+            System.out.println(TranslateForm.class.getName()+":Done!");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(TranslateForm.class.getName() + e.getMessage());
         } finally {
             IOUtils.closeQuietly(input);
         }
@@ -205,7 +203,7 @@ public class TranslateForm {
     }
     
     public void submit() {
-        System.out.println("Submit Function!");
+        System.out.println(TranslateForm.class.getName()+":Submit Function!");
         Translate translate = new Translate();
         Order order = new Order();
         translate.setLanguage(language);
@@ -232,7 +230,7 @@ public class TranslateForm {
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("درسته ......"));
+                        new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
         }

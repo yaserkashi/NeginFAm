@@ -5,103 +5,101 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">ui:composition
     <ui:define name="content">
-        <h:form> 
+        <header>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+        </header>
 
-            <p:outputLabel value="ثبت سفارش ترجمه" style="float:left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
+        <h:head>
+            <title>سفارش ترجمه</title>
+        </h:head>
+        <h:body>
+            <h:form> 
 
+                <p:panelGrid columns="2"  style="float: right" styleClass="form" >
+                    <f:facet name="header" >
+                        ثبت سفارش ترجمه                    
+                    </f:facet>
 
-            <p:outputPanel style="float: right;text-align: center;margin-top: 50px">
-                <h:panelGrid columns="4" cellpadding="5"  >
-
-                    <p:selectOneMenu id="field" value="#{translateForm.field}">
-                        <f:selectItem itemLabel="یکی را انتخاب کنید" itemValue="" />
+                    <h:outputText value="زمینه" />
+                    <p:selectOneMenu id="field" value="#{translateForm.field}" style="direction: ltr">
+                        <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
                         <f:selectItems value="#{translateForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
 
                     </p:selectOneMenu>
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:outputText value="زمینه" />
-
-                    <p:selectOneMenu id="lang" value="#{translateForm.language}">
-                        <f:selectItem itemLabel="یکی را انتخاب کنید" itemValue="" />
+                    <h:outputText value="زبان مبدا و مقصد" />
+                    <p:selectOneMenu id="lang" value="#{translateForm.language}" style="direction: ltr" >
+                        <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
                         <f:selectItems value="#{translateForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
 
                     </p:selectOneMenu>
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly1"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:outputText value="زبان مبدا و مقصد" />
 
-                    <p:calendar  value="#{translateForm.dateTime}"/>
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly3"  icon="ui-icon-disk" title="Icon Only"  />
-
-                    <h:outputLabel value="*" style="color: red"/>
                     <h:outputText value="تاریخ و ساعت درخواستی" />
+                    <p:calendar  value="#{translateForm.dateTime}"/>
 
-                    <h:inputText value="#{translateForm.title}"  style="font-weight: bold;" required="true" />
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly4"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="*" style="color: red"/>
                     <h:outputText value="موضوع" />
+                    <h:inputText value="#{translateForm.title}"  style="font-weight: bold;" required="true" />
 
 
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly5"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="" style="color: red"/>
+
+
                     <h:outputText value="ترجمه جداول انجام شود" />
                     <p:selectBooleanCheckbox value="#{translateForm.table}" />
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly6"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="" style="color: red"/>
                     <h:outputText value= "ترجمه زیر جداول انجام شود" />
                     <p:selectBooleanCheckbox value="#{translateForm.subtable}" />
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly7"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="" style="color: red"/>
                     <h:outputText value= "مطالب داخل شکل ترجمه شود" />
                     <p:selectBooleanCheckbox value="#{translateForm.shape}" />
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly8"  icon="ui-icon-disk" title="Icon Only"  />
 
-                    <h:outputLabel value="" style="color: red"/>
                     <h:outputText value= "نمودار ها رسم شوند" />
                     <p:selectBooleanCheckbox value="#{translateForm.chart}" />
 
+
+
+                    <h:outputText value="توضیحات" />
                     <p:inputTextarea value="#{translateForm.explain}" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
 
-                    <p:commandButton actionListener="welcome to this site" id="iconOnly9"  icon="ui-icon-disk" title="Icon Only"  />
-
-                    <h:outputLabel value="" style="color: red"/>
-                    <h:outputText value="توضیحات" />
-
-                    <p:selectBooleanCheckbox value="#{translateForm.delivery}" />
-                    <p:commandButton actionListener="welcome to this site" id="iiconOnly10"  icon="ui-icon-disk" title="Icon Only"  />
-                    <h:outputLabel value="" style="color: red"/>
                     <h:outputText value="تحویل حضوری " />
+                    <p:selectBooleanCheckbox value="#{translateForm.delivery}" />
 
-                    <h:form enctype="multipart/form-data" >
-                    <p:fileUpload value="#{translateForm.attachFile}" mode="advanced" dragDropSupport="true" fileUploadListener="#{translateForm.uploaded}"/>
-                    </h:form>
-                   <h:outputLabel value="" style="color: red"/>
-                    <h:outputLabel value="" style="color: red"/>
                     <h:outputText value="اپلود فایل" />
+                    <h:form enctype="multipart/form-data" >
+                        <p:fileUpload value="#{translateForm.attachFile}" mode="advanced" dragDropSupport="true" fileUploadListener="#{translateForm.uploaded}"/>
+                    </h:form>
+
+
+                    <p:commandButton  value="ثبت" actionListener="#{typeForm.submit()}" style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
+                    </p:commandButton>
+                    <p:outputLabel value="" ></p:outputLabel>
+
+
+                  
+
+
+                </p:panelGrid>
 
 
 
+            </h:form>
 
-                </h:panelGrid>
-                
-            </p:outputPanel>
-            <p:commandButton action="#{translateForm.submit()}"  value="ثبت" icon="ui-icon-star" style="margin-top: 1000px;margin-left: 100px;background: #efc47D"/>            
-        </h:form>
+        </h:body>
 
-
-        
     </ui:define>
 </ui:composition> 

@@ -85,56 +85,55 @@
 
                 </div>
                 <div class="headerMenu">
-                    <p:menubar >
-                        <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
+                     <p:menubar >
+                    <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
                         <p:menuitem value="ثبت سفارش انلاین" url="/pages/guest/signup.xhtml" />
 
                         <p:submenu label="هزینه و زمان تحویل">
                             <p:submenu label="هزینه خدمات ترجمه">
-                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/head menu/traslate english to perstion.xhtml"  />
-                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/head menu/cost of per to eng.xhtml" />
-                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/head menu/cost of transe file.xhtml" />
+                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/guest/traslateenglishtoperstion.xhtml"  />
+                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/guest/costofpertoeng.xhtml" />
+                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/guest/costoftransefile.xhtml" />
 
                             </p:submenu>
 
                             <p:submenu label="هزینه خدمات تایپ">
-                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/head menu/cost type per.xhtml"  />
-                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/head menu/cost type other.xhtml" />
+                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/guest/costtypeper.xhtml"  />
+                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/guest/costtypeother.xhtml" />
 
                             </p:submenu>
 
 
-                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/head menu/cost of editer.xhtml"  />
+                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/guest/costofediter.xhtml"  />
 
 
 
-                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/head menu/cost of layout.xhtml"/>
+                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/guest/costoflayout.xhtml"/>
 
 
                         </p:submenu>
                         <p:submenu label="لیست خدمات">
                             <p:submenu label="خدمات تایپ">
-                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/head menu/type per and eng.xhtml"  />
-                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/head menu/Contracts with companies.xhtml" />
-                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/head menu/help service type.xhtml" />
+                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/guest/typeperandeng.xhtml"  />
+                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/guest/contractswithcompanies.xhtml" />
+                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/guest/helpservicetype.xhtml" />
 
                             </p:submenu>
 
                             <p:submenu label="خدمات ترجمه">
-                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/head menu/traslate per and eng.xhtml"  />
+                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/guest/traslateperandeng.xhtml"  />
 
-                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/head menu/traslate book.xhtml" />
-                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/head menu/traslate Article.xhtml" />
-                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/head menu/help service traslate.xhtml" />
+                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/guest/traslatebook.xhtml" />
+                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/guest/traslateArticle.xhtml" />
+                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/guest/helpservicetraslate.xhtml" />
 
                             </p:submenu>
 
 
                         </p:submenu>
-
-                        <p:menuitem value="تماس با ما" url="/pages/head menu/contact us.xhtml"/>
-                        <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml"/>
-                    </p:menubar>
+                    <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml" />
+                    <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml" />
+                </p:menubar>
                 </div>
             </div>
             <div class="content">
@@ -148,7 +147,7 @@
                         <div>
                             <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
                                 <h:form  >
-                                    <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px " value="کاربر گرامی#{login.user}خوش آمدید"/>
+                                    <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px " value="کاربر گرامی #{login.user}خوش آمدید"/>
                                     <p:panelMenu style="float: right;width: 100%;padding-top: 15px;" >
                                         <p:submenu label="پروفایل کاربری" >
                                             <p:menuitem value="مشاهده و ویرایش "  icon="ui-icon-disk" url="/pages/user/profile.xhtml"  />
@@ -178,7 +177,7 @@
                                             <p:menuitem value="صندوق پیام"  ajax="false"  icon="ui-icon-home" url="/pages/user/listmassage.xhtml" />
                                         </p:submenu> 
                                         <p:submenu label="گزرشات مالی">
-                                            <p:menuitem value="گزارش مالی "   ajax="false" icon="ui-icon-close" url="/pages/user/financialmanagement.xhtml"/>
+                                            <p:menuitem value="گزارش مالی "   ajax="false" icon="ui-icon-close" url="/pages/user/financialManagement.xhtml"/>
                                         </p:submenu> 
 
                                     </p:panelMenu>

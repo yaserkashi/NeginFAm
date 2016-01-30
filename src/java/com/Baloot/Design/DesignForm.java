@@ -183,15 +183,14 @@ public class DesignForm {
             }
             File finalFile = new File(filePath, filename);
             Files.copy(input, finalFile.toPath());
-            System.out.println(filePath);
-            System.out.println("Done!");
+            System.out.println(DesignForm.class.getName() + ":Done!");
         } catch (IOException e) {
             Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
     public void submit() {
-        System.out.println("SUBMIT FUNCTION!");
+        System.out.println(DesignForm.class.getName() + ":SUBMIT FUNCTION!");
         Design design = new Design();
         Order order = new Order();
         design.setDesignType(designType);
@@ -221,7 +220,7 @@ public class DesignForm {
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("درسته ......"));
+                        new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {
             Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
         }

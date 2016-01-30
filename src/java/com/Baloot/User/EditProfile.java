@@ -97,7 +97,7 @@ public class EditProfile {
                 user.setPhoneNum(phone);
                 UserServices.updateTable(user);
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("درسته ......"));
+                        new FacesMessage("اطلاعات شما با موفقیت ویرایش شد."));
             } catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }

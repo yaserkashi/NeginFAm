@@ -11,6 +11,6 @@ package com.Baloot.Enum;
  * @author FK
  */
 public enum OrderTypesEnum {
-    type,design,translate;
+    type,design,translate,paper;
    
 }
