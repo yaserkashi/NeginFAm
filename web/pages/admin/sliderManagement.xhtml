@@ -6,11 +6,28 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:form> 
-  
-          This is Slider Management Page
-</h:form>
-
-        
-
+            This is Slider Management Page
+            <br/>
+            <!--value : listy as image ha ke adreseshon ro az DB mikhne-->
+            <!--selection : listy ke bayad jaye ImagesView.image set beshe-->
+            <!--dar vage liste dovom hamone=ie ke to slider neshon mide-->
+            <p:dataTable id="basicDT" var="image" value="#{usersManagement.list}" 
+                         styleClass="dataTable"                       
+                         selection="#{dtSelectionView.selectedCar}" rowKey="#{image.id}">
+                <f:facet name="header">
+                    عکس اسلایدر
+                </f:facet>
+                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                <p:column headerText="تصویر" >
+                    <p:graphicImage width="100" height="100"
+                                    value="../../resources/images/slider/#{image.id}.jpg"/>
+                </p:column>
+                <p:column headerText="نام تصویر">
+                    <h:outputText value="#{image.username}" />
+                </p:column>                               
+            </p:dataTable>
+            <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
+            <p:button  value="اضافه نمودن تصویر" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
+        </h:form>
     </ui:define>
 </ui:composition>  
