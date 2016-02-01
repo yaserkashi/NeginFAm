@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.Baloot.page;
+package com.Baloot.Image;
 
 /**
  *
@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
  
 @ManagedBean
-public class ImagesView {
+public class ImagesForm {
      
     private List<String> images;
      

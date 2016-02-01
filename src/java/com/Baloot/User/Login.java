@@ -51,8 +51,8 @@ public class Login implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "Incorrect Username and Passowrd",
-                            "Please enter correct username and Password"));
+                            "نام کاربری و رمز عبور اشتباه",
+                            "لطفا رمزعبور و نام کاربری درست را وارد کنید."));
                 return "index";
             }
             case 1 : {

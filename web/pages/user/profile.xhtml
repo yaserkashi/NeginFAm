@@ -30,63 +30,39 @@
                     </f:facet>
 
                     <h:outputText value="کدشما"  />
-                    <h:outputText value="111" style="font-weight: bold;"/>
+                    <h:outputText value="#{editProfile.id}" style="font-weight: bold;"/>
 
 
                     <h:outputText value="نام کاربری"  />
                     <p:inplace id="ajax1" editor="true">
-                        <h:inputText value="test" style="font-weight: bold" required="true"/>
+                        <h:inputText value="#{editProfile.username}" style="font-weight: bold" required="true"/>
                     </p:inplace>
 
                     <h:outputText value="نام" />
                     <p:inplace id="ajax2" editor="true">
-                        <h:inputText value="test1" style="font-weight: bold" required="true"/>
+                        <h:inputText value="#{editProfile.name}" style="font-weight: bold" required="true"/>
                     </p:inplace>
 
                     <h:outputText value="نام خانوادگی" /> 
                     <p:inplace id="ajax3" editor="true">
-                        <h:inputText value="test2" style="font-weight: bold" required="true"/>
-                    </p:inplace>
-
-                    <h:outputText value="ادرس" />
-                    <p:inplace id="ajax4" editor="true">
-                        <p:inputTextarea value="یزد،خیابان شهید مطهری" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                        <h:inputText value="#{editProfile.family}" style="font-weight: bold" required="true"/>
                     </p:inplace>
 
                     <h:outputText value="تلفن همراه" />
                     <p:inplace id="ajax5" editor="true">
-                        <h:inputText value="09130000000" style="font-weight: bold" required="true"/>
+                        <h:inputText value="#{editProfile.phone}" style="font-weight: bold" required="true"/>
                     </p:inplace>
-
-                    <h:outputText value="نحوه اشنایی باسایت" />
-                    <p:inplace id="ajax6" editor="true">
-                        <h:inputText value="تبلیغات" style="font-weight: bold" required="true"/>
-                    </p:inplace>
-
-
 
                     <h:outputText value="پست الکترونیک" />
                     <p:inplace id="ajax8" editor="true">
-                        <h:inputText value="aaa@yahoo.com" style="font-weight: bold"  required="true"/>
+                        <h:inputText value="#{editProfile.email}" style="font-weight: bold"  required="true"/>
                     </p:inplace>
-
-
-                    <h:outputText value="تاریخ ثبت نام" />
-                    <h:outputText value="94/10/6" style="font-weight: bold" />
-
-
-
-
 
                 </p:panelGrid>
 
-
-
-                <p:commandButton  value="ثبت" icon="ui-icon-star" style="margin-top: 300px;margin-left: 100px;background: #5D8A3D" disabled="true"/>
+                <p:commandButton action="#{editProfile.submit()}" value="ثبت" icon="ui-icon-star" style="margin-top: 300px;margin-left: 100px;background: #5D8A3D" disabled="true"/>
             </h:form>
         </h:body>
-
-
 
     </ui:define>
 </ui:composition>  
