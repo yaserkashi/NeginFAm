@@ -8,6 +8,7 @@ package com.Baloot.Factor;
 
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,5 +45,50 @@ public class FactorServices {
             System.out.println(e);
         }
         return list;
+    }
+    public static int insertRecordIntoTable(Factor factor) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        int id = 0;
+        String insertTableSQL = "INSERT INTO factor (factor.user_id,factor.sum_price,factor.off,factor.pay_condition,factor.p_factor,factor.date_time) VALUES (?,?,?,?,?,?)";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, factor.getUserId().getId());
+            preparedStatement.setDouble(2, factor.getSumPrice());
+            preparedStatement.setDouble(3, factor.getOff());
+            preparedStatement.setInt(4, factor.getPayCondition());
+            preparedStatement.setBoolean(5, factor.getPFactor());
+            preparedStatement.setString(6, factor.getDateTime());
+            
+
+            // execute insert SQL stetement
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("Record is inserted into DBType table!");
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+        return id;
     }
 }

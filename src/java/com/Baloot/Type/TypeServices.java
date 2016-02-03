@@ -6,12 +6,16 @@
 
 package com.Baloot.Type;
 
+import com.Baloot.User.UserServices;
+import com.Baloot.User.Users;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -62,5 +66,76 @@ public class TypeServices {
 
         }
         return id;
+    }
+     public static List<Type> getALLType() {
+        Connection con = null;
+        PreparedStatement ps;
+        List<Type> list = new ArrayList<>();
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from type");
+ 
+            ResultSet rs = ps.executeQuery();
+           
+            while (rs.next()) {
+                Type type = new Type();
+                //language,field,title,date_time,explain,option,user_id
+                 type.setId(rs.getInt("id"));
+                type.setAttachFile(rs.getString("attach_file"));
+                type.setDeliveryType(rs.getBoolean("delivery_type"));
+                type.setExplain(rs.getString("explain"));
+                type.setField(rs.getInt("field"));
+                type.setTitle(rs.getString("title"));
+                type.setOption(rs.getString("option"));              
+                type.setEndDateTime(rs.getString("end_date_time"));
+                type.setDateTime(rs.getString("date_time"));
+                Users user = UserServices.getUserById(rs.getInt("user_id"));
+                type.setUserId(user);
+                type.setLanguage(rs.getInt("language"));
+                list.add(type);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
+    }
+      public static Type getTypeById(Integer id) {
+        Connection con = null;
+        PreparedStatement ps;
+     
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from type where id= ?");
+            ps.setInt(id, 1);
+            ResultSet rs = ps.executeQuery();
+             Type type = new Type();
+            while (rs.next()) {
+               
+                //language,field,title,date_time,explain,option,user_id
+                 type.setId(rs.getInt("id"));
+                type.setAttachFile(rs.getString("attach_file"));
+                type.setDeliveryType(rs.getBoolean("delivery_type"));
+                type.setExplain(rs.getString("explain"));
+                type.setField(rs.getInt("field"));
+                type.setTitle(rs.getString("title"));
+                type.setOption(rs.getString("option"));              
+                type.setEndDateTime(rs.getString("end_date_time"));
+                type.setDateTime(rs.getString("date_time"));
+                Users user = UserServices.getUserById(rs.getInt("user_id"));
+                type.setUserId(user);
+                type.setLanguage(rs.getInt("language"));
+             
+            }
+            return type;
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
     }
 }

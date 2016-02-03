@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -64,5 +66,75 @@ public class PaperServices {
 
         }
         return id;
+    }
+      public static List<Paper> getALLPaper() {
+        Connection con = null;
+        PreparedStatement ps;
+        List<Paper> list = new ArrayList<>();
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from paper");
+ 
+            ResultSet rs = ps.executeQuery();
+            //group,field,orientation_of_field,title,date,end_date_time,explain,option,delivery_type,attach_file
+            while (rs.next()) {
+                Paper paper = new Paper();
+                 paper.setId(rs.getInt("id"));
+                paper.setAttachFile(rs.getString("attach_file"));
+                paper.setDeliveryType(rs.getBoolean("delivery_type"));
+                paper.setExplain(rs.getString("explain"));
+                paper.setField(rs.getInt("field"));
+                paper.setGroup(rs.getInt("group"));
+                paper.setOrientationOfField(rs.getInt("orientation_of_field"));
+                paper.setTitle(rs.getString("title"));
+                paper.setOption(rs.getString("option"));
+                paper.setDate(rs.getString("date"));
+                paper.setEndDateTime(rs.getString("end_date_time"));
+          
+                list.add(paper);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
+    }
+      public static Paper getPaperById(Integer id) {
+        Connection con = null;
+        PreparedStatement ps;
+        List<Paper> list = new ArrayList<>();
+ 
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from paper where id= ?");
+            ps.setInt(id, 1);
+            ResultSet rs = ps.executeQuery();
+               Paper paper = new Paper();
+            while (rs.next()) {
+             
+                //group,field,orientation_of_field,title,date,end_date_time,explain,option,delivery_type,attach_file
+                paper.setId(rs.getInt("id"));
+                paper.setAttachFile(rs.getString("attach_file"));
+                paper.setDeliveryType(rs.getBoolean("delivery_type"));
+                paper.setExplain(rs.getString("explain"));
+                paper.setField(rs.getInt("field"));
+                paper.setGroup(rs.getInt("group"));
+                paper.setOrientationOfField(rs.getInt("orientation_of_field"));
+                paper.setTitle(rs.getString("title"));
+                paper.setOption(rs.getString("option"));
+                paper.setDate(rs.getString("date"));
+                paper.setEndDateTime(rs.getString("end_date_time"));
+               
+            }
+            return paper;
+        } catch (SQLException ex) {
+            System.out.println("Error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
     }
 }

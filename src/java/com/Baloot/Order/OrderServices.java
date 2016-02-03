@@ -6,10 +6,15 @@
 
 package com.Baloot.Order;
 
+import com.Baloot.User.UserServices;
+import com.Baloot.User.Users;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -89,5 +94,65 @@ public class OrderServices {
 
         }
 
+    }
+    public static List<Order> listOfOrderForUser(int userId)
+    {
+        List<Order> orderList=new ArrayList<>();
+    Connection dbConnection;
+        PreparedStatement ps;
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            
+            ps = dbConnection.prepareStatement("Select * from order where user_id_get = ?");
+            ps.setInt(1, userId);
+ 
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+               Order item = new Order();
+                //table_name,table_id,user_id,order_date,condition
+                item.setCondition(rs.getInt("condition"));
+                item.setId(rs.getInt("id"));
+                item.setOrderDate(rs.getString("order_date"));
+                item.setTableId(rs.getInt("table_id"));
+                item.setTableName(rs.getString("table_name"));
+                 Users user = UserServices.getUserById(rs.getInt("user_id"));
+                 item.setUserId(user);
+                orderList.add(item);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    return orderList;
+    }
+     public static List<Order> AllOfOrder()
+    {
+        List<Order> orderList=new ArrayList<>();
+    Connection dbConnection;
+        PreparedStatement ps;
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            
+            ps = dbConnection.prepareStatement("Select * from order");
+          
+ 
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Order item = new Order();
+                //table_name,table_id,user_id,order_date,condition
+                item.setCondition(rs.getInt("condition"));
+                item.setId(rs.getInt("id"));
+                item.setOrderDate(rs.getString("order_date"));
+                item.setTableId(rs.getInt("table_id"));
+                item.setTableName(rs.getString("table_name"));
+                 Users user = UserServices.getUserById(rs.getInt("user_id"));
+                 item.setUserId(user);
+                orderList.add(item);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    return orderList;
     }
 }
