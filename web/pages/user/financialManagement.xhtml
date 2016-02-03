@@ -23,41 +23,36 @@
 
             <h:form> 
 
-
-
-                <p:dataTable value="" var="financialM" styleClass="dataTable">
+                <p:dataTable value="#{userFinancialManagement.list}" var="financialM" selection="#{adminFinancialManagement.selected}" styleClass="dataTable">
 
                     <p:ajax event="rowSelect"  update=""  />
 
                     <p:column headerText="ردیف">
                         <h:outputText value="1" />
                     </p:column>  
-                    <p:column headerText="نام بانک" filterBy="#{financialM.id}">
-                        <h:outputText value="بانک سامان" />
-                    </p:column>  
-                    <p:column headerText="شماره فاکتور" filterBy="#{financialM.id}">
-                        <h:outputText value="21789" />
+                    <p:column headerText="شماره فاکتور" filterBy="#{financialM.fatorId}">
+                        <h:outputText value="#{financialM.fatorId}" />
                     </p:column> 
-                    <p:column headerText="شماره سفارش" filterBy="#{financialM.id}">
-                        <h:outputText value="862"/>
+                    <p:column headerText="شماره سفارش" filterBy="#{financialM.orderId}">
+                        <h:outputText value="#{financialM.orderId}"/>
                     </p:column>
-                    <p:column headerText="مجموعه" filterBy="#{financialM.id}">
-                        <h:outputText value="90000ریال" />
+                    <p:column headerText="مجموعه" filterBy="#{financialM.sum}">
+                        <h:outputText value="#{financialM.sum}" />
                     </p:column>
                     <p:column headerText="تاریخ">
-                        <h:outputText value="1394/10/22"/>
+                        <h:outputText value="#{financialM.date}"/>
                     </p:column>
                     <p:column headerText="وضعیت">
-                        <h:outputText value="تایید نشده" style="color: red"/>
+                        <h:outputText value="#{financialM.condition}" />
+                    </p:column>
+                    <p:column headerText="مرحله">
+                        <h:outputText value="#{financialM.step}" />
                     </p:column>
 
                 </p:dataTable>
 
-
-
             </h:form>
         </h:body>
-
 
     </ui:define>
 </ui:composition> 

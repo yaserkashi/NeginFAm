@@ -5,37 +5,44 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-        <h:form> 
-
-            <p:dataTable value="" style="direction: rtl" styleClass="form">
-
+        <h:form id="form1"> 
+            
+            <p:dataTable value="#{employmentList.list}" var="empl" id="listofEmpl"
+                         selection="#{employmentList.selected}" rowKey="#{empl.id}"
+                         style="direction: rtl" styleClass="form"
+                         selectionMode="single" >
+                <p:ajax event="rowSelect" oncomplete="PF('list').show()"/>
+                
                 <f:facet name="header">
                     لیست
                 </f:facet>
                 <p:column headerText="نام">
-                    <h:outputText value="تست" />
+                    <h:outputText value="#{empl.name}" />
                 </p:column>
 
-                <p:column headerText="نام کاربری">
-                    <h:outputText value="تست" />
+                <p:column headerText="نام خانوادگی">
+                    <h:outputText value="#{empl.lastName}" />
                 </p:column>
 
                 <p:column headerText="رشته تحصیلی">
-                    <h:outputText value="تست" />
+                    <h:outputText value="#{empl.lastEducationField}" />
                 </p:column>
 
-                <p:column headerText="مقطع">
-                    <h:outputText value="تست" />
+                <p:column headerText="دانشگاه">
+                    <h:outputText value="#{empl.lastEducationUniversity}" />
                 </p:column>
 
-                <p:column headerText="">
-                    <p:commandButton icon="ui-icon-search" onclick="PF('list').show()"/>
-                </p:column>
+<!--                <p:column headerText="">
+                    <p:commandButton icon="ui-icon-search" onclick="PF('list').show()" 
+                                    
+                                     />
+                </p:column>-->
             </p:dataTable>
             <p:dialog widgetVar="list" dynamic="true"
                       style="direction:rtl" resizable="false" closable="true" position="center" width="56%">
-                <ui:include src="/pages/admin/translatorList.xhtml"></ui:include>
-
+                <h:form id="form2">
+                    <ui:include src="/pages/admin/translatorList.xhtml"></ui:include>
+                </h:form>
             </p:dialog>
         </h:form>
 

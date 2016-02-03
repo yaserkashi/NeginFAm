@@ -37,11 +37,8 @@
                         <p:panelGrid columns="1" >
                             <h:outputText value="شماره سفارش" />
                             <p:inputText id="filter1" style="width: 40px" />
-                        </p:panelGrid>
-        
-        
-        
-        
+                        </p:panelGrid>    
+               
                         <p:panelGrid columns="1">
                             <h:outputText value="مجموعه" />
                             <p:inputText id="filter2" style="width: 40px"/>
@@ -49,8 +46,7 @@
         
                         <h:outputText value="تاریخ" style="width: 40px" />
                         <h:outputText value="وضعیت" style="width: 40px" />
-        
-        
+                
                         <h:outputText value="1" />
                         <h:outputText value="1234" />
                         <h:outputText value="کاربر" />
@@ -69,53 +65,33 @@
         
                     </p:panelGrid>-->
 
-
-        <p:dataTable value="" var="financialM" styleClass="dataTable">
+        <p:dataTable value="#{adminFinancialManagement.list}" var="financialM" selection="#{adminFinancialManagement.selected}" styleClass="dataTable">
 
             <p:ajax event="rowSelect"  update=""  />
 
             <p:column headerText="ردیف">
-                <h:outputText value="1" />
-            </p:column>  
-            <p:column headerText="کد کاربر">
-                <h:outputText value="1234" />
-            </p:column>  
-            <p:column headerText="نام">
-                <h:outputText value="کاربر" />
-            </p:column> 
-            <p:column headerText="نام خانوادگی" >
-                 <h:outputText value="کاربر" />
-            </p:column>
-            <p:column headerText="نام بانک">
-                <h:outputText value=" سامان" />
+                <h:outputText value="#{adminFinancialManagement.list.indexOf(financialM)+1}" />
             </p:column>
             <p:column headerText="شماره فاکتور">
-                 <h:outputText value="21789" />
+                <h:outputText value="#{financialM.fatorId}" />
             </p:column>
              <p:column headerText="شماره سفارش">
-               <h:outputText value="862"/>
+                 <h:outputText value="#{financialM.orderId}"/>
             </p:column>
              <p:column headerText="مجموعه">
-                <h:outputText value="90000ریال" />
+                 <h:outputText value="#{financialM.sum}" />
             </p:column>
              <p:column headerText="تاریخ">
-               <h:outputText value="94/1/2"/>
+                 <h:outputText value="#{financialM.date}"/>
             </p:column> 
             <p:column headerText="وضعیت">
-                <p:selectOneMenu id="console8" style="padding-right: 15px;width: 40px" >
-                            <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
-                            <f:selectItem itemLabel=" تایید" itemValue="Xbox One" />
-                            <f:selectItem itemLabel="عدم تایید" itemValue="PS4" />
-        
-                        </p:selectOneMenu>
+                <h:outputText value="#{financialM.condition}"/>
             </p:column>
-            
-             
+            <p:column headerText="مرحله">
+                <h:outputText value="#{financialM.step}"/>
+            </p:column>
+                       
         </p:dataTable>
-
-
-
-
 
     </ui:define>
 </ui:composition>  

@@ -5,36 +5,30 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-
-    
-
+   
         <h:form> 
 
-
-
-
-
-            <p:dataTable value="" var="message" styleClass="dataTable">
+            <p:dataTable value="#{listMessage.list}" var="message" rowKey="#{message.id}" selection="#{listMessage.selectedMessage}" styleClass="dataTable">
 
                 <p:ajax event="rowSelect"  update=""  />
 
                 <p:column headerText="ردیف">
-                    <h:outputText value="1" />
+                    <h:outputText value="#{listMessage.list.indexOf(message)+1}" />
                 </p:column>  
                 <p:column headerText="موضوع">
-                    <h:outputText value="سوال" />
+                    <h:outputText value="#{message.title}" />
                 </p:column>  
                 <p:column headerText="پیام">
-                     <h:outputText value="سوال من به این دلیل بود زیرا یکی از استادانم برا ترجمه ای که قبلا ایران فرتاک برای من انجام داده بود"/>
+                    <h:outputText value="#{message.text}"/>
                 </p:column> 
                 <p:column headerText="وضعیت" >
-                    <h:outputText value="خوانده شده" />
+                    <h:outputText value="#{message.getReadStr()}" />
                 </p:column>
                 <p:column headerText="تاریخ ارسال">
-                    <h:outputText value="1394/10/17" />
+                    <h:outputText value="#{message.dateTime}" />
                 </p:column>
                 <p:column headerText="نوع پیام">
-                    <h:outputText value="ارسال" />
+                    <h:outputText value="#{message.getType(listMessage.id)}" />
                 </p:column>
                 <p:column headerText="جزئیات پیام">
                     <p:commandButton  icon="ui-icon-document" onclick="PF('messageDialog').show()">
@@ -45,15 +39,11 @@
             <p:dialog widgetVar="messageDialog" dynamic="true"
                       style="direction:rtl"
                       header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
-                <h:outputText value="سوال من به این دلیل بود زیرا یکی از استادانم برا ترجمه ای که قبلا ایران فرتاک برای من انجام داده بود."  styleClass="font"/>
+                <h:outputText value="#{listMessage.selectedMessage.text}"  styleClass="font"/>
 
             </p:dialog>
 
-
-
         </h:form>
-
-
 
     </ui:define>
 </ui:composition> 

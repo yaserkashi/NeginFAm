@@ -93,7 +93,7 @@ public class EmploymentServices {
                 empl.setPhone(rs.getString("phone"));
                 empl.setMobile(rs.getString("mobile"));
                 empl.setAddress(rs.getString("address"));
-                empl.setBankCardNumber(rs.getString("bank_card_num"));
+                empl.setBankCardNumber(rs.getString("bank_card_number"));
                 empl.setBankName(rs.getString("bank_name"));
                 empl.setBirthCertificate(rs.getString("birth_certificate"));
                 empl.setField(rs.getString("field"));
@@ -106,7 +106,7 @@ public class EmploymentServices {
                 empl.setOtherField(rs.getString("other_field"));
                 empl.setRecords(rs.getString("records"));
                 empl.setSex(rs.getBoolean("sex"));
-                empl.setTranslateLanguage(rs.getString("translate_languge"));
+                empl.setTranslateLanguage(rs.getString("translate_language"));
                 list.add(empl);
             }
             return list;

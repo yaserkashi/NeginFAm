@@ -22,29 +22,20 @@
         <h:body>
             <h:form> 
 
-
-
                 <p:panelGrid columns="2" styleClass="form" style="float: right" >
                         <f:facet name="header" >
                             ارسال پیام
                         </f:facet>
 
                         <h:outputText value="موضوع" style="width: 400px"/>
-                        <h:inputText   required="true" style="width: 400px" />
-
-
+                        <h:inputText  value="#{sendMessageFromUser.title}" required="true" style="width: 400px" />
 
                         <h:outputText value="پیام" />
-                        <p:inputTextarea required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false"  style="width: 400px"/>
-
-
-
-
-
+                        <p:inputTextarea value="#{sendMessageFromUser.text}" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false"  style="width: 400px"/>
 
                     </p:panelGrid>
 
-                <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
+                <p:commandButton action="#{sendMessageFromUser.submit()}" value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
             </h:form>
 
         </h:body>

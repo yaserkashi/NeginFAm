@@ -17,6 +17,7 @@ public class ReportList {
     private Integer sum;
     private String date;
     private Integer step;
+    private Integer userId;
 
     public Integer getFatorId() {
         return fatorId;
@@ -65,5 +66,13 @@ public class ReportList {
     public void setStep(Integer step) {
         this.step = step;
     } 
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
     
 }

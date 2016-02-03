@@ -20,7 +20,7 @@ import java.util.List;
  * @author FK
  */
 public class MessageServices {
-    public static List<Message> getInbox(int id) {
+    public static List<Message> getMessagesById(int id) {
         List<Message> list = new ArrayList<>();
         Connection dbConnection;
         PreparedStatement ps;
@@ -28,42 +28,15 @@ public class MessageServices {
         try {
             dbConnection = DataConnect.getConnection();
             
-            ps = dbConnection.prepareStatement("Select * from message where user_id_get = ?");
+            ps = dbConnection.prepareStatement("Select * from message where user_id_get = ? or user_id_send = ?");
             ps.setInt(1, id);
+            ps.setInt(2, id);
  
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Message item = new Message();
                 item.setUserIdSend(UserServices.getUserById(rs.getInt("user_id_send")));
-                item.setUserIdGet(UserServices.getUserById(id));
-                item.setTitle(rs.getString("title"));
-                item.setText(rs.getString("text"));
-                item.setRead(rs.getBoolean("read"));
-                item.setDateTime(rs.getString("date_time"));
-                list.add(item);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-    
-    public static List<Message> getOutbox(int id) {
-        List<Message> list = new ArrayList<>();
-        Connection dbConnection;
-        PreparedStatement ps;
-
-        try {
-            dbConnection = DataConnect.getConnection();
-            
-            ps = dbConnection.prepareStatement("Select * from message where user_id_send = ?");
-            ps.setInt(1, id);
- 
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                Message item = new Message();
                 item.setUserIdGet(UserServices.getUserById(rs.getInt("user_id_get")));
-                item.setUserIdSend(UserServices.getUserById(id));
                 item.setTitle(rs.getString("title"));
                 item.setText(rs.getString("text"));
                 item.setRead(rs.getBoolean("read"));

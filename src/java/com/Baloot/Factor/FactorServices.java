@@ -23,14 +23,44 @@ public class FactorServices {
     public static List<ReportList> getReportList() {
         List<ReportList> list = new ArrayList<>();
         Connection dbConnection;
-        Statement statement;
+        PreparedStatement ps;
 
-        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and f.user_id=1 and fitem.order_id=public.order.id";
+        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and fitem.order_id=public.order.id";
+        
         try {
             dbConnection = DataConnect.getConnection();
-            statement = dbConnection.createStatement();
+            ps = dbConnection.prepareStatement(select);
             
-            ResultSet rs= statement.executeQuery(select);
+            ResultSet rs= ps.executeQuery(select);
+            while (rs.next()){
+                ReportList item = new ReportList();
+                item.setCondition(rs.getInt("pay_condition"));
+                item.setDate(rs.getString("order_date"));
+                item.setFatorId(rs.getInt("factor_id"));
+                item.setOrderId(rs.getInt("order_id"));
+                item.setStep(rs.getInt("condition"));
+                item.setSum(rs.getInt("sum_price"));
+                item.setUserId(rs.getInt("user_id"));
+                list.add(item);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public static List<ReportList> getReportListById(int id) {
+        List<ReportList> list = new ArrayList<>();
+        Connection dbConnection;
+        PreparedStatement ps;
+
+        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and f.user_id=? and fitem.order_id=public.order.id";
+        
+        try {
+            dbConnection = DataConnect.getConnection();
+            ps = dbConnection.prepareStatement(select);
+            ps.setInt(1, id);
+            ResultSet rs= ps.executeQuery(select);
             while (rs.next()){
                 ReportList item = new ReportList();
                 item.setCondition(rs.getInt("pay_condition"));

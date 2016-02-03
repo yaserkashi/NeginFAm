@@ -88,6 +88,13 @@ public class Message implements Serializable {
         return read;
     }
 
+    public String getReadStr() {
+        if (read)
+            return "خوانده شده";
+        else
+            return "خوانده نشده";
+    }
+    
     public void setRead(Boolean read) {
         this.read = read;
     }
@@ -122,6 +129,13 @@ public class Message implements Serializable {
 
     public void setUserIdSend(Users userIdSend) {
         this.userIdSend = userIdSend;
+    }
+    
+    public String getType(int id) {
+        if (userIdGet.getId() == id)
+            return "دریافتی";
+        else
+            return "ارسالی";
     }
 
     @Override
