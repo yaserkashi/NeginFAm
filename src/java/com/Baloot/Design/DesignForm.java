@@ -12,8 +12,8 @@ import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
 import com.Baloot.Order.Order;
 import com.Baloot.Order.OrderServices;
-import com.Baloot.User.Users;
 import com.Baloot.User.UserServices;
+import com.Baloot.User.Users;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
@@ -32,6 +32,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -156,15 +157,33 @@ public class DesignForm {
         this.delivery = delivery;
     }
           
-    public void upload() {
+    public void upload(FileUploadEvent event) {
+        attachFile=event.getFile();
+        if (attachFile != null) {
+            try {
+                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());                
+            } catch (IOException ex) {
+                Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    public void uploaded() {
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+                submit();
             } catch (IOException ex) {
                 Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        else{
+            System.out.println("eror null file");
+        
         }
     }
 
@@ -189,8 +208,9 @@ public class DesignForm {
         }
     }
     
-    public void submit() {
+    public void submit() {        
         System.out.println(DesignForm.class.getName() + ":SUBMIT FUNCTION!");
+        System.out.println("+++++++++++++++++++++++++++++"+attachFile.getFileName());        
         Design design = new Design();
         Order order = new Order();
         design.setDesignType(designType);

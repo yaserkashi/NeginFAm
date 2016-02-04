@@ -73,7 +73,7 @@
         </ui:insert>
     </h:head>
     <h:body style="background-color: #fffffe">
-        <h:form prependId="false">
+        <h:form enctype="multipart/form-data" prependId="false" >
             <div id="header" class="header">
                 <div class="logo">
                     <p:graphicImage style="height: inherit;min-height: 70px"
@@ -146,7 +146,7 @@
                     <ui:insert name="sidePanel">
                         <div>
                             <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
-                                <h:form  >
+                                
                                     <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px " value="کاربر گرامی #{login.user}خوش آمدید"/>
                                     <p:panelMenu style="float: right;width: 100%;padding-top: 15px;" >
                                         <p:submenu label="پروفایل کاربری" >
@@ -182,7 +182,7 @@
 
                                     </p:panelMenu>
                                     <p:commandButton value="خروج" style="width: 100% ;" action="#{login.logout()}"/>
-                                </h:form>
+                               
                             </p:layoutUnit>
                         </div>  
                         <ui:include src="/template/commonContent.xhtml"/>
