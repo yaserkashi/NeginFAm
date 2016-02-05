@@ -22,12 +22,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
 /**
  *
  * @author Ali-M
  */
-@ManagedBean
+
 public class OrderFollowUpForAdmin {
     
     private Order  selectedOreder;
@@ -118,14 +117,12 @@ public class OrderFollowUpForAdmin {
     public void setPaper(Paper paper) {
         this.paper = paper;
     }
-    public List<Order> listOfOrdreForAdmin()
+    public List<Order> ListOfOrdreForUser()
     {
     return OrderServices.AllOfOrder();
     }
-    public void insertNewFactor()
+    public void InsertNewFactor()
     {
-     
-        System.out.println("I'm here");
     if(selectedOreder!=null)
     {
         Factor factor=new Factor();
@@ -156,32 +153,25 @@ public class OrderFollowUpForAdmin {
         
     }
     }
-   public String selectedOrderAction()
+   public void SelectedOrderAction()
    {
-   String typeOforder=selectedOreder.getTableName();
- String pageOut="";
+  String typeOforder=selectedOreder.getTableName();
  
        switch (typeOforder)
        {
-           case "type":
-               type = TypeServices.getTypeById(selectedOreder.getTableId());
-               pageOut = "";
-               break;
-           case "design":
-               design=DesignServices.getDesignById(selectedOreder.getTableId());
-                 
-               pageOut = "";
-               System.out.println("ok"+design.getEndDate());   
-               break;
-           case "translate":
-               translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
-               pageOut = "";
-               break;
-           case "paper":
-               paper = PaperServices.getPaperById(selectedOreder.getTableId());
-               pageOut = "";
-               break;
+                case "type":
+         type=  TypeServices.getTypeById(selectedOreder.getTableId());
+        break;
+                case "design":
+          design=DesignServices.getDesignById(selectedOreder.getTableId());
+        break;
+                 case "translate":
+ translate=TranslateServices.getTranslateById(selectedOreder.getTableId());
+        break;
+                 case "paper":
+         paper=PaperServices.getPaperById(selectedOreder.getTableId());
+        break;
        }
-       return pageOut;       
+             
    }
 }

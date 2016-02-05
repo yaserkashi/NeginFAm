@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
     <header>
         <style>
             .ui-panelgrid td {
@@ -103,7 +105,7 @@
 
 
             <p:outputLabel value="توضیحات "  ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+            <p:outputLabel value="#{orderFollowUpForUser.paper.explain}" style="color: red" ></p:outputLabel>
 
             <p:outputLabel value="توضیحات مدیر " ></p:outputLabel>
             <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
@@ -111,12 +113,10 @@
 
 
             <p:outputLabel value=" فایل سفارش" ></p:outputLabel>
-            <p:commandButton value="دانلود" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                <p:fileDownload value="#{fileDownloadView.file}" />
-            </p:commandButton>   
+           
 
             <p:outputLabel value=" وضعیت سفارش" ></p:outputLabel>
-            <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>   
+            <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.condition} " style="color: red" ></p:outputLabel>   
 
 
 
@@ -146,5 +146,5 @@
         </p:panelGrid>
     </h:body>
 
-
-</html>
+    </ui:define>
+</ui:composition>

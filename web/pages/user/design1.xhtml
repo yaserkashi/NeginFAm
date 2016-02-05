@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
     <header>
         <style>
             .ui-panelgrid td {
@@ -35,14 +37,14 @@
                 جزئیات سفارش.
             </f:facet>
             <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+            <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
 
             <p:outputLabel value="نوع طراحی "  ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+            <p:outputLabel value="سلام " style="color: red" ></p:outputLabel>
 
 
             <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+            <p:outputLabel value="#{orderFollowUpForUser.design.endDate}" style="color: red" ></p:outputLabel>
 
             <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
             <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
@@ -87,9 +89,7 @@
 
 
             <p:outputLabel value="فایل سفارش " ></p:outputLabel>
-            <p:commandButton value="دانلود" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" >
-                <p:fileDownload value="#{fileDownloadView.file}" />
-            </p:commandButton>
+           
 
             <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
             <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
@@ -115,11 +115,7 @@
             <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
                              style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
         </p:panelGrid>
-
-
-
-
-
-
     </h:body>
-</html>
+    </ui:define>
+</ui:composition>
+

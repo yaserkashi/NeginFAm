@@ -23,15 +23,14 @@ public class FactorServices {
     public static List<ReportList> getReportList() {
         List<ReportList> list = new ArrayList<>();
         Connection dbConnection;
-        PreparedStatement ps;
+        Statement statement;
 
-        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and fitem.order_id=public.order.id";
-        
+        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and f.user_id=1 and fitem.order_id=public.order.id";
         try {
             dbConnection = DataConnect.getConnection();
-            ps = dbConnection.prepareStatement(select);
+            statement = dbConnection.createStatement();
             
-            ResultSet rs= ps.executeQuery(select);
+            ResultSet rs= statement.executeQuery(select);
             while (rs.next()){
                 ReportList item = new ReportList();
                 item.setCondition(rs.getInt("pay_condition"));
@@ -40,7 +39,6 @@ public class FactorServices {
                 item.setOrderId(rs.getInt("order_id"));
                 item.setStep(rs.getInt("condition"));
                 item.setSum(rs.getInt("sum_price"));
-                item.setUserId(rs.getInt("user_id"));
                 list.add(item);
             }
         } catch (SQLException e) {
@@ -48,7 +46,6 @@ public class FactorServices {
         }
         return list;
     }
-    
     public static List<ReportList> getReportListById(int id) {
         List<ReportList> list = new ArrayList<>();
         Connection dbConnection;

@@ -104,7 +104,7 @@ public class OrderServices {
         try {
             dbConnection = DataConnect.getConnection();
             
-            ps = dbConnection.prepareStatement("Select * from public.order where user_id = ?");
+            ps = dbConnection.prepareStatement("Select * from order where user_id_get = ?");
             ps.setInt(1, userId);
  
             ResultSet rs = ps.executeQuery();
@@ -116,7 +116,7 @@ public class OrderServices {
                 item.setOrderDate(rs.getString("order_date"));
                 item.setTableId(rs.getInt("table_id"));
                 item.setTableName(rs.getString("table_name"));
-                 Users user = UserServices.getUserById(userId);
+                 Users user = UserServices.getUserById(rs.getInt("user_id"));
                  item.setUserId(user);
                 orderList.add(item);
             }
@@ -134,7 +134,7 @@ public class OrderServices {
         try {
             dbConnection = DataConnect.getConnection();
             
-            ps = dbConnection.prepareStatement("Select * from public.order");
+            ps = dbConnection.prepareStatement("Select * from order");
           
  
             ResultSet rs = ps.executeQuery();

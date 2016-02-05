@@ -5,53 +5,30 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
+        <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser()}" var="followup" styleClass="dataTable" id="followtb"
+                     selection="#{orderFollowUpForUser.selectedOreder}" selectionMode="single" rowKey="#{followup.id}">
+            <p:column headerText="نوع سفارش" filterBy="#{followup.tableName}">
+                <h:outputText value="#{followup.tableName}" />
+            </p:column> 
+            <p:column headerText="ردیف">
+                <h:outputText value="#{orderFollowUpForUser.listOfOrdreForUser().indexOf(followup)+1}" />
+            </p:column>  
+            <p:column headerText="شماره سفارش">
+                <h:outputText value="#{followup.id}" />
+            </p:column>  
 
-        <h:form id="form"> 
+            <p:column headerText="وضعیت" filterBy="#{followup.condition}">
+                <h:outputText value="#{followup.condition}"/>
+            </p:column>
+        </p:dataTable>
 
+        <p:commandButton  icon="ui-icon-document"  value="مشاهدهههههه"                         
+                              action="#{orderFollowUpForUser.selectedOrderAction()}"  />          
 
-
-            <p:dataTable value="" var="followup" styleClass="dataTable">
-
-                <p:ajax event="rowSelect"  update=""  />
-                <p:column headerText="نوع سفارش" filterBy="#{followup.id}">
-                    <h:outputText value="سفارش طراحی" />
-                </p:column> 
-                <p:column headerText="ردیف">
-                    <h:outputText value="1" />
-                </p:column>  
-                <p:column headerText="شماره سفارش">
-                    <h:outputText value="862" />
-                </p:column>  
-                <p:column headerText="نوع تحویل">
-                    <h:outputText value="عادی"/>
-                </p:column> 
-                <p:column headerText="وضعیت" filterBy="#{followup.id}">
-                    <h:outputText value="اعلام نشده"/>
-                </p:column>
-                <p:column headerText="موضوع">
-                    <h:outputText value="ریاضی" />
-                </p:column>
-                <p:column headerText="مشاهده">
-                    <p:commandButton  icon="ui-icon-document" onclick="PF('followupDialog').show()">
-                    </p:commandButton>
-                </p:column> 
-            </p:dataTable>
-
-            <p:dialog widgetVar="followupDialog" dynamic="true"
-                      style="direction:rtl"
-                      header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
-                <ui:include src="/pages/user/design1.xhtml"></ui:include>
-                <!--<ui:include src="/pages/user/article1.xhtml"></ui:include>-->
-                <!--<ui:include src="/pages/user/type1.xhtml"></ui:include>-->
-                <!--<ui:include src="/pages/user/translate1.xhtml"></ui:include>-->
-
-
-
-
-            </p:dialog>
-
-
-
-        </h:form>
+<!--        <p:dialog widgetVar="followupDialog" dynamic="true"
+                  style="direction:rtl" id="dg1"
+                  resizable="false" closable="true" position="center" width="56%">
+            <ui:include src="" />
+        </p:dialog>-->
     </ui:define>
 </ui:composition> 

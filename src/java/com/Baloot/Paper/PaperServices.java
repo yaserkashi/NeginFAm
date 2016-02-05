@@ -105,7 +105,7 @@ public class PaperServices {
       public static Paper getPaperById(Integer id) {
         Connection con = null;
         PreparedStatement ps;
-        List<Paper> list = new ArrayList<>();
+        
  
         try {
             con = DataConnect.getConnection();

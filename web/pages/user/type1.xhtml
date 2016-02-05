@@ -1,140 +1,141 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <header>
-        <style>
-            .ui-panelgrid td {
-                border-width: 0px;
-                border-style: solid;
-                border-color: inherit;
-                padding: 4px 10px;
-            }
-        </style>
-    </header>
-    <h:head>
-        <style>
-            .ui-panelgrid td {
-                border-width: 0px;
-                border-style: solid;
-                border-color: inherit;
-                padding: 4px 10px;
-            }
-        </style>
-        <title>پیگیری سفارش طراحی</title>
-    </h:head>
-    <h:body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <header>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+        </header>
+        <h:head>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+            <title>پیگیری سفارش تایپ</title>
+        </h:head>
+        <h:body>
 
-        <p:messages autoUpdate="true"/>
-        <h:outputText value="سفارش شما با موفقیت ثبت شد و به زودی توسط اپراتورهای سایت بررسی و نتیجه به اطلاع شما خواهد رسید."  styleClass="form" style="background: #00cc00"/>
-        <p:panelGrid id="panel" columns="4" styleClass="form" style="margin-right: 26%" >
-            <f:facet name="header" >
-                جزئیات سفارش.
-            </f:facet>
+            <p:messages autoUpdate="true"/>
+            <h:outputText value="سفارش شما با موفقیت ثبت شد و به زودی توسط اپراتورهای سایت بررسی و نتیجه به اطلاع شما خواهد رسید."  styleClass="form" style="background: #00cc00"/>
+            <p:panelGrid id="panel" columns="4" styleClass="form" style="margin-right: 26%" >
+                <f:facet name="header" >
+                    جزئیات سفارش.
+                </f:facet>
 
-            <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
+                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
 
-            <p:outputLabel value="زبان " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-
-
-            <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-            <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                <p:outputLabel value="زبان " ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
 
 
-            <p:outputLabel value="زمینه " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>           
+                <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
+                <p:outputLabel value="#{orderFollowUpForUser.type.endDateTime}" style="color: red" ></p:outputLabel>
 
-            <p:outputLabel value=" موضوع" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-
-
-            <p:outputLabel value=" فرمول نویسی" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-            <p:outputLabel value=" صفحه آرایی " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
 
 
-            <p:outputLabel value=" تصویرگری " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                <p:outputLabel value="زمینه " ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>           
 
-            <p:outputLabel value=" رسم جدول" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-
-
-            <p:outputLabel value=" رسم نمودار" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-            <p:outputLabel value=" رسم شکل " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                <p:outputLabel value=" موضوع" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
 
 
-            <p:outputLabel value=" ویراستاری" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                <p:outputLabel value=" فرمول نویسی" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
-            <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-
-
-            <p:outputLabel value=" توضیحات " ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-            <p:outputLabel value=" توضیحات مدیر" ></p:outputLabel>
-            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-
-
-            <p:outputLabel value="فایل سفارش " ></p:outputLabel>
-            <p:commandButton value="دانلود" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" >
-                <p:fileDownload value="#{fileDownloadView.file}" />
-            </p:commandButton>
-
-            <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
-            <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
+                <p:outputLabel value=" صفحه آرایی " ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
 
 
+                <p:outputLabel value=" تصویرگری " ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
-
-        </p:panelGrid>
-
-        <p:panelGrid columns="3" styleClass="form">
-            <p:commandButton value="کنسل کردن سفارش"  actionListener="#{dialogView.message()}"
-                             style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
-                <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
-                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
-                    <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Dialog2').show()" />
-                    <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
-                </p:confirmDialog>
-            </p:commandButton>
+                <p:outputLabel value=" رسم جدول" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
 
 
-            <p:commandButton value="مشاهده فاکتور" action="factor" disabled="true"
-                             style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                <p:outputLabel value=" رسم نمودار" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
-            <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
-                             style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
-        </p:panelGrid>
+                <p:outputLabel value=" رسم شکل " ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+
+                <p:outputLabel value=" ویراستاری" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+                <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+
+                <p:outputLabel value=" توضیحات " ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+                <p:outputLabel value=" توضیحات مدیر" ></p:outputLabel>
+                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+                <p:outputLabel value="فایل سفارش " ></p:outputLabel>
+
+
+                <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
+                <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
 
 
 
 
 
+            </p:panelGrid>
 
-    </h:body>
-</html>
+            <p:panelGrid columns="3" styleClass="form">
+                <p:commandButton value="کنسل کردن سفارش"  actionListener="#{dialogView.message()}"
+                                 style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
+                    <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                        <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Dialog2').show()" />
+                        <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
+                    </p:confirmDialog>
+                </p:commandButton>
+
+
+
+                <p:commandButton value="مشاهده فاکتور" action="factor" disabled="true"
+                                 style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+
+                <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
+                                 style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+            </p:panelGrid>
+
+
+
+
+
+
+        </h:body>
+    </ui:define>
+</ui:composition>
