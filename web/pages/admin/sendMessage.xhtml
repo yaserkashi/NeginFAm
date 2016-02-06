@@ -45,9 +45,21 @@
 
         <p:dialog widgetVar="multiUserserDialog" dynamic="true"
                   style="direction:rtl"
-                  header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
-               
-            </p:dialog>
+                  header="انتخاب مخاطب" resizable="false" closable="true" position="center" width="56%">
+            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" 
+                         styleClass="dataTable"                       
+                         selection="#{dtSelectionView.selectedCar}" rowKey="#{user.id}">
+                <f:facet name="header">
+                   انتخاب مخاطب
+                </f:facet>
+                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                
+                <p:column headerText="نام مخاطب">
+                    <h:outputText value="#{user.username}" />
+                </p:column>                               
+            </p:dataTable>
+            <p:button  value="ذخیره" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/> 
+        </p:dialog>
         <!--</p:dialog>-->
 
 
