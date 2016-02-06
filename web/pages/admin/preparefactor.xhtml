@@ -1,11 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+
     <h:head>
         <style>
             .ui-panelgrid td {
@@ -18,45 +20,110 @@
         <title>اطلاعات مترجم</title>
     </h:head>
     <h:body>
-        
-     
 
-            <p:panelGrid columns="4"  style="margin-right: 16%">
-                <f:facet name="header">
-                    شماره سفارش:1234
-                </f:facet>
+        <p:panelGrid id="panel" columns="4" styleClass="form" style="margin-right: 26%" >
+            <f:facet name="header" >
+                جزئیات سفارش.
+            </f:facet>
+            <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
+            <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red" ></p:outputLabel>
 
-              
-                <h:outputText value="شرح جزئیات " style="width: 10px"/>
-                <h:outputText value="واحد" style="width: 10px"/>
-                <h:outputText value="تعداد" style="width: 10px"/>
-                <h:outputText value="جمع " style="width: 10px"/>
-        
+            <p:outputLabel value="نوع طراحی "  ></p:outputLabel>
+            <p:outputLabel value="سلام " style="color: red" ></p:outputLabel>
 
-                <h:inputText  style="font-weight: bold;width: 120px" required="true"/>
-                <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
-                <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
-                <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
-               
 
-             
+            <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
+            <p:outputLabel value="#{orderFollowUpForAdmin.design.endDate}" style="color: red" ></p:outputLabel>
 
-                <f:facet name="footer">
-                    <p:panelGrid columns="2" styleClass="font" style="margin-right: 26%">
-                        <h:outputText value="مبلغ کل" style="width: 40px"/>
-                        <h:inputText  style="width: 40px" required="true"/>
-                        <h:outputText   value="مبلغ تخفیف" style="width: 40px" />
-                        <h:inputText  style="width: 40px" required="true"/>
-                        <h:outputText value="هزینه نهایی" style="width: 40px" />
-                        <h:inputText  style="width: 40px" required="true"/>
+            <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
 
-                    </p:panelGrid>
-                </f:facet>
 
-            </p:panelGrid>
 
-            <p:commandButton value="ارسال" 
-                             style="color: #FFF; float: left;background:#0066ff"/>
 
-          </h:body>
-</html>
+            <p:outputLabel value="سایز" ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+            <p:outputLabel value="سایزدلخواه" ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+
+            <p:outputLabel value="رنگ چاپ" ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+            <p:outputLabel value="نوع چاپ" ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+
+
+            <p:outputLabel value="مشخصات چاپ" ></p:outputLabel> 
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+            <p:outputLabel value="تحویل حضوری " ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+
+            <p:outputLabel value="توضیحات " ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+            <p:outputLabel value="توضیحات مدیر "  ></p:outputLabel>
+            <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+
+
+
+
+
+
+            <p:outputLabel value="فایل سفارش " ></p:outputLabel>
+
+
+            <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
+            <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
+
+
+
+        </p:panelGrid>
+
+        <p:panelGrid columns="4"  style="margin-right: 16%">
+            <f:facet name="header">
+                شماره سفارش:1234
+            </f:facet>
+
+
+            <h:outputText value="شرح جزئیات " style="width: 10px"/>
+            <h:outputText value="واحد" style="width: 10px"/>
+            <h:outputText value="تعداد" style="width: 10px"/>
+            <h:outputText value="جمع " style="width: 10px"/>
+
+
+            <h:inputText  style="font-weight: bold;width: 120px" required="true"/>
+            <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
+            <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
+            <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
+
+
+
+
+            <f:facet name="footer">
+                <p:panelGrid columns="2" styleClass="font" style="margin-right: 26%">
+                    <h:outputText value="مبلغ کل" style="width: 40px"/>
+                    <h:inputText  style="width: 40px" required="true"/>
+                    <h:outputText   value="مبلغ تخفیف" style="width: 40px" />
+                    <h:inputText  style="width: 40px" required="true"/>
+                    <h:outputText value="هزینه نهایی" style="width: 40px" />
+                    <h:inputText  style="width: 40px" required="true"/>
+
+                </p:panelGrid>
+            </f:facet>
+
+        </p:panelGrid>
+
+        <p:commandButton value="ارسال" 
+                         style="color: #FFF; float: left;background:#0066ff"/>
+
+    </h:body>
+    </ui:define>
+</ui:composition>

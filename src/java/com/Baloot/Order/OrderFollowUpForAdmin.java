@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Order;
+
 import com.Baloot.Design.*;
 import com.Baloot.Enum.*;
 import com.Baloot.Factor.Factor;
@@ -23,14 +23,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+
 /**
  *
  * @author Ali-M
  */
 @ManagedBean
 public class OrderFollowUpForAdmin {
-    
-    private Order  selectedOreder;
+
+    private Order selectedOreder;
     private Design design;
     private Type type;
     private Paper paper;
@@ -38,13 +39,14 @@ public class OrderFollowUpForAdmin {
     private String unit;
     private Double off;
     private Double unitPrice;
-public OrderFollowUpForAdmin()
-{
-unit="ok";
-off=0.1;
-unitPrice=10.0;
-number=10;
-}
+
+    public OrderFollowUpForAdmin() {
+        unit = "ok";
+        off = 0.1;
+        unitPrice = 10.0;
+        number = 10;
+    }
+
     public String getUnit() {
         return unit;
     }
@@ -77,6 +79,7 @@ number=10;
         this.number = number;
     }
     private Integer number;
+
     public Translate getTranslate() {
         return translate;
     }
@@ -93,6 +96,7 @@ number=10;
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
     public Order getSelectedOreder() {
         return selectedOreder;
     }
@@ -124,81 +128,78 @@ number=10;
     public void setPaper(Paper paper) {
         this.paper = paper;
     }
-    public List<Order> listOfOrdreForAdmin()
-    {
-    return OrderServices.AllOfOrder();
+
+    public List<Order> listOfOrdreForAdmin() {
+        return OrderServices.AllOfOrder();
     }
-    public void insertNewFactor()
-    {
-     
-        
-    if(selectedOreder!=null)
-    {
-        
-        Factor factor=new Factor();
-         PersianCalendar pc = new PersianCalendar();
-        String currentDate = pc.getIranianDateTime();
-        factor.setDateTime(currentDate);
-        Users user =selectedOreder.getUserId();
-        factor.setUserId(user);
-        factor.setSumPrice((unitPrice-(unitPrice*off))*number);
-        factor.setPFactor(true);
-        factor.setPayCondition(0);
-        factor.setOff(off);
-        try {
-            Integer factorId=FactorServices.insertRecordIntoTable(factor);
-            factor.setId(factorId);
-            
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
+
+    public void insertNewFactor() {
+
+        if (selectedOreder != null) {
+
+            Factor factor = new Factor();
+            PersianCalendar pc = new PersianCalendar();
+            String currentDate = pc.getIranianDateTime();
+            factor.setDateTime(currentDate);
+            Users user = selectedOreder.getUserId();
+            factor.setUserId(user);
+            factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
+            factor.setPFactor(true);
+            factor.setPayCondition(0);
+            factor.setOff(off);
+            try {
+                Integer factorId = FactorServices.insertRecordIntoTable(factor);
+                factor.setId(factorId);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
+            }
+            try {
+                FactorItem factorItem = new FactorItem();
+                System.out.println(" facto ID : " + factor.getId());
+                factorItem.setFactorId(factor);
+                factorItem.setOrderId(selectedOreder.getId());
+                factorItem.setUnit(unit);
+                factorItem.setNumber(number);
+                factorItem.setUnitPrice(unitPrice);
+                OrderServices.updateCondition(selectedOreder.getId(), 1);
+                FactorItemServices.insertRecordIntoTable(factorItem);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
         }
+    }
+
+    public String selectedOrderAction() {
+        String pageOut = new String();
+        String typeOforder;
         try {
-            FactorItem factorItem=new FactorItem();
-             System.out.println(" facto ID : "+factor.getId());
-            factorItem.setFactorId(factor);
-            factorItem.setOrderId(selectedOreder.getId());
-            factorItem.setUnit(unit);
-            factorItem.setNumber(number);
-            factorItem.setUnitPrice(unitPrice);
-            OrderServices.updateCondition(selectedOreder.getId(), 1);
-            FactorItemServices.insertRecordIntoTable(factorItem);
+            typeOforder = selectedOreder.getTableName();
+            System.out.println("hereeeeeeeeeeee" + typeOforder);
+            switch (typeOforder) {
+                case "type":
+                    type = TypeServices.getTypeById(selectedOreder.getTableId());
+                    pageOut = "/pages/user/type1.xhtml";
+                    break;
+                case "design":
+                    design = DesignServices.getDesignById(selectedOreder.getTableId());
+                    pageOut = "/pages/admin/preparefactor.xhtml";
+                    System.out.println("ok" + design.getEndDate() + pageOut);
+                    break;
+                case "translate":
+                    translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
+                    pageOut = "/pages/user/translate1.xhtml";
+                    break;
+                case "paper":
+                    paper = PaperServices.getPaperById(selectedOreder.getTableId());
+                    pageOut = "/pages/user/article1.xhtml";
+                    break;
+            }
         } catch (Exception e) {
-              System.out.println(e.getMessage());
+            System.out.println("here in exeption " + e.getMessage());
         }
- 
+        return pageOut;
     }
-    }
-   public String selectedOrderAction()
-   {
-   String typeOforder=selectedOreder.getTableName();
- String pageOut="";
- 
-       switch (typeOforder)
-       {
-           case "type":
-               type = TypeServices.getTypeById(selectedOreder.getTableId());
-              
-               pageOut = "";
-               break;
-           case "design":
-               design=DesignServices.getDesignById(selectedOreder.getTableId());
-              
-               pageOut = "";
-               System.out.println("ok"+design.getEndDate());   
-               break;
-           case "translate":
-               translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
-               
-               pageOut = "";
-               break;
-           case "paper":
-               paper = PaperServices.getPaperById(selectedOreder.getTableId());
-              
-               pageOut = "";
-               break;
-       }
-       return pageOut;       
-   }
 }
