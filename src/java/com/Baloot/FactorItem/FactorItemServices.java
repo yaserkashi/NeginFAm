@@ -25,7 +25,7 @@ public class FactorItemServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         int id = 0;
-        String insertTableSQL = "INSERT INTO factor (factor_item.factor_id,factor_item.order_id,factor_item.unit,factor_item.numbers,factor_item.unit_price) VALUES (?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO factor_item (factor_id,order_id,unit,numbers,unit_price) VALUES (?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();

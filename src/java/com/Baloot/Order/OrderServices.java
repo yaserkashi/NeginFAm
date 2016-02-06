@@ -65,7 +65,7 @@ public class OrderServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String updateTableSQL = "UPDATE order SET condition = ? WHERE id = ?";
+        String updateTableSQL = "UPDATE public.order SET condition = ? WHERE id = ?";
 
         try {
             dbConnection = DataConnect.getConnection();

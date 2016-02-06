@@ -7,35 +7,33 @@
     <ui:define name="content">
         <h:form> 
   
-            <p:dataTable value="" var="trackorder" styleClass="dataTable" style="direction: rtl">
+            <p:dataTable value="#{orderFollowUpForAdmin.listOfOrdreForAdmin()}" 
+                         selection="#{orderFollowUpForAdmin.selectedOreder}" selectionMode="single" rowKey="#{trackorder.id}"
+                         var="trackorder" styleClass="dataTable" style="direction: rtl">
 
                 <p:ajax event="rowSelect"  update=""  />
                  <p:column headerText="ردیف">
-                    <h:outputText value="1" />
+                     <h:outputText value="#{orderFollowUpForAdmin.listOfOrdreForAdmin().indexOf(trackorder)+1}" />
                 </p:column> 
                 
                  <p:column headerText="نام کاربری">
-                    <h:outputText value="تست" />
+                     <h:outputText value="#{trackorder.userId.username}" />
                 </p:column> 
                 
                 <p:column headerText="نوع سفارش" >
-                    <h:outputText value="سفارش طراحی" />
+                    <h:outputText value="#{trackorder.tableName}" />
                 </p:column> 
                 
                 <p:column headerText="شماره سفارش">
-                    <h:outputText value="862" />
+                    <h:outputText value="#{trackorder.id}" />
                 </p:column>  
-                <p:column headerText="نوع تحویل">
-                    <h:outputText value="عادی"/>
-                </p:column> 
+                
                 <p:column headerText="وضعیت" >
-                    <h:outputText value="اعلام نشده"/>
+                    <h:outputText value="#{trackorder.condition}"/>
                 </p:column>
-                <p:column headerText="موضوع">
-                    <h:outputText value="ریاضی" />
-                </p:column>
+               <!--action="/pages/admin/preparefactor.xhtml"-->
                 <p:column headerText="مشاهده">
-                    <p:commandButton  icon="ui-icon-document" onclick="PF('followupDialog').show()">
+                    <p:commandButton  icon="ui-icon-document" actionListener="#{orderFollowUpForAdmin.insertNewFactor()}" >
                     </p:commandButton>
                 </p:column> 
             </p:dataTable>

@@ -38,7 +38,13 @@ public class OrderFollowUpForAdmin {
     private String unit;
     private Double off;
     private Double unitPrice;
-
+public OrderFollowUpForAdmin()
+{
+unit="ok";
+off=0.1;
+unitPrice=10.0;
+number=10;
+}
     public String getUnit() {
         return unit;
     }
@@ -125,15 +131,15 @@ public class OrderFollowUpForAdmin {
     public void insertNewFactor()
     {
      
-        System.out.println("I'm here");
+        
     if(selectedOreder!=null)
     {
+        
         Factor factor=new Factor();
          PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         factor.setDateTime(currentDate);
-        Users user = UserServices.getUserByUsername(SessionBean.getUserName());
-        design.setUserId(user);
+        Users user =selectedOreder.getUserId();
         factor.setUserId(user);
         factor.setSumPrice((unitPrice-(unitPrice*off))*number);
         factor.setPFactor(true);
@@ -142,18 +148,26 @@ public class OrderFollowUpForAdmin {
         try {
             Integer factorId=FactorServices.insertRecordIntoTable(factor);
             factor.setId(factorId);
+            
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
+        try {
             FactorItem factorItem=new FactorItem();
+             System.out.println(" facto ID : "+factor.getId());
             factorItem.setFactorId(factor);
             factorItem.setOrderId(selectedOreder.getId());
             factorItem.setUnit(unit);
             factorItem.setNumber(number);
             factorItem.setUnitPrice(unitPrice);
-            FactorItemServices.insertRecordIntoTable(factorItem);
             OrderServices.updateCondition(selectedOreder.getId(), 1);
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            FactorItemServices.insertRecordIntoTable(factorItem);
+        } catch (Exception e) {
+              System.out.println(e.getMessage());
         }
-        
+ 
     }
     }
    public String selectedOrderAction()
@@ -165,20 +179,23 @@ public class OrderFollowUpForAdmin {
        {
            case "type":
                type = TypeServices.getTypeById(selectedOreder.getTableId());
+              
                pageOut = "";
                break;
            case "design":
                design=DesignServices.getDesignById(selectedOreder.getTableId());
-                 
+              
                pageOut = "";
                System.out.println("ok"+design.getEndDate());   
                break;
            case "translate":
                translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
+               
                pageOut = "";
                break;
            case "paper":
                paper = PaperServices.getPaperById(selectedOreder.getTableId());
+              
                pageOut = "";
                break;
        }

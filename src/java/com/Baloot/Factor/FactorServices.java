@@ -78,7 +78,7 @@ public class FactorServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         int id = 0;
-        String insertTableSQL = "INSERT INTO factor (factor.user_id,factor.sum_price,factor.off,factor.pay_condition,factor.p_factor,factor.date_time) VALUES (?,?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO factor (user_id,sum_price,off,pay_condition,p_factor,date_time) VALUES (?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
