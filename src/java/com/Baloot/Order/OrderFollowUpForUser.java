@@ -6,14 +6,16 @@
 package com.Baloot.Order;
 
 import com.Baloot.Design.*;
+import com.Baloot.Factor.Factor;
+import com.Baloot.FactorItem.FactorItem;
+import com.Baloot.FactorItem.FactorItemServices;
+import com.Baloot.Paper.*;
 import com.Baloot.Translate.*;
 import com.Baloot.Type.*;
-import com.Baloot.Paper.*;
-import java.util.List;
-import com.Baloot.Enum.*;
 import com.Baloot.User.UserServices;
 import com.Baloot.util.SessionBean;
 import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -31,6 +33,16 @@ public class OrderFollowUpForUser {
     private Type type;
     private Paper paper;
     private Translate translate;
+    private FactorItem factorItemForSectedOrder;
+
+    public FactorItem getFactorItemForSectedOrder() {
+        return factorItemForSectedOrder;
+    }
+
+    public void setFactorItemForSectedOrder(FactorItem factorItemForSectedOrder) {
+        this.factorItemForSectedOrder = factorItemForSectedOrder;
+    }
+   
 
     public Translate getTranslate() {
         return translate;
@@ -103,7 +115,7 @@ public class OrderFollowUpForUser {
         String typeOforder ;
         try {
             typeOforder = selectedOreder.getTableName();
-            System.out.println("hereeeeeeeeeeee" + typeOforder);
+          
             switch (typeOforder) {
                 case "type":
                     type = TypeServices.getTypeById(selectedOreder.getTableId());
@@ -133,29 +145,18 @@ public class OrderFollowUpForUser {
         }
         return pageOut;
     }
-//    public void selectedOrderAction() {
-//        String typeOforder = selectedOreder.getTableName();
-//        try {
-//            switch (typeOforder) {
-//                case "type":
-//                    type = TypeServices.getTypeById(selectedOreder.getTableId());                  
-//                    break;
-//                case "design":
-//                    design = DesignServices.getDesignById(selectedOreder.getTableId());
-//                    break;
-//                case "translate":
-//                    translate = TranslateServices.getTranslateById(selectedOreder.getTableId());                 
-//                    break;
-//                case "paper":
-//                    paper = PaperServices.getPaperById(selectedOreder.getTableId());              
-//                    break;
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    /**
+     *<b> تابع برای بدست آوردن فاکتور برای</b>
+     *<b> سفارش انتخاب شده توسط کابر</b>
+     */
+    public void showFactorForSelectedOrder() {
+        if (selectedOreder != null) {
+           factorItemForSectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
+        }
+    }
 
     public String whichPage() {
+        
         try {
             if (selectedOreder !=null) {
                 return "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";

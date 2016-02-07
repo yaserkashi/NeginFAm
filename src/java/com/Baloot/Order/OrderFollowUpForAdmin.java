@@ -183,7 +183,7 @@ public class OrderFollowUpForAdmin {
         String typeOforder;
   
   
-        System.out.println("factor : "+factorItem.getId()+" *0* "+factorItem.getFactorId().getSumPrice());
+       
         try {
             typeOforder = selectedOreder.getTableName();
             System.out.println("hereeeeeeeeeeee" + typeOforder);
