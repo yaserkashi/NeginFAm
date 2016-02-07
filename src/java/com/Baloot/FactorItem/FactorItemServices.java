@@ -7,12 +7,17 @@
 package com.Baloot.FactorItem;
 
 import com.Baloot.Factor.Factor;
+import com.Baloot.Factor.FactorServices;
+import com.Baloot.Type.Type;
+import com.Baloot.User.UserServices;
+import com.Baloot.User.Users;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  *
@@ -65,4 +70,36 @@ public class FactorItemServices {
         }
         return id;
     }
+    
+     public static FactorItem selectFactorItemByOrderId(Integer orderId){
+         FactorItem factorItem = new FactorItem();
+         Connection con = null;
+         PreparedStatement ps;
+         
+         try {
+             con = DataConnect.getConnection();
+             ps = con.prepareStatement("Select * from factor_item where order_id= ?");
+             ps.setInt(1, orderId);
+             ResultSet rs = ps.executeQuery();
+             
+             while (rs.next()) {
+
+                 //factor_id,order_id,unit,numbers,unit_price
+                 factorItem.setId(rs.getInt("id"));
+                 factorItem.setOrderId(orderId);
+                 factorItem.setUnit(rs.getString("unit"));
+                 factorItem.setNumber(rs.getInt("numbers"));
+                 factorItem.setUnitPrice(rs.getDouble("unit_price"));
+                 Factor factor=FactorServices.selectFactorById(rs.getInt("factor_id"));
+                 factorItem.setFactorId(factor);
+             }
+             return factorItem;
+         } catch (SQLException ex) {
+             System.out.println("Error -->" + ex.getMessage());
+             return null;
+         } finally {
+             DataConnect.close(con);
+         }
+       
+     }
 }

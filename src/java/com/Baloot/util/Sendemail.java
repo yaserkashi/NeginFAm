@@ -1,3 +1,5 @@
+package com.Baloot.util;
+
 
 import com.google.common.base.Strings;
 import com.sun.mail.smtp.SMTPTransport;

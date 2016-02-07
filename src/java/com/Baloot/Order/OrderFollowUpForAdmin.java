@@ -41,10 +41,7 @@ public class OrderFollowUpForAdmin {
     private Double unitPrice;
 
     public OrderFollowUpForAdmin() {
-        unit = "ok";
-        off = 0.1;
-        unitPrice = 10.0;
-        number = 10;
+       
     }
 
     public String getUnit() {
@@ -132,11 +129,20 @@ public class OrderFollowUpForAdmin {
     public List<Order> listOfOrdreForAdmin() {
         return OrderServices.AllOfOrder();
     }
+    public void confirmationPayFactor()throws SQLException
+    {
+    OrderServices.updateCondition(selectedOreder.getId(),StepsOfOrder.ConfirmationPayFactor.ordinal());
+    }
+ 
+    public void cancelOrder() throws SQLException {
+
+        OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
+    }
 
     public void insertNewFactor() {
-
-        if (selectedOreder != null) {
-
+        System.out.println("hi");
+        if (selectedOreder != null && selectedOreder.getCondition() == 0) {
+           
             Factor factor = new Factor();
             PersianCalendar pc = new PersianCalendar();
             String currentDate = pc.getIranianDateTime();
@@ -163,7 +169,7 @@ public class OrderFollowUpForAdmin {
                 factorItem.setUnit(unit);
                 factorItem.setNumber(number);
                 factorItem.setUnitPrice(unitPrice);
-                OrderServices.updateCondition(selectedOreder.getId(), 1);
+                OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.registrationFactor.ordinal());
                 FactorItemServices.insertRecordIntoTable(factorItem);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -172,9 +178,12 @@ public class OrderFollowUpForAdmin {
         }
     }
 
-    public String selectedOrderAction() {
+    public String selectedOrderAction() throws SQLException {
         String pageOut = new String();
         String typeOforder;
+  
+  
+        System.out.println("factor : "+factorItem.getId()+" *0* "+factorItem.getFactorId().getSumPrice());
         try {
             typeOforder = selectedOreder.getTableName();
             System.out.println("hereeeeeeeeeeee" + typeOforder);

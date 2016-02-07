@@ -6,6 +6,8 @@
 
 package com.Baloot.Factor;
 
+import com.Baloot.User.UserServices;
+import com.Baloot.User.Users;
 import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -117,5 +119,74 @@ public class FactorServices {
 
         }
         return id;
+    }
+    public static Factor selectFactorById(Integer id)
+    {
+     Factor factor = new Factor();
+         Connection con = null;
+         PreparedStatement ps;
+         
+         try {
+             con = DataConnect.getConnection();
+             ps = con.prepareStatement("Select * from factor where id= ?");
+             ps.setInt(1,id);
+             ResultSet rs = ps.executeQuery();
+             
+             while (rs.next()) {
+
+                 //user_id,sum_price,off,pay_condition,p_factor,date_time
+                 factor.setId(rs.getInt("id"));
+                 factor.setSumPrice(rs.getDouble("sum_price"));
+                 factor.setOff(rs.getDouble("off"));
+                 factor.setPayCondition(rs.getInt("pay_condition"));
+                 factor.setPFactor(rs.getBoolean("p_factor"));
+                 factor.setDateTime(rs.getString("date_time"));
+                 Users users=UserServices.getUserById(rs.getInt("user_id"));
+                 factor.setUserId(users);
+                 
+             }
+             return factor;
+         } catch (SQLException ex) {
+             System.out.println("Error -->" + ex.getMessage());
+             return null;
+         } finally {
+             DataConnect.close(con);
+         }
+      
+    }
+    public static void payFactor(Integer id,Integer payCondition) throws SQLException
+    {
+     Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateTableSQL = "UPDATE factor SET pay_condition = ? WHERE id = ?";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+
+            preparedStatement.setInt(1, payCondition);
+            preparedStatement.setInt(2, id);
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("Condition updated in DBOrder table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
     }
 }
