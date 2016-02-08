@@ -39,18 +39,41 @@
         <p:dialog widgetVar="multiUserserDialog" dynamic="true"
                   style="direction:rtl"
                   header="انتخاب مخاطب" resizable="false" closable="true" position="center" width="56%">
-            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" 
-                         styleClass="dataTable"                       
-                         selection="#{sendMessageFromAdmin.selected}" rowKey="#{user.id}">
+            <!--            <p:dataTable id="basicDT" var="user" value="" 
+                                     styleClass="dataTable"                       
+                                     selection="rowKey="">
+                            <f:facet name="header">
+                               انتخاب مخاطب
+                            </f:facet>
+                            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                            
+                            <p:column headerText="نام مخاطب">
+                                <h:outputText value="]" />
+                            </p:column>                               
+                        </p:dataTable>-->
+            <p:dataTable id="checkboxDT" var="car" value="#{usersManagement.list}" selection="#{sendMessageFromAdmin.selected}" rowKey="#{car.id}" style="margin-bottom:0">
                 <f:facet name="header">
-                   انتخاب مخاطب
+                    Checkbox
                 </f:facet>
                 <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                
-                <p:column headerText="نام مخاطب">
-                    <h:outputText value="#{user.username}" />
-                </p:column>                               
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.name}" />
+                </p:column>
+
+                <f:facet name="footer">
+                    <p:commandButton process="checkboxDT" update=":adminform:selectedStr" icon="ui-icon-search" value="View" oncomplete="PF('multiUserserDialog').hide()" />
+                </f:facet>
             </p:dataTable>
+            <p:dialog header="Selected Cars" widgetVar="multiCarDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false" width="200">
+                <p:outputPanel id="multiCarDetail" style="text-align:center;">
+                    <ui:repeat value="#{sendMessageFromAdmin.selected}" var="car">
+                        <h:outputText value="#{car.id} - #{car.name}" style="display:block"/>
+                    </ui:repeat>
+                </p:outputPanel>
+            </p:dialog>
             <p:commandButton value="ذخیره" update=":adminform:selectedStr" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/> 
         </p:dialog>
         <!--</p:dialog>-->
