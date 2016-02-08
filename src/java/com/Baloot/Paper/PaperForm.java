@@ -148,13 +148,20 @@ public class PaperForm {
         this.plan = plan;
     }
            
-    public void uploaded(FileUploadEvent event) {
-        System.out.println(PaperForm.class.getName() + "Uploaded Function!");
-        try {
-            attachFile = event.getFile();
-            save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-        } catch (IOException e) {
-            System.out.println(PaperForm.class.getName() + e.getMessage());
+    public void uploaded() {
+        if (attachFile != null) {
+            try {
+                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+                submit();
+            } catch (IOException ex) {
+                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            System.out.println("eror null file");
+        
         }
     }
     

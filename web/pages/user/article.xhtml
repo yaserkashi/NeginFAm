@@ -90,22 +90,14 @@
                 
                 <p:outputLabel value="آپلود فایل سفارش" ></p:outputLabel>
                 <h:form enctype="multipart/form-data" styleClass="font">
-                    <p:fileUpload  value="#{typeForm.attachFile}" dragDropSupport="true" mode="advanced"
-                                   fileUploadListener="#{typeForm.uploaded}"/>
+                    <p:fileUpload  value="#{typeForm.attachFile}" mode="simple"/>
+                    <p:commandButton value="Submit" ajax="false" actionListener="#{paperForm.uploaded}"  />
                 </h:form>
-
 
                 <p:outputLabel value="جهت دریافت اطلاعات از طریق ایمیل خود ، علاوه بر چک کردن پوشه inbox ،پوشه spam ایمیل خود را نیز چک کنید.
                                ( توجه : در برخی از سرویس دهنده های ایمیل ، به جای نام spam از نام هایی نظیر Bulk , junk استفاده شده است )" 
                                ></p:outputLabel>
                 <p:outputLabel value="" ></p:outputLabel>
-
-
-                <p:commandButton action="#{paperForm.submit()}" value="ثبت"  style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
-                </p:commandButton>
-                <p:outputLabel value="" ></p:outputLabel>
-
-
 
             </p:panelGrid>
             </h:body>

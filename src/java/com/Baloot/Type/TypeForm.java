@@ -32,7 +32,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -211,13 +210,20 @@ public class TypeForm {
         return options;
     }
     
-    public void uploaded(FileUploadEvent event) {
-        System.out.println(TypeForm.class.getName() + ":Uploaded Function!");
-        try {
-            attachFile = event.getFile();
-            save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-        } catch (IOException e) {
-            System.out.println(TypeForm.class.getName() + e.getMessage());
+    public void uploaded() {
+        if (attachFile != null) {
+            try {
+                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+                submit();
+            } catch (IOException ex) {
+                Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            System.out.println("eror null file");
+        
         }
     }
     
@@ -250,7 +256,8 @@ public class TypeForm {
         type.setExplain(explain);
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
-        type.setDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        type.setDateTime(currentDate);
+        type.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
         type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         type.setUserId(user);

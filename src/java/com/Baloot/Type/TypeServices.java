@@ -27,7 +27,7 @@ public class TypeServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         int id = 0;
-        String insertTableSQL = "INSERT INTO type (language,field,title,date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO type (language,field,title,date_time,explain,option,user_id,attach_file,delivery_type,end_date_time) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
@@ -40,6 +40,9 @@ public class TypeServices {
             preparedStatement.setString(5, type.getExplain());
             preparedStatement.setString(6, type.getOption());
             preparedStatement.setInt(7, type.getUserId().getId());
+            preparedStatement.setString(8, type.getAttachFile());
+            preparedStatement.setBoolean(9, type.getDeliveryType());
+            preparedStatement.setString(10, type.getEndDateTime());
 
             // execute insert SQL stetement
             int affectedRows = preparedStatement.executeUpdate();

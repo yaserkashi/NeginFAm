@@ -28,7 +28,7 @@ public class TranslateServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         int id = 0;
-        String insertTableSQL = "INSERT INTO translate (language,field,title,date_time,end_date_time,explain,option,user_id) VALUES (?,?,?,?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO translate (language,field,title,date_time,end_date_time,explain,option,user_id,attach_file,delivery_type) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
@@ -42,6 +42,8 @@ public class TranslateServices {
             preparedStatement.setString(6, translate.getExplain());
             preparedStatement.setString(7, translate.getOption());
             preparedStatement.setInt(8, translate.getUserId().getId());
+            preparedStatement.setString(9, translate.getAttachFile());
+            preparedStatement.setBoolean(10, translate.getDeliveryType());
 
             // execute insert SQL stetement
             preparedStatement.executeUpdate();

@@ -81,21 +81,13 @@
 
                     <h:outputText value="اپلود فایل" />
                     <h:form enctype="multipart/form-data" >
-                        <p:fileUpload value="#{translateForm.attachFile}" mode="advanced" dragDropSupport="true" fileUploadListener="#{translateForm.uploaded}"/>
+                        <p:fileUpload value="#{translateForm.attachFile}" mode="simple"/>
+                        <p:commandButton value="Submit" ajax="false" actionListener="#{translateForm.uploaded}"  />
                     </h:form>
 
-
-                    <p:commandButton  value="ثبت" actionListener="#{typeForm.submit()}" style="background: #2F84B1; color: window ; float: right ; font-size: 16px">
-                    </p:commandButton>
                     <p:outputLabel value="" ></p:outputLabel>
-
-
-                  
-
-
+                 
                 </p:panelGrid>
-
-
 
             </h:form>
 
