@@ -177,6 +177,45 @@ public class OrderFollowUpForAdmin {
 
         }
     }
+     public void insertNewFactor(Integer id) {
+        System.out.println("hi");
+        selectedOreder=OrderServices.selectOrderById(id);
+        if (selectedOreder != null && selectedOreder.getCondition() == 0) {
+           
+            Factor factor = new Factor();
+            PersianCalendar pc = new PersianCalendar();
+            String currentDate = pc.getIranianDateTime();
+            factor.setDateTime(currentDate);
+            Users user = selectedOreder.getUserId();
+            factor.setUserId(user);
+            factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
+            factor.setPFactor(true);
+            factor.setPayCondition(0);
+            factor.setOff(off);
+            try {
+                Integer factorId = FactorServices.insertRecordIntoTable(factor);
+                factor.setId(factorId);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
+            }
+            try {
+                FactorItem factorItem = new FactorItem();
+                System.out.println(" facto ID : " + factor.getId());
+                factorItem.setFactorId(factor);
+                factorItem.setOrderId(selectedOreder.getId());
+                factorItem.setUnit(unit);
+                factorItem.setNumber(number);
+                factorItem.setUnitPrice(unitPrice);
+                OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.registrationFactor.ordinal());
+                FactorItemServices.insertRecordIntoTable(factorItem);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+    }
 
     public String selectedOrderAction() throws SQLException {
         String pageOut = new String();

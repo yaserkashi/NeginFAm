@@ -125,6 +125,38 @@ public class OrderServices {
         }
     return orderList;
     }
+     public static Order selectOrderById(int id)
+    {
+       
+    Connection dbConnection;
+        PreparedStatement ps;
+  Order item = new Order();
+        try {
+            dbConnection = DataConnect.getConnection();
+            
+            ps = dbConnection.prepareStatement("Select * from public.order where id = ?");
+            ps.setInt(1, id);
+ 
+            ResultSet rs = ps.executeQuery();
+           
+            if(rs.next()){
+              
+                //table_name,table_id,user_id,order_date,condition
+                item.setCondition(rs.getInt("condition"));
+                item.setId(id);
+                item.setOrderDate(rs.getString("order_date"));
+                item.setTableId(rs.getInt("table_id"));
+                item.setTableName(rs.getString("table_name"));
+                 Users user = UserServices.getUserById(rs.getInt("user_id"));
+                 item.setUserId(user);
+         
+            }else
+            {return null;}
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    return item;
+    }
      public static List<Order> AllOfOrder()
     {
         List<Order> orderList=new ArrayList<>();
