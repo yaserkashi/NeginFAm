@@ -64,8 +64,8 @@ public class Sendemail {
         this.message = message;
     }
     //"ardakannegin""09134512648@@";
-    private String mailName="neginfamardakan";
-    private String passWord="09134512648";
+    private final String mailName="neginfamardakan";
+    private final String passWord="09134512648";
     private String mail;
     private List<String> mailList;
     private String title;
@@ -110,7 +110,7 @@ public class Sendemail {
         Sendemail.Send(username, password, recipientEmail, "", title, message);
     }
 
-   
+  
     public static void Send(final String username, final String password, String recipientEmail, String ccEmail, String title, String message) throws AddressException, MessagingException {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -140,7 +140,7 @@ public class Sendemail {
             msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmail, false));
         }
 
-        msg.setSubject(title);
+        msg.setSubject(title, "utf-8");
         msg.setText(message, "utf-8");
         msg.setSentDate(new Date());
 
