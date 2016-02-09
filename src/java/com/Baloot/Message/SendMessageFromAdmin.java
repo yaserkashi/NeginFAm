@@ -83,9 +83,9 @@ public class SendMessageFromAdmin {
         Users user = UserServices.getUserByUsername("fateme");
         if (type) {
             Sendemail sm = new Sendemail();
+            System.out.println(user.getEmail()+title+text);
             sm.sendEmail(user.getEmail(), title, text);
             Message msg = new Message();
-
             msg.setTitle(title);
             msg.setText(text);
             PersianCalendar pc = new PersianCalendar();

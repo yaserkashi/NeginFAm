@@ -7,8 +7,8 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-        <h:form id="form">
-            <p:galleria style="margin: auto!important; 	z-index: 0;" value="#{imagesView.images}" var="image" showCaption="true">
+        <h:form id="form" >
+            <p:galleria style="margin-top: 56px " value="#{imagesView.images}" var="image" showCaption="true" panelWidth="800" panelHeight="280">
                 <p:graphicImage name="/#{image}" alt="Image Description for #{image}" title="#{image}"/>
             </p:galleria>
 

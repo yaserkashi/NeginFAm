@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-       template="../../template/signuptemplate.xhtml">
-<h:head>
-    <h:outputStylesheet library="css" name="style.css"/>
-    <link href="../resources/css/style.css"/>
+      template="../../template/signuptemplate.xhtml">
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <link href="../resources/css/style.css"/>
 
-    <style type="text/css">
-        .ui-panelgrid > * > tr,
-        .ui-panelgrid .ui-panelgrid-cell {
-            border: none;
-        }
+        <style type="text/css">
+            .ui-panelgrid > * > tr,
+            .ui-panelgrid .ui-panelgrid-cell {
+                border: none;
+            }
 
-        .ui-menu .ui-menu-list .ui-menuitem {
-            border: medium none;
-            float: right !important;
-            direction: rtl !important;
-            margin-right: 5px;
-        }
+            .ui-menu .ui-menu-list .ui-menuitem {
+                border: medium none;
+                float: right !important;
+                direction: rtl !important;
+                margin-right: 5px;
+            }
 
-        .ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-text {
-            margin-left: 0.4em;
-            float: right;
-        }
+            .ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-text {
+                margin-left: 0.4em;
+                float: right;
+            }
 
-        .ui-menu.ui-menubar .ui-menu-parent .ui-menu-child {
-            padding: 5px 0px;
-            width: 150px;
-        }
+            .ui-menu.ui-menubar .ui-menu-parent .ui-menu-child {
+                padding: 5px 0px;
+                width: 150px;
+            }
 
-        .ui-menu.ui-widget li > .ui-menuitem-link {
-            padding: 0.3em 0px;
-            width: 100%;
-            border-width: 1px 0px;
-            padding: 3px;
-        }
+            .ui-menu.ui-widget li > .ui-menuitem-link {
+                padding: 0.3em 0px;
+                width: 100%;
+                border-width: 1px 0px;
+                padding: 3px;
+            }
 
-    </style>
-    <link rel="SHORTCUT ICON" href="#{resource['images:logo.jpg']}"/>
-    <ui:insert name="header">
-        <ui:include src="/template/commonContent.xhtml"/>
-    </ui:insert>
-</h:head>
+        </style>
+        <link rel="SHORTCUT ICON" href="#{resource['images:logo.jpg']}"/>
+        <ui:insert name="header">
+            <ui:include src="/template/commonContent.xhtml"/>
+        </ui:insert>
+    </h:head>
     <h:body style="background-color: #fffffe" >
-    <h:form prependId="false">
-        <div id="header" class="header">
-            <div class="logo">
-                <p:graphicImage style="height: inherit;min-height: 70px"
-                                url="/resources/images/ac.jpg"></p:graphicImage>
-            </div>
-            <div class="company">
-                <p:outputLabel style="text-align: center; font-family: BYekan,'BYekan',tahoma; "
-                               value="گروه تبلیغاتی طیف"/>
+        <h:form prependId="false">
+            <div id="header" class="header">
+                <div class="logo">
+                    <p:graphicImage style="height: inherit;min-height: 70px"
+                                    url="/resources/images/ac.jpg"></p:graphicImage>
+                </div>
+                <div class="company">
+                    <p:outputLabel style="text-align: center; font-family: BYekan,'BYekan',tahoma; "
+                                   value="گروه تبلیغاتی طیف"/>
 
-            </div>
-            <div class="headerMenu" >
-                <p:menubar >
+                </div>
+                <div class="headerMenu" >
+                    <p:menubar >
                     <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
                         <p:menuitem value="ثبت سفارش انلاین" url="/pages/guest/signup.xhtml" />
 
@@ -106,59 +106,58 @@
 
 
                         </p:submenu>
-                    <p:menuitem value="ثبت نام" url="/pages/guest/signup.xhtml" />
                     <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml" />
                     <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml" />
                 </p:menubar>
-            </div>
-        </div>
-        <div class="content">
-
-            <div style="width:100%;height: 280px;margin-bottom: 20px; padding-left: 10px; padding-right: 10px ">
-                <ui:insert name="galleria">
-                    <ui:include src="/template/commonContent.xhtml"/>
-                </ui:insert>
-            </div>
-            <div class="contentPanel">
-                <ui:insert name="content">
-                    <ui:include src="/template/commonContent.xhtml"/>
-                </ui:insert>
-            </div>
-            <div class="sidePanel">
-                <ui:insert name="sidePanel">
-                    <ui:include src="/template/commonContent.xhtml"/>
-                </ui:insert>
-            </div>
-        </div>
-
-
-    
-    <footer>
-        <div class="footer">
-            <ui:insert name="footer">
-            </ui:insert>
-<!--                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
-                    <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
-                </div>-->
-                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                    <p:outputLabel value="a"></p:outputLabel>
                 </div>
-                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                    <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
+            </div>
+            <div class="content">
+
+                <div style="width:100%;height: 280px;margin-bottom: 20px; padding-left: 10px; padding-right: 10px ">
+                    <ui:insert name="galleria">
+                        <ui:include src="/template/commonContent.xhtml"/>
+                    </ui:insert>
                 </div>
-                <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
-                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                        <h:outputText value="صفحه نخست"></h:outputText>
-                    </p:commandLink>
-                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                        <h:outputText value="درباره ما"> </h:outputText>
-                    </p:commandLink>
+                <div class="contentPanel">
+                    <ui:insert name="content">
+                        <ui:include src="/template/commonContent.xhtml"/>
+                    </ui:insert>
                 </div>
-        </div>
-    </footer>
+                <div class="sidePanel">
+                    <ui:insert name="sidePanel">
+                        <ui:include src="/template/commonContent.xhtml"/>
+                    </ui:insert>
+                </div>
+            </div>
+
+
+
+            <footer>
+                <div class="footer">
+                    <ui:insert name="footer">
+                    </ui:insert>
+                    <!--                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
+                                        <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
+                                    </div>-->
+                    <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
+                         padding-top: 22px;margin-right: -6px;margin-left: -5px">
+                        <p:outputLabel value="a"></p:outputLabel>
+                    </div>
+                    <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
+                         padding-top: 22px;margin-right: -6px;margin-left: -5px">
+                        <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
+                    </div>
+                    <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
+                        <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
+                            <h:outputText value="صفحه نخست"></h:outputText>
+                        </p:commandLink>
+                        <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
+                            <h:outputText value="درباره ما"> </h:outputText>
+                        </p:commandLink>
+                    </div>
+                </div>
+            </footer>
         </h:form>
-</h:body>
+    </h:body>
 
 </html>

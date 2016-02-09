@@ -72,10 +72,10 @@
             <p:column headerText="ردیف">
                 <h:outputText value="#{adminFinancialManagement.list.indexOf(financialM)+1}" />
             </p:column>
-            <p:column headerText="شماره فاکتور">
+            <p:column headerText="شماره فاکتور" filterBy="#{financialM.fatorId}">
                 <h:outputText value="#{financialM.fatorId}" />
             </p:column>
-             <p:column headerText="شماره سفارش">
+             <p:column headerText="شماره سفارش" filterBy="#{financialM.orderId}">
                  <h:outputText value="#{financialM.orderId}"/>
             </p:column>
              <p:column headerText="مجموعه">
@@ -84,7 +84,7 @@
              <p:column headerText="تاریخ">
                  <h:outputText value="#{financialM.date}"/>
             </p:column> 
-            <p:column headerText="وضعیت">
+            <p:column headerText="وضعیت" filterBy="#{financialM.condition}">
                 <h:outputText value="#{financialM.condition}"/>
             </p:column>
             <p:column headerText="مرحله">

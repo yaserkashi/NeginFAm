@@ -130,7 +130,7 @@ public class SignUp {
     public void setLowCheck(boolean lowCheck) {
         this.lowCheck = lowCheck;
     }
-    public void submit(){
+    public String submit(){
         System.out.println("Submit Function");
         if (!captcha.validate(secCode)) {
             FacesContext.getCurrentInstance().addMessage(null,
@@ -153,9 +153,10 @@ public class SignUp {
                 UserServices.insertRecordIntoTable(user);
                 FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("ثبت نام شما با موفقیت انجام شد."));
+                return "/pages/user/user.xhtml";
             } catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }
-     
+     return "/";
     }
 }

@@ -8,22 +8,32 @@
         <ui:composition template="/template/template.xhtml">
             <ui:define name="header">
                 <title> صفحه اصلی </title>
+                <style>
+                    .ui-panelgrid td {
+                        border-width: 0px;
+                        border-style: hidden;
+                        border-color: inherit;
+                        padding: 4px 10px;
+                    }
+                </style>
             </ui:define>
             <script type="text/javascript">
                 onload perView();
             </script>
 
-            <ui:define name="galleria">
-                <div style="margin-right: 90px">
+            <ui:define name="galleria" >
+                <div style="margin-right: 90px" >
                     <p:galleria value="#{imagesForm.images}" var="image" panelWidth="1100" panelHeight="280"
                                 showCaption="true">
                         <p:graphicImage name="#{image}" alt="" title="" height="1320"/>
                     </p:galleria>
                 </div>
             </ui:define>
-            <ui:define name="sidePanel">
-                <div style="width:230px;background-color: #ffffff;padding-right: 10px;padding-top: 5px;margin-right: 23px">
-                    <p:panelGrid columns="1" style="background-color: antiquewhite; margin-right: 20px">
+            <ui:define name="sidePanel" >
+                <div style="width:230px;background-color: #ffffff;padding-right: 10px;padding-top: 5px;margin-right: 23px; border-width: 0px">
+                     <p:panelGrid columns="1" style="background-color: antiquewhite; margin-right: 20px;">
+                        <p:outputLabel styleClass="news-link" value="ورود به حساب کاربری"/>
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                         <p:inputText placeholder="نام کاربری" style="float: right ;width: 150px" required="true"
                                      id="username"
                                      value="#{login.user}"
@@ -35,14 +45,13 @@
 
 
                         <p:commandButton action="#{login.validateUsernamePassword}"
-                                         style="margin-right: 40px" styleClass="loginPanelBtn" value="ورود"/>
+                                         style="margin-right: 40px" styleClass="loginPanelBtn" value="ورود" actionListener="fdfdf"/>
 
                         <p:commandButton 
                             style="font: -moz-info; font-family: BYekan,'BYekan',tahoma;padding-left: 2px; " value="کلمه عبور را فراموش کردم"/>
 
                     </p:panelGrid>
-
-
+                    
                     <h:link outcome="/pages/guest/signup.xhtml" >
                         <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33" >
                             <p:graphicImage width="80px" style="margin: 2px;size: 200px;" url="/resources/images/signup-icon.png"/>
@@ -51,15 +60,20 @@
                         </p:panelGrid>
                     </h:link>
 
+                   
 
 
-                    <h:link outcome="/pages/guest/signup-help.xhtml" >
-                        <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
-                            <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
-                            <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
 
-                        </p:panelGrid>
-                    </h:link>
+
+
+
+                    <!--                    <h:link outcome="/pages/guest/signup-help.xhtml" >
+                                            <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
+                                                <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
+                                                <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
+                    
+                                            </p:panelGrid>
+                                        </h:link>-->
 
 
                     <p:panelGrid columns="1" styleClass="news" >
@@ -101,29 +115,55 @@
             <ui:define name="content">
                 <!--here is place of code-->
 
-                <div style="background-color: #fff;margin-top: 50px; padding: 25px; text-align: center;">
+                <div style="background-color: #fff;margin-top: 50px; padding: 20px; text-align: center;   ">
+
+
+
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
-                        <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/register.png"/>
+                        <h:outputLabel value="دانلود فایل نهایی" styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
+                                        url="/resources/images/arrow-down-icon.png"></p:graphicImage>
+
                     </h:link>
-                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;position: relative" url="/resources/images/left_arrow.png"/>
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="پرداخت فاکتور"  styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
+                                        url="/resources/images/payment.png"></p:graphicImage>
+
+
+                    </h:link>
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="براورد زمان و هزینه"  styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/time1.jpg"/>
+
+                    </h:link>
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="ثبت سفارش" styleClass="helpfont"/>
+
                         <p:graphicImage styleClass="registerImg" width="80px"
                                         url="/resources/images/Apply-Now-icon.png"></p:graphicImage>
                     </h:link>
+
+
                     <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
-                        <p:graphicImage styleClass="registerImg" width="80px"
-                                        url="/resources/images/pen.png"></p:graphicImage>
-                    </h:link>
-                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
-                    <h:link outcome="/pages/guest/signup.xhtml" value="">
-                        <p:graphicImage styleClass="registerImg" width="80px"
-                                        url="/resources/images/arrow-down-icon.png"></p:graphicImage>
-                    </h:link>
-                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
-                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="ثبت نام در سایت" style="position: absolute;padding-top:  100px;" styleClass="helpfont"/>
+
                         <p:graphicImage styleClass="registerImg" width="80px"
                                         url="/resources/images/register.png"></p:graphicImage>
+
                     </h:link>
 
                 </div>
@@ -137,6 +177,7 @@
                                         <div dir="ltr" style="float: right;" id="myeditable" ></div>-->
                     <iframe class="iFrameClass" src="resources/html/test.html" scrolling="no" height="1200"/>
                 </div>
+
             </ui:define>
 
         </ui:composition>

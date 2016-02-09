@@ -42,7 +42,7 @@
                     <p:column headerText="تاریخ">
                         <h:outputText value="#{financialM.date}"/>
                     </p:column>
-                    <p:column headerText="وضعیت">
+                    <p:column headerText="وضعیت" filterBy="#{financialM.condition}">
                         <h:outputText value="#{financialM.condition}" />
                     </p:column>
                     <p:column headerText="مرحله">

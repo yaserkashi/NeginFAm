@@ -84,9 +84,9 @@
                                    value="گروه تبلیغاتی طیف"/>
 
                 </div>
- <div class="headerMenu">
+                <div class="headerMenu">
                     <p:menubar >
-                    <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
+                        <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
                         <p:menuitem value="ثبت سفارش انلاین" url="/pages/guest/signup.xhtml" />
 
                         <p:submenu label="هزینه و زمان تحویل">
@@ -131,33 +131,33 @@
 
 
                         </p:submenu>
-                    <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml" />
-                    <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml" />
-                </p:menubar>
+                        <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml" />
+                        <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml" />
+                    </p:menubar>
                 </div>
-           
-                
-                
-             <div class="content">
 
-            
-            <div class="contentPanel">
-                <ui:insert name="content">
-                    <ui:include src="/template/commonContent.xhtml"/>
-                </ui:insert>
-            </div>
-           
-        
-                
-                
-                
-                
-                
-                <div class="sidePanel" >
-                    <ui:insert name="sidePanel">
-                      <div>
-                            <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
-                               
+
+
+                <div class="content">
+
+
+                    <div class="contentPanel">
+                        <ui:insert name="content">
+                            <ui:include src="/template/commonContent.xhtml"/>
+                        </ui:insert>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="sidePanel" >
+                        <ui:insert name="sidePanel">
+                            <div>
+                                <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
+
                                     <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px " value="کاربر گرامی#{login.user}خوش آمدید"/>
                                     <p:panelMenu style="float: right;width: 100%;padding-top: 15px " >
                                         <p:submenu label="مدیریت محتوی" >
@@ -166,76 +166,85 @@
                                         </p:submenu>
 
                                         <p:separator /> 
-                                           
-                                           
+
+
                                         <p:submenu label="مدیریت کاربران">
                                             <p:menuitem value="مدیریت اعضا "   ajax="true" icon="" url="/pages/admin/usersManagement.xhtml"/>
-                                            <p:menuitem value="ارسال پیامک به اعضا"  ajax="true"  icon="" url="/pages/admin/sendMessage.xhtml"/>
-                                            <p:menuitem value="صندوق پیامک"  ajax="true"  icon="" url="/pages/admin/listmassage.xhtml"/>
-                                       </p:submenu>
-                                        
+                                        </p:submenu>
+
                                         <p:separator />
+
+                                        <p:submenu label="مدیریت پیام ها">
+                                            <p:menuitem value="ارسال پیام به اعضا"  ajax="true"  icon="" url="/pages/admin/sendMessage.xhtml"/>
+                                            <p:menuitem value="صندوق پیام"  ajax="true"  icon="" url="/pages/admin/listmassage.xhtml"/>
+                                        </p:submenu>
+
+                                        <p:separator />
+
+
 
 
                                         <p:submenu label="مدیریت مالی">
                                             <p:menuitem value="مدیریت مالی اعضا"   ajax="true" icon=""    url="/pages/admin/financialManagement.xhtml"/>
-                                            <p:menuitem value="مدیریت پرداختها"   ajax="true" icon=""  url="/pages/admin/paymentsManagement.xhtml" />
                                         </p:submenu>
-                                        
+
                                         <p:separator />
 
 
                                         <p:submenu label="سفارشات">
                                             <p:menuitem value="پیگیری سفارش خاص"  ajax="false" icon="" url="/pages/admin/trackOrder.xhtml" />
                                         </p:submenu> 
-                                        
-                                        <p:separator />
-                                         
-                                        
-                                         <p:submenu label="استخدام">
-                                            <p:menuitem value="بررسی درخواستهای استخدام"  ajax="false" icon="" url="/pages/admin/requestReview.xhtml" />
-                                         </p:submenu> 
-                                            
-                                    </p:panelMenu>
-                                   
-                               
-                            </p:layoutUnit>
-                        </div>   
-                        <ui:include src="/template/commonContent.xhtml"/>
 
-                    </ui:insert>
-                </div>
-                 
-                 </div> 
+                                        <p:separator />
+
+
+                                        <p:submenu label="استخدام">
+                                            <p:menuitem value="بررسی درخواستهای استخدام"  ajax="false" icon="" url="/pages/admin/requestReview.xhtml" />
+                                        </p:submenu> 
+
+                                    </p:panelMenu>
+                                    <p:commandButton value="ورود به پنل کاربری" style="width: 100% ;text-align: right;height: 40px;padding-right: 10px" action="/pages/user/index1.xhtml"/>
+                                    <p:commandButton value="خروج" style="width: 100% ;text-align: right;height: 40px;padding-right: 10px" action="#{login.logout()}"/>
+
+
+
+                                </p:layoutUnit>
+                            </div>   
+                            <ui:include src="/template/commonContent.xhtml"/>
+
+                        </ui:insert>
+                    </div>
+
+                </div> 
             </div>
 
 
 
-<!--            <footer>
-                <div class="footer">
-                    <ui:insert name="footer">
-                    </ui:insert>
-                                    <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
-                                        <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
-                                    </div>
-                    <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                         padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                        <p:outputLabel value="a"></p:outputLabel>
-                    </div>
-                    <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                         padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                        <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
-                    </div>
-                    <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
-                        <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                            <h:outputText value="صفحه نخست"></h:outputText>
-                        </p:commandLink>
-                        <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                            <h:outputText value="درباره ما"> </h:outputText>
-                        </p:commandLink>
-                    </div>
-                </div>
-            </footer>-->
+            <!--            <footer>
+                            <div class="footer">
+                                <ui:insert name="footer">
+                                </ui:insert>
+                                                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
+                                                    <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
+                                                </div>
+                                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
+                                     padding-top: 22px;margin-right: -6px;margin-left: -5px">
+                                    <p:outputLabel value="a"></p:outputLabel>
+                                </div>
+                                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
+                                     padding-top: 22px;margin-right: -6px;margin-left: -5px">
+                                    <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
+                                </div>
+                                <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
+                                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
+                                        <h:outputText value="صفحه نخست"></h:outputText>
+                                    </p:commandLink>
+                                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
+                                        <h:outputText value="درباره ما"> </h:outputText>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </footer>-->
         </h:form>
     </h:body>
 
