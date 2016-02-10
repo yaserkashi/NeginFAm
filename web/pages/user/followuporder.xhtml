@@ -5,8 +5,8 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-        <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser()}" var="followup" styleClass="dataTable" id="followtb"
-                     selection="#{orderFollowUpForUser.selectedOreder}" selectionMode="single" rowKey="#{followup.id}">
+        <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser()}" var="followup"
+                     styleClass="dataTable" id="followtb" rowKey="#{followup.id}">
             <p:column headerText="نوع سفارش" filterBy="#{followup.tableName}">
                 <h:outputText value="#{followup.tableName}" />
             </p:column> 
@@ -20,15 +20,32 @@
             <p:column headerText="وضعیت" filterBy="#{followup.condition}">
                 <h:outputText value="#{followup.condition}"/>
             </p:column>
-        </p:dataTable>
+            <p:column headerText="مشاهده سفارش" style="width:32px;text-align: center">
+                <p:commandButton icon="ui-icon-search"  action="#{orderFollowUpForUser.selectedOrderAction()}"  title="View">
+                    <f:setPropertyActionListener value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
+             <p:column headerText="مشاهده فاکتور" style="width:32px;text-align: center">
+                 <p:commandButton icon="ui-icon-search"  action="#{orderFollowUpForUser.showFactorForSelectedOrder()}"  title="View">
+                    <f:setPropertyActionListener value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
+            <p:column rendered="true" headerText="دانلود فایل نهایی" style="width:32px;text-align: center">
+                 <p:commandButton icon="ui-icon-search" disabled="true"  action="#{orderFollowUpForUser.selectedOrderAction()}"  title="View">
+                    <f:setPropertyActionListener value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
+             <p:column headerText="لغو سفارش" style="width:32px;text-align: center">
+                 <p:commandButton icon="ui-icon-search"  action="#{orderFollowUpForUser.cancelOrder()}"  title="View">
+                    <f:setPropertyActionListener value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>    
 
-        <p:commandButton  icon="ui-icon-document"  value="مشاهده"                         
-                              action="#{orderFollowUpForUser.selectedOrderAction()}"  />          
-
-<!--        <p:dialog widgetVar="followupDialog" dynamic="true"
-                  style="direction:rtl" id="dg1"
-                  resizable="false" closable="true" position="center" width="56%">
-            <ui:include src="" />
-        </p:dialog>-->
+        <!--        <p:dialog widgetVar="followupDialog" dynamic="true"
+                          style="direction:rtl" id="dg1"
+                          resizable="false" closable="true" position="center" width="56%">
+                    <ui:include src="" />
+                </p:dialog>-->
     </ui:define>
 </ui:composition> 

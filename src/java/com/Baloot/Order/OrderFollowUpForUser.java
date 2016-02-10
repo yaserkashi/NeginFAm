@@ -6,6 +6,7 @@
 package com.Baloot.Order;
 
 import com.Baloot.Design.*;
+import com.Baloot.Enum.StepsOfOrder;
 import com.Baloot.Factor.Factor;
 import com.Baloot.FactorItem.FactorItem;
 import com.Baloot.FactorItem.FactorItemServices;
@@ -14,6 +15,7 @@ import com.Baloot.Translate.*;
 import com.Baloot.Type.*;
 import com.Baloot.User.UserServices;
 import com.Baloot.util.SessionBean;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -33,16 +35,15 @@ public class OrderFollowUpForUser {
     private Type type;
     private Paper paper;
     private Translate translate;
-    private FactorItem factorItemForSectedOrder;
+    private FactorItem factorItemForSelectedOrder;
 
-    public FactorItem getFactorItemForSectedOrder() {
-        return factorItemForSectedOrder;
+    public FactorItem getFactorItemForSelectedOrder() {
+        return factorItemForSelectedOrder;
     }
 
-    public void setFactorItemForSectedOrder(FactorItem factorItemForSectedOrder) {
-        this.factorItemForSectedOrder = factorItemForSectedOrder;
+    public void setFactorItemForSelectedOrder(FactorItem factorItemForSelectedOrder) {
+        this.factorItemForSelectedOrder = factorItemForSelectedOrder;
     }
-   
 
     public Translate getTranslate() {
         return translate;
@@ -112,10 +113,10 @@ public class OrderFollowUpForUser {
 
     public String selectedOrderAction() {
         String pageOut = new String();
-        String typeOforder ;
+        String typeOforder;
         try {
             typeOforder = selectedOreder.getTableName();
-          
+
             switch (typeOforder) {
                 case "type":
                     type = TypeServices.getTypeById(selectedOreder.getTableId());
@@ -145,25 +146,32 @@ public class OrderFollowUpForUser {
         }
         return pageOut;
     }
+
     /**
-     *<b> تابع برای بدست آوردن فاکتور برای</b>
-     *<b> سفارش انتخاب شده توسط کابر</b>
+     * <b> تابع برای بدست آوردن فاکتور برای</b>
+     * <b> سفارش انتخاب شده توسط کابر</b>
      */
-    public void showFactorForSelectedOrder() {
+    public String showFactorForSelectedOrder() {
         if (selectedOreder != null) {
-           factorItemForSectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
+            factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
+            return "/pages/user/factor.xhtml";
         }
+        return null;
     }
 
     public String whichPage() {
-        
+
         try {
-            if (selectedOreder !=null) {
+            if (selectedOreder != null) {
                 return "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "/pages/user/design1.xhtml";
+    }
+
+    public void cancelOrder() throws SQLException {
+        OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
     }
 }
