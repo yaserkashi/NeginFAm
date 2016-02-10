@@ -30,13 +30,29 @@
                 <h:outputText value="#{trackorder.condition}"/>
             </p:column>
             <!--action="/pages/admin/preparefactor.xhtml"-->
-            <p:column headerText="مشاهده">
-                <p:commandButton  icon="ui-icon-document" actionListener="#{orderFollowUpForAdmin.insertNewFactor()}" >
+            <p:column headerText="مشاهده سفارش" style="width:32px;text-align: center">
+                <p:commandButton icon="ui-icon-search"  action="#{orderFollowUpForAdmin.selectedOrderAction()}"  title="View">
+                    <f:setPropertyActionListener value="#{trackorder}" target="#{orderFollowUpForAdmin.selectedOreder}" />
                 </p:commandButton>
-            </p:column> 
+            </p:column>
+             <p:column headerText="مشاهده فاکتور" style="width:32px;text-align: center">
+                 <p:commandButton icon="ui-icon-search"  action="#{orderFollowUpForAdmin.selectedOrderAction()}"  title="View">
+                    <f:setPropertyActionListener value="#{trackorder}" target="#{orderFollowUpForAdmin.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
+            <p:column rendered="true" headerText="دانلود فایل نهایی" style="width:32px;text-align: center">
+                 <p:commandButton icon="ui-icon-search" disabled="true"  action="#{orderFollowUpForAdmin.selectedOrderAction()}"  title="View">
+                    <f:setPropertyActionListener value="#{trackorder}" target="#{orderFollowUpForAdmin.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
+              <p:column headerText="لغو سفارش" style="width:32px;text-align: center">
+                 <p:commandButton icon="ui-icon-search"  action="#{orderFollowUpForAdmin.cancelOrder()}"  title="View">
+                    <f:setPropertyActionListener value="#{trackorder}" target="#{orderFollowUpForAdmin.selectedOreder}" />
+                </p:commandButton>
+            </p:column>
         </p:dataTable>
-        <p:commandButton  icon="ui-icon-document"  value="مشاهده"                         
-                          action="#{orderFollowUpForAdmin.selectedOrderAction()}"  />    
+<!--        <p:commandButton  icon="ui-icon-document"  value="مشاهده"                         
+                          action="#{orderFollowUpForAdmin.selectedOrderAction()}"  />    -->
 
         <p:dialog widgetVar="followupDialog" dynamic="true"
                   style="direction:rtl"
