@@ -119,6 +119,86 @@
                 </div>
                 <div class="sidePanel">
                     <ui:insert name="sidePanel">
+                        
+                        
+                                        <div style="width:250px;background-color: #ffffff;padding-right: 10px;padding-top: 5px; border-width: 0px">
+                    <h:link outcome="/pages/guest/signup.xhtml" >
+                        <p:panelGrid columns="1" style="; margin-right: 10px;" >
+                            <p:graphicImage  width="250px" style="position: relative;"  
+                                             url="/resources/images/singup.png"></p:graphicImage>
+                        </p:panelGrid>
+                    </h:link>
+                    
+                     <h:link outcome="/pages/guest/contactus.xhtml" >
+                         <p:panelGrid columns="1" style="; margin-right: 10px;margin-top: 10px" styleClass="border" >
+                             <f:facet name="header">
+                                 با ما تماس بگیرید
+                             </f:facet>
+                            <p:graphicImage  width="240px" style="position: relative"
+                                             url="/resources/images/us.jpg"></p:graphicImage>
+                        </p:panelGrid>
+                    </h:link>
+
+                   
+
+
+
+
+
+
+
+
+<!--                                        <h:link outcome="/pages/guest/signup-help.xhtml" >
+                                            <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
+                                                <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
+                                                <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
+                    
+                                            </p:panelGrid>
+                                        </h:link>-->
+
+
+                    <p:panelGrid columns="1" styleClass="border" style="width: 250px;margin-top: 30px" >
+                        <f:facet name="header">
+                            آخرین اخبار سایت
+                        </f:facet>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>      
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                    </p:panelGrid>
+                </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <ui:include src="/template/commonContent.xhtml"/>
                     </ui:insert>
                 </div>

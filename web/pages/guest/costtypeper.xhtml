@@ -21,11 +21,18 @@
                 min-height: 0.01%;
                 overflow-x: auto;
             }
+            
+             .ui-panelgrid td {
+                border-width: 0px;
+                border-style: solid;
+                border-color: inherit;
+                padding: 4px 10px;
+            }
         </style>
 
         <h:form>
 <!--            <p:outputLabel value="هزینه تایپ فارسی" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>-->
-            <p:panelGrid columns="1" styleClass="form" style="float: right">
+            <p:panelGrid columns="1" styleClass="form border" style="float: right">
                 <f:facet name="header">هزینه تایپ فارسی</f:facet>
                     <p:graphicImage   url="/resources/images/cost type per.jpg"/>
 
