@@ -88,4 +88,46 @@ public class MessageServices {
         }
 
     }
+    
+    public static void insertRecordsIntoTable(List<Message> messages) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String insertTableSQL = "INSERT INTO message (text,user_id_send,user_id_get,date_time,read,title) VALUES (?,?,?,?,?,?)";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+            
+            for (Message message : messages) {
+                preparedStatement.setString(1, message.getText());
+                preparedStatement.setInt(2, message.getUserIdSend().getId());
+                preparedStatement.setInt(3, message.getUserIdGet().getId());
+                preparedStatement.setString(4, message.getDateTime());
+                preparedStatement.setBoolean(5, message.getRead());
+                preparedStatement.setString(6, message.getTitle());
+
+                // execute insert SQL stetement
+                preparedStatement.executeUpdate();
+            }
+            System.out.println("Records are inserted into DBMessage table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
 }

@@ -10,6 +10,7 @@ import com.Baloot.util.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -34,6 +35,44 @@ public class SmsMessageServices {
             // execute insert SQL stetement
             preparedStatement.executeUpdate();
             System.out.println("Record is inserted into DBSmsMessage table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+    
+    public static void insertRecordsIntoTable(List<SmsMessage> messages) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String insertTableSQL = "INSERT INTO message (text_id,user_id,condition) VALUES (?,?,?)";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+            for (SmsMessage message : messages) {
+                preparedStatement.setInt(1, message.getTextId().getId());
+                preparedStatement.setInt(2, message.getUserId().getId());
+                preparedStatement.setString(3, message.getCondition());
+
+                // execute insert SQL stetement
+                preparedStatement.executeUpdate();
+            }
+            System.out.println("Records are inserted into DBSmsMessage table!");
 
         } catch (SQLException e) {
 

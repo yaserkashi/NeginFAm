@@ -24,9 +24,9 @@
 
             <ui:define name="galleria" >
                 <div style="margin-right: 90px" >
-                    <p:galleria value="#{imagesForm.images}" var="image" panelWidth="1100" panelHeight="280"
+                    <p:galleria value="#{imagesForm.selectedImages}" var="image" panelWidth="1100" panelHeight="280"
                                 showCaption="true">
-                        <p:graphicImage name="#{image}" alt="" title="" height="1320"/>
+                        <p:graphicImage name="#{image.address}" alt="" title="" height="1320"/>
                     </p:galleria>
                 </div>
             </ui:define>

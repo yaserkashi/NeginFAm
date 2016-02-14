@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
     @NamedQuery(name = "Image.findByAddress", query = "SELECT i FROM Image i WHERE i.address = :address"),
-    @NamedQuery(name = "Image.findById", query = "SELECT i FROM Image i WHERE i.id = :id")})
+    @NamedQuery(name = "Image.findById", query = "SELECT i FROM Image i WHERE i.id = :id"),
+    @NamedQuery(name = "Image.findBySelected", query = "SELECT i FROM Image i WHERE i.selected = :selected")})
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
     @Size(max = 500)
@@ -40,6 +41,8 @@ public class Image implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "selected")
+    private Boolean selected;
 
     public Image() {
     }
@@ -62,6 +65,14 @@ public class Image implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 
     @Override

@@ -1,37 +1,194 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
-                template="templates/ui.xhtml">
-    <ui:define name="content">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="header">
+                <title> صفحه اصلی </title>
+                <style>
+                    .ui-panelgrid td {
+                        border-width: 0px;
+                        border-style: hidden;
+                        border-color: inherit;
+                        padding: 4px 10px;
+                    }
+                </style>
+            </ui:define>
+            <script type="text/javascript">
+                onload perView();
+            </script>
+
+            <ui:define name="galleria" >
+                <div style="margin-right: 90px" >
+                    <p:galleria value="#{imagesForm.selectedImages}" var="image" panelWidth="1100" panelHeight="280"
+                                showCaption="true">
+                        <p:graphicImage name="#{image.address}" alt="" title="" height="1320"/>
+                    </p:galleria>
+                </div>
+            </ui:define>
+            <ui:define name="sidePanel"  >
+                <div style="width:230px;background-color: #ffffff;padding-right: 10px;padding-top: 5px; border-width: 0px">
+                    <h:link outcome="/pages/guest/signup.xhtml" >
+                        <p:panelGrid columns="1" style="; margin-right: 10px;margin-top: 10px" >
+                            <p:graphicImage  width="230px" style="position: relative"
+                                             url="/resources/images/singup.png"></p:graphicImage>
+                        </p:panelGrid>
+                    </h:link>
+                    
+                    <p:panelGrid columns="1" styleClass="border" style="margin-top: 25px"  >
+                        <f:facet name="header" >
+                            ورود به حساب کاربری
+                        </f:facet>
+                        <!--<p:outputLabel styleClass="news-link" value="ورود به حساب کاربری" />-->
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        <p:inputText placeholder="نام کاربری" style="float: right ;width: 200px" required="true"
+                                     id="username"
+                                     value="#{login.user}"
+                                     requiredMessage="Please enter username"/>
+
+                        <p:password placeholder="کلمه عبور " style="float: right;width:200px" id="password"
+                                    value="#{login.pwd}"/>
+                        <p:outputLabel></p:outputLabel>
+
+
+
+                        <p:commandButton action="#{login.validateUsernamePassword}"
+                                         style="margin-right: 70px" styleClass="loginPanelBtn" value="ورود" actionListener="fdfdf"/>
+                        <f:facet name="footer" >
+                            <p:commandButton action="/pages/guest/forgotPass.xhtml"
+                                             style="padding-left: 35px;padding-right: 35px;color: red;font: -moz-info; font-family: BYekan,'BYekan',tahoma; border: none; " value="کلمه عبور را فراموش کردم"/>
+                        </f:facet>
+                    </p:panelGrid>
+
+                   
+
+
+
+
+
+
+
+
+<!--                                        <h:link outcome="/pages/guest/signup-help.xhtml" >
+                                            <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
+                                                <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
+                                                <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
+                    
+                                            </p:panelGrid>
+                                        </h:link>-->
+
+
+                    <p:panelGrid columns="1" styleClass="font border" style="width: 230px;margin-top: 30px" >
+                        <f:facet name="header">
+                            آخرین اخبار سایت
+                        </f:facet>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>      
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                        </h:link>
+                        <h:link outcome="/pages/guest/news" value="">
+                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                        </h:link>
+                    </p:panelGrid>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <!--here is place of code-->
+
+                <div style="background-color: #fff;margin-top: 50px; padding: 20px; text-align: center;margin-right: 10px   " class="border">
+
+
+
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="دانلود فایل نهایی" styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
+                                        url="/resources/images/arrow-down-icon.png"></p:graphicImage>
+
+                    </h:link>
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;position: relative" url="/resources/images/left_arrow.png"/>
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="پرداخت فاکتور"  styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
+                                        url="/resources/images/payment.png"></p:graphicImage>
+
+
+                    </h:link>
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="براورد زمان و هزینه"  styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/time1.jpg"/>
+
+                    </h:link>
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="ثبت سفارش" styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/Apply-Now-icon.png"></p:graphicImage>
+                    </h:link>
+
+
+                    <p:graphicImage width="20px" style="margin-bottom: 27px;" url="/resources/images/left_arrow.png"/>
+
+                    <h:link outcome="/pages/guest/signup.xhtml" value="">
+                        <h:outputLabel value="ثبت نام در سایت"  styleClass="helpfont"/>
+
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/register.png"></p:graphicImage>
+
+                    </h:link>
+
+                </div>
+                <div>
+                    <!--                    <p:commandButton onclick="perView()" />
+                                        <script type="text/javascript" >
+                                            function perView() {
+                                                $("#myeditable").load("resources/html/test.html");
+                                            }
+                                        </script>
+                                        <div dir="ltr" style="float: right;" id="myeditable" ></div>-->
+                    <iframe class="iFrameClass border"  src="resources/html/test.html" scrolling="no" height="1100" />
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
     </h:head>
-    <h:body>
-        Hello from Facelets
-        this is ali asty test <br />
-        i change aline in index.xhtml
-        i,m yaser and change aline
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <h:form id="form">
-            <p:commandButton value="Show The User" actionListener="#{test.select}" />
-            <h3>Login Logout</h3>
-            <h:outputText value="Username" />
-            <h:inputText id="username" value="#{login.user}"></h:inputText>
-            <h:message for="username"></h:message>
-            <br /><br />
 
-            <h:outputText value="Password" />
-            <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
-            <h:message for="password"></h:message>
-            <br /><br />
-
-            <h:commandButton action="#{login.validateUsernamePassword}"
-                value="Login"></h:commandButton>
-        </h:form>
-    </h:body>
-
-    </ui:define>
-</ui:composition>
+</html>
