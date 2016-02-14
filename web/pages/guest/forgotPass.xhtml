@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:botDetect="botDetectFacelets"
+                template="../../template/signuptemplate.xhtml">
+    <ui:define name="content">
+    <body>
+         <p:panelGrid id="panel" columns="2" styleClass="panel">
+
+             <h:inputText id="selectedStr" value="#{forgotPassword.userName}" style="font-weight: bold;width: 320px;" required="true" />
+            <h:outputText value="نام کاربری" />
+
+            <h:inputText value="#{forgotPassword.email}" style="font-weight: bold;width: 320px;" required="true" />
+            <h:outputText value="ایمیل" />
+        </p:panelGrid>
+        <p:commandButton action="#{forgotPassword.changePassword()}" value="ذخیره"  icon="ui-icon-start" style="margin-top: 300px;margin-left: 100px;background: #4EA2D0"/>
+    </body>
+    </ui:define>
+</ui:composition>
