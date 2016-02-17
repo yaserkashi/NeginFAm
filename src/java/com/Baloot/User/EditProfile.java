@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
@@ -28,6 +29,7 @@ public class EditProfile {
     private String username = user.getUsername();
     private String name = user.getName();
     private String family = user.getFamily();
+    @Digits(integer = 11,fraction = 0, message = "تلفن باید یازده رقم باشد.")
     private String phone = user.getPhoneNum();
     @Email(message = "رایانامه باید معتبر باشد.")
     private String email = user.getEmail();

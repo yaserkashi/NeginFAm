@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Digits;
 import org.hibernate.validator.constraints.Email;
 import org.primefaces.model.UploadedFile;
 
@@ -28,7 +29,9 @@ public class EmploymentForm {
     private String sex;
     @Email(message = "پست الکترونیکی باید معتبر باشد.")
     private String email;
+    @Digits(integer = 11,fraction = 0, message = "موبایل باید یازده رقم باشد.")
     private String mobile;
+    @Digits(integer = 11,fraction = 0, message = "تلفن باید یازده رقم باشد.")
     private String phone;
     private String address;
     private String nationalCode;
