@@ -223,7 +223,10 @@ public class DesignForm {
         design.setPrintType(printType);
         design.setDesignOption(designOption);
         design.setPrintOption(printOption);
-        design.setEndDate(pc.DateToString(pc.getIranianDateFromDate(endDate)));
+        if (endDate != null)
+            design.setEndDate(pc.DateToString(pc.getIranianDateFromDate(endDate)));
+        else
+            design.setEndDate("");
         design.setExplain(explian);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         design.setUserId(user);

@@ -257,7 +257,10 @@ public class TypeForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         type.setDateTime(currentDate);
-        type.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        if (dateTime != null)
+            type.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        else
+            type.setEndDateTime("");
         type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         type.setUserId(user);

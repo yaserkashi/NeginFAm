@@ -31,7 +31,6 @@
 
                 <h:outputText value="زمینه" />
                 <p:selectOneMenu id="field" value="#{translateForm.field}" style="direction: ltr">
-                    <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
                     <f:selectItems value="#{translateForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
 
                 </p:selectOneMenu>
@@ -39,7 +38,6 @@
 
                 <h:outputText value="زبان مبدا و مقصد" />
                 <p:selectOneMenu id="lang" value="#{translateForm.language}" style="direction: ltr" >
-                    <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
                     <f:selectItems value="#{translateForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
 
                 </p:selectOneMenu>

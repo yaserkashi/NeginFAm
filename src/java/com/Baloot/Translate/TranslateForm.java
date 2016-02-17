@@ -220,7 +220,10 @@ public class TranslateForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         translate.setDateTime(currentDate);
-        translate.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        if (dateTime != null)
+            translate.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        else
+            translate.setEndDateTime("");
         translate.setOption(getOption(table, subtable, chart, shape));
         if(attachFile != null)
             translate.setAttachFile(attachFile.getFileName());

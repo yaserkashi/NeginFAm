@@ -207,7 +207,10 @@ public class PaperForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         paper.setDate(currentDate);
-        paper.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        if (dateTime != null)
+            paper.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        else
+            paper.setEndDateTime("");
         paper.setOption(getOption(options)+plan);
         if(attachFile != null)
             paper.setAttachFile(attachFile.getFileName());
