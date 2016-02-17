@@ -17,79 +17,81 @@
         </header>
 
         <h:head>
+              <script type="text/javascript"
+                src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
             <title>سفارش ترجمه</title>
         </h:head>
         <h:body>
-            <h:form> 
 
-                <p:panelGrid columns="2"  style="float: right" styleClass="form border" >
-                    <f:facet name="header" >
-                        ثبت سفارش ترجمه                    
-                    </f:facet>
+            <p:messages id="messages"  autoUpdate="true" closable="true" />
+            <p:panelGrid columns="2"  style="float: right" styleClass="form border" >
+                <f:facet name="header" >
+                    ثبت سفارش ترجمه                    
+                </f:facet>
 
-                    <h:outputText value="زمینه" />
-                    <p:selectOneMenu id="field" value="#{translateForm.field}" style="direction: ltr">
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
-                        <f:selectItems value="#{translateForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
+                <h:outputText value="زمینه" />
+                <p:selectOneMenu id="field" value="#{translateForm.field}" style="direction: ltr">
+                    <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
+                    <f:selectItems value="#{translateForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
 
-                    </p:selectOneMenu>
-
-
-                    <h:outputText value="زبان مبدا و مقصد" />
-                    <p:selectOneMenu id="lang" value="#{translateForm.language}" style="direction: ltr" >
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
-                        <f:selectItems value="#{translateForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
-
-                    </p:selectOneMenu>
+                </p:selectOneMenu>
 
 
+                <h:outputText value="زبان مبدا و مقصد" />
+                <p:selectOneMenu id="lang" value="#{translateForm.language}" style="direction: ltr" >
+                    <f:selectItem itemLabel="انتخاب کنید" itemValue="" />
+                    <f:selectItems value="#{translateForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}" />
 
-                    <h:outputText value="تاریخ و ساعت درخواستی" />
-                    <p:calendar  value="#{translateForm.dateTime}"/>
+                </p:selectOneMenu>
 
 
-                    <h:outputText value="موضوع" />
-                    <h:inputText value="#{translateForm.title}"  style="font-weight: bold;" required="true" />
+
+                <h:outputText value="تاریخ و ساعت درخواستی" />
+                <p:calendar  value="#{translateForm.dateTime}"/>
 
 
+                <h:outputText value="موضوع" />
+                <h:inputText value="#{translateForm.title}"  style="font-weight: bold;" required="true" />
 
 
 
 
-                    <h:outputText value="ترجمه جداول انجام شود" />
-                    <p:selectBooleanCheckbox value="#{translateForm.table}" />
 
 
-                    <h:outputText value= "ترجمه زیر جداول انجام شود" />
-                    <p:selectBooleanCheckbox value="#{translateForm.subtable}" />
+                <h:outputText value="ترجمه جداول انجام شود" />
+                <p:selectBooleanCheckbox value="#{translateForm.table}" />
 
 
-                    <h:outputText value= "مطالب داخل شکل ترجمه شود" />
-                    <p:selectBooleanCheckbox value="#{translateForm.shape}" />
+                <h:outputText value= "ترجمه زیر جداول انجام شود" />
+                <p:selectBooleanCheckbox value="#{translateForm.subtable}" />
 
 
-                    <h:outputText value= "نمودار ها رسم شوند" />
-                    <p:selectBooleanCheckbox value="#{translateForm.chart}" />
+                <h:outputText value= "مطالب داخل شکل ترجمه شود" />
+                <p:selectBooleanCheckbox value="#{translateForm.shape}" />
+
+
+                <h:outputText value= "نمودار ها رسم شوند" />
+                <p:selectBooleanCheckbox value="#{translateForm.chart}" />
 
 
 
-                    <h:outputText value="توضیحات" />
-                    <p:inputTextarea value="#{translateForm.explain}" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                <h:outputText value="توضیحات" />
+                <p:inputTextarea value="#{translateForm.explain}" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
 
-                    <h:outputText value="تحویل حضوری " />
-                    <p:selectBooleanCheckbox value="#{translateForm.delivery}" />
+                <h:outputText value="تحویل حضوری " />
+                <p:selectBooleanCheckbox value="#{translateForm.delivery}" />
 
-                    <h:outputText value="اپلود فایل" />
-                    <h:form enctype="multipart/form-data" >
-                        <p:fileUpload value="#{translateForm.attachFile}" mode="simple"/>
-                        <p:commandButton value="Submit" ajax="false" actionListener="#{translateForm.uploaded}"  />
-                    </h:form>
+                <h:outputText value="اپلود فایل" />
+                <h:form enctype="multipart/form-data" >
+                    <p:fileUpload value="#{translateForm.attachFile}" mode="simple"/>
+                    <p:commandButton value="Submit" ajax="false" actionListener="#{translateForm.uploaded}"  />
+                </h:form>
 
-                    <p:outputLabel value="" ></p:outputLabel>
-                 
-                </p:panelGrid>
+                <p:outputLabel value="" ></p:outputLabel>
 
-            </h:form>
+            </p:panelGrid>
+
+           
 
         </h:body>
 
