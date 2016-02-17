@@ -64,8 +64,8 @@ public class PaperForm {
         return fields;
     }
     
-    public void setLanguage(Integer language) {
-        this.group = language;
+    public void setGroup(Integer group) {
+        this.group = group;
     }
 
     public void setField(Integer field) {
