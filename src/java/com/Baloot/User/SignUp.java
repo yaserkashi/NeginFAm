@@ -7,12 +7,16 @@
 package com.Baloot.User;
 
 import botdetect.web.jsf.JsfCaptcha;
+import com.Baloot.util.SessionBean;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
@@ -32,9 +36,11 @@ public class SignUp {
     private String email;
     private String name;
     private String lastname;
+    @Digits(integer = 11,fraction = 0, message = "تلفن باید یازده رقم باشد.")
     private String mobile;
     private String introduction;
     private String secCode;
+    @AssertTrue(message = "باید قوانین سایت را مطالعه و قبول کنید.")
     private boolean lowCheck;
     private JsfCaptcha captcha;
 
@@ -153,6 +159,8 @@ public class SignUp {
                 UserServices.insertRecordIntoTable(user);
                 FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("ثبت نام شما با موفقیت انجام شد."));
+                HttpSession session = SessionBean.getSession();
+                session.setAttribute("username", userName);
                 return "/pages/user/user.xhtml";
             } catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
