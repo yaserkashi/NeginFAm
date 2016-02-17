@@ -38,7 +38,7 @@
                                              url="/resources/images/singup.png"></p:graphicImage>
                         </p:panelGrid>
                     </h:link>
-                    
+
                     <p:panelGrid columns="1" styleClass="border" style="margin-top: 25px"  >
                         <f:facet name="header" >
                             ورود به حساب کاربری
@@ -54,9 +54,9 @@
                                     value="#{login.pwd}"/>
                         <p:outputLabel></p:outputLabel>
 
+                        <p:defaultCommand target="login"/>
 
-
-                        <p:commandButton action="#{login.validateUsernamePassword}"
+                        <p:commandButton id="login" action="#{login.validateUsernamePassword}"
                                          style="margin-right: 70px" styleClass="loginPanelBtn" value="ورود" actionListener="fdfdf"/>
                         <f:facet name="footer" >
                             <p:commandButton action="/pages/guest/forgotPass.xhtml"
@@ -64,7 +64,6 @@
                         </f:facet>
                     </p:panelGrid>
 
-                   
 
 
 
@@ -73,13 +72,14 @@
 
 
 
-<!--                                        <h:link outcome="/pages/guest/signup-help.xhtml" >
-                                            <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
-                                                <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
-                                                <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
-                    
-                                            </p:panelGrid>
-                                        </h:link>-->
+
+                    <!--                                        <h:link outcome="/pages/guest/signup-help.xhtml" >
+                                                                <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
+                                                                    <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
+                                                                    <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
+                                        
+                                                                </p:panelGrid>
+                                                            </h:link>-->
 
 
                     <p:panelGrid columns="1" styleClass="font border" style="width: 230px;margin-top: 30px" >
