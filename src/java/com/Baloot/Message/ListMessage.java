@@ -44,5 +44,8 @@ public class ListMessage {
     public void setSelectedMessage(Message selectedMessage) {
         this.selectedMessage = selectedMessage;
     }  
-   
+
+    public String getSenderUsername (int id) {
+        return UserServices.getUserById(id).getUsername();
+    }
 }

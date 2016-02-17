@@ -6,7 +6,7 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
 
-        <h:form> 
+        <h:form id="form"> 
 
             <!--            <p:outputLabel value="لیست پیام ها" style="float: left;text-align: right;height: 50px;width: 100%;background: #A4B1B6"/>
             
@@ -46,35 +46,35 @@
                         
                                     </p:panelGrid>  -->
 
-
-
-            <p:dataTable value="" var="message" styleClass="dataTable">
+            <p:dataTable value="#{listMessage.list}"
+                         var="message" styleClass="dataTable">
 
                 <p:ajax event="rowSelect"  update=""  />
 
                 <p:column headerText="ردیف">
-                    <h:outputText value="1" />
+                    <h:outputText value="#{listMessage.list.indexOf(message)+1}" />
                 </p:column> 
                 <p:column headerText="نام کاربری فرستنده">
-                    <h:outputText value="maryam" />
+                    <h:outputText value="#{listMessage.getSenderUsername(message.userIdSend.id)}" />
                 </p:column> 
                 <p:column headerText="موضوع">
-                    <h:outputText value="سوال" />
+                    <h:outputText value="#{message.title}" />
                 </p:column>  
                 <p:column headerText="پیام">
-                    <h:outputText value="سوال من به این دلیل بود زیرا یکی از استادانم برای..."/>
+                    <h:outputText value="#{message.text}"/>
                 </p:column> 
                 <p:column headerText="وضعیت" >
-                    <h:outputText value="خوانده شده" />
+                    <h:outputText value="#{message.readStr}" />
                 </p:column>
                 <p:column headerText="تاریخ ارسال">
-                    <h:outputText value="1394/10/17" />
+                    <h:outputText value="#{message.dateTime}" />
                 </p:column>
                 <p:column headerText="نوع پیام">
-                    <h:outputText value="ارسال" />
+                    <h:outputText value="#{message.getType(1)}" />
                 </p:column>
                 <p:column headerText="جزئیات بیشتر">
-                    <p:commandButton  icon="ui-icon-document" onclick="PF('messageDialog').show()">
+                    <p:commandButton icon="ui-icon-document" oncomplete="PF('messageDialog').show()">
+                        <f:setPropertyActionListener value="#{message}" target="#{listMessage.selectedMessage}" />
                     </p:commandButton>
                 </p:column>
 
@@ -87,25 +87,22 @@
             <p:dialog widgetVar="messageDialog" dynamic="true"
                       style="direction:rtl"
                       header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
-                <h:outputText value="سوال من به این دلیل بود زیرا یکی از استادانم برا ترجمه ای که قبلا ایران فرتاک برای من انجام داده بود."  styleClass="font"/>
+                <p:outputPanel id="messageDetail">
+                    <h:outputText value="#{listMessage.selectedMessage.text}"  styleClass="font"/>
+                </p:outputPanel>
 
             </p:dialog>
 
-
-
-
             <p:dialog widgetVar="ResultDialog" dynamic="true" 
-                      
                       header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center">
                 <p:panelGrid id="panel" columns="2"  >
 
                     <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" >
-                        <f:selectItem itemLabel="ایمیل" itemValue="#{false}" />
+                        <f:selectItem itemLabel="ایمیل" itemValue="#{true}" />
                         <f:selectItem itemLabel="تلفن" itemValue="#{false}" />
                         <f:selectItem itemLabel="صندوق پیام" itemValue="#{true}" />
                     </p:selectOneRadio>
                     <h:outputText value="نوع پیام" />
-
                    
                     <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;" required="true" />
                     <h:outputText value="موضوع" />
@@ -114,13 +111,10 @@
                     <h:outputText value="پیام" />
 
                 </p:panelGrid>
+                <p:commandButton action="#{sendMessageFromAdmin.submit()}" value="ارسال" />
             </p:dialog>
-
-
 
         </h:form>
 
-
-
     </ui:define>
-</ui:composition> 
+    </ui:composition> 
