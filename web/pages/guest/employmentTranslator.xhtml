@@ -19,184 +19,115 @@
         <h:head>
             <title>استخدام مترجم</title>
         </h:head>
-        <h:body>
-            <h:form> 
+        <h:form> 
 
+            <p:messages autoUpdate="true"/>
+            <p:panelGrid columns="3" style="float: right;margin-top: 40px;direction: rtl" styleClass="form border">
+                <f:facet name="header">
+                    <h:outputText value="اطلاعات شخصی"  /> 
+                </f:facet>
 
-                <p:panelGrid columns="3" style="float: right;margin-top: 40px;direction: rtl" styleClass="form border">
+                <h:outputText value="نام"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputText value="#{employmentForm.name}" style="font-weight: bold" required="true" requiredMessage="نام را وارد نکرده اید."/>
 
-                    <f:facet name="header">
-                        <h:outputText value="اطلاعات شخصی"  /> 
-                    </f:facet>
-                    <h:outputText value="نام"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
+                <h:outputText value="نام خانوادگی"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputText value="#{employmentForm.lastName}" style="font-weight: bold" required="true" requiredMessage="نام خانوادگی را وارد نکرده اید."/>
 
-                    <h:outputText value="نام خانوادگی"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
+                <h:outputText value="جنسیت"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <p:selectOneRadio id="console15" value="#{employmentForm.sex}" required="true" requiredMessage="جنسیت را وارد نکرده اید.">
+                    <f:selectItem itemLabel="مرد" itemValue="men" />
+                    <f:selectItem itemLabel="زن" itemValue="woman" />
+                </p:selectOneRadio>
 
-                    <h:outputText value="جنسیت"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <p:selectOneRadio id="console15" >
-                        <f:selectItem itemLabel="مرد" itemValue="PS4" />
-                        <f:selectItem itemLabel="زن" itemValue="PS4" />
-                    </p:selectOneRadio>
+                <h:outputText value="پست الکترونیکی"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputText value="#{employmentForm.email}" style="font-weight: bold" required="true" requiredMessage="پست الکترونیکی را وارد نکرده اید."/>
 
-                    <h:outputText value="پست الکترونیکی"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
+                <h:outputText value="شماره موبایل"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputText value="#{employmentForm.mobile}" style="font-weight: bold" required="true" requiredMessage="شماره موبایل را وارد نکرده اید."/>
 
-                    <h:outputText value="شماره موبایل"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
+                <h:outputText value="تلفن ثابت"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputText value="#{employmentForm.phone}" style="font-weight: bold" required="true" requiredMessage="شماره تلفن را وارد نکرده اید."/>
 
-                    <h:outputText value="تلفن ثابت"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
+                <h:outputText value="ادرس محل سکونت"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputTextarea value="#{employmentForm.address}" style="font-weight: bold" required="true" requiredMessage="آدرس را وارد نکرده اید."/>
 
-                    <h:outputText value="ادرس محل سکونت"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputTextarea  style="font-weight: bold" required="true"/>
+                <h:outputText value="کدملی ده رقمی"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputText value="#{employmentForm.nationalCode}" style="font-weight: bold" required="true" requiredMessage="کد ملی را وارد نکرده اید."/>
 
-                    <h:outputText value="کدملی ده رقمی"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
+                <h:outputText value="ایا توانایی ترجمه همزمان را دارید؟"  />
+                <h:outputLabel value="" style="color: red"/>
+                <p:selectOneRadio value="#{employmentForm.onlineTranslate}" id="console17" >
+                    <f:selectItem itemLabel="بله" itemValue="yes" />
+                    <f:selectItem itemLabel="خیر" itemValue="no" />
+                </p:selectOneRadio>
 
-                    <h:outputText value="نحوه اشنایی با ما"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <p:selectOneMenu id="console16" style="padding-right: 15px;width: 80px" >
-                        <f:selectItem itemLabel="انتخاب کنید" itemValue=""  />
-                        <f:selectItem itemLabel="موتورهای جست وجو" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="تبلیغات انلاین" itemValue="PS4" />
-                    </p:selectOneMenu>
+                <h:outputText value="سوابق نحصیلی و کاری مرتبط با ترجمه"  />
+                <h:outputLabel value="*" style="color: red"/>
+                <h:inputTextarea value="#{employmentForm.records}" style="font-weight: bold" required="true" requiredMessage="سوابق را وارد نکرده اید."/>
 
-                    <h:outputText value="ایا توانایی ترجمه همزمان را دارید؟"  />
-                    <h:outputLabel value="" style="color: red"/>
-                    <p:selectOneRadio id="console17" >
-                        <f:selectItem itemLabel="بله" itemValue="PS4" />
-                        <f:selectItem itemLabel="خیر" itemValue="PS4" />
-                    </p:selectOneRadio>
+            </p:panelGrid>
 
-                    <h:outputText value="سوابق نحصیلی و کاری مرتبط با ترجمه"  />
-                    <h:outputLabel value="*" style="color: red"/>
-                    <h:inputTextarea  style="font-weight: bold" required="true"/>
+            <p:panelGrid columns="4" style="float: right;direction: rtl;margin-top: 20px"  styleClass="form border">
 
+                <f:facet name="header">
+                    <h:outputText value="اخرین مدارک تحصیلی"  /> 
+                </f:facet>
 
+                <h:outputText value="رشته تحصیلی"  />
+                <h:outputText value="مقطع"  />
+                <h:outputText value="دانشگاه/اموزشگاه"  />
+                <h:outputText value="معدل"  />
 
+                <h:inputText value="#{employmentForm.lastEducationField}" style="font-weight: bold;width: 120px" required="true" requiredMessage="رشته تحصیلی را وارد نکرده اید."/>
+                <h:inputText  style="font-weight: bold;width: 100px" />
+                <h:inputText value="#{employmentForm.lastEducationUniversity}" style="font-weight: bold;width: 120px" required="true" requiredMessage="دانشگاه محل تحصیل را وارد نکرده اید."/>
+                <h:inputText value="#{employmentForm.lastEducationAverage}" style="font-weight: bold;width: 100px" required="true" requiredMessage="معدل را وارد نکرده اید."/>
 
-                </p:panelGrid >
+            </p:panelGrid>
 
-                <p:panelGrid columns="4" style="float: right;direction: rtl;margin-top: 10px"  styleClass="form border" >
+            <p:panelGrid columns="3" style="float: right;direction: rtl;margin-top: 20px" styleClass="form border" >
+                <f:facet name="header">
+                    <h:outputText value="مهارت"  /> 
+                </f:facet>
+                <h:outputText value="زبان های ترجمه"  />
+                <h:outputText value="" style="width: 5px"/>
 
-                    <f:facet name="header">
-                        <h:outputText value="اخرین مدارک تحصیلی"  /> 
-                    </f:facet>
+                <p:selectManyCheckbox id="grid2" layout="grid" value="#{employmentForm.selectedItems}"  columns="3">
+                    <f:selectItems value="#{employmentForm.items}" />                  
+                </p:selectManyCheckbox>
 
+                <h:outputText value="سایر زمینه ها"  />
+                <h:outputText value="" style="width: 5px"/>
+                <h:inputText value="#{employmentForm.otherField}" style="font-weight: bold"/>
 
-                    <h:outputText value="رشته تحصیلی"  />
-                    <h:outputText value="مقطع"  />
-                    <h:outputText value="دانشگاه/اموزشگاه"  />
-                    <h:outputText value="معدل"  />
+                <h:outputText value="شماره کارت بانکی"  />
+                <h:outputText value="*" style="width: 5px;color: red"/>
+                <h:inputText value="#{employmentForm.bankCardNum}" style="font-weight: bold" required="true" requiredMessage="شماره کارت بانکی را وارد نکرده اید."/>
 
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true"/>
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true"/>
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
+                <h:outputText value="نام بانک"  />
+                <h:outputText value="*" style="width: 5px;color: red"/>
+                <h:inputText value="#{employmentForm.bankName}" style="font-weight: bold" required="true" requiredMessage="نام بانک را وارد نکرده اید."/>
 
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
+                <h:outputText value="تصویر کارت ملی یاشناسنامه"  />
+                <h:outputText value="*" style="width: 5px;color: red"/>
+                <p:fileUpload value="" mode="simple" />
 
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true"/>
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
+                <h:outputText value="3*4تصویر"  />
+                <h:outputText value="*" style="width: 5px;color: red"/>
+                <p:fileUpload value="" mode="simple" />
 
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
-                    <h:inputText  style="font-weight: bold;width: 120px" required="true"/>
-                    <h:inputText  style="font-weight: bold;width: 100px" required="true" />
+            </p:panelGrid>
 
-                </p:panelGrid>
-
-
-                <p:panelGrid columns="3" style="float: right;direction: rtl;margin-top: 20px;margin-bottom: 20px"  styleClass="form border" >
-                    <f:facet name="header">
-                        <h:outputText value="مهارت"  /> 
-                    </f:facet>
-                    <h:outputText value="زبان های ترجمه"  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <p:selectOneRadio id="language1" >
-                        <f:selectItem itemLabel="انگلیسی به فارسی" itemValue="PS4" />
-                        <f:selectItem itemLabel="فارسی به انگلیسی" itemValue="PS4" />
-                        <f:selectItem itemLabel="عربی به فارسی" itemValue="PS4" />
-                    </p:selectOneRadio>
-                    <h:outputText value=""  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <p:selectOneRadio id="language2" >
-                        <f:selectItem itemLabel="فارسی به عربی" itemValue="PS4" />
-                        <f:selectItem itemLabel="فرانسه به فارسی" itemValue="PS4" />
-                        <f:selectItem itemLabel="فارسی به فرانسه" itemValue="PS4" />
-                    </p:selectOneRadio>
-                    <h:outputText value=""  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <p:selectOneRadio id="language3" >
-                        <f:selectItem itemLabel="روسی به فارسی" itemValue="PS4" />
-                        <f:selectItem itemLabel="فارسی به روسی" itemValue="PS4" />
-                        <f:selectItem itemLabel="المانی به فارسی" itemValue="PS4" />
-
-                    </p:selectOneRadio>
-
-                    <h:outputText value="سایر زبان ها"  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
-
-                    <h:outputText value="زمینه"  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <p:selectOneRadio id="language4" >
-                        <f:selectItem itemLabel="علوم پایه" itemValue="PS4" />
-                        <f:selectItem itemLabel="کامپیوتر" itemValue="PS4" />
-                        <f:selectItem itemLabel="برق و الکترونیک" itemValue="PS4" />
-                        <f:selectItem itemLabel="مکانیک" itemValue="PS4" />
-                    </p:selectOneRadio>
-                    <h:outputText value=""  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <p:selectOneRadio id="language5" >
-                        <f:selectItem itemLabel="نفت،گاز،پتروشیمی" itemValue="PS4" />
-                        <f:selectItem itemLabel="کشاوزی و صنایع غذایی" itemValue="PS4" />
-                        <f:selectItem itemLabel="متالوژی و مواد" itemValue="PS4" />
-                    </p:selectOneRadio>
-
-                    <h:outputText value="سایر زمینه ها"  />
-                    <h:outputText value="" style="width: 5px"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
-
-                    <h:outputText value="شماره کارت بانکی"  />
-                    <h:outputText value="*" style="width: 5px;color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
-
-                    <h:outputText value="نام بانک"  />
-                    <h:outputText value="*" style="width: 5px;color: red"/>
-                    <h:inputText  style="font-weight: bold" required="true"/>
-
-                    <h:outputText value="تصویر کارت ملی یاشناسنامه"  />
-                    <h:outputText value="*" style="width: 5px;color: red"/>
-                    <p:fileUpload value="" mode="simple" />
-
-                    <h:outputText value="3*4تصویر"  />
-                    <h:outputText value="*" style="width: 5px;color: red"/>
-                    <p:fileUpload value="" mode="simple" />
-
-
-
-
-                </p:panelGrid>
-
-                <p:commandButton  value="ثبت" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
-            </h:form>
-        </h:body>
+            <p:commandButton action="#{employmentForm.submit()}" value="ثبت" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+        </h:form>
 
     </ui:define>
 </ui:composition>  

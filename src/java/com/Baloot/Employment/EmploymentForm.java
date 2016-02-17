@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Employment;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.validation.constraints.Digits;
 import org.hibernate.validator.constraints.Email;
 import org.primefaces.model.UploadedFile;
@@ -21,17 +23,17 @@ import org.primefaces.model.UploadedFile;
  *
  * @author FK
  */
-
 @ManagedBean
 public class EmploymentForm {
+
     private String name;
     private String lastName;
     private String sex;
     @Email(message = "پست الکترونیکی باید معتبر باشد.")
     private String email;
-    @Digits(integer = 11,fraction = 0, message = "موبایل باید یازده رقم باشد.")
+    @Digits(integer = 11, fraction = 0, message = "موبایل باید یازده رقم باشد.")
     private String mobile;
-    @Digits(integer = 11,fraction = 0, message = "تلفن باید یازده رقم باشد.")
+    @Digits(integer = 11, fraction = 0, message = "تلفن باید یازده رقم باشد.")
     private String phone;
     private String address;
     private String nationalCode;
@@ -47,6 +49,33 @@ public class EmploymentForm {
     private String bankName;
     private UploadedFile birthCertificate;
     private UploadedFile image;
+    private List<SelectItem> items;
+    private String[] selectedItems;
+
+    @PostConstruct
+    public void init() {
+        items = new ArrayList<>();
+        items.add(new SelectItem("Miami1", "valueMiami1"));
+        items.add(new SelectItem("Miami2", "valueMiami2"));
+        items.add(new SelectItem("Miami3", "valueMiami3"));
+        items.add(new SelectItem("Miami11", "valueMiami31"));
+    }
+
+    public List<SelectItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<SelectItem> items) {
+        this.items = items;
+    }
+
+    public String[] getSelectedItems() {
+        return selectedItems;
+    }
+
+    public void setSelectedItems(String[] selectedItems) {
+        this.selectedItems = selectedItems;
+    }
 
     public String getName() {
         return name;
@@ -207,29 +236,31 @@ public class EmploymentForm {
     public void setBirthCertificate(UploadedFile birthCertificate) {
         this.birthCertificate = birthCertificate;
     }
-    
+
     public String getLanguege(List<Boolean> languages) {
         String language = "";
         for (Boolean lang : languages) {
-            if (lang)
+            if (lang) {
                 language += "1";
-            else
+            } else {
                 language += "0";
+            }
         }
         return language;
     }
-    
+
     public String getField(List<Boolean> fields) {
         String field = "";
         for (Boolean f : fields) {
-            if (f)
+            if (f) {
                 field += "1";
-            else
+            } else {
                 field += "0";
+            }
         }
         return field;
     }
-         
+
     public void submit() {
         System.out.println(EmploymentForm.class.getName() + ":Submit Function!");
         Employment empl = new Employment();
@@ -245,25 +276,29 @@ public class EmploymentForm {
         empl.setName(name);
         empl.setNationalCode(nationalCode);
         Boolean ot = false;
-        if (onlineTranslate.equals("yes"))
+        if (onlineTranslate.equals("yes")) {
             ot = true;
+        }
         empl.setOnlineTranslate(ot);
         empl.setOtherField(otherField);
         empl.setPhone(phone);
         empl.setRecords(records);
         Boolean s = false;
-        if (sex.equals("man"))
+        if (sex.equals("man")) {
             s = true;
+        }
         empl.setSex(s);
-        if (fields != null)
+        if (fields != null) {
             empl.setField(getField(fields));
-        if (languages != null)
+        }
+        if (languages != null) {
             empl.setTranslateLanguage(getLanguege(languages));
-        
+        }
+
         try {
             EmploymentServices.insertRecordIntoTable(empl);
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("اطلاعات شما با موفقیت ثبت شد."));
+                    new FacesMessage("اطلاعات شما با موفقیت ثبت شد."));
         } catch (SQLException ex) {
             Logger.getLogger(EmploymentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
