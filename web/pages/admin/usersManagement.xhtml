@@ -6,7 +6,11 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:form> 
-            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" styleClass="dataTable">
+<!--             <p:dataTable value="#{orderFollowUpForAdmin.listOfOrdreForAdmin()}" 
+                     selection="#{orderFollowUpForAdmin.selectedOreder}" selectionMode="single" rowKey="#{trackorder.id}"
+                     var="trackorder" styleClass="dataTable" style="direction: rtl">-->
+            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" styleClass="dataTable" 
+                         selection="#{usersManagement.selected}" selectionMode="single" rowKey="#{user.id}">
                 <f:facet name="header">
                     لیست کاربران
                 </f:facet>
@@ -27,66 +31,51 @@
                 </p:column>
                 <p:column style="width:32px;text-align: center">
                     <p:commandButton  icon="ui-icon-document" onclick="PF('userDialog').show()">
+                        <f:setPropertyActionListener value="#{user}" target="#{usersManagement.selected}" />
                     </p:commandButton>
                 </p:column>
                 <p:column style="width:32px;text-align: center">
                     <p:commandButton  icon="ui-icon-close" action="#{usersManagement.deleteUser(user.id)}" update="@form" ajax="true">
+                        <f:setPropertyActionListener value="#{user}" target="#{usersManagement.selected}" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
-            <p:dialog header="اطلاعات کاربر" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+           <p:dialog header="اطلاعات کاربر" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userDetail" style="text-align:center;">
                     <p:panelGrid  columns="2"  columnClasses="label,value" >
                         <f:facet name="header">
                         </f:facet>
-                        <h:outputText value="111" style="font-weight: bold;"/>
+                        <h:outputText value="#{usersManagement.selected.id}" style="font-weight: bold;"/>
                         <h:outputText value="کدشما"  />
 
                         <p:inplace id="ajax11" editor="true">
-                            <h:inputText value="test" style="font-weight: bold" required="true"/>
+                            <h:inputText value="#{usersManagement.selected.username}" style="font-weight: bold" required="true"/>
                         </p:inplace>
                         <h:outputText value="نام کاربری" />
 
                         <p:inplace id="ajax12" editor="true">
-                            <h:inputText value="test1" style="font-weight: bold" required="true"/>
+                            <h:inputText value="#{usersManagement.selected.name}" style="font-weight: bold" required="true"/>
                         </p:inplace>
                         <h:outputText value="نام" />
 
                         <p:inplace id="ajax13" editor="true">
-                            <h:inputText value="test2" style="font-weight: bold" required="true"/>
+                            <h:inputText value="#{usersManagement.selected.family}" style="font-weight: bold" required="true"/>
                         </p:inplace>
                         <h:outputText value="نام خانوادگی" /> 
 
-                        <p:inplace id="ajax14" editor="true">
-                            <p:inputTextarea value="یزد،خیابان شهید مطهری" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
-
-
-                        </p:inplace>
-                        <h:outputText value="ادرس" />
+                       
 
                         <p:inplace id="ajax15" editor="true">
-                            <h:inputText value="09130000000" style="font-weight: bold" required="true"/>
+                            <h:inputText value="#{usersManagement.selected.phoneNum}" style="font-weight: bold" required="true"/>
                         </p:inplace>
                         <h:outputText value="تلفن همراه" />
-
-                        <p:inplace id="ajax16" editor="true">
-                            <h:inputText value="تبلیغات" style="font-weight: bold" required="true"/>
-                        </p:inplace>
-                        <h:outputText value="نحوه اشنایی باسایت" />
-
-
-
                         <p:inplace id="ajax18" editor="true">
-                            <h:inputText value="aaa@yahoo.com" style="font-weight: bold"  required="true"/>
+                            <h:inputText value="#{usersManagement.selected.email}" style="font-weight: bold"  required="true"/>
                         </p:inplace>
                         <h:outputText value="پست الکترونیک" />
-
-
-                        <h:outputText value="94/10/6" style="font-weight: bold" />
-                        <h:outputText value="تاریخ ثبت نام" />
-
+                     
                         <f:facet name="footer">
-                            <p:commandButton  value="ثبت" icon="ui-icon-star" style=";margin-left: 100px;background: #5D8A3D" disabled="true"/>
+                            <p:commandButton  value="ثبت" icon="ui-icon-star" style=";margin-left: 100px;background: #5D8A3D" disabled="false"/>
                         </f:facet>
 
                     </p:panelGrid>
