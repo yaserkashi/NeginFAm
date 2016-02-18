@@ -34,7 +34,7 @@ public class UsersManagement {
         this.selected = selected;
     }
     
-    public void deleteUser(int id) {
-        UserServices.deleteUserById(id);
+    public void deleteUser() {
+        UserServices.deleteUserById(selected.getId());
     }
 }
