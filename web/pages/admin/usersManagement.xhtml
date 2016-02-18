@@ -5,122 +5,91 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-         <h:head>
-           
+        <h:head>
             <title>مدیریت اعضا</title>
         </h:head>
-        <h:body>
-        <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" styleClass="dataTable" 
-                     selection="#{usersManagement.selected}" selectionMode="single" rowKey="#{user.id}">
-            <f:facet name="header">
-                لیست کاربران
-            </f:facet>
-            <p:column headerText="کد" >
-                <h:outputText value="#{user.id}" />
-            </p:column>
-            <p:column headerText="نام کاربری">
-                <h:outputText value="#{user.username}" />
-            </p:column>
-            <p:column headerText="ایمیل">
-                <h:outputText value="#{user.email}" />
-            </p:column>
-            <p:column headerText="نام">
-                <h:outputText value="#{user.name}" />
-            </p:column>
-            <p:column headerText="نام خانوادگی">
-                <h:outputText value="#{user.family}" />
-            </p:column >
-            <p:column headerText="مشاهده" style="width:32px;text-align: center">
-                <p:commandButton  icon="ui-icon-document" update=":adminform:userDetail" onclick="PF('userDialog').show()" ajax="true">
-                    <f:setPropertyActionListener value="#{user}" target="#{usersManagement.selected}" />
-                </p:commandButton>
-            </p:column>
-            <p:column headerText="حذف کاربر" style="width:32px;text-align: center" >
-                <p:commandButton  icon="ui-icon-close" action="#{usersManagement.deleteUser(user.id)}" update="@form" >
+        <h:body>            
 
-                </p:commandButton>
-            </p:column>
-        </p:dataTable>
-
-        <p:dataTable id="basicDT" var="car" value="#{usersManagement.list}">
-            <f:facet name="header">
-                Basic
-            </f:facet>
-            <p:column headerText="Id">
-                <h:outputText value="#{car.id}" />
-            </p:column>
-            
-          
-            <p:column style="width:32px;text-align: center">
-                <p:commandButton update=":adminform:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
-                    <f:setPropertyActionListener value="#{car}" target="#{usersManagement.setSelected(selected)}" />
-                </p:commandButton>
-            </p:column>
-        </p:dataTable>
+            <p:dataTable id="basicDT" var="user" value="#{usersManagement.list}" 
+                         styleClass="dataTable" rowKey="#{user.id}">
+                <f:facet name="header">
+                    لیست کاربران
+                </f:facet>
+                <p:column headerText="کد" >
+                    <h:outputText value="#{user.id}" />
+                </p:column>
+                <p:column headerText="نام کاربری">
+                    <h:outputText value="#{user.username}" />
+                </p:column>
+                <p:column headerText="ایمیل">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column headerText="نام">
+                    <h:outputText value="#{user.name}" />
+                </p:column>
+                <p:column headerText="نام خانوادگی">
+                    <h:outputText value="#{user.family}" />
+                </p:column >
 
 
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update=":adminform:aaaa" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+                        <f:setPropertyActionListener value="#{user}" target="#{usersManagement.selected}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="حذف کاربر" style="width:32px;text-align: center" >
+                    <p:commandButton  icon="ui-icon-close" action="#{usersManagement.deleteUser()}" update="@form" >
+                        <f:setPropertyActionListener value="#{user}" target="#{usersManagement.selected}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
 
-        <p:dialog id="dialog" header="اطلاعات کاربر" widgetVar="userDialog" modal="true"
-                  showEffect="fade" hideEffect="fade" resizable="false">
-            <p:outputPanel id="userDetail" style="text-align:center;"
-                           rendered="#{not empty usersManagement.selected}">
-                <p:panelGrid  columns="2"  columnClasses="label,value" >
-                    <f:facet name="header">
-                    </f:facet>
-                    <h:outputText value="#{usersManagement.selected.id}" style="font-weight: bold;"/>
-                    <h:outputText value="کدشما"  />
 
-                    <p:inplace id="ajax11" editor="true">
+            <p:dialog header="اطلاعات کاربر" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="aaaa" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty usersManagement.selected}" columnClasses="label,value">
+
+                        <f:facet name="header">
+                        </f:facet>
+                        <h:outputText value="#{usersManagement.selected.id}" style="font-weight: bold;"/>
+                        <h:outputText value="کدشما"  />
+
+
                         <h:inputText value="#{usersManagement.selected.username}" style="font-weight: bold" required="true"/>
-                    </p:inplace>
-                    <h:outputText value="نام کاربری" />
 
-                    <p:inplace id="ajax12" editor="true">
+                        <h:outputText value="نام کاربری" />
+
+
                         <h:inputText value="#{usersManagement.selected.name}" style="font-weight: bold" required="true"/>
-                    </p:inplace>
-                    <h:outputText value="نام" />
 
-                    <p:inplace id="ajax13" editor="true">
+                        <h:outputText value="نام" />
+
+
                         <h:inputText value="#{usersManagement.selected.family}" style="font-weight: bold" required="true"/>
-                    </p:inplace>
-                    <h:outputText value="نام خانوادگی" /> 
+
+                        <h:outputText value="نام خانوادگی" /> 
 
 
 
-                    <p:inplace id="ajax15" editor="true">
+
                         <h:inputText value="#{usersManagement.selected.phoneNum}" style="font-weight: bold" required="true"/>
-                    </p:inplace>
-                    <h:outputText value="تلفن همراه" />
-                    <p:inplace id="ajax18" editor="true">
+
+                        <h:outputText value="تلفن همراه" />
+
                         <h:inputText value="#{usersManagement.selected.email}" style="font-weight: bold"  required="true"/>
-                    </p:inplace>
-                    <h:outputText value="پست الکترونیک" />
+                        <h:outputText value="پست الکترونیک" />
 
-                    <f:facet name="footer">
-                        <p:commandButton  value="ثبت"  icon="ui-icon-star" style=";margin-left: 100px;background: #5D8A3D" disabled="false"/>
-                    </f:facet>
+                        <f:facet name="footer">
+                            <p:commandButton  value="ثبت"  icon="ui-icon-star" style=";margin-left: 100px;background: #5D8A3D" disabled="false"/>
+                        </f:facet>
 
-                </p:panelGrid>
-            </p:outputPanel>
-        </p:dialog>
-        
-        
-        
-         <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel id="carDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty usersManagement.selected}" columnClasses="label,value">
-               
- 
-                <h:outputText value="Id:" />
-                <h:outputText value="#{usersManagement.selected.id}" />
- 
-               
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
 
 
 
-</h:body>
+        </h:body>
     </ui:define>
 </ui:composition>  
