@@ -15,29 +15,34 @@
                 }
             </style>
         </header>
-        
+
         <h:head>
             <title>مدیریت محتوا</title>
         </h:head>
         <h:body>
-        <h:form> 
-            <h:panelGrid columns="2"  style="margin-top: 49px">
-               
-               
-            <h:inputText  style="font-weight: bold;width: 760px;height: 24px;"  required="true" />
-              <h:outputText value="عنوان" />
-            </h:panelGrid>
-           
-                
-            <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="800" height="290" style="margin-top:  6px"/>
 
-            <h:panelGrid columns="2" style="margin-top: 10px">
-               
+            <p:messages id="messages"  autoUpdate="true" closable="true" />
+
+            <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" width="800" height="290" styleClass="form"/>
+
+
+            <h:panelGrid columns="2" >
+
+
                 <p:commandButton value="ثبت" action="#{editorView.createFile()}"  icon="ui-icon-disk" />
 
-                <p:commandButton value="حذف" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+                <p:commandButton value="پاک کردن محتوا" type="button" icon="ui-icon-close"  onclick="PF('editorWidget').clear();" >
+                    <p:confirm header="هشدار!!" message="از پاک کردن محتویات صفحه اطمینان دارید؟"   />
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                        <p:commandButton value="بله"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Dialog2').show()" />
+                        <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
+                    </p:confirmDialog>
+                </p:commandButton>
             </h:panelGrid>
-        </h:form> 
+
+
+
+
         </h:body>
     </ui:define>
 </ui:composition>  

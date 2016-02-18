@@ -5,12 +5,13 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-        <h:form> 
-            This is Slider Management Page
-            <br/>
+       
+          
+            
             <!--value : listy as image ha ke adreseshon ro az DB mikhne-->
             <!--selection : listy ke bayad jaye ImagesView.image set beshe-->
             <!--dar vage liste dovom hamone=ie ke to slider neshon mide-->
+             <p:messages id="messages"  autoUpdate="true" closable="true" />
             <p:dataTable id="basicDT" var="image" value="#{imagesForm.images}" 
                          styleClass="dataTable"                       
                          selection="#{imagesForm.selectedList}" rowKey="#{image.id}">
@@ -28,6 +29,6 @@
             </p:dataTable>
             <p:commandButton action="#{imagesForm.submit()}" value="ذخیره" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
             <p:button  value="اضافه نمودن تصویر" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
-        </h:form>
+      
     </ui:define>
 </ui:composition>  
