@@ -30,17 +30,17 @@
                     ثبت سفارش تایپ
                 </f:facet>
 
-                <p:outputLabel value="زبان " ></p:outputLabel>
+                <p:outputLabel value="زبان *" ></p:outputLabel>
                 <p:selectOneMenu id="lang" value="#{typeForm.language}" styleClass="input" >
                     <f:selectItems value="#{typeForm.languges}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel value="زمینه " ></p:outputLabel>
+                <p:outputLabel value="زمینه *" ></p:outputLabel>
                 <p:selectOneMenu id="feild" value="#{typeForm.field}" styleClass="input" >
                     <f:selectItems value="#{typeForm.fields}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
                 </p:selectOneMenu>              
 
-                <p:outputLabel value=" موضوع" ></p:outputLabel>
+                <p:outputLabel value=" موضوع*" ></p:outputLabel>
                 <p:inputText value="#{typeForm.title}"  />
 
                 <p:outputLabel value=" فرمول نویسی" ></p:outputLabel>
@@ -67,14 +67,14 @@
                 <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" ></p:outputLabel>
                 <p:inputTextarea value="#{typeForm.explain}" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
 
-                <p:outputLabel value=" تاریخ و ساعت درخواستی " ></p:outputLabel>
+                <p:outputLabel value=" تاریخ و ساعت درخواستی *" ></p:outputLabel>
                 <p:calendar value="#{typeForm.dateTime}" />
 
                 <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
                 <p:selectBooleanCheckbox value="#{typeForm.delivery}"  />
 
 
-                <p:outputLabel value="آپلود فایل سفارش" ></p:outputLabel>
+                <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
                 <h:form enctype="multipart/form-data" >
                     <p:fileUpload value="#{typeForm.attachFile}" mode="simple"/>
 

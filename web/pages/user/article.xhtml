@@ -30,17 +30,17 @@
                     ثبت سفارش مقاله
                 </f:facet>
 
-                <p:outputLabel value="انتخاب گروه "  ></p:outputLabel>
+                <p:outputLabel value="انتخاب گروه *"  ></p:outputLabel>
                 <p:selectOneMenu id="group" value="#{paperForm.group}" styleClass="input">
                     <f:selectItems value="#{paperForm.groups}" var="group" itemLabel="#{group.text}" itemValue="#{group.id}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel value="انتخاب رشته " ></p:outputLabel>
+                <p:outputLabel value="انتخاب رشته *" ></p:outputLabel>
                 <p:selectOneMenu id="feild" value="#{paperForm.field}" styleClass="input">
                     <f:selectItems value="#{paperForm.fields}" var="field" itemLabel="#{field.text}" itemValue="#{field.id}"/>
                 </p:selectOneMenu>            
 
-                <p:outputLabel value=" انتخاب گرایش" ></p:outputLabel>
+                <p:outputLabel value=" انتخاب گرایش*" ></p:outputLabel>
                 <p:selectOneMenu id="orientation" value="#{paperForm.orientation}" styleClass="input">
                     <f:selectItems value="#{paperForm.orientations}" var="orientation" itemLabel="#{orientation.text}" itemValue="#{orientation.id}"/>
                 </p:selectOneMenu>
@@ -66,7 +66,7 @@
                 <p:outputLabel value=" نگارش مقاله بدون دریافت اطلاعات اولیه" ></p:outputLabel>
                 <p:selectBooleanCheckbox value="#{paperForm.options.get(7)}"  />
 
-                <p:outputLabel value=" مایل به انتخاب کدام یک از طرح های زیر برای دریافت خدمات هستید؟ " ></p:outputLabel>
+                <p:outputLabel value=" مایل به انتخاب کدام یک از طرح های زیر برای دریافت خدمات هستید؟ *" ></p:outputLabel>
                 <p:outputLabel value=" "></p:outputLabel>
 
 
@@ -78,7 +78,7 @@
                 </p:selectOneRadio>
                 <p:outputLabel value=" " ></p:outputLabel>     
 
-                <p:outputLabel value=" موضوع" ></p:outputLabel>
+                <p:outputLabel value=" موضوع*" ></p:outputLabel>
                 <p:inputText value="#{paperForm.title}"  />     
 
                 <p:outputLabel value=" توضیحات " ></p:outputLabel>
@@ -87,10 +87,10 @@
                 <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
                 <p:selectBooleanCheckbox value="#{paperForm.delivery}"  />
 
-                <p:outputLabel value=" تاریخ و ساعت درخواستی "></p:outputLabel>
+                <p:outputLabel value=" تاریخ و ساعت درخواستی *"></p:outputLabel>
                 <p:calendar value="#{paperForm.dateTime}" style="width:200px;float: right;direction: rtl"/>
                 
-                <p:outputLabel value="آپلود فایل سفارش" ></p:outputLabel>
+                <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
                 <h:form enctype="multipart/form-data" styleClass="font">
                     <p:fileUpload  value="#{typeForm.attachFile}" mode="simple"/>
                     <p:commandButton value="Submit" ajax="false" actionListener="#{paperForm.uploaded}"  />

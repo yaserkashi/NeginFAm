@@ -27,10 +27,10 @@
                     ارسال پیام
                 </f:facet>
 
-                <h:outputText value="موضوع" style="width: 400px"/>
+                <h:outputText value="موضوع*" style="width: 400px"/>
                 <h:inputText  value="#{sendMessageFromUser.title}"  style="width: 400px" />
 
-                <h:outputText value="پیام" />
+                <h:outputText value="پیام*" />
                 <p:inputTextarea value="#{sendMessageFromUser.text}"  rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false"  style="width: 400px"/>
 
             </p:panelGrid>

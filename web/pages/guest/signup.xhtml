@@ -106,7 +106,10 @@
                     <p:selectBooleanCheckbox value="#{signUp.lowCheck}" ></p:selectBooleanCheckbox>
                     <p:outputLabel value="تمامی قوانین نگین فام را قبول دارم"/>
                     <br/>
-                    <a href="/resources/1.jpg">دانلود قوانین شرکت</a>
+                    <h:form>
+                     <p:commandButton value="دانلود قوانین سایت"  onclick="PF('rules').show()" style="font-size: 14px;font-weight: normal;background: white;color: red;">
+                    </p:commandButton>
+                        </h:form>
                 </p:column>                
             </p:row>                    
             <p:row>
@@ -117,6 +120,13 @@
                 </p:column>
             </p:row>
         </p:panelGrid>
+        
+        
+          <p:dialog widgetVar="rules" dynamic="true" header="قوانین سایت"
+                  style="direction: rtl" id="dg1"
+                  resizable="false" closable="true" position="center" width="30%">
+            <ui:include src="/pages/guest/siteRules.xhtml" />
+        </p:dialog> 
     </ui:define>
 </ui:composition>   
 

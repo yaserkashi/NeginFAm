@@ -31,19 +31,19 @@
                         تغییر رمز   عبور                  
                     </f:facet>
 
-                    <h:outputText value="رمزعبور فعلی" />
+                    <h:outputText value="رمزعبور فعلی*" />
                     <p:password value="#{changePass.currentPass}" required="true" requiredMessage="رمز عبور قبلی را وارد کنید."/>
 
 
 
 
 
-                    <h:outputLabel for="pwd1" value="رمز عبور جدید" />
+                    <h:outputLabel for="pwd1" value="رمز عبور جدید*" />
                     <p:password id="pwd1" value="#{changePass.pass}" match="pwd2" validatorMessage="رمز عبور و تکرار آن مطابقت ندارند." required="true" requiredMessage="رمز عبور را وارد کنید." feedback="true" />
 
 
 
-                    <h:outputLabel for="pwd2" value="تکرار رمز عبور جدید" />
+                    <h:outputLabel for="pwd2" value="تکرار رمز عبور جدید*" />
                     <p:password id="pwd2" value="#{changePass.pass}" label="Password 2" required="true" requiredMessage="رمز عبور را تکرار کنید." feedback="true" />
 
 
