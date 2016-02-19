@@ -18,7 +18,9 @@ import com.Baloot.util.SessionBean;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -173,5 +175,17 @@ public class OrderFollowUpForUser {
 
     public void cancelOrder() throws SQLException {
         OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
+    }
+
+    public void yaser() {
+        System.out.println("shdxjkhjksjhfdf5373745376576857xfg");
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map map = context.getExternalContext().getRequestParameterMap();
+        String msg = (String) map.get("msg");
+        System.out.println(msg);
+        if (selectedOreder != null) {
+            System.out.println("selected is not null" + selectedOreder.getId());
+        }
+        System.out.println("selected is nulllllllllllllllllllllllllllll");
     }
 }
