@@ -113,79 +113,84 @@ public class OrderFollowUpForUser {
 
     }
 
-    public String selectedOrderAction() {
-        String pageOut = new String();
-        String typeOforder;
-        try {
-            typeOforder = selectedOreder.getTableName();
-
-            switch (typeOforder) {
-                case "type":
-                    type = TypeServices.getTypeById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/type1.xhtml";
-                    break;
-                case "design":
-                    design = DesignServices.getDesignById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/design1.xhtml";
-                    System.out.println("ok" + design.getEndDate() + pageOut);
-                    break;
-                case "translate":
-                    translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/translate1.xhtml";
-                    break;
-                case "paper":
-                    paper = PaperServices.getPaperById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/article1.xhtml";
-                    break;
-            }
-
-            System.out.println("in end " + pageOut);
-            if (pageOut.isEmpty()) {
-                pageOut = "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
-            }
-        } catch (Exception e) {
-            System.out.println("here in exeption " + e.getMessage());
-        }
-        return pageOut;
-    }
+//    public String selectedOrderAction() {
+//        String pageOut = new String();
+//        String typeOforder;
+//        try {
+//            typeOforder = selectedOreder.getTableName();
+//
+//            switch (typeOforder) {
+//                case "type":
+//                    type = TypeServices.getTypeById(selectedOreder.getTableId());
+//                    pageOut = "/pages/user/type1.xhtml";
+//                    break;
+//                case "design":
+//                    design = DesignServices.getDesignById(selectedOreder.getTableId());
+//                    pageOut = "/pages/user/design1.xhtml";
+//                    System.out.println("ok" + design.getEndDate() + pageOut);
+//                    break;
+//                case "translate":
+//                    translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
+//                    pageOut = "/pages/user/translate1.xhtml";
+//                    break;
+//                case "paper":
+//                    paper = PaperServices.getPaperById(selectedOreder.getTableId());
+//                    pageOut = "/pages/user/paper1.xhtml";
+//                    break;
+//            }
+//
+//            System.out.println("in end " + pageOut);
+//            if (pageOut.isEmpty()) {
+//                pageOut = "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
+//            }
+//        } catch (Exception e) {
+//            System.out.println("here in exeption " + e.getMessage());
+//        }
+//        return pageOut;
+//    }
 
     /**
      * <b> تابع برای بدست آوردن فاکتور برای</b>
      * <b> سفارش انتخاب شده توسط کابر</b>
+     * @return page factor
      */
     public String showFactorForSelectedOrder() {
-        if (selectedOreder != null) {
-            factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
-            return "/pages/user/factor.xhtml";
-        }
-        return null;
-    }
-
-    public String whichPage() {
-
-        try {
-            if (selectedOreder != null) {
-                return "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "/pages/user/design1.xhtml";
-    }
-
-    public void cancelOrder() throws SQLException {
-        OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
-    }
-
-    public void yaser() {
-        System.out.println("shdxjkhjksjhfdf5373745376576857xfg");
         FacesContext context = FacesContext.getCurrentInstance();
         Map map = context.getExternalContext().getRequestParameterMap();
         String msg = (String) map.get("msg");
-        System.out.println(msg);
-        if (selectedOreder != null) {
-            System.out.println("selected is not null" + selectedOreder.getId());
+        int id = Integer.valueOf(msg);
+        selectedOreder = OrderServices.selectOrderById(id);
+        factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
+        return "/pages/user/factor.xhtml";
+    }
+
+    public void cancelOrder() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Map map = context.getExternalContext().getRequestParameterMap();
+            String msg = (String) map.get("msg");
+            int id = Integer.valueOf(msg);
+            selectedOreder = OrderServices.selectOrderById(id);
+            OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("selected is nulllllllllllllllllllllllllllll");
+
+    }
+
+    public void yaser() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Map map = context.getExternalContext().getRequestParameterMap();
+            String msg = (String) map.get("msg");
+            int id = Integer.valueOf(msg);
+            System.out.println("id" + id);
+            selectedOreder = OrderServices.selectOrderById(id);
+            OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
+            System.out.println("selected ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
