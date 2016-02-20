@@ -21,7 +21,7 @@
             <title>ارسال پیام به اعضا</title>
         </h:head>
         <h:body>
-
+        <p:messages autoUpdate="true"/>
         <p:panelGrid id="panel" columns="2" styleClass="panel border" >
 
             <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" >
@@ -34,10 +34,10 @@
             <h:inputText id="selectedStr" value="#{sendMessageFromAdmin.selectedStr}" style="font-weight: bold;width: 320px;" required="true" />
             <p:commandButton value="انتخاب مخاطب"  onclick="PF('multiUserserDialog').show()" style="width: 130px;" />
 
-            <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;" required="true" />
+            <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;"/>
             <h:outputText value="موضوع" />
 
-            <p:inputTextarea value="#{sendMessageFromAdmin.text}" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+            <p:inputTextarea value="#{sendMessageFromAdmin.text}" style="font-weight: bold" required="true" requiredMessage="متن پیام را وارد نکرده اید." rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
             <h:outputText value="پیام" />
 
         </p:panelGrid>

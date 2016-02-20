@@ -117,7 +117,7 @@ public class SendMessageFromAdmin {
             try {
                 MessageServices.insertRecordsIntoTable(messages);
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(SendMessageFromAdmin.class.getName() + "پیام ها ارسال شد."));
+                        new FacesMessage( "پیام ها ارسال شد."));
             } catch (SQLException ex) {
                 Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -141,7 +141,7 @@ public class SendMessageFromAdmin {
                 }
                 SmsMessageServices.insertRecordsIntoTable(list);
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(SendMessageFromAdmin.class.getName() + "پیام ها ارسال شد."));
+                        new FacesMessage( "پیام ها ارسال شد."));
             } catch (SQLException ex) {
                 Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
