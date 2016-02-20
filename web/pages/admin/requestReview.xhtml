@@ -40,14 +40,15 @@
 
                 <p:column headerText="مشاهده">
                     <p:commandButton icon="ui-icon-search" onclick="PF('list').show()" 
-                                    
+                                     update=":adminform:outpanel"
                                      />
                 </p:column>
             </p:dataTable>
             <p:dialog widgetVar="list" dynamic="true"
                       style="direction:rtl" resizable="false" closable="true" position="center" width="56%">
-          
+                <p:outputPanel id="outpanel">
                     <ui:include src="/pages/admin/translatorList.xhtml"></ui:include>
+                </p:outputPanel>
               
             </p:dialog>
         </h:body>

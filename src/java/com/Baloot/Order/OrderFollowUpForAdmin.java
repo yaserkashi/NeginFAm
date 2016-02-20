@@ -20,9 +20,11 @@ import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -249,5 +251,32 @@ public class OrderFollowUpForAdmin {
             System.out.println("here in exeption " + e.getMessage());
         }
         return pageOut;
+    }
+    
+     public String showFactorForSelectedOrder() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map map = context.getExternalContext().getRequestParameterMap();
+        String msg = (String) map.get("msg");
+        int id = Integer.valueOf(msg);
+        selectedOreder = OrderServices.selectOrderById(id);
+        return "/pages/admin/factor.xhtml";
+    }
+
+   
+
+    public void yaser() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Map map = context.getExternalContext().getRequestParameterMap();
+            String msg = (String) map.get("msg");
+            int id = Integer.valueOf(msg);
+            System.out.println("id" + id);
+            selectedOreder = OrderServices.selectOrderById(id);
+            OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
+            System.out.println("selected ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -28,7 +28,7 @@
         </p:dataTable>    
         <p:remoteCommand name="cancel" action="#{orderFollowUpForUser.yaser()}" />
         <p:remoteCommand name="showFactor" action="#{orderFollowUpForUser.showFactorForSelectedOrder()}" />
-        <p:dialog header="اطلاعات کاربر" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:dialog header="سفارش کاربر" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
             <p:outputPanel id="orderDialogPanel" style="text-align:center;">
                 <p:outputPanel  rendered="#{not empty orderFollowUpForUser.selectedOreder}">
                     <p:panel rendered="#{orderFollowUpForUser.selectedOreder.tableName=='design'}" >
