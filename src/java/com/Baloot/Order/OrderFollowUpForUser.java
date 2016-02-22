@@ -8,19 +8,23 @@ package com.Baloot.Order;
 import com.Baloot.Design.*;
 import com.Baloot.Enum.StepsOfOrder;
 import com.Baloot.Factor.Factor;
+import com.Baloot.Factor.FactorServices;
 import com.Baloot.FactorItem.FactorItem;
 import com.Baloot.FactorItem.FactorItemServices;
 import com.Baloot.Paper.*;
 import com.Baloot.Translate.*;
 import com.Baloot.Type.*;
 import com.Baloot.User.UserServices;
+import com.Baloot.util.PayLine;
 import com.Baloot.util.SessionBean;
+import com.sun.xml.fastinfoset.EncodingConstants;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -177,7 +181,71 @@ public class OrderFollowUpForUser {
         }
 
     }
+    /**
+     * تابع است که به کلید پرداخت فاکتور وصل میشود 
+     * @return لینک پرداخت
+     */
+public String payLink()
+{
+ try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Map map = context.getExternalContext().getRequestParameterMap();
+            String msg = (String) map.get("msg");
+            int id = Integer.valueOf(msg);
+          FactorItem item=  FactorItemServices.selectFactorItemByOrderId(id);
+         
+          try {
+           PayLine   pay = new PayLine();
+       
+        String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567",item.getFactorId().getSumPrice(), "http://localhost:12841/neginLast/pages/user/resultPayFactor.xhtml");
+        if (Integer.parseInt(result) > 0) {
+            OrderServices.InsertGetId(id, Integer.parseInt(result));
+            return "http://payline.ir/payment-test/gateway-" + result;
+        }  
+        } catch (Exception e) {
+            System.out.println("Error -------->>>>>>> "+e.getMessage());
+        }
+       
 
+        return "";
+          
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+ return null;
+}
+/**
+ * تابع چک پرداخت آنلاین که در لود صفحه باید صدا زده شود
+ */
+    public String checkPay() throws SQLException {
+        try {
+            String id_get = null;
+        String trans_id = null;
+        String result;
+        PayLine pay = new PayLine();
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        if (request != null) {
+            id_get = request.getParameter("id_get");
+            trans_id = request.getParameter("trans_id");
+            Order order = OrderServices.selectOrderByGetId(Integer.parseInt(id_get));
+            if (order != null) {
+                result = pay.Get("http://payline.ir/payment-test/gateway-result-second", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", trans_id, id_get);
+                if (Integer.parseInt(result) == 1) {
+                    FactorItem factorItem = FactorItemServices.selectFactorItemByOrderId(order.getId());
+                    FactorServices.payFactor(factorItem.getFactorId().getId(), 1);
+                    OrderServices.updateCondition(order.getId(), StepsOfOrder.payFactor.ordinal());
+return "موفق اومد";
+                }
+            }
+
+        }
+        } catch (Exception e) {
+            System.out.println("reror------>>>"+e.getMessage());
+        }
+        
+return "ناموفق بود" ;
+      
+    }
     public void yaser() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();

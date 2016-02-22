@@ -59,7 +59,48 @@ public class OrderServices {
         }
 
     }
-    
+     
+   /**
+    * 
+    * @param id=آیدی سفارش
+    * @param getID=آیدیی که 
+    * @throws SQLException 
+    */
+    public static void InsertGetId(int id, int getID) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateTableSQL = "UPDATE public.order SET get_id = ? WHERE id = ?";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+
+            preparedStatement.setInt(1, getID);
+            preparedStatement.setInt(2, id);
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("Condition updated in DBOrder table!");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
     public static void updateCondition(int id, int newCondition) throws SQLException {
 
         Connection dbConnection = null;
@@ -186,5 +227,38 @@ public class OrderServices {
             System.out.println(e);
         }
     return orderList;
+    }
+      public static Order selectOrderByGetId(int getId)
+    {
+       
+    Connection dbConnection;
+        PreparedStatement ps;
+  Order item = new Order();
+        try {
+            dbConnection = DataConnect.getConnection();
+            
+            ps = dbConnection.prepareStatement("Select * from public.order where get_id = ?");
+            ps.setInt(1, getId);
+ 
+            ResultSet rs = ps.executeQuery();
+           
+            if(rs.next()){
+              
+                //table_name,table_id,user_id,order_date,condition
+                item.setCondition(rs.getInt("condition"));
+                item.setId(rs.getInt("id"));
+                item.setOrderDate(rs.getString("order_date"));
+                item.setTableId(rs.getInt("table_id"));
+                item.setTableName(rs.getString("table_name"));
+                item.setGet_id(getId);
+                 Users user = UserServices.getUserById(rs.getInt("user_id"));
+                 item.setUserId(user);
+         
+            }else
+            {return null;}
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    return item;
     }
 }

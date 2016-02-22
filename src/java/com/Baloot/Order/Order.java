@@ -53,10 +53,23 @@ public class Order implements Serializable {
     private String orderDate;
     @Column(name = "condition")
     private Integer condition;
+    /*
+    /آیدی برای چک پرداخت آنلاین
+    */
+     @Column(name = "get_id")
+    private Integer get_id;
+
+   
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
+ public Integer getGet_id() {
+        return get_id;
+    }
 
+    public void setGet_id(Integer get_id) {
+        this.get_id = get_id;
+    }
     public Order() {
     }
 
