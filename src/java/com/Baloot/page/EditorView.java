@@ -10,7 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -38,6 +40,8 @@ public class EditorView {
             fw.write(text);
             fw.close();
             System.out.println("File Created!");
+            FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("فایل مورد نظر ثبت شد."));
         } catch (IOException iox) {
             //do stuff with exception
             iox.printStackTrace();
