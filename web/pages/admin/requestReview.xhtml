@@ -5,18 +5,18 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">    
-         <h:head>
-           
+        <h:head>
+
             <title>بررسی درخواست های استخدام</title>
         </h:head>
         <h:body>
-            
+
             <p:dataTable value="#{employmentList.list}" var="empl" id="listofEmpl"
-                         selection="#{employmentList.selected}" rowKey="#{empl.id}"
+                         rowKey="#{empl.id}"
                          style="direction: rtl" styleClass="form"
-                         selectionMode="single" >
-                <p:ajax event="rowSelect" oncomplete="PF('list').show()" process="listofEmpl"
-                        update=":adminform:panelview,:adminform:selectedEmpl"/>                
+                         >
+                <!--                <p:ajax event="rowSelect" oncomplete="PF('list').show()" process="listofEmpl"
+                                        update=":adminform:panelview,:adminform:selectedEmpl"/>                -->
                 <f:facet name="header">
                     لیست
                 </f:facet>
@@ -35,13 +35,15 @@
                 <p:column headerText="دانشگاه">
                     <h:outputText value="#{empl.lastEducationUniversity}" />
                 </p:column>
-                
-               
+
+
 
                 <p:column headerText="مشاهده">
                     <p:commandButton icon="ui-icon-search" onclick="PF('list').show()" 
                                      update=":adminform:outpanel"
-                                     />
+                                     >
+                        <f:setPropertyActionListener value="#{empl}" target="#{employmentList.selected}" />
+                    </p:commandButton>
                 </p:column>
             </p:dataTable>
             <p:dialog widgetVar="list" dynamic="true"
@@ -49,7 +51,7 @@
                 <p:outputPanel id="outpanel">
                     <ui:include src="/pages/admin/translatorList.xhtml"></ui:include>
                 </p:outputPanel>
-              
+
             </p:dialog>
         </h:body>
 
