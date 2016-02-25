@@ -138,6 +138,14 @@ private String textMessage;
         Object ret = call.invoke(params);
         return ret;
     }
+    /**
+     * تابع ارسال اسمس به وسیله پنل اسمس 
+     * @param to =شماره فردی که میخواهید پیام را دریافت کند
+     * @param text=متن پیام
+     * @param isflash=به صورت دیفالت برابر با "false"قرار دهید
+     * @return =نتیجه ارسال را بر میگرداند 
+     * @throws Exception 
+     */
       public static Object sendSms(String to ,String text,String isflash) throws Exception {
         String url = "http://api.payamak-panel.com/post/send.asmx";
         Object[] params = new Object[6];
