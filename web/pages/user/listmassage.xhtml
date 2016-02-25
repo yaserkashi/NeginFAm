@@ -5,12 +5,10 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
-   
-        <h:form> 
+        <h:body>
+
 
             <p:dataTable value="#{listMessage.list}" var="message" rowKey="#{message.id}" selection="#{listMessage.selectedMessage}" styleClass="dataTable">
-
-                <p:ajax event="rowSelect"  update=""  />
 
                 <p:column headerText="ردیف">
                     <h:outputText value="#{listMessage.list.indexOf(message)+1}" />
@@ -18,9 +16,7 @@
                 <p:column headerText="موضوع">
                     <h:outputText value="#{message.title}" />
                 </p:column>  
-                <p:column headerText="پیام">
-                    <h:outputText value="#{message.text}"/>
-                </p:column> 
+
                 <p:column headerText="وضعیت" >
                     <h:outputText value="#{message.getReadStr()}" />
                 </p:column>
@@ -30,20 +26,24 @@
                 <p:column headerText="نوع پیام">
                     <h:outputText value="#{message.getType(listMessage.id)}" />
                 </p:column>
-                <p:column headerText="جزئیات پیام">
-                    <p:commandButton  icon="ui-icon-document" onclick="PF('messageDialog').show()">
+                <p:column headerText="جزئیات بیشتر">
+                    <p:commandButton update=":userForm:messageDetailUser" icon="ui-icon-document" oncomplete="PF('messageDialogUser').show()">
+                        <f:setPropertyActionListener value="#{message}" target="#{listMessage.selectedMessage}" />
                     </p:commandButton>
-                </p:column> 
+                </p:column>
             </p:dataTable>
-
-            <p:dialog widgetVar="messageDialog" dynamic="true"
+            
+            <p:dialog widgetVar="messageDialogUser" 
                       style="direction:rtl"
-                      header="#{reportmsgs['customers']}" resizable="false" closable="true" position="center" width="56%">
-                <h:outputText value="#{listMessage.selectedMessage.text}"  styleClass="font"/>
+                     resizable="false" closable="true" position="center" width="56%">
+                <p:outputPanel id="messageDetailUser">
+                    <h:outputText value="#{listMessage.selectedMessage.text}"  styleClass="font"/>
+                </p:outputPanel>
 
             </p:dialog>
+        </h:body>
 
-        </h:form>
+
 
     </ui:define>
 </ui:composition> 
