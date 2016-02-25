@@ -148,7 +148,7 @@ public class PaperForm {
         this.plan = plan;
     }
            
-    public void uploaded() {
+    public void uploaded() throws Exception {
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
@@ -195,7 +195,7 @@ public class PaperForm {
         return opts;
     }
     
-    public void submit() {
+    public void submit() throws Exception {
         System.out.println(PaperForm.class.getName() + ":Submit Function!");
         Paper paper = new Paper();
         Order order = new Order();
@@ -224,6 +224,7 @@ public class PaperForm {
             int id = PaperServices.insertRecordIntoTable(paper);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
+               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {

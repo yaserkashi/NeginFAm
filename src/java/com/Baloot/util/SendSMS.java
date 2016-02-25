@@ -21,9 +21,9 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 public class SendSMS {
-private String userName="9138758450";
-private String passWord="9138758450";
-private String fromNumber="";
+private static String userName="9138758450";
+private static String passWord="9138758450";
+private static String fromNumber="50005000902126";
 private String textMessage;
 
     public String getTextMessage() {
@@ -119,6 +119,32 @@ private String textMessage;
         params[1] = password;
         params[2] = to;
         params[3] = from;
+        params[4] = text;
+        params[5] = isflash;
+
+        String method = "SendSimpleSMS2";
+        Service service = new Service();
+        Call call = (Call) service.createCall();
+        call.setTargetEndpointAddress(new java.net.URL(url));
+        call.setOperationName(new QName("http://tempuri.org/", method));
+        call.setSOAPActionURI("http://tempuri.org/" + method);
+        call.addParameter(new QName("http://tempuri.org/", "username"), XMLType.XSD_STRING, ParameterMode.IN);
+        call.addParameter(new QName("http://tempuri.org/", "password"), XMLType.XSD_STRING, ParameterMode.IN);
+        call.addParameter(new QName("http://tempuri.org/", "to"), XMLType.XSD_STRING, ParameterMode.IN);
+        call.addParameter(new QName("http://tempuri.org/", "from"), XMLType.XSD_STRING, ParameterMode.IN);
+        call.addParameter(new QName("http://tempuri.org/", "text"), XMLType.XSD_STRING, ParameterMode.IN);
+        call.addParameter(new QName("http://tempuri.org/", "isflash"), XMLType.XSD_BOOLEAN, ParameterMode.IN);
+        // call.setReturnType(new QName("SendResult"));
+        Object ret = call.invoke(params);
+        return ret;
+    }
+      public static Object sendSms(String to ,String text,String isflash) throws Exception {
+        String url = "http://api.payamak-panel.com/post/send.asmx";
+        Object[] params = new Object[6];
+        params[0] = userName;
+        params[1] = passWord;
+        params[2] = to;
+        params[3] =fromNumber;
         params[4] = text;
         params[5] = isflash;
 

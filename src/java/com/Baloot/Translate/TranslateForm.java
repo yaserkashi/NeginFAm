@@ -152,7 +152,7 @@ public class TranslateForm {
         return attachFile;
     }
     
-    public void uploaded() {
+    public void uploaded() throws Exception {
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
@@ -209,7 +209,7 @@ public class TranslateForm {
         return options;
     }
     
-    public void submit() {
+    public void submit() throws Exception {
         System.out.println(TranslateForm.class.getName()+":Submit Function!");
         Translate translate = new Translate();
         Order order = new Order();
@@ -239,6 +239,7 @@ public class TranslateForm {
             int id = TranslateServices.insertRecordIntoTable(translate);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
+               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {

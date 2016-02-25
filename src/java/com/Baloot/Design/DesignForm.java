@@ -170,7 +170,7 @@ public class DesignForm {
         }
         
     }
-    public void uploaded() {
+    public void uploaded() throws Exception {
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
@@ -208,7 +208,7 @@ public class DesignForm {
         }
     }
     
-    public void submit() {        
+    public void submit() throws Exception {        
         System.out.println(DesignForm.class.getName() + ":SUBMIT FUNCTION!");
         System.out.println("+++++++++++++++++++++++++++++"+attachFile.getFileName());        
         Design design = new Design();
@@ -242,6 +242,7 @@ public class DesignForm {
             int id = DesignServices.insertRecordIntoTable(design);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
+           com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {
