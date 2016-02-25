@@ -144,7 +144,7 @@ private String textMessage;
      * @param text=متن پیام
      * @param isflash=به صورت دیفالت برابر با "false"قرار دهید
      * @return =نتیجه ارسال را بر میگرداند 
-     * @throws Exception 
+     * @throws Exception ارور
      */
       public static Object sendSms(String to ,String text,String isflash) throws Exception {
         String url = "http://api.payamak-panel.com/post/send.asmx";
