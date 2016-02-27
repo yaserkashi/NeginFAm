@@ -37,7 +37,8 @@
                 </p:column>
 
                 <p:column headerText="پاسخ">
-                    <p:commandButton  icon="ui-icon-document" onclick="PF('ResultDialog').show()">
+                    <p:commandButton update=":adminform:messageReply" icon="ui-icon-document" oncomplete="PF('ResultDialog').show()">
+                        <f:setPropertyActionListener value="#{message}" target="#{listMessage.selectedMessage}" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
@@ -53,7 +54,8 @@
 
             <p:dialog widgetVar="ResultDialog" dynamic="true" 
                       resizable="false" closable="true" position="center">
-                <p:panelGrid id="panel" columns="2"  >
+                <p:outputPanel id="messageReply">
+                    <p:panelGrid id="panel" columns="2" rendered="#{not empty listMessage.selectedMessage}" >
 
                     <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" >
                         <f:selectItem itemLabel="ایمیل" itemValue="#{true}" />
@@ -69,7 +71,8 @@
                     <h:outputText value="پیام" />
 
                 </p:panelGrid>
-                <p:commandButton action="#{sendMessageFromAdmin.submit()}" value="ارسال" />
+                </p:outputPanel>
+                <p:commandButton action="#{sendMessageFromAdmin.reply(listMessage.selectedMessage.userIdSend)}" value="ارسال" />
             </p:dialog>
         </h:body>
 

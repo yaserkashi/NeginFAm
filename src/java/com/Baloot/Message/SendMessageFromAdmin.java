@@ -97,7 +97,7 @@ public class SendMessageFromAdmin {
     }
            
     public void submit() {
-        System.out.println("SUBMIT FUNCTION!");
+        System.out.println(SendMessageFromAdmin.class.getName() + "SUBMIT FUNCTION!");
         if (type) {
             Sendemail sm = new Sendemail();
             sm.groupSendEmail(getEmails(selected), title, text);
@@ -142,6 +142,50 @@ public class SendMessageFromAdmin {
                 SmsMessageServices.insertRecordsIntoTable(list);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage( "پیام ها ارسال شد."));
+            } catch (SQLException ex) {
+                Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void reply(Users to) {
+        System.out.println(SendMessageFromAdmin.class.getName() + "Reply FUNCTION!");
+        if (type) {
+            Sendemail sm = new Sendemail();
+            sm.sendEmail(to.getEmail(), title, text);
+            Message msg = new Message();
+            msg.setTitle(title);
+            msg.setText(text);
+            PersianCalendar pc = new PersianCalendar();
+            msg.setDateTime(pc.getIranianDateTime());
+            msg.setRead(false);
+            msg.setUserIdGet(to);
+            msg.setUserIdSend(UserServices.getUserByUsername("admin"));
+
+            try {
+                MessageServices.insertRecordIntoTable(msg);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage( "پیام ارسال شد."));
+            } catch (SQLException ex) {
+                Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            SendSMS ss = new SendSMS();
+            ss.send(to.getPhoneNum(), text);
+            
+            TextSmsMessage tsm = new TextSmsMessage();
+            tsm.setText(text);
+            
+            try {
+                int id = TextSmsMessageServices.insertRecordIntoTable(tsm);
+                tsm.setId(id);
+                SmsMessage sms = new SmsMessage();
+                sms.setTextId(tsm);
+                sms.setUserId(to);
+                sms.setCondition("sent");
+                SmsMessageServices.insertRecordIntoTable(sms);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage( "پیام ارسال شد."));
             } catch (SQLException ex) {
                 Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
