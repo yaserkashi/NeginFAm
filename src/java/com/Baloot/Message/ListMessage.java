@@ -38,6 +38,7 @@ public class ListMessage {
     }
 
     public Message getSelectedMessage() {
+        System.out.println("Set Message");
         return selectedMessage;
     }
 

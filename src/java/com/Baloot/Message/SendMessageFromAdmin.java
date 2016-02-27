@@ -20,22 +20,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+
 import javax.faces.context.FacesContext;
+
 
 /**
  *
  * @author FK
  */
 @ManagedBean
+
 public class SendMessageFromAdmin {
     private String title;
     private String text;
     private List<Users> selected;
     private Boolean type;
     private String selectedStr = "";
+private Message selsectMessage;
 
+    public Message getSelsectMessage() {
+        return selsectMessage;
+    }
+
+    public void setSelsectMessage(Message selsectMessage) {
+        this.selsectMessage = selsectMessage;
+    }
+
+        
     public String getTitle() {
         return title;
     }
@@ -148,8 +162,15 @@ public class SendMessageFromAdmin {
         }
     }
     
-    public void reply(Users to) {
+    public void reply() {
+       
+      if(selsectMessage==null)
+      {
+          System.out.println("is NULLLLLLLLLLLL");
+          return;
+                }
         System.out.println(SendMessageFromAdmin.class.getName() + "Reply FUNCTION!");
+       Users to=selsectMessage.getUserIdSend();
         if (type) {
             Sendemail sm = new Sendemail();
             sm.sendEmail(to.getEmail(), title, text);
