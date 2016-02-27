@@ -6,9 +6,7 @@
 
 package com.Baloot.TextSmsMessage;
 
-import com.Baloot.SmsMessage.SmsMessage;
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,15 +15,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FK
+ * @author Ali
  */
 @Entity
 @Table(name = "text_sms_message")
@@ -33,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "TextSmsMessage.findAll", query = "SELECT t FROM TextSmsMessage t"),
     @NamedQuery(name = "TextSmsMessage.findByText", query = "SELECT t FROM TextSmsMessage t WHERE t.text = :text"),
-    @NamedQuery(name = "TextSmsMessage.findById", query = "SELECT t FROM TextSmsMessage t WHERE t.id = :id")})
+    @NamedQuery(name = "TextSmsMessage.findById", query = "SELECT t FROM TextSmsMessage t WHERE t.id = :id"),
+    @NamedQuery(name = "TextSmsMessage.findByStaticValueType", query = "SELECT t FROM TextSmsMessage t WHERE t.staticValueType = :staticValueType")})
 public class TextSmsMessage implements Serializable {
     private static final long serialVersionUID = 1L;
     @Size(max = 250)
@@ -44,8 +41,8 @@ public class TextSmsMessage implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @OneToMany(mappedBy = "textId")
-    private Collection<SmsMessage> smsMessageCollection;
+    @Column(name = "static_value_type")
+    private Integer staticValueType;
 
     public TextSmsMessage() {
     }
@@ -70,13 +67,12 @@ public class TextSmsMessage implements Serializable {
         this.id = id;
     }
 
-    @XmlTransient
-    public Collection<SmsMessage> getSmsMessageCollection() {
-        return smsMessageCollection;
+    public Integer getStaticValueType() {
+        return staticValueType;
     }
 
-    public void setSmsMessageCollection(Collection<SmsMessage> smsMessageCollection) {
-        this.smsMessageCollection = smsMessageCollection;
+    public void setStaticValueType(Integer staticValueType) {
+        this.staticValueType = staticValueType;
     }
 
     @Override
@@ -101,7 +97,7 @@ public class TextSmsMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.TextSmsMessage[ id=" + id + " ]";
+        return "com.Baloot.TextSmsMessage.TextSmsMessage[ id=" + id + " ]";
     }
     
 }
