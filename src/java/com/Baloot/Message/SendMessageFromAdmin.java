@@ -20,22 +20,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+
 import javax.faces.context.FacesContext;
+
 
 /**
  *
  * @author FK
  */
 @ManagedBean
+
 public class SendMessageFromAdmin {
     private String title;
     private String text;
     private List<Users> selected;
     private Boolean type;
     private String selectedStr = "";
+private Message selsectMessage;
 
+    public Message getSelsectMessage() {
+        return selsectMessage;
+    }
+
+    public void setSelsectMessage(Message selsectMessage) {
+        this.selsectMessage = selsectMessage;
+    }
+
+        
     public String getTitle() {
         return title;
     }
@@ -147,4 +161,58 @@ public class SendMessageFromAdmin {
             }
         }
     }
+<<<<<<< HEAD
+=======
+    
+    public void reply() {
+       
+      if(selsectMessage==null)
+      {
+          System.out.println("is NULLLLLLLLLLLL");
+          return;
+                }
+        System.out.println(SendMessageFromAdmin.class.getName() + "Reply FUNCTION!");
+       Users to=selsectMessage.getUserIdSend();
+        if (type) {
+            Sendemail sm = new Sendemail();
+            sm.sendEmail(to.getEmail(), title, text);
+            Message msg = new Message();
+            msg.setTitle(title);
+            msg.setText(text);
+            PersianCalendar pc = new PersianCalendar();
+            msg.setDateTime(pc.getIranianDateTime());
+            msg.setRead(false);
+            msg.setUserIdGet(to);
+            msg.setUserIdSend(UserServices.getUserByUsername("admin"));
+
+            try {
+                MessageServices.insertRecordIntoTable(msg);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage( "پیام ارسال شد."));
+            } catch (SQLException ex) {
+                Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            SendSMS ss = new SendSMS();
+            ss.send(to.getPhoneNum(), text);
+            
+            TextSmsMessage tsm = new TextSmsMessage();
+            tsm.setText(text);
+            
+            try {
+                int id = TextSmsMessageServices.insertRecordIntoTable(tsm);
+                tsm.setId(id);
+                SmsMessage sms = new SmsMessage();
+                sms.setTextId(tsm);
+                sms.setUserId(to);
+                sms.setCondition("sent");
+                SmsMessageServices.insertRecordIntoTable(sms);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage( "پیام ارسال شد."));
+            } catch (SQLException ex) {
+                Logger.getLogger(SendMessageFromAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+>>>>>>> Ali
 }

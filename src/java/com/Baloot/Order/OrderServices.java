@@ -245,7 +245,7 @@ public class OrderServices {
             if(rs.next()){
               
                 //table_name,table_id,user_id,order_date,condition
-                item.setCondition(rs.getInt("condition"));
+                 item.setCondition(rs.getInt("condition"));
                 item.setId(rs.getInt("id"));
                 item.setOrderDate(rs.getString("order_date"));
                 item.setTableId(rs.getInt("table_id"));
