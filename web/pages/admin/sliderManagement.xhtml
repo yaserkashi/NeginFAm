@@ -32,7 +32,10 @@
                 </p:column>                               
             </p:dataTable>
             <p:commandButton action="#{imagesForm.submit()}" value="ذخیره" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
-            <p:button  value="اضافه نمودن تصویر" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
+            <h:form enctype="multipart/form-data" styleClass="font">
+                <p:fileUpload  value="#{imagesForm.attachFile}" mode="simple" style="margin-left: 100px"/>
+                <p:commandButton value="اضافه نمودن تصویر" ajax="false" actionListener="#{imagesForm.uploaded}"  style="margin-top: 30px;background: #4EA2D0"/>
+            </h:form>
       </h:body>
     </ui:define>
 </ui:composition>  
