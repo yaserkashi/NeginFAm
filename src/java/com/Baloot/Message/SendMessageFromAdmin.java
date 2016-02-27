@@ -46,6 +46,7 @@ private Message selsectMessage;
     }
 
     public void setSelsectMessage(Message selsectMessage) {
+        System.out.println("SET MESSAGE");
         this.selsectMessage = selsectMessage;
     }
 
@@ -161,8 +162,7 @@ private Message selsectMessage;
             }
         }
     }
-<<<<<<< HEAD
-=======
+
     
     public void reply() {
        
@@ -214,5 +214,5 @@ private Message selsectMessage;
             }
         }
     }
->>>>>>> Ali
+
 }
