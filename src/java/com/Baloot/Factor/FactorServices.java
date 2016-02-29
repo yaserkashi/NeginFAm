@@ -27,7 +27,7 @@ public class FactorServices {
         Connection dbConnection;
         Statement statement;
 
-        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and f.user_id=2 and fitem.order_id=public.order.id";
+        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and fitem.order_id=public.order.id";
         try {
             dbConnection = DataConnect.getConnection();
             statement = dbConnection.createStatement();
