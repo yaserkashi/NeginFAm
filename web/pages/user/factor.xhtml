@@ -20,15 +20,14 @@
             <title>فاکتور سفارش</title>
         </h:head>
         <h:body>
-
             <p:panelGrid columns="1" styleClass="form border font" style="float: right;margin-bottom: 25px;border-bottom-width: 4px;border-color: #000000;">
 
                 <p:panelGrid columns="3" styleClass="form" style="float: right;margin-bottom: 25px;margin-top: 0px">
 
-                  
+
                     <p:outputLabel value="شماره فاکتور:1" style="padding: 10px" /> 
                     <p:outputLabel value="فاکتور فروش" style="padding: 50px;font-size: 24px;"  />
-                  
+
                     <p:outputLabel value="تاریخ: 4/12/94"  style="padding: 10px"/>
                 </p:panelGrid>
 
@@ -75,16 +74,15 @@
                     </p:column>
 
                     <f:facet name="footer" >
-                    جمع کل به حروف: پانزده هزار ریال
-                </f:facet>
+                        جمع کل به حروف: پانزده هزار ریال
+                    </f:facet>
                 </p:dataTable> 
-                
-                
+
+
 
 
             </p:panelGrid>
-
-
+            <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" />
 
 
 

@@ -55,9 +55,80 @@
             </f:facet>
 
         </p:panelGrid>
+        
+        <p:outputLabel value="id sefaresh" />
+        <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" />
 
         <p:commandButton value="ارسال" 
                          style="color: #FFF; float: left;background:#0066ff"/>
+        
+        
+        
+        <p:panelGrid columns="1" styleClass="form border font" style="float: right;margin-bottom: 25px;border-bottom-width: 4px;border-color: #000000;">
+
+            <p:panelGrid columns="3" styleClass="form" style="float: right;margin-bottom: 25px;margin-top: 0px">
+
+
+                <p:outputLabel value="شماره فاکتور:1" style="padding: 10px" /> 
+                <p:outputLabel value="فاکتور فروش" style="padding: 50px;font-size: 24px;"  />
+
+                <p:outputLabel value="تاریخ: 4/12/94"  style="padding: 10px"/>
+            </p:panelGrid>
+
+            <p:panelGrid columns="2" styleClass="form border" style="float: right;margin-bottom: 25px;margin-top: 0px">
+
+                <f:facet name="header">
+                    مشخصات فروشنده
+                </f:facet>
+                <p:outputLabel value="واحد فروش اینترنتی" style="padding: 10px" /> 
+                <p:outputLabel value="http://neginfam.ir" style="padding: 10px" />
+                <p:outputLabel value="نشانی: یزد- صفاییه- میدان نعل اسبی-نرسیده به دانشگاه" style="padding: 10px;"/>
+                <p:outputLabel value="شماره تماس:‌09131521214"  style="padding: 10px"/>
+            </p:panelGrid>
+
+
+
+            <p:panelGrid columns="2" styleClass="form border" style="float: right;margin-bottom: 25px;margin-top: 0px" > 
+
+                <f:facet name="header">
+                    مشخصات خریدار
+                </f:facet>
+                <p:outputLabel value="نام شخص: آقای ..." style="padding: 10px" /> 
+                <p:outputLabel value="شماره تلفن: 0912111111111" style="padding: 10px" />
+                <p:outputLabel value="آدرس: یزد- خیابان کاشانی- کو چه ی الهام- پلاک 12"  style="padding: 10px"/>
+                <p:outputLabel value=""  style="padding: 40px"/>
+
+            </p:panelGrid>
+
+
+            <p:dataTable value="" var="factor" style="margin-top: 0px"
+                         styleClass="form"  id="followtb11" rowKey="">
+                <p:column headerText="ردیف" >
+                    <h:outputText value="1" />
+                </p:column> 
+                <p:column headerText="شرح کالا یا خدمات">
+                    <h:outputText value="سفارش طراحی" />
+                </p:column>  
+                <p:column headerText="قیمت واحد (تومان)">
+                    <h:outputText value="15000" />
+                </p:column>  
+
+                <p:column headerText="قیمت کل (تومان)" >
+                    <h:outputText value="15000"/>
+                </p:column>
+
+                <f:facet name="footer" >
+                    جمع کل به حروف: پانزده هزار ریال
+                </f:facet>
+            </p:dataTable> 
+
+
+
+
+        </p:panelGrid>
+
+
+
 
     </h:body>  
     </ui:define>

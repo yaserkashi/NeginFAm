@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -43,7 +44,7 @@ public class OrderFollowUpForAdmin {
     private Double unitPrice;
 
     public OrderFollowUpForAdmin() {
-       
+
     }
 
     public String getUnit() {
@@ -131,11 +132,11 @@ public class OrderFollowUpForAdmin {
     public List<Order> listOfOrdreForAdmin() {
         return OrderServices.AllOfOrder();
     }
-    public void confirmationPayFactor()throws SQLException
-    {
-    OrderServices.updateCondition(selectedOreder.getId(),StepsOfOrder.ConfirmationPayFactor.ordinal());
+
+    public void confirmationPayFactor() throws SQLException {
+        OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.ConfirmationPayFactor.ordinal());
     }
- 
+
     public void cancelOrder() throws SQLException {
 
         OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
@@ -144,7 +145,7 @@ public class OrderFollowUpForAdmin {
     public void insertNewFactor() {
         System.out.println("hi");
         if (selectedOreder != null && selectedOreder.getCondition() == 0) {
-           
+
             Factor factor = new Factor();
             PersianCalendar pc = new PersianCalendar();
             String currentDate = pc.getIranianDateTime();
@@ -179,11 +180,12 @@ public class OrderFollowUpForAdmin {
 
         }
     }
-     public void insertNewFactor(Integer id) {
+
+    public void insertNewFactor(Integer id) {
         System.out.println("hi");
-        selectedOreder=OrderServices.selectOrderById(id);
+        selectedOreder = OrderServices.selectOrderById(id);
         if (selectedOreder != null && selectedOreder.getCondition() == 0) {
-           
+
             Factor factor = new Factor();
             PersianCalendar pc = new PersianCalendar();
             String currentDate = pc.getIranianDateTime();
@@ -222,9 +224,7 @@ public class OrderFollowUpForAdmin {
     public String selectedOrderAction() throws SQLException {
         String pageOut = new String();
         String typeOforder;
-  
-  
-       
+
         try {
             typeOforder = selectedOreder.getTableName();
             System.out.println("hereeeeeeeeeeee" + typeOforder);
@@ -252,18 +252,26 @@ public class OrderFollowUpForAdmin {
         }
         return pageOut;
     }
-    
-     public String showFactorForSelectedOrder() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Map map = context.getExternalContext().getRequestParameterMap();
-        String msg = (String) map.get("msg");
-        int id = Integer.valueOf(msg);
-        selectedOreder = OrderServices.selectOrderById(id);
+
+    public String showFactorForSelectedOrder() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Map map = context.getExternalContext().getRequestParameterMap();
+            String msg = (String) map.get("msg");
+            int id = Integer.valueOf(msg);
+            System.out.println(id + "---------------------------------");
+            selectedOreder = OrderServices.selectOrderById(id);
+            return "/pages/admin/factor.xhtml";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "/pages/admin/factor.xhtml";
+
     }
 
-   
-
+    public String yaser2(){
+         return "/pages/admin/factor.xhtml";
+    }
     public void yaser() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
