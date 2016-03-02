@@ -14,6 +14,7 @@
                     border-color: inherit;
                     padding: 4px 10px;
                 }
+
             </style>
         </header>
         <h:head>
@@ -23,7 +24,7 @@
         <body>
             <p:messages id="messages"  autoUpdate="true" closable="true" />
 
-            <p:panelGrid id="panel" columns="2" styleClass="form border" style="float: right;"> 
+            <p:panelGrid id="panel" columns="2" styleClass="form border"  style="margin: auto;margin-top: 195px;"> 
                 <f:facet name="header" >
                     تغییر رمز عبور
                 </f:facet>
@@ -32,12 +33,11 @@
 
                 <h:outputText value="ایمیل" />
                 <h:inputText value="#{forgotPassword.email}" style="font-weight: bold;width: 300px;" />
-
-
-
+                <p:spacer/>
+                <p:commandButton action="#{forgotPassword.changePassword()}" value="تائید"   icon="ui-icon-start" style="background: #4EA2D0 ;float: left"/>
+            
             </p:panelGrid>
-            <p:commandButton action="#{forgotPassword.changePassword()}" value="تائید"   icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
-
+            
         </body>
     </ui:define>
 </ui:composition>
