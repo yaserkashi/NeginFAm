@@ -7,129 +7,108 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-       <h:head>
-        <style>
-            .ui-panelgrid td {
-                border-width: 0px;
-                border-style: solid;
-                border-color: inherit;
-                padding: 4px 10px;
-            }
-        </style>
-        <title>اطلاعات مترجم</title>
-    </h:head>
-    <h:body>
+        <h:head>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+            <title>صدور فاکتور</title>
+        </h:head>
+        <h:body>
+            <p:panelGrid columns="1" styleClass="form border font" style="float: right;margin-bottom: 25px;border-bottom-width: 4px;border-color: #000000;">
 
-       
-
-        <p:panelGrid columns="4"  style="margin-right: 16%">
-            <f:facet name="header">
-                شماره سفارش:1234
-            </f:facet>
+                <p:panelGrid columns="3" styleClass="form" style="float: right;margin-bottom: 25px;margin-top: 0px">
 
 
-            <h:outputText value="شرح جزئیات " style="width: 10px"/>
-            <h:outputText value="واحد" style="width: 10px"/>
-            <h:outputText value="تعداد" style="width: 10px"/>
-            <h:outputText value="جمع " style="width: 10px"/>
+                    <p:outputLabel value="شماره فاکتور:1" style="padding: 10px" /> 
+                    <p:outputLabel value="فاکتور فروش" style="padding: 50px;font-size: 24px;"  />
 
-
-            <h:inputText  style="font-weight: bold;width: 120px" required="true"/>
-            <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
-            <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
-            <h:inputText  style="font-weight: bold;width: 40px" required="true"/>
-
-
-
-
-            <f:facet name="footer">
-                <p:panelGrid columns="2" styleClass="font" style="margin-right: 26%">
-                    <h:outputText value="مبلغ کل" style="width: 40px"/>
-                    <h:inputText  style="width: 40px" required="true"/>
-                    <h:outputText   value="مبلغ تخفیف" style="width: 40px" />
-                    <h:inputText  style="width: 40px" required="true"/>
-                    <h:outputText value="هزینه نهایی" style="width: 40px" />
-                    <h:inputText  style="width: 40px" required="true"/>
-
+                    <p:outputLabel value="تاریخ: 4/12/94"  style="padding: 10px"/>
                 </p:panelGrid>
-            </f:facet>
 
-        </p:panelGrid>
-        
-        <p:outputLabel value="id sefaresh" />
-        <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" />
+                <p:panelGrid columns="2" styleClass="form border" style="float: right;margin-bottom: 25px;margin-top: 0px">
 
-        <p:commandButton value="ارسال" 
-                         style="color: #FFF; float: left;background:#0066ff"/>
-        
-        
-        
-        <p:panelGrid columns="1" styleClass="form border font" style="float: right;margin-bottom: 25px;border-bottom-width: 4px;border-color: #000000;">
+                    <f:facet name="header">
+                        مشخصات فروشنده
+                    </f:facet>
+                    <p:outputLabel value="واحد فروش اینترنتی" style="padding: 10px" /> 
+                    <p:outputLabel value="http://neginfam.ir" style="padding: 10px" />
+                    <p:outputLabel value="نشانی: یزد- صفاییه- میدان نعل اسبی-نرسیده به دانشگاه" style="padding: 10px;"/>
+                    <p:outputLabel value="شماره تماس:‌09131521214"  style="padding: 10px"/>
+                </p:panelGrid>
+                <p:panelGrid columns="2" styleClass="form border" style="float: right;margin-bottom: 25px;margin-top: 0px" > 
 
-            <p:panelGrid columns="3" styleClass="form" style="float: right;margin-bottom: 25px;margin-top: 0px">
+                    <f:facet name="header">
+                        مشخصات خریدار
+                    </f:facet>
+                    <p:outputLabel value="نام شخص: آقای ..." style="padding: 10px" /> 
+                    <p:outputLabel value="شماره تلفن: 0912111111111" style="padding: 10px" />
+                    <p:outputLabel value="آدرس: یزد- خیابان کاشانی- کو چه ی الهام- پلاک 12"  style="padding: 10px"/>
+                    <p:outputLabel value=""  style="padding: 40px"/>
+                </p:panelGrid>
+                <p:panelGrid  style="margin-top: 0px" 
+                              styleClass="form border"  id="followtb11" >
+                    <f:facet name="header">                       
+                        <p:row>
+                            <p:column colspan="1" >ردیف</p:column>
+                            <p:column colspan="1"  > شرح کالا یا خدمات</p:column>
+                            <p:column colspan="1"  >واحد</p:column>
+                            <p:column colspan="1" >قیمت واحد</p:column>
+                            <p:column colspan="1">تعداد</p:column>
+                            <p:column colspan="1" >جمع (ریال)</p:column>                      
+                        </p:row>
+                    </f:facet>
 
+                    <p:row>
+                        <p:column>
+                            <h:outputText value="1" />
+                        </p:column>  <p:column>
+                            <h:outputText value="#{orderFollowUpForAdmin.selectedOreder.tableName}"  />
+                        </p:column>  <p:column>
+                            <p:inputText value="#{orderFollowUpForAdmin.unit}" style="width: 60px"/>
+                        </p:column>  <p:column>
+                            <p:inputText value="#{orderFollowUpForAdmin.unitPrice}" style="width: 60px" />
+                        </p:column>  <p:column>
+                            <p:inputText value="#{orderFollowUpForAdmin.number}" style="width: 60px" />
+                        </p:column>  <p:column>
+                            <h:outputText value="#{orderFollowUpForAdmin.sumPrice}"/>
+                        </p:column>
+                    </p:row>
+                    <f:facet name="footer" >
+                        <p:row>
+                            <p:column  colspan="4"  style="text-align: right">
 
-                <p:outputLabel value="شماره فاکتور:1" style="padding: 10px" /> 
-                <p:outputLabel value="فاکتور فروش" style="padding: 50px;font-size: 24px;"  />
+                            </p:column>
+                            <p:column  colspan="1"  style="text-align: right">
+                                <h:outputText value="   درصد تخفیف" />
+                            </p:column>
+                            <p:column  colspan="1"  style="text-align: right">
+                                <p:inputText value="#{orderFollowUpForAdmin.off}" style="width: 45px"/>
+                            </p:column>
 
-                <p:outputLabel value="تاریخ: 4/12/94"  style="padding: 10px"/>
+                        </p:row>
+                        <p:row>
+                            <p:column  colspan="4"  style="text-align: right">
+
+                            </p:column>
+                            <p:column  colspan="1"  style="text-align: right">
+                                <h:outputText value="مبلغ نهایی: " />                               
+                            </p:column>
+                            <p:column  colspan="1"  style="text-align: right">
+                                <h:outputText value="#{orderFollowUpForAdmin.finalPrice}" />                            
+                            </p:column>
+                        </p:row>
+                    </f:facet>
+                </p:panelGrid>
+                <p:remoteCommand name="factorSubmit" action="#{orderFollowUpForAdmin.insertNewFactor()}" />
+                <p:commandButton value="ثبت" onclick="factorSubmit([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);" style="float: left "/>
             </p:panelGrid>
+            <p:inputText style="display: none;"  id="idOfOrderForAdmin" value="#{orderFollowUpForAdmin.selectedOreder.id}" />
 
-            <p:panelGrid columns="2" styleClass="form border" style="float: right;margin-bottom: 25px;margin-top: 0px">
-
-                <f:facet name="header">
-                    مشخصات فروشنده
-                </f:facet>
-                <p:outputLabel value="واحد فروش اینترنتی" style="padding: 10px" /> 
-                <p:outputLabel value="http://neginfam.ir" style="padding: 10px" />
-                <p:outputLabel value="نشانی: یزد- صفاییه- میدان نعل اسبی-نرسیده به دانشگاه" style="padding: 10px;"/>
-                <p:outputLabel value="شماره تماس:‌09131521214"  style="padding: 10px"/>
-            </p:panelGrid>
-
-
-
-            <p:panelGrid columns="2" styleClass="form border" style="float: right;margin-bottom: 25px;margin-top: 0px" > 
-
-                <f:facet name="header">
-                    مشخصات خریدار
-                </f:facet>
-                <p:outputLabel value="نام شخص: آقای ..." style="padding: 10px" /> 
-                <p:outputLabel value="شماره تلفن: 0912111111111" style="padding: 10px" />
-                <p:outputLabel value="آدرس: یزد- خیابان کاشانی- کو چه ی الهام- پلاک 12"  style="padding: 10px"/>
-                <p:outputLabel value=""  style="padding: 40px"/>
-
-            </p:panelGrid>
-
-
-            <p:dataTable value="" var="factor" style="margin-top: 0px"
-                         styleClass="form"  id="followtb11" rowKey="">
-                <p:column headerText="ردیف" >
-                    <h:outputText value="1" />
-                </p:column> 
-                <p:column headerText="شرح کالا یا خدمات">
-                    <h:outputText value="سفارش طراحی" />
-                </p:column>  
-                <p:column headerText="قیمت واحد (تومان)">
-                    <h:outputText value="15000" />
-                </p:column>  
-
-                <p:column headerText="قیمت کل (تومان)" >
-                    <h:outputText value="15000"/>
-                </p:column>
-
-                <f:facet name="footer" >
-                    جمع کل به حروف: پانزده هزار ریال
-                </f:facet>
-            </p:dataTable> 
-
-
-
-
-        </p:panelGrid>
-
-
-
-
-    </h:body>  
+        </h:body>  
     </ui:define>
 </ui:composition>

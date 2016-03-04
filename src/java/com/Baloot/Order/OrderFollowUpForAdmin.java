@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -32,6 +33,7 @@ import javax.faces.context.FacesContext;
  * @author Ali-M
  */
 @ManagedBean
+@SessionScoped
 public class OrderFollowUpForAdmin {
 
     private Order selectedOreder;
@@ -42,9 +44,26 @@ public class OrderFollowUpForAdmin {
     private String unit;
     private Double off;
     private Double unitPrice;
+    private Integer number;
+    private Double sumPrice;
+    private Double finalPrice;
 
     public OrderFollowUpForAdmin() {
 
+    }
+
+    public Double getSumPrice() {
+        if (!(unitPrice == null || number == null)) {
+            return sumPrice = (unitPrice * number);
+        }
+        return sumPrice;
+    }
+
+    public Double getFinalPrice() {
+        if (!(unitPrice == null || number == null || off == null)) {
+            return finalPrice = (unitPrice - (unitPrice * off)) * number;
+        }
+        return finalPrice;
     }
 
     public String getUnit() {
@@ -78,7 +97,6 @@ public class OrderFollowUpForAdmin {
     public void setNumber(Integer number) {
         this.number = number;
     }
-    private Integer number;
 
     public Translate getTranslate() {
         return translate;
@@ -142,50 +160,53 @@ public class OrderFollowUpForAdmin {
         OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
     }
 
+//    public void insertNewFactor() {
+//        System.out.println("hi");
+//        if (selectedOreder != null && selectedOreder.getCondition() == 0) {
+//
+//            Factor factor = new Factor();
+//            PersianCalendar pc = new PersianCalendar();
+//            String currentDate = pc.getIranianDateTime();
+//            factor.setDateTime(currentDate);
+//            Users user = selectedOreder.getUserId();
+//            factor.setUserId(user);
+//            factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
+//            factor.setPFactor(true);
+//            factor.setPayCondition(0);
+//            factor.setOff(off);
+//            try {
+//                Integer factorId = FactorServices.insertRecordIntoTable(factor);
+//                factor.setId(factorId);
+//
+//            } catch (SQLException ex) {
+//                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println(ex.getMessage());
+//            }
+//            try {
+//                FactorItem factorItem = new FactorItem();
+//                System.out.println(" facto ID : " + factor.getId());
+//                factorItem.setFactorId(factor);
+//                factorItem.setOrderId(selectedOreder.getId());
+//                factorItem.setUnit(unit);
+//                factorItem.setNumber(number);
+//                factorItem.setUnitPrice(unitPrice);
+//                OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.registrationFactor.ordinal());
+//                FactorItemServices.insertRecordIntoTable(factorItem);
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//
+//        }
+//    }
     public void insertNewFactor() {
-        System.out.println("hi");
-        if (selectedOreder != null && selectedOreder.getCondition() == 0) {
-
-            Factor factor = new Factor();
-            PersianCalendar pc = new PersianCalendar();
-            String currentDate = pc.getIranianDateTime();
-            factor.setDateTime(currentDate);
-            Users user = selectedOreder.getUserId();
-            factor.setUserId(user);
-            factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
-            factor.setPFactor(true);
-            factor.setPayCondition(0);
-            factor.setOff(off);
-            try {
-                Integer factorId = FactorServices.insertRecordIntoTable(factor);
-                factor.setId(factorId);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println(ex.getMessage());
-            }
-            try {
-                FactorItem factorItem = new FactorItem();
-                System.out.println(" facto ID : " + factor.getId());
-                factorItem.setFactorId(factor);
-                factorItem.setOrderId(selectedOreder.getId());
-                factorItem.setUnit(unit);
-                factorItem.setNumber(number);
-                factorItem.setUnitPrice(unitPrice);
-                OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.registrationFactor.ordinal());
-                FactorItemServices.insertRecordIntoTable(factorItem);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
-    }
-
-    public void insertNewFactor(Integer id) {
-        System.out.println("hi");
+        Integer id;
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map map = context.getExternalContext().getRequestParameterMap();
+        String msg = (String) map.get("msg");
+        id = Integer.valueOf(msg);
+        System.out.println("hi"+id+unitPrice);
         selectedOreder = OrderServices.selectOrderById(id);
         if (selectedOreder != null && selectedOreder.getCondition() == 0) {
-
             Factor factor = new Factor();
             PersianCalendar pc = new PersianCalendar();
             String currentDate = pc.getIranianDateTime();
@@ -261,7 +282,7 @@ public class OrderFollowUpForAdmin {
             int id = Integer.valueOf(msg);
             System.out.println(id + "---------------------------------");
             selectedOreder = OrderServices.selectOrderById(id);
-            return "/pages/admin/factor.xhtml";
+            return "/pages/admin/factor.xhtml?faces-redirect=true";
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,9 +290,10 @@ public class OrderFollowUpForAdmin {
 
     }
 
-    public String yaser2(){
-         return "/pages/admin/factor.xhtml";
+    public String yaser2() {
+        return "/pages/admin/factor.xhtml";
     }
+
     public void yaser() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();

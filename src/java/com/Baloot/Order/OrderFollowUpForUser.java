@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Ali-M
  */
 @ManagedBean
+@SessionScoped
 public class OrderFollowUpForUser {
 
     public OrderFollowUpForUser() {
@@ -152,10 +154,10 @@ public class OrderFollowUpForUser {
 //        }
 //        return pageOut;
 //    }
-
     /**
      * <b> تابع برای بدست آوردن فاکتور برای</b>
      * <b> سفارش انتخاب شده توسط کابر</b>
+     *
      * @return page factor
      */
     public String showFactorForSelectedOrder() {
@@ -163,9 +165,11 @@ public class OrderFollowUpForUser {
         Map map = context.getExternalContext().getRequestParameterMap();
         String msg = (String) map.get("msg");
         int id = Integer.valueOf(msg);
+        System.out.println("ojhgsahIASGKFHDJ" + id);
         selectedOreder = OrderServices.selectOrderById(id);
         factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
-        return "/pages/user/factor.xhtml";
+        System.out.println("herrrrrrrrrrrrrrrrrreeeeeeeeeeeee" + factorItemForSelectedOrder.getFactorId().getSumPrice());
+        return "/pages/user/factor.xhtml?faces-redirect=true";
     }
 
     public void cancelOrder() {
@@ -181,71 +185,73 @@ public class OrderFollowUpForUser {
         }
 
     }
+
     /**
-     * تابع است که به کلید پرداخت فاکتور وصل میشود 
+     * تابع است که به کلید پرداخت فاکتور وصل میشود
+     *
      * @return لینک پرداخت
      */
-public String payLink()
-{
- try {
+    public String payLink() {
+        try {
             FacesContext context = FacesContext.getCurrentInstance();
             Map map = context.getExternalContext().getRequestParameterMap();
             String msg = (String) map.get("msg");
             int id = Integer.valueOf(msg);
-          FactorItem item=  FactorItemServices.selectFactorItemByOrderId(id);
-         
-          try {
-           PayLine   pay = new PayLine();
-       
-        String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567",item.getFactorId().getSumPrice(), "http://localhost:12841/neginLast/pages/user/resultPayFactor.xhtml");
-        if (Integer.parseInt(result) > 0) {
-            OrderServices.InsertGetId(id, Integer.parseInt(result));
-            return "http://payline.ir/payment-test/gateway-" + result;
-        }  
-        } catch (Exception e) {
-            System.out.println("Error -------->>>>>>> "+e.getMessage());
-        }
-       
+            FactorItem item = FactorItemServices.selectFactorItemByOrderId(id);
 
-        return "";
-          
+            try {
+                PayLine pay = new PayLine();
+
+                String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "http://localhost:12841/neginLast/pages/user/resultPayFactor.xhtml");
+                if (Integer.parseInt(result) > 0) {
+                    OrderServices.InsertGetId(id, Integer.parseInt(result));
+                    return "http://payline.ir/payment-test/gateway-" + result;
+                }
+            } catch (Exception e) {
+                System.out.println("Error -------->>>>>>> " + e.getMessage());
+            }
+
+            return "";
+
         } catch (Exception e) {
             e.printStackTrace();
         }
- return null;
-}
-/**
- * تابع چک پرداخت آنلاین که در لود صفحه باید صدا زده شود
- */
+        return null;
+    }
+
+    /**
+     * تابع چک پرداخت آنلاین که در لود صفحه باید صدا زده شود
+     */
     public String checkPay() throws SQLException {
         try {
             String id_get = null;
-        String trans_id = null;
-        String result;
-        PayLine pay = new PayLine();
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        if (request != null) {
-            id_get = request.getParameter("id_get");
-            trans_id = request.getParameter("trans_id");
-            Order order = OrderServices.selectOrderByGetId(Integer.parseInt(id_get));
-            if (order != null) {
-                result = pay.Get("http://payline.ir/payment-test/gateway-result-second", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", trans_id, id_get);
-                if (Integer.parseInt(result) == 1) {
-                    FactorItem factorItem = FactorItemServices.selectFactorItemByOrderId(order.getId());
-                    FactorServices.payFactor(factorItem.getFactorId().getId(), 1);
-                    OrderServices.updateCondition(order.getId(), StepsOfOrder.payFactor.ordinal());
-return "موفق اومد";
+            String trans_id = null;
+            String result;
+            PayLine pay = new PayLine();
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            if (request != null) {
+                id_get = request.getParameter("id_get");
+                trans_id = request.getParameter("trans_id");
+                Order order = OrderServices.selectOrderByGetId(Integer.parseInt(id_get));
+                if (order != null) {
+                    result = pay.Get("http://payline.ir/payment-test/gateway-result-second", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", trans_id, id_get);
+                    if (Integer.parseInt(result) == 1) {
+                        FactorItem factorItem = FactorItemServices.selectFactorItemByOrderId(order.getId());
+                        FactorServices.payFactor(factorItem.getFactorId().getId(), 1);
+                        OrderServices.updateCondition(order.getId(), StepsOfOrder.payFactor.ordinal());
+                        return "موفق اومد";
+                    }
                 }
-            }
 
-        }
+            }
         } catch (Exception e) {
-            System.out.println("reror------>>>"+e.getMessage());
+            System.out.println("reror------>>>" + e.getMessage());
         }
-        
-return "ناموفق بود" ;
-      
+
+        return "ناموفق بود";
+
     }
+
     public void yaser() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
