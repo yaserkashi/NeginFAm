@@ -55,15 +55,15 @@ public class Login implements Serializable {
                             "لطفا رمزعبور و نام کاربری درست را وارد کنید."));
                 return "index";
             }
-            case 1 : {
+          case 1 : {
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username", user);
-                return "/pages/admin/admin.xhtml";
+                return "/pages/admin/contentManagement.xhtml?faces-redirect=true";
             }
             case 2 : {
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username", user);
-                return "/pages/user/index1.xhtml";
+                return "/pages/user/followuporder.xhtml?faces-redirect=true";
             }
         }
         return "index";
