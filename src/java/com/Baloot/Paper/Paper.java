@@ -192,5 +192,107 @@ public class Paper implements Serializable {
     public String toString() {
         return "Entity.Paper[ id=" + id + " ]";
     }
-    
+   /**
+ * ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption1() {
+        if (option.indexOf(0) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+/**
+ *  ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption2() {
+        if (option.indexOf(1) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+/**
+ *  ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله 
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption3() {
+        if (option.indexOf(2) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+
+/**
+ * ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption4() {
+        if (option.indexOf(3) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+/**
+ *  استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption5() {
+        if (option.indexOf(4) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+/**
+ *  استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری 
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption6() {
+        if (option.indexOf(5) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+/**
+ *  نگارش مقاله بدون دریافت اطلاعات اولیه
+ * @return دارد یا ندارد بر میگرداند
+ */
+    public String hasOption7() {
+        if (option.indexOf(6) == 0) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+    /**
+     * تحویل حضوری 
+     * @return دارد یا ندارد بر میگرداند
+     */
+      public String hasDelevry() {
+        if (!deliveryType) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }
+      /**
+       * نوع متون
+       * @return نوع متون شامل عمومی، تخصصی یا تخصصی وژه را برمیگرداند
+       */
+public String hasOption8() {
+        if (option.indexOf(7) == 0) {
+            return "متون عمومی";
+        } else if (option.indexOf(7) == 1) {
+            return "متون تخصصی";
+        } else {
+            return "متون تخصصی ویژه";
+        }
+        
+    } 
 }
