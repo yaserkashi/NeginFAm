@@ -6,6 +6,7 @@
 
 package com.Baloot.Order;
 
+import com.Baloot.Enum.StepsOfOrder;
 import com.Baloot.User.Users;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -149,5 +150,24 @@ public class Order implements Serializable {
     public String toString() {
         return "Entity.Order1[ id=" + id + " ]";
     }
-    
+    /**
+     * وضعیت یک سفارش
+     * @return وضعیت سفارش را به صورت یک استرینگ فارسی برمیگرداند
+     */
+    public String conditionView() {
+        if (condition == StepsOfOrder.registrationOrder.ordinal()) {
+            return "سفارش ثبت شده";
+        } else if (condition == StepsOfOrder.registrationFactor.ordinal()) {
+            return "پیش فاکتور صادر شده";
+        } else if (condition == StepsOfOrder.payFactor.ordinal()) {
+            return "فاکتور توسط مشتری پرداخت شده";
+        } else if (condition == StepsOfOrder.ConfirmationPayFactor.ordinal()) {
+            return "پرداخت تایید شده و انجام کاار شروع شده";
+        } else if (condition == StepsOfOrder.EndOrder.ordinal()) {
+            return "کار به اتمام رسیده است";
+        } else if (condition == StepsOfOrder.dissuasion.ordinal()) {
+            return "سفارش کنسل شده است";
+        }
+        return "";
+    }
 }
