@@ -65,6 +65,298 @@
                 border-width: 1px 0px;
                 padding: 3px;
             }
+               .ui-dialog {
+                position: fixed;
+                padding: 0;
+                overflow: hidden;
+                font-size: medium !important;
+                z-index: 1000 !important;
+            }
+            .ui-icon {
+                width: 16px;
+                height: 16px;
+                text-align: center !important;
+            }
+
+            .ui-dialog-title {
+                float: right !important;
+                margin: .3em 16px .1em 0;
+                direction: rtl !important;
+
+            }
+            .ui-dialog-buttonpane {
+                text-align: center !important;
+                direction: rtl !important;
+
+            }
+            .ui-dialog-titlebar-close, .ui-dialog .ui-dialog-titlebar-minimize, .ui-dialog .ui-dialog-titlebar-maximize {
+
+                float: left !important;
+
+            }
+            *.ui-messages-error, .ui-message-error {
+
+                text-align: right !important;
+                direction: rtl !important;
+
+            }
+
+            .ui-messages-error-icon{
+                display: none !important;
+            }
+            .ui-messages-close {
+                float: left !important;
+            }
+
+            .ui-messages-error, .ui-message-error {
+                text-align: right !important;
+                direction: rtl !important;
+                width: 400px ;
+                position: absolute;
+                margin-top: 40px;
+                font-stretch: normal;
+            }
+
+            .ui-messages-info {
+                text-align: right !important;
+                direction: rtl !important;
+                width: 400px ;
+                position: absolute;
+                margin-top: 40px;
+                font-stretch: normal;
+            }
+
+            .ui-messages-info-icon, .ui-messages-error-icon, .ui-message-warn-icon,.ui-message-fatal-icon {
+                background: url("") no-repeat;
+
+            }
+            .ui-widget-content.ui-icon {
+                display: none !important;
+            }
+
+ 
+             #nav {
+                background-color: #222;
+            }
+            #nav *{
+                z-index: 9999;
+            }
+            
+            #nav_wrapper > ul > li:first-child {
+                width: 18%;
+                padding: 0px 0%;
+                border-left: none;
+                min-width: 210px;
+            }
+            
+             #nav_wrapper > ul > li:first-child > a {
+                font: -moz-info; 
+                font-family: BYekan,'BYekan',tahoma;
+                text-transform: uppercase;
+                text-align:center;
+                color: #FFFFFF;
+                font-size:120%;
+                padding-top: 4px;
+            }
+
+
+            #nav_wrapper {
+               
+                margin: 0 auto;
+
+            }
+            #nav ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                position: relative;
+                //min-width: 200px;
+                direction:rtl;
+            }
+            #nav ul li {
+                display: inline-block;
+            }
+            #nav ul li:hover {
+                background-color: #333;
+            }
+            #nav ul li a, visited {
+                color: #CCC;
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 12px;
+            }
+            #nav ul li:hover ul {
+                display: block;
+            }
+            #nav ul ul {
+                display: none;
+                position: absolute;
+                background-color: #333;
+                border: 5px solid #222;
+                border-top: 0;
+                margin-right: -5px;
+            }
+
+            .submenu {
+
+
+            }
+
+
+            #nav ul ul  .submenu {
+                display: none !important;
+                position: absolute;
+                background-color: #333;
+                border: 5px solid #222;
+                border-top: 0;
+                margin-right: -5px;
+            }
+
+            #nav continer:hover  ul{
+                display: block !important;
+            }
+
+            #nav ul ul li {
+                display: block;
+            }
+            #nav ul ul li a:hover {
+                color: #699;
+            }
+            #cssmenu,
+            #cssmenu ul,
+            #cssmenu li,
+            #cssmenu a {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                list-style: none;
+                font-weight: normal;
+                text-decoration: none;
+                line-height: 1;
+               font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: small;
+
+            }
+            #cssmenu a {
+                line-height: 1.3;
+            }
+
+            #cssmenu {
+                width: 100%;
+                float:right;
+                direction:rtl;
+            }
+            #cssmenu > ul > li > ul > li > a > span  {
+                padding-right:40px;
+                ont: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 11px;
+
+            }
+
+            #cssmenu > ul > li {
+                margin: 0 0 2px 0;
+            }
+            #cssmenu > ul > li:last-child {
+                margin: 0;
+            }
+            
+            #cssmenu > ul > li:first-child {
+               margin-top: 20px;
+            }
+            #cssmenu > ul > li > a {
+                font-size: 15px;
+                display: block;
+                color: #ffffff;
+                text-shadow: 0 1px 1px #000;
+                background: #354a5f;
+              
+            }
+            #cssmenu > ul > li > a > span {
+                display: block;
+                border: 1px solid #354a5f;
+                padding: 6px 10px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                //font-weight: bold;
+                padding-right:33px;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 13px;
+
+            }
+            #cssmenu > ul > li > a:hover {
+                text-decoration: none;
+                 
+            }
+            #cssmenu > ul > li.active {
+                border-bottom: none;
+            }
+            #cssmenu > ul > li.active > a {
+                background: #000;
+                color: #fff;
+                text-shadow: 0 1px 1px #000;
+            }
+            #cssmenu > ul > li.active > a span {
+                border: 1px solid #000;
+            }
+            #cssmenu > ul > li.has-sub > a span {
+                background: url(images/icon_plus.png) 98% center no-repeat;
+                padding-right:33px;
+                 font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 13px;
+            }
+            #cssmenu > ul > li.has-sub.active > a span {
+                background: url(images/icon_minus.png) 98% center no-repeat;
+                padding-right:33px;
+               
+            }
+            /* Sub menu */
+            #cssmenu ul ul {
+                padding: 5px 12px;
+                display: none;
+            }
+            #cssmenu ul ul li {
+                padding: 3px 0;
+            }
+            #cssmenu ul ul a {
+                display: block;
+                color: #fff;
+                font-size: 13px;
+                //font-weight: bold;
+            }
+            #cssmenu ul ul a:hover {
+            }
+            #cssmenu ul > li.has-sub > a span {
+    background: url(../../resources/images/icon_plus.png) 98% center no-repeat; 
+    padding-right: 33px;
+    font: -moz-info;
+    font-family: BYekan,'BYekan',tahoma;
+    font-size: 13px;
+}
+
+
+
+            
+            #cssmenu ul > li.has-sub > a span {
+                background: url(../../resources/images/icon_plus.png) 98% center no-repeat; 
+                padding-right: 33px;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 13px;
+            }
+
+
+            #cssmenu > ul > li.has-sub.active > a span {
+                background: url(../../resources/images/icon_minus.png) 98% center no-repeat;
+                padding-right: 33px;
+            }
 
         </style>
         <link rel="SHORTCUT ICON" href="#{resource['images:logo.jpg']}"/>
@@ -73,10 +365,10 @@
         </ui:insert>
     </h:head>
     <h:body style="background-color: #fffffe">
-        <h:form id="adminform" >
+        <h:form enctype="multipart/form-data" id="adminform" prependId="false" >
             <div id="header" class="header">
                 <div class="logo">
-                    <p:graphicImage style="height: inherit;min-height: 70px"
+                    <p:graphicImage style="height: inherit;"
                                     url="/resources/images/ac.jpg"></p:graphicImage>
                 </div>
                 <div class="company">
@@ -84,168 +376,150 @@
                                    value="گروه تبلیغاتی طیف"/>
 
                 </div>
-                <div class="headerMenu">
-                    <p:menubar >
-                        <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
-                      
 
-                        <p:submenu label="هزینه و زمان تحویل">
-                            <p:submenu label="هزینه خدمات ترجمه">
-                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/guest/traslateenglishtoperstion.xhtml"  />
-                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/guest/costofpertoeng.xhtml" />
-                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/guest/costoftransefile.xhtml" />
+            </div>
+            
+             <div id="nav">
+                 
 
-                            </p:submenu>
+                
+                 <div id="nav_wrapper">
+                    <ul>
+                        <li><a href="#">گروه تبلیغاتی طیف</a>
+                        </li>
+                        <li> <a href="/NeginFAm4/index.xhtml">صفحه اصلی</a>
+                        </li>
+                        <li> <a href="#">خدمات ترجمه</a>
+                            <ul>
+                               <li ><a href="/NeginFAm4/pages/guest/traslateenglishtoperstion.xhtml">ترجمه انگلیسی به فارسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costofpertoeng.xhtml">ترجمه فارسی به انگلیسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costoftransefile.xhtml"> ترجمه فایل صوتی و تصویری</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/traslatebook.xhtml">ترجمه کتاب و جزوه</a>
+                                </li>
+                                 <li ><a href="/NeginFAm4/pages/guest/traslateArticle.xhtml">ترجمه مقالات تخصصی</a>
+                                </li>
+                                 <li ><a href="/NeginFAm4/pages/guest/helpservicetraslate.xhtml">راهنمای خدمات ترجمه</a>
+                                </li>
 
-                            <p:submenu label="هزینه خدمات تایپ">
-                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/guest/costtypeper.xhtml"  />
-                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/guest/costtypeother.xhtml" />
+                            </ul>
+                        </li>
+                        <li> <a href="#">خدمات تایپ</a>
 
-                            </p:submenu>
+                            <ul>
+                              <li ><a href="/NeginFAm4/pages/guest/typeperandeng.xhtml">تایپ فارسی و انگلیسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costtypeper.xhtml">هزینه تایپ فارسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costtypeother.xhtml">هزینه تایپ های دیگر</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/helpservicetype.xhtml">راهنمای خدمات تایپ</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+                        
+                        <li> <a href="#">سایر خدمات</a>
 
-
-                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/guest/costofediter.xhtml"  />
-
-
-
-                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/guest/costoflayout.xhtml"/>
-
-
-                        </p:submenu>
-                        <p:submenu label="لیست خدمات">
-                            <p:submenu label="خدمات تایپ">
-                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/guest/typeperandeng.xhtml"  />
-                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/guest/contractswithcompanies.xhtml" />
-                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/guest/helpservicetype.xhtml" />
-
-                            </p:submenu>
-
-                            <p:submenu label="خدمات ترجمه">
-                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/guest/traslateperandeng.xhtml"  />
-
-                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/guest/traslatebook.xhtml" />
-                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/guest/traslateArticle.xhtml" />
-                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/guest/helpservicetraslate.xhtml" />
-
-                            </p:submenu>
-
-
-                        </p:submenu>
-                        <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml" />
-                        <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml" />
-                    </p:menubar>
+                            <ul>
+                                <li ><a href="/NeginFAm4/pages/guest/costofediter.xhtml">خدمات ویراستاری</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costoflayout.xhtml">خدمات صفحه ارایی</a>
+                                </li>
+                               
+                               
+                            </ul>
+                        </li>
+                        
+                       
+                        <li> <a href="/NeginFAm4/pages/guest/employmentTranslator.xhtml">استخدام مترجم</a>
+                        </li>
+                        <li> <a href="/NeginFAm4/pages/guest/contactus.xhtml">تماس با ما</a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            
+            
+            
+            <div class="content">
+                <div class="contentPanel">
+                    <ui:insert name="content">
+                        <ui:include src="/template/commonContent.xhtml"/>
+                    </ui:insert>
+                </div>
+                <div class="usersidePanel" style="background: #354a5f">
+                    <ui:insert name="sidePanel">
+                        <div>
+                            <p:layoutUnit position="east" resizable="true" size="300" >
+                                    <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;" value="کاربر گرامی #{login.user}خوش آمدید"/>
 
+                                <div id='cssmenu'>
+                                    <ul>
+                                      
+                                        <li class='has-sub'><a href='#'><span>مدیریت محتوی</span></a>
+                                            <ul>
+                                                <li><a href="/NeginFAm4/pages/admin/sliderManagement.xhtml"><span>مدیریت اسلایدر صفحه اول</span></a></li>
+                                              
+                                                <li ><a href="/NeginFAm4/pages/admin/contentManagement.xhtml"><span>مدیریت محتوای صفحه اول</span></a></li>
+                                            </ul>
+                                        </li>
+                                         <li ><a href="/NeginFAm4/pages/admin/usersManagement.xhtml"><span>مدیریت کاربران</span></a></li>
+                                        <li class='has-sub'><a href='#'><span>مدیریت پیام ها</span></a>
+                                            <ul>
+                                                <li><a href="/NeginFAm4/pages/admin/sendMessage.xhtml"><span>ارسال پیام به کاربران</span></a></li>
+                                                 <li><a href="/NeginFAm4/pages/admin/listmassage.xhtml"><span>صندوق پیام</span></a></li>
+                                                 
+                                            </ul>
+                                        </li>
+                                        <li ><a href="/NeginFAm4/pages/admin/financialManagement.xhtml"><span>مدیریت مالی کاربران</span></a></li>
+                                        <li ><a href="/NeginFAm4/pages/admin/trackOrder.xhtml"><span>پیگیری سفارشات</span></a></li>
+                                        <li ><a href="/NeginFAm4/pages/admin/requestReview.xhtml"><span>درخواست های استخدام</span></a></li>
+                                        <li ><a href="/NeginFAm4/pages/user/index1.xhtml"><span>ورود به پنل کاربری</span></a></li>
+                                        
 
+                                    </ul>
+                                </div>
 
-                <div class="content">
+                            </p:layoutUnit>
+                        </div>  
+                        <ui:include src="/template/commonContent.xhtml"/>
 
-
-                    <div class="contentPanel">
-                        <ui:insert name="content">
-                            <ui:include src="/template/commonContent.xhtml"/>
-                        </ui:insert>
-                    </div>
-
-
-
-
-
-
-
-                    <div class="sidePanel" >
-                        <ui:insert name="sidePanel">
-                            <div>
-                                <p:layoutUnit position="east" resizable="true" size="300" minSize="60" maxSize="230">
-
-                                    <p:outputLabel style="font: -moz-info;padding-right: 35px; font-family: BYekan,'BYekan',tahoma;padding-left: 2px;padding-top: 20px " value="کاربر گرامی#{login.user}خوش آمدید"/>
-                                    <p:panelMenu style="float: right;width: 100%;padding-top: 15px " >
-                                        <p:submenu label="مدیریت محتوی" >
-                                            <p:menuitem value="مدیریت اسلایدر صفحه اول "  icon="" url="/pages/admin/sliderManagement.xhtml"  />
-                                            <p:menuitem value="مدیریت محتوای صفحه اول" icon="" url="/pages/admin/contentManagement.xhtml"/>
-                                        </p:submenu>
-
-                                        <p:separator /> 
-
-
-                                        <p:submenu label="مدیریت کاربران">
-                                            <p:menuitem value="مدیریت اعضا "   ajax="true" icon="" url="/pages/admin/usersManagement.xhtml"/>
-                                        </p:submenu>
-
-                                        <p:separator />
-
-                                        <p:submenu label="مدیریت پیام ها">
-                                            <p:menuitem value="ارسال پیام به اعضا"  ajax="true"  icon="" url="/pages/admin/sendMessage.xhtml"/>
-                                            <p:menuitem value="صندوق پیام"  ajax="true"  icon="" url="/pages/admin/listmassage.xhtml"/>
-                                        </p:submenu>
-
-                                        <p:separator />
-
-
-
-
-                                        <p:submenu label="مدیریت مالی">
-                                            <p:menuitem value="مدیریت مالی اعضا"   ajax="true" icon=""    url="/pages/admin/financialManagement.xhtml"/>
-                                        </p:submenu>
-
-                                        <p:separator />
-
-
-                                        <p:submenu label="سفارشات">
-                                            <p:menuitem value="پیگیری سفارش خاص"  ajax="false" icon="" url="/pages/admin/trackOrder.xhtml" />
-                                        </p:submenu> 
-
-                                        <p:separator />
-
-
-                                        <p:submenu label="استخدام">
-                                            <p:menuitem value="بررسی درخواستهای استخدام"  ajax="false" icon="" url="/pages/admin/requestReview.xhtml" />
-                                        </p:submenu> 
-
-                                    </p:panelMenu>
-                                    <p:commandButton value="ورود به پنل کاربری" style="width: 100% ;text-align: right;height: 40px;padding-right: 10px" action="/pages/user/index1.xhtml"/>
-                                    <p:commandButton value="خروج" style="width: 100% ;text-align: right;height: 40px;padding-right: 10px" action="#{login.logout()}"/>
-
-
-
-                                </p:layoutUnit>
-                            </div>   
-                            <ui:include src="/template/commonContent.xhtml"/>
-
-                        </ui:insert>
-                    </div>
-
-                </div> 
+                    </ui:insert>
+                </div>
             </div>
 
 
 
-            <!--            <footer>
-                            <div class="footer">
-                                <ui:insert name="footer">
-                                </ui:insert>
-                                                <div style="width: 33%;height: 40px;display: inline-block;background-color:slategray;margin-right: -6px; padding-top: 22px">
-                                                    <p:graphicImage style="height: 31px" url="../resources/images/logo.png"></p:graphicImage>
-                                                </div>
-                                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                                     padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                                    <p:outputLabel value="a"></p:outputLabel>
-                                </div>
-                                <div style="width: 33%;display: inline-block;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                                     padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                                    <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
-                                </div>
-                                <div style="width: 32%;display: inline-block;text-align: right;padding-right:34px;background-color:slategray;padding-bottom: 10px;">
-                                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                                        <h:outputText value="صفحه نخست"></h:outputText>
-                                    </p:commandLink>
-                                    <p:commandLink style="display:block" action="#{mainPage.goToAnotherPage}">
-                                        <h:outputText value="درباره ما"> </h:outputText>
-                                    </p:commandLink>
-                                </div>
-                            </div>
-                        </footer>-->
+               <!--<script src="/resources/js/jquery-2.1.4.min" type="text/javascript"></script>-->
+        <script type="text/javascript">
+            (function($) {
+                $(document).ready(function() {
+                    $('#cssmenu > ul > li > a').click(function() {
+                        $('#cssmenu li').removeClass('active');
+                        $(this).closest('li').addClass('active');
+                        var checkElement = $(this).next();
+                        if ((checkElement.is('ul')) &amp;&amp; (checkElement.is(':visible'))) {
+                            $(this).closest('li').removeClass('active');
+                            checkElement.slideUp('normal');
+                        }
+                        if ((checkElement.is('ul')) &amp;&amp; (!checkElement.is(':visible'))) {
+                            $('#cssmenu ul ul:visible').slideUp('normal');
+                            checkElement.slideDown('normal');
+                        }
+                        if ($(this).closest('li').find('ul').children().length == 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    });
+                });
+            })(jQuery);
+        </script>
         </h:form>
+     
     </h:body>
 
 </html>

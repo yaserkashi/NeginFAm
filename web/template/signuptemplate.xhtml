@@ -5,10 +5,16 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      template="../../template/signuptemplate.xhtml">
+
+
     <h:head>
         <h:outputStylesheet library="css" name="style.css"/>
         <link href="../resources/css/style.css"/>
+        <link href="../resources/css/styles.css"/>
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="../resources/js/script.js"></script>
 
         <style type="text/css">
             .ui-panelgrid > * > tr,
@@ -37,17 +43,196 @@
                 padding: 0.3em 0px;
                 width: 100%;
                 border-width: 1px 0px;
-                padding: 3px;
+                padding: 3px -1px 3px 15px;
+            }
+            .ui-icon-triangle-1-e {
+                background-position: -95px -16px;
+            }
+               .ui-dialog {
+                position: fixed;
+                padding: 0;
+                overflow: hidden;
+                font-size: medium !important;
+                z-index: 1000 !important;
+            }
+            .ui-icon {
+                width: 16px;
+                height: 16px;
+                text-align: center !important;
             }
 
+            .ui-dialog-title {
+                float: right !important;
+                margin: .3em 16px .1em 0;
+                direction: rtl !important;
+
+            }
+            .ui-dialog-buttonpane {
+                text-align: center !important;
+                direction: rtl !important;
+
+            }
+            .ui-dialog-titlebar-close, .ui-dialog .ui-dialog-titlebar-minimize, .ui-dialog .ui-dialog-titlebar-maximize {
+
+                float: left !important;
+
+            }
+            *.ui-messages-error, .ui-message-error {
+
+                text-align: right !important;
+                direction: rtl !important;
+
+            }
+
+            .ui-messages-error-icon{
+                display: none !important;
+            }
+            .ui-messages-close {
+                float: left !important;
+            }
+
+            .ui-messages-error, .ui-message-error {
+                text-align: right !important;
+                direction: rtl !important;
+                width: 400px ;
+                position: absolute;
+                margin-top: 40px;
+                font-stretch: normal;
+            }
+
+            .ui-messages-info {
+                text-align: right !important;
+                direction: rtl !important;
+                width: 400px ;
+                position: absolute;
+                margin-top: 40px;
+                font-stretch: normal;
+            }
+
+            .ui-messages-info-icon, .ui-messages-error-icon, .ui-message-warn-icon,.ui-message-fatal-icon {
+                background: url("") no-repeat;
+
+            }
+            .ui-widget-content.ui-icon {
+                display: none !important;
+            }
+
+ 
+
+            #nav {
+                background-color: #222;
+            }
+            #nav *{
+                z-index: 9999;
+            }
+
+            #nav_wrapper > ul > li:first-child {
+                margin-right: 10px;
+            }
+
+
+            .ui-panelgrid .ui-panelgrid-header {
+                text-align: center;
+                padding: 4px 10px;
+                height: 40px;
+
+            }ّ
+
+            #nav_wrapper {
+
+                margin: 0 auto;
+                padding: 3px;
+
+            }
+            #nav ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                position: relative;
+                //min-width: 200px;
+                direction:rtl;
+            }
+            #nav ul li {
+                display: inline-block;
+            }
+            #nav ul li:hover {
+                background-color: #333;
+            }
+            #nav ul li a, visited {
+                color: #CCC;
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 12px;
+            }
+            #nav ul li:hover ul {
+                display: block;
+            }
+            #nav ul ul {
+                display: none;
+                position: absolute;
+                background-color: #333;
+                border: 5px solid #222;
+                border-top: 0;
+                margin-right: -5px;
+            }
+
+            .submenu {
+
+
+            }
+            .ui-galleria {
+                overflow: hidden;
+                width:99.85% !important;
+                visibility: visible;
+                position: relative;
+
+            }
+            .ui-galleria-caption {
+                position: absolute;
+                left: 1px;
+                background-color: rgba(0,0,0,0.5);
+                display: none !important;
+                color: #FFFFFF;
+                padding: 0.2em 1em;
+            }
+
+            .ui-galleria-filmstrip-wrapper {
+                overflow: hidden;
+                margin: 5px auto;
+                position: relative;
+                display: none;
+            }
+
+            #nav ul ul  .submenu {
+                display: none !important;
+                position: absolute;
+                background-color: #333;
+                border: 5px solid #222;
+                border-top: 0;
+                margin-right: -5px;
+            }
+
+            #nav continer:hover  ul{
+                display: block !important;
+            }
+
+            #nav ul ul li {
+                display: block;
+            }
+            #nav ul ul li a:hover {
+                color: #699;
+            }
         </style>
         <link rel="SHORTCUT ICON" href="#{resource['images:logo.jpg']}"/>
         <ui:insert name="header">
             <ui:include src="/template/commonContent.xhtml"/>
         </ui:insert>
     </h:head>
-    <h:body style="background-color: #fffffe">
-        <h:form prependId="false">
+    <h:body style="background-color: #fffffe" >
+        <h:form prependId="false" >
             <div id="header" class="header">
                 <div class="logo">
                     <p:graphicImage style="height: inherit;min-height: 70px"
@@ -58,163 +243,147 @@
                                    value="گروه تبلیغاتی طیف"/>
 
                 </div>
-                 <div class="headerMenu">
-                    <p:menubar >
-                    <p:menuitem value="خانه" icon="ui-icon-home" url="/index.xhtml"/>
-                       
-
-                        <p:submenu label="هزینه و زمان تحویل">
-                            <p:submenu label="هزینه خدمات ترجمه">
-                                <p:menuitem value="هزینه ترجمه انگلیسی به فارسی" url="/pages/guest/traslateenglishtoperstion.xhtml"  />
-                                <p:menuitem value="هزینه ترجمه فارسی به انگلیسی" url="/pages/guest/costofpertoeng.xhtml" />
-                                <p:menuitem value="هزینه ترجمه فایل صوتی و تصویری" url="/pages/guest/costoftransefile.xhtml" />
-
-                            </p:submenu>
-
-                            <p:submenu label="هزینه خدمات تایپ">
-                                <p:menuitem value="هزینه تایپ فارسی" url="/pages/guest/costtypeper.xhtml"  />
-                                <p:menuitem value="هزینه تایپ چیزهای دیگر" url="/pages/guest/costtypeother.xhtml" />
-
-                            </p:submenu>
-
-
-                            <p:menuitem value="هزینه خدمات ویراستاری" url="/pages/guest/costofediter.xhtml"  />
 
 
 
-                            <p:menuitem value="هزینه خدمات صفحه ارایی" url="/pages/guest/costoflayout.xhtml"/>
 
 
-                        </p:submenu>
-                        <p:submenu label="لیست خدمات">
-                            <p:submenu label="خدمات تایپ">
-                                <p:menuitem value="تایپ فارسی و انگلیسی" url="/pages/guest/typeperandeng.xhtml"  />
-                                <p:menuitem value="انعقاد قرارداد با ارگان ها،انتشارات و شرکت ها" url="/pages/guest/contractswithcompanies.xhtml" />
-                                <p:menuitem value="راهنمای خدمات تایپ" url="/pages/guest/helpservicetype.xhtml" />
+            </div>
 
-                            </p:submenu>
+            <div id="nav">
+                <div id="nav_wrapper">
+                    <ul>
 
-                            <p:submenu label="خدمات ترجمه">
-                                <p:menuitem value="ترجمه فارسی و انگلیسی" url="/pages/guest/traslateperandeng.xhtml"  />
+                        <li> <a href="/NeginFAm4/index.xhtml">صفحه اصلی</a>
+                        </li>
+                        <li> <a href="#">خدمات ترجمه</a>
+                            <ul>
+                                <li ><a href="/NeginFAm4/pages/guest/traslateenglishtoperstion.xhtml">ترجمه انگلیسی به فارسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costofpertoeng.xhtml">ترجمه فارسی به انگلیسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costoftransefile.xhtml"> ترجمه فایل صوتی و تصویری</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/traslatebook.xhtml">ترجمه کتاب و جزوه</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/traslateArticle.xhtml">ترجمه مقالات تخصصی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/helpservicetraslate.xhtml">راهنمای خدمات ترجمه</a>
+                                </li>
 
-                                <p:menuitem value="ترجمه کتاب و جزوه" url="/pages/guest/traslatebook.xhtml" />
-                                <p:menuitem value="ترجمه مقالات تخصصی" url="/pages/guest/traslateArticle.xhtml" />
-                                <p:menuitem value="راهنمای خدمات ترجمه" url="/pages/guest/helpservicetraslate.xhtml" />
+                            </ul>
+                        </li>
+                        <li> <a href="#">خدمات تایپ</a>
 
-                            </p:submenu>
+                            <ul>
+                                <li ><a href="/NeginFAm4/pages/guest/typeperandeng.xhtml">تایپ فارسی و انگلیسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costtypeper.xhtml">هزینه تایپ فارسی</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costtypeother.xhtml">هزینه تایپ های دیگر</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/helpservicetype.xhtml">راهنمای خدمات تایپ</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li> <a href="#">سایر خدمات</a>
+
+                            <ul>
+                                <li ><a href="/NeginFAm4/pages/guest/costofediter.xhtml">خدمات ویراستاری</a>
+                                </li>
+                                <li ><a href="/NeginFAm4/pages/guest/costoflayout.xhtml">خدمات صفحه ارایی</a>
+                                </li>
 
 
-                        </p:submenu>
-                    <p:menuitem value="تماس با ما" url="/pages/guest/contactus.xhtml" />
-                    <p:menuitem value="استخدام مترجم" url="/pages/guest/employmentTranslator.xhtml" />
-                </p:menubar>
+                            </ul>
+                        </li>
+
+
+                        <li> <a href="/NeginFAm4/pages/guest/employmentTranslator.xhtml">استخدام مترجم</a>
+                        </li>
+                        <li> <a href="/NeginFAm4/pages/guest/contactus.xhtml">تماس با ما</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
             <div class="content">
 
-                <div class="contentPanel">
+                <div class="maincontentPanel">
                     <ui:insert name="content">
                         <ui:include src="/template/commonContent.xhtml"/>
                     </ui:insert>
                 </div>
+
                 <div class="sidePanel">
                     <ui:insert name="sidePanel">
-                        
-                        
-                                        <div style="width:250px;background-color: #ffffff;padding-right: 10px;padding-top: 5px; border-width: 0px">
-                    <h:link outcome="/pages/guest/signup.xhtml" >
-                        <p:panelGrid columns="1" style="; margin-right: 10px;" >
-                            <p:graphicImage  width="250px" style="position: relative;"  
-                                             url="/resources/images/singup.png"></p:graphicImage>
-                        </p:panelGrid>
-                    </h:link>
-                    
-                     <h:link outcome="/pages/guest/contactus.xhtml" >
-                         <p:panelGrid columns="1" style="; margin-right: 10px;margin-top: 10px" styleClass="border" >
-                             <f:facet name="header">
-                                 با ما تماس بگیرید
-                             </f:facet>
-                            <p:graphicImage  width="240px" style="position: relative"
-                                             url="/resources/images/us.jpg"></p:graphicImage>
-                        </p:panelGrid>
-                    </h:link>
-
-                   
-
-
-
-
-
-
-
-
-<!--                                        <h:link outcome="/pages/guest/signup-help.xhtml" >
-                                            <p:panelGrid columns="2" style="border:none;margin-top: 30px; color:  #00cc33">
-                                                <p:graphicImage width="80px" style="margin: 2px;size: 200px;"  url="/resources/images/help-icon.jpg"/>
-                                                <p:outputLabel style="font-size: 18px !important;" styleClass="news-link" value="راهنمای ثبت سفارش!!."/>
-                    
-                                            </p:panelGrid>
-                                        </h:link>-->
-
-
-                    <p:panelGrid columns="1" styleClass="border" style="width: 250px;margin-top: 30px" >
-                        <f:facet name="header">
-                            آخرین اخبار سایت
-                        </f:facet>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>      
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
-                        </h:link>
-                        <h:link outcome="/pages/guest/news" value="">
-                            <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
-                        </h:link>
-                    </p:panelGrid>
-                </div>
-                        
-                        
-                        
-                        
-                        
-                        
                         <ui:include src="/template/commonContent.xhtml"/>
+                        <div style="width:100%;padding-right: 10px;padding-top: 5px; border-width: 0px">
+                            <h:link outcome="/pages/guest/signup.xhtml" >
+
+                                <p:graphicImage width="90%" style="padding-right: 15px"
+                                                url="/resources/images/singup.jpg"></p:graphicImage>
+
+                            </h:link>
+
+                            <p:panelGrid columns="1" styleClass="border"  style="background: #fff !important" >
+                                <f:facet name="header">
+                                    با ما تماس بگیرید
+                                </f:facet>
+                                <p:graphicImage  style="width: 100%;"
+                                                 url="/resources/images/us.jpg"></p:graphicImage>
+                            </p:panelGrid>
+
+
+
+
+
+
+                            <p:panelGrid columns="1" styleClass="font border" style="width: 93%;margin-top: 30px" >
+                                <f:facet name="header">
+                                    آخرین اخبار سایت
+                                </f:facet>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>      
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  توافق هسته ای مبلغ ترجمه را افزایش داد!!"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  بلاخره قرارداد این پروژه بسته شد"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="  ایران دارای رتبه 10 در مقاله علمی در جهان"/>
+                                </h:link>
+                                <h:link outcome="/pages/guest/news" value="">
+                                    <p:outputLabel styleClass="news-link" value="نیما یوشیج . تولدی دوباره !!!!  "/>
+                                </h:link>
+                            </p:panelGrid>
+                        </div>
                     </ui:insert>
                 </div>
+
             </div>
-            <div id="footerdiv" style="margin-top: 20px;">
-<!--                <footer>
-                    <div class="footer">
-                        <ui:insert name="footer">  
-                            <div style="width: 100%;display:table;text-align:right;vertical-align: bottom;padding-bottom: 5px;background-color:slategray;
-                                 padding-top: 22px;margin-right: -6px;margin-left: -5px">
-                                <p:outputLabel value="تمامی حقوق این وب سایت برای شرکت طیف محفوظ می باشد. "></p:outputLabel>
-                            </div>                       
-                        </ui:insert>
-                    </div>
-                </footer>-->
-            </div>
+
+
+
         </h:form>
     </h:body>
 
