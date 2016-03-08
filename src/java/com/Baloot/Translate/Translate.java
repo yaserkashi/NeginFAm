@@ -7,6 +7,7 @@
 package com.Baloot.Translate;
 
 import com.Baloot.User.Users;
+import com.Baloot.util.UtilForDecode;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -189,6 +190,48 @@ public class Translate implements Serializable {
             return false;
         }
         return true;
+    }
+    /**
+     * تابع دیکد برای سفارش ترجمه که مشخص میکند ترجمه جداول انجام شود دارد یا نه
+     *
+     * @return استرینگ فارسی دارد یا ندارد بر میگرداند
+     */
+    public String hasOption1() {
+        return UtilForDecode.decod(option.charAt(0));
+    }
+
+    /**
+     * ترجمه زیر جداول انجام شود
+     *
+     * @return استرینگ فارسی دارد یا ندارد بر میگرداند
+     */
+    public String hasOption2() {
+        return UtilForDecode.decod(option.charAt(1));
+    }
+
+    /**
+     * مطالب داخل شکل ترجمه شود
+     *
+     * @return استرینگ فارسی دارد یا ندارد بر میگرداند
+     */
+    public String hasOption3() {
+        return UtilForDecode.decod(option.charAt(2));
+    }
+
+    /**
+     * نمودار ها رسم شوند
+     *
+     * @return استرینگ فارسی دارد یا ندارد بر میگرداند
+     */
+    public String hasOption4() {
+        return UtilForDecode.decod(option.charAt(3));
+    }
+    /**
+     * تحویل حضوری دارد یا نه 
+     * @return استرینگ فارسی دارد یا ندارد بر میگرداند
+     */
+    public String hasDelivery() {
+        return UtilForDecode.decod(deliveryType);
     }
 
     @Override

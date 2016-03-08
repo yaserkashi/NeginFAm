@@ -7,6 +7,7 @@
 package com.Baloot.Type;
 
 import com.Baloot.User.Users;
+import com.Baloot.util.UtilForDecode;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -195,5 +196,75 @@ public class Type implements Serializable {
     public String toString() {
         return "Entity.Type[ id=" + id + " ]";
     }
+    /**
+     * فرمول نویسی
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option1() {
+        return UtilForDecode.decod(option.charAt(0));
+    }
+
+    /**
+     * صفحه آرایی
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option2() {
+        return UtilForDecode.decod(option.charAt(1));
+    }
+
+    /**
+     * تصویرگری
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option3() {
+        return UtilForDecode.decod(option.charAt(2));
+    }
+
+    /**
+     * رسم جدول
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option4() {
+        return UtilForDecode.decod(option.charAt(3));
+    }
+
+    /**
+     * رسم نمودار
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option5() {
+        return UtilForDecode.decod(option.charAt(4));
+    }
+
+    /**
+     * رسم شکل
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option6() {
+        return UtilForDecode.decod(option.charAt(5));
+    }
+
+    /**
+     * ویراستاری
+     *
+     * @return دارد یا ندارد برمیگرداند
+     */
+    public String option7() {
+        return UtilForDecode.decod(option.charAt(6));
+    }
     
+     /**
+     * تحویل حضوری دارد یا نه 
+     * @return استرینگ فارسی دارد یا ندارد بر میگرداند
+     */
+    public String hasDelivery() {
+        return UtilForDecode.decod(deliveryType);
+    }
+
 }
