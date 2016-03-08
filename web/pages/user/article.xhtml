@@ -90,16 +90,18 @@
                 <p:outputLabel value=" تاریخ و ساعت درخواستی *"></p:outputLabel>
                 <p:calendar value="#{paperForm.dateTime}" style="width:200px;float: right;direction: rtl"/>
                 
-                <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
-                <h:form enctype="multipart/form-data" styleClass="font">
-                    <p:fileUpload  value="#{typeForm.attachFile}" mode="simple"/>
-                    <p:commandButton value="Submit" ajax="false" actionListener="#{paperForm.uploaded}"  />
-                </h:form>
+               
 
                 <p:outputLabel value="جهت دریافت اطلاعات از طریق ایمیل خود ، علاوه بر چک کردن پوشه inbox ،پوشه spam ایمیل خود را نیز چک کنید.
                                ( توجه : در برخی از سرویس دهنده های ایمیل ، به جای نام spam از نام هایی نظیر Bulk , junk استفاده شده است )" 
                                ></p:outputLabel>
                 <p:outputLabel value="" ></p:outputLabel>
+                
+                 <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
+                <h:form enctype="multipart/form-data" styleClass="font">
+                    <p:fileUpload  value="#{typeForm.attachFile}" mode="simple"/>
+                    <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left" ajax="false" actionListener="#{paperForm.uploaded}"  />
+                </h:form>
 
             </p:panelGrid>
             </h:body>
