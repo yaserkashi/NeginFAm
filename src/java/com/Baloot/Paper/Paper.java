@@ -197,7 +197,8 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption1() {
-        if (option.indexOf(0) == 0) {
+        
+        if (option.charAt(0) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -208,7 +209,7 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption2() {
-        if (option.indexOf(1) == 0) {
+        if (option.charAt(1) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -219,7 +220,7 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption3() {
-        if (option.indexOf(2) == 0) {
+        if (option.charAt(2) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -231,7 +232,7 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption4() {
-        if (option.indexOf(3) == 0) {
+        if (option.charAt(3) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -242,7 +243,7 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption5() {
-        if (option.indexOf(4) == 0) {
+        if (option.charAt(4) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -253,7 +254,7 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption6() {
-        if (option.indexOf(5) == 0) {
+        if (option.charAt(5) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -264,7 +265,8 @@ public class Paper implements Serializable {
  * @return دارد یا ندارد بر میگرداند
  */
     public String hasOption7() {
-        if (option.indexOf(6) == 0) {
+        
+        if (option.charAt(6) == 0) {
             return "ندارد";
         } else {
             return "دارد";
@@ -286,9 +288,9 @@ public class Paper implements Serializable {
        * @return نوع متون شامل عمومی، تخصصی یا تخصصی وژه را برمیگرداند
        */
 public String hasOption8() {
-        if (option.indexOf(7) == 0) {
+        if (option.charAt(7) == 0) {
             return "متون عمومی";
-        } else if (option.indexOf(7) == 1) {
+        } else if (option.charAt(7) == 1) {
             return "متون تخصصی";
         } else {
             return "متون تخصصی ویژه";

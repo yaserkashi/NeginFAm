@@ -170,4 +170,20 @@ public class Order implements Serializable {
         }
         return "";
     }
+    /**
+     * نام فارسی جداول یا همان عنوان فارسی سفارشات
+     * @return یک استرینگ فارسی 
+     */
+    public String tablePersianName() {
+        if (tableName.equals("type")) {
+            return "تایپ";
+        } else if (tableName.equals("design")) {
+            return "طراحی";
+        } else if (tableName.equals("translate")) {
+            return "ترجمه";
+        } else if (tableName.equals("paper")) {
+            return "مقاله";
+        }
+        return "";
+    }
 }

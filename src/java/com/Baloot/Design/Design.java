@@ -208,5 +208,15 @@ public class Design implements Serializable {
     public String toString() {
         return "Entity.Design[ id=" + id + " ]";
     }
-    
+    /**
+     * تحویل حضوری 
+     * @return دارد یا ندارد بر میگرداند
+     */
+      public String hasDelevry() {
+        if (!deliveryType) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
+    }  
 }
