@@ -116,7 +116,7 @@ public class DesignServices {
         try {
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from design where id= ?");
-            ps.setInt(id, 1);
+            ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
              Design design = new Design();
             while (rs.next()) {

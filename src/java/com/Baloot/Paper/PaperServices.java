@@ -110,7 +110,7 @@ public class PaperServices {
         try {
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from paper where id= ?");
-            ps.setInt(id, 1);
+            ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
                Paper paper = new Paper();
             while (rs.next()) {

@@ -76,6 +76,7 @@ public class OrderFollowUpForUser {
 
     public void setSelectedOreder(Order selectedOreder) {
         this.selectedOreder = selectedOreder;
+        selectedOrderAction();
     }
 
     public Design getDesign() {
@@ -119,41 +120,41 @@ public class OrderFollowUpForUser {
 
     }
 
-//    public String selectedOrderAction() {
-//        String pageOut = new String();
-//        String typeOforder;
-//        try {
-//            typeOforder = selectedOreder.getTableName();
-//
-//            switch (typeOforder) {
-//                case "type":
-//                    type = TypeServices.getTypeById(selectedOreder.getTableId());
-//                    pageOut = "/pages/user/type1.xhtml";
-//                    break;
-//                case "design":
-//                    design = DesignServices.getDesignById(selectedOreder.getTableId());
-//                    pageOut = "/pages/user/design1.xhtml";
-//                    System.out.println("ok" + design.getEndDate() + pageOut);
-//                    break;
-//                case "translate":
-//                    translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
-//                    pageOut = "/pages/user/translate1.xhtml";
-//                    break;
-//                case "paper":
-//                    paper = PaperServices.getPaperById(selectedOreder.getTableId());
-//                    pageOut = "/pages/user/paper1.xhtml";
-//                    break;
-//            }
-//
-//            System.out.println("in end " + pageOut);
-//            if (pageOut.isEmpty()) {
-//                pageOut = "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
-//            }
-//        } catch (Exception e) {
-//            System.out.println("here in exeption " + e.getMessage());
-//        }
-//        return pageOut;
-//    }
+    public void selectedOrderAction() {
+       
+        String pageOut = new String();
+        String typeOforder;
+        try {
+            typeOforder = selectedOreder.getTableName();
+
+            switch (typeOforder) {
+                case "type":
+                    type = TypeServices.getTypeById(selectedOreder.getTableId());
+                   
+                    break;
+                case "design":
+                    design = DesignServices.getDesignById(selectedOreder.getTableId());
+                   
+                    break;
+                case "translate":
+                    translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
+                   
+                    break;
+                case "paper":
+                    paper = PaperServices.getPaperById(selectedOreder.getTableId());
+                 
+                    break;
+            }
+
+            System.out.println("in end " + pageOut);
+            if (pageOut.isEmpty()) {
+                pageOut = "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
+            }
+        } catch (Exception e) {
+            System.out.println("here in exeption " + e.getMessage());
+        }
+       
+    }
     /**
      * <b> تابع برای بدست آوردن فاکتور برای</b>
      * <b> سفارش انتخاب شده توسط کابر</b>

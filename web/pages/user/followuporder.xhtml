@@ -7,8 +7,8 @@
     <ui:define name="content">
         <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser()}" var="followup"
                      styleClass="dataTable" id="followtb11" rowKey="#{followup.id}">
-            <p:column headerText="نوع سفارش" filterBy="#{followup.tableName}">
-                <h:outputText value="#{followup.tableName}" />
+            <p:column headerText="نوع سفارش" filterBy="#{followup.tablePersianName()}">
+                <h:outputText value="#{followup.tablePersianName()}" />
             </p:column> 
             <p:column headerText="ردیف">
                 <h:outputText value="#{orderFollowUpForUser.listOfOrdreForUser().indexOf(followup)+1}" />
@@ -17,12 +17,12 @@
                 <h:outputText value="#{followup.id}" />
             </p:column>  
 
-            <p:column headerText="وضعیت" filterBy="#{followup.condition}">
-                <h:outputText value="#{followup.condition}"/>
+            <p:column headerText="وضعیت" filterBy="#{followup.conditionView()}">
+                <h:outputText value="#{followup.conditionView()}"/>
             </p:column>
             <p:column headerText="مشاهده سفارش" style="width:32px;text-align: center">
-                <p:commandButton icon="ui-icon-search" update=":userForm:orderDialogPanel" onclick="PF('orderDialog').show();" title="View">
-                    <f:setPropertyActionListener value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
+                <p:commandButton  icon="ui-icon-search" update=":userForm:orderDialogPanel" onclick="PF('orderDialog').show();" title="View">
+                    <f:setPropertyActionListener  value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
                 </p:commandButton>
             </p:column>
         </p:dataTable>    
@@ -31,7 +31,7 @@
         <p:dialog header="سفارش کاربر" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
             <p:outputPanel id="orderDialogPanel" style="text-align:center;">
                 <p:outputPanel  rendered="#{not empty orderFollowUpForUser.selectedOreder}">
-                    <p:panel rendered="#{orderFollowUpForUser.selectedOreder.tableName=='design'}" >
+                    <p:panel  rendered="#{orderFollowUpForUser.selectedOreder.tableName=='design'}" >
                         <header>
                             <style>
                                 .ui-panelgrid td {
@@ -63,30 +63,28 @@
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
                                 <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="نوع طراحی "  ></p:outputLabel>
-                                <p:outputLabel value="سلام " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.designTypeFarsi()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.design.endDate}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.registerDate}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="سایز" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-                                <p:outputLabel value="سایزدلخواه" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.size}" style="color: red" ></p:outputLabel>
+                                
                                 <p:outputLabel value="رنگ چاپ" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.printType}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="نوع چاپ" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.designOption}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="مشخصات چاپ" ></p:outputLabel> 
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.printOption}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تحویل حضوری " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.hasDelevry()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="توضیحات " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-                                <p:outputLabel value="توضیحات مدیر "  ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.design.explain} " style="color: red" ></p:outputLabel>
+                               
                                 <p:outputLabel value="فایل سفارش " ></p:outputLabel>
                                 <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
-                                <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                             </p:panelGrid>
                             <p:panelGrid columns="3" styleClass="form">
                                 <p:commandButton value="کنسل کردن سفارش"  onclick="
@@ -135,44 +133,40 @@
                                     جزئیات سفارش.
                                 </f:facet>
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="موضوع " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>   
-                                <p:outputLabel value="ارجاع به تایپیست خاص "  ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.title}" style="color: red" ></p:outputLabel>   
                                 <p:outputLabel value="گروه" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.group}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="رشته "  ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.field}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="گرایش " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.orientationOfField}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی "  ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.endDateTime}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ ثبت سفارش " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.date}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption1()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی"></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption2()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption3()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption4()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption5()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption6()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" نگارش مقاله بدون دریافت اطلاعات اولیه" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption7()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" طرح دریافت خدمات " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.hasOption8()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="توضیحات "  ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.paper.explain}" style="color: red" ></p:outputLabel>
-                                <p:outputLabel value="توضیحات مدیر " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" فایل سفارش" ></p:outputLabel>
                                 <p:outputLabel value=" وضعیت سفارش" ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.condition} " style="color: red" ></p:outputLabel>   
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView} " style="color: red" ></p:outputLabel>   
                             </p:panelGrid>
 
 
@@ -226,38 +220,36 @@
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="زبان " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.language}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.type.endDateTime}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.dateTime}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="زمینه " ></p:outputLabel>
                                 <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>           
                                 <p:outputLabel value=" موضوع" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.title}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" فرمول نویسی" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option1()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" صفحه آرایی " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option2()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" تصویرگری " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option3()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" رسم جدول" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option4()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" رسم نمودار" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option5()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" رسم شکل " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option6()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" ویراستاری" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.option7()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.hasDelivery()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value=" توضیحات " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-                                <p:outputLabel value=" توضیحات مدیر" ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.explain}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="فایل سفارش " ></p:outputLabel>
                                 <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
-                                <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                             </p:panelGrid>
 
                             <p:panelGrid columns="3" styleClass="form">

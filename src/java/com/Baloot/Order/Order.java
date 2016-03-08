@@ -168,7 +168,7 @@ public class Order implements Serializable {
         } else if (condition == StepsOfOrder.dissuasion.ordinal()) {
             return "سفارش کنسل شده است";
         }
-        return "";
+        return "نا مشخص";
     }
     /**
      * نام فارسی جداول یا همان عنوان فارسی سفارشات
@@ -184,6 +184,6 @@ public class Order implements Serializable {
         } else if (tableName.equals("paper")) {
             return "مقاله";
         }
-        return "";
+        return "نامشخص";
     }
 }

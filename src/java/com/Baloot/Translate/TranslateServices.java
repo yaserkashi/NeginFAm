@@ -114,7 +114,7 @@ public class TranslateServices {
         try {
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from translate where id= ?");
-            ps.setInt(id, 1);
+            ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
             Translate translate = new Translate();
             while (rs.next()) {

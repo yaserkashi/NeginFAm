@@ -48,4 +48,36 @@ public class CodingServices {
             DataConnect.close(con);
         }
     }
+    /**
+     * انتخاب از جدول کدینگ با استفاده از کلید اصلی
+     * @param codeId=کلید اصلی
+     * @return یه شی از نوع coing
+     */
+    public static Coding getCodings(Integer codeId) {
+        Connection con = null;
+        PreparedStatement ps;
+
+        try {
+            con = DataConnect.getConnection();
+            ps = con.prepareStatement("Select * from Coding where id = ? ");
+            ps.setInt(1, codeId);
+
+            ResultSet rs = ps.executeQuery();
+            Coding cod = new Coding();
+            if (rs.next()) {
+
+                cod.setId(rs.getInt("id"));
+                cod.setText(rs.getString("text"));
+                cod.setOrderId(rs.getInt("order_id"));
+                cod.setTypeId(rs.getInt("type_id"));
+
+            }
+            return cod;
+        } catch (SQLException ex) {
+            System.out.println("Login error -->" + ex.getMessage());
+            return null;
+        } finally {
+            DataConnect.close(con);
+        }
+    }
 }

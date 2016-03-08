@@ -111,9 +111,10 @@ public class TypeServices {
         PreparedStatement ps;
      
         try {
+            
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from type where id= ?");
-            ps.setInt(id, 1);
+            ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
              Type type = new Type();
             while (rs.next()) {

@@ -20,7 +20,7 @@
                 </p:column> 
 
                 <p:column headerText="نوع سفارش" >
-                    <h:outputText value="#{trackorder.tableName}" />
+                    <h:outputText value="#{trackorder.tablePersianName()}" />
                 </p:column> 
 
                 <p:column headerText="شماره سفارش">
@@ -28,7 +28,7 @@
                 </p:column>  
 
                 <p:column headerText="وضعیت" >
-                    <h:outputText value="#{trackorder.condition}"/>
+                    <h:outputText value="#{trackorder.conditionView()}"/>
                 </p:column>
                 <!--action="/pages/admin/preparefactor.xhtml"-->
                 <p:column headerText="مشاهده سفارش" style="width:32px;text-align: center">

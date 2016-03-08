@@ -39,7 +39,7 @@
 
                 <p:outputLabel value="سایز*" ></p:outputLabel>
                 <p:selectOneMenu id="feild" value="#{designForm.size}" styleClass="input">
-                    <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                    <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.text}"/>
                 </p:selectOneMenu> 
 
 
@@ -56,12 +56,12 @@
 
                 <p:outputLabel value="رنگ چاپ*" ></p:outputLabel>
                 <p:selectOneMenu id="feild1" value="#{designForm.printType}" styleClass="input" >
-                    <f:selectItems value="#{designForm.printTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                    <f:selectItems value="#{designForm.printTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.text}"/>
                 </p:selectOneMenu>  
 
                 <p:outputLabel value="نوع چاپ*" ></p:outputLabel>
                 <p:selectOneMenu id="feild2" value="#{designForm.designOption}" styleClass="input" >
-                    <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                    <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.text}"/>
 
                 </p:selectOneMenu>            
 
@@ -69,13 +69,13 @@
 
                 <p:outputLabel value="مشخصات چاپ*" ></p:outputLabel> 
                 <p:selectOneMenu id="feild3" value="#{designForm.printOption}" styleClass="input">
-                    <f:selectItems value="#{designForm.printOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                    <f:selectItems value="#{designForm.printOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.text}"/>
 
                 </p:selectOneMenu>
 
 
                 <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" ></p:outputLabel>
-                <p:inputTextarea value="#{designForm.explian}" rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                <p:inputTextarea value="#{designForm.explian}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
 
                 <p:outputLabel value=" تاریخ و ساعت درخواستی *" ></p:outputLabel>
                 <p:calendar value="#{designForm.endDate}" />

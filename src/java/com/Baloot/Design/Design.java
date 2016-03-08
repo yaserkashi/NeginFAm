@@ -6,6 +6,7 @@
 
 package com.Baloot.Design;
 
+import com.Baloot.Coding.CodingServices;
 import com.Baloot.User.Users;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -207,6 +208,16 @@ public class Design implements Serializable {
     @Override
     public String toString() {
         return "Entity.Design[ id=" + id + " ]";
+    }
+    /**
+     * نوع طراحی 
+     * @return مقدار استرینگ فارسی برمیگرداند 
+     */
+    public String  designTypeFarsi()
+    {
+    if(designType!=null)
+    {return CodingServices.getCodings(designType).getText();}
+    else{return "نا مشخص";}
     }
     /**
      * تحویل حضوری 
