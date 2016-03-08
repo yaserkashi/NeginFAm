@@ -22,23 +22,25 @@
         </h:head>
         <h:body>
         <p:messages autoUpdate="true"/>
-        <p:panelGrid id="panel" columns="2" styleClass="panel border" >
-
-            <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" >
+        <p:panelGrid id="panel" columns="2" styleClass="panel border" style="width: 70%;float: right">
+            <f:facet name="header">
+           ارسال پیام به کاربران
+        </f:facet>
+            <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" style="float: right">
                 <f:selectItem itemLabel="ایمیل" itemValue="#{true}" />
                 <f:selectItem itemLabel="تلفن" itemValue="#{false}" />
                 <f:selectItem itemLabel="صندوق پیام" itemValue="#{false}" />
             </p:selectOneRadio>
-            <h:outputText value="نوع پیام" />
+            <h:outputText value="نوع پیام"  style="float: right"/>
+            <h:inputText id="selectedStr" value="#{sendMessageFromAdmin.selectedStr}" style="font-weight: bold;width: 320px;float: right" required="true" />
+            <p:commandButton value="انتخاب مخاطب"  onclick="PF('multiUserserDialog').show()" style="width: 130px;float: right" />
 
-            <h:inputText id="selectedStr" value="#{sendMessageFromAdmin.selectedStr}" style="font-weight: bold;width: 320px;" required="true" />
-            <p:commandButton value="انتخاب مخاطب"  onclick="PF('multiUserserDialog').show()" style="width: 130px;" />
+            <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;float: right"/>
+            <h:outputText value="موضوع" style="float: right"/>
 
-            <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;"/>
-            <h:outputText value="موضوع" />
-
-            <p:inputTextarea value="#{sendMessageFromAdmin.text}" style="font-weight: bold" required="true" requiredMessage="متن پیام را وارد نکرده اید." rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
-            <h:outputText value="پیام" />
+            <p:inputTextarea value="#{sendMessageFromAdmin.text}" style="font-weight: bold;float: right" required="true" requiredMessage="متن پیام را وارد نکرده اید." rows="5" cols="30" maxlength="1000" counterTemplate="{0} characters remaining." autoResize="false" />
+            <h:outputText value="پیام" style="float: right"/>
+             <p:commandButton action="#{sendMessageFromAdmin.submit()}"  value="ذخیره"  style=";float: left;background: #4EA2D0"/>
 
         </p:panelGrid>
 
@@ -84,7 +86,7 @@
         </p:dialog>
         <!--</p:dialog>-->
 
-        <p:commandButton action="#{sendMessageFromAdmin.submit()}" value="ذخیره"  icon="ui-icon-start" style="margin-top: 300px;margin-left: 100px;background: #4EA2D0"/>
+       
         <!--</h:form>-->
         </h:body>
     </ui:define>
