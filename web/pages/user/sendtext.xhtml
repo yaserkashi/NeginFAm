@@ -22,7 +22,7 @@
         <h:body>
 
             <p:messages id="messages"  autoUpdate="true" closable="true" />
-            <p:panelGrid columns="2" styleClass="form border"  style="float: right" >
+            <p:panelGrid columns="2" styleClass="form border"  style="float: right;width: 70%" >
                 <f:facet name="header" >
                     ارسال پیام
                 </f:facet>
@@ -33,9 +33,11 @@
                 <h:outputText value="پیام*" />
                 <p:inputTextarea value="#{sendMessageFromUser.text}"  rows="5" cols="30" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false"  style="width: 400px"/>
 
+                <h:outputText value="" />
+                <p:commandButton action="#{sendMessageFromUser.submit()}" value="ذخیره" style="background: #4EA2D0 ;float: left"/>
             </p:panelGrid>
 
-            <p:commandButton action="#{sendMessageFromUser.submit()}" value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"/>
+
 
 
         </h:body>

@@ -25,7 +25,7 @@
 
             <p:messages id="messages"  autoUpdate="true" closable="true" />
            
-            <p:panelGrid columns="2" styleClass="profile border" style="float: right" >
+            <p:panelGrid columns="2" styleClass="profile border" style="float: right;width: 70%" >
                 <f:facet name="header" >
                     ویرایش اطلاعات کاربری
                 </f:facet>
@@ -56,10 +56,13 @@
                 <p:inplace id="ajax8" editor="true">
                     <h:inputText value="#{editProfile.email}" style="font-weight: bold"  required="true"/>
                 </p:inplace>
+                
+                <h:outputText value=""  />
+                <p:commandButton action="#{editProfile.submit()}" value="ثبت"  style="background: #4EA2D0 ;float: left"/>
 
             </p:panelGrid>
 
-            <p:commandButton action="#{editProfile.submit()}" value="ثبت" icon="ui-icon-star" style="margin-top: 300px;margin-left: 100px;background: #5D8A3D"/>
+            
 
         </h:body>
 

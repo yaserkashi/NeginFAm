@@ -26,7 +26,7 @@
 
 
                 <p:messages id="messages"  autoUpdate="true" closable="true" />
-                <p:panelGrid columns="2" styleClass="form border"  style="float: right"  >
+                <p:panelGrid columns="2" styleClass="form border"  style="float: right;width:70%"  >
                     <f:facet name="header" >
                         تغییر رمز   عبور                  
                     </f:facet>
@@ -46,11 +46,12 @@
                     <h:outputLabel for="pwd2" value="تکرار رمز عبور جدید*" />
                     <p:password id="pwd2" value="#{changePass.pass}" label="Password 2" required="true" requiredMessage="رمز عبور را تکرار کنید." feedback="true" />
 
-
+                    <h:outputLabel for="pwd2" value="" />
+                    <p:commandButton  value="ذخیره"  style="background: #4EA2D0 ;float: left"
+                                      disabled="false" action="#{changePass.submit()}" />
                 </p:panelGrid>
 
-                <p:commandButton  value="ذخیره" icon="ui-icon-start" style="margin-top: 200px;margin-left: 100px;background: #4EA2D0"
-                                  disabled="false" action="#{changePass.submit()}" />
+
             </h:form>
 
         </h:body>
