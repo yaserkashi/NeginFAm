@@ -89,7 +89,7 @@
                             <p:panelGrid columns="3" styleClass="form">
                                 <p:commandButton value="کنسل کردن سفارش"  onclick="
                                         cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
-                                                 style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
+                                                 style="color: #FFF ;background:#ff0033;float: left ; font-size: 14px ;direction: rtl">
                                     <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                         <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -97,9 +97,9 @@
                                     </p:confirmDialog>
                                 </p:commandButton>  
                                 <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="false"
-                                                 style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                 style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px ;"/>
                                 <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
-                                                 style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                 style="color: #FFF ;background:#0066ff;float:left ; font-size: 14px ;"/>
                             </p:panelGrid>
                         </h:body>
                     </p:panel>
