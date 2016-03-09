@@ -21,7 +21,7 @@
             <p:column headerText="وضعیت" filterBy="#{followup.conditionView()}">
                 <h:outputText value="#{followup.conditionView()}"/>
             </p:column>
-            <p:column headerText="مشاهده سفارش" style="width:32px;text-align: center">
+            <p:column headerText="مشاهده سفارش">
                 <p:commandButton  icon="ui-icon-search" update=":userForm:orderDialogPanel" onclick="PF('orderDialog').show();" title="View">
                     <f:setPropertyActionListener  value="#{followup}" target="#{orderFollowUpForUser.selectedOreder}" />
                 </p:commandButton>
@@ -56,10 +56,9 @@
                         </h:head>
                         <h:body>
                             <p:messages autoUpdate="true"/>
-                            <h:outputText value="سفارش شما با موفقیت ثبت شد و به زودی توسط اپراتورهای سایت بررسی و نتیجه به اطلاع شما خواهد رسید."  styleClass="form" style="background: #00cc00"/>
-                            <p:panelGrid id="paneldesign" columns="4" styleClass="form border"  style="margin-right: 26%" >
+                            <p:panelGrid id="paneldesign" columns="4"   style="width: 100%;text-align: right;direction: rtl;font-size: 14px" >
                                 <f:facet name="header" >
-                                    جزئیات سفارش.
+                                    جزئیات سفارش
                                 </f:facet>
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
                                 <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
@@ -83,6 +82,7 @@
                                 <p:outputLabel value="#{orderFollowUpForUser.design.explain} " style="color: red" ></p:outputLabel>
                                
                                 <p:outputLabel value="فایل سفارش " ></p:outputLabel>
+                                <p:outputLabel value="" ></p:outputLabel>
                                 <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                             </p:panelGrid>
