@@ -6,6 +6,7 @@
 
 package com.Baloot.Paper;
 
+import com.Baloot.Coding.CodingServices;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -91,7 +92,16 @@ public class Paper implements Serializable {
     public Integer getGroup() {
         return group;
     }
-
+    /**
+     * گروه فارسی
+     * @return 
+     */
+    public String groupText() {
+        if (group != null) {
+            return CodingServices.getCodings(group).getText();
+        }
+        return "نامشخص";
+    }
     public void setGroup(Integer group) {
         this.group = group;
     }
@@ -99,7 +109,17 @@ public class Paper implements Serializable {
     public Integer getField() {
         return field;
     }
-
+    /**
+     * رشته به صورت فارسی
+     *
+     * @return
+     */
+    public String fieldText() {
+        if (field != null) {
+            return CodingServices.getCodings(field).getText();
+        }
+        return "نامشخص";
+    }
     public void setField(Integer field) {
         this.field = field;
     }
@@ -111,7 +131,17 @@ public class Paper implements Serializable {
     public void setOrientationOfField(Integer orientationOfField) {
         this.orientationOfField = orientationOfField;
     }
-
+/**
+     * گرایش به صورت فارسی
+     *
+     * @return
+     */
+    public String orietText() {
+        if (orientationOfField != null) {
+            return CodingServices.getCodings(orientationOfField).getText();
+        }
+        return "نامشخص";
+    }
     public String getOption() {
         return option;
     }

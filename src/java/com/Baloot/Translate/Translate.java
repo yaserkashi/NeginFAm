@@ -6,6 +6,7 @@
 
 package com.Baloot.Translate;
 
+import com.Baloot.Coding.CodingServices;
 import com.Baloot.User.Users;
 import com.Baloot.util.UtilForDecode;
 import java.io.Serializable;
@@ -87,7 +88,16 @@ public class Translate implements Serializable {
     public Integer getLanguage() {
         return language;
     }
-
+    /**
+     *زبان را به فارسی برمیگرداند
+     * @return
+     */
+    public String languageText() {
+        if (language != null) {
+            return CodingServices.getCodings(language).getText();
+        }
+        return "نامشخص";
+    }
     public void setLanguage(Integer language) {
         this.language = language;
     }
@@ -99,7 +109,16 @@ public class Translate implements Serializable {
     public void setField(Integer field) {
         this.field = field;
     }
-
+    /**
+     *رشته را به فارسی بر میگرداند
+     * @return
+     */
+    public String fieldText() {
+        if (field != null) {
+            return CodingServices.getCodings(field).getText();
+        }
+        return "نامشخص";
+    }
     public String getDateTime() {
         return dateTime;
     }

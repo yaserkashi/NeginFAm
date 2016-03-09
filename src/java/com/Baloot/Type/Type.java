@@ -6,6 +6,7 @@
 
 package com.Baloot.Type;
 
+import com.Baloot.Coding.CodingServices;
 import com.Baloot.User.Users;
 import com.Baloot.util.UtilForDecode;
 import java.io.Serializable;
@@ -87,7 +88,17 @@ public class Type implements Serializable {
     public Integer getLanguage() {
         return language;
     }
-
+/**
+     * زبان به صورت فارسی
+     *
+     * @return
+     */
+    public String languageText() {
+        if (language != null) {
+            return CodingServices.getCodings(language).getText();
+        }
+        return "نامشخص";
+    }
     public void setLanguage(Integer language) {
         this.language = language;
     }

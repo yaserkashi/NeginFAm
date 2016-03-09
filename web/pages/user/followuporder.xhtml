@@ -70,7 +70,6 @@
                                 <p:outputLabel value="#{orderFollowUpForUser.design.registerDate}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="سایز" ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.design.size}" style="color: red" ></p:outputLabel>
-                                
                                 <p:outputLabel value="رنگ چاپ" ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.design.printType}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="نوع چاپ" ></p:outputLabel>
@@ -137,11 +136,11 @@
                                 <p:outputLabel value="موضوع " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.paper.title}" style="color: red" ></p:outputLabel>   
                                 <p:outputLabel value="گروه" ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.paper.group}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.groupText()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="رشته "  ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.paper.field}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.fieldText()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="گرایش " ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.paper.orientationOfField}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.paper.orietText()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی "  ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.paper.endDateTime}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ ثبت سفارش " ></p:outputLabel>
@@ -220,7 +219,7 @@
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="زبان " ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.type.language}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.type.languageText()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.type.endDateTime}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
@@ -299,33 +298,30 @@
                                     جزئیات سفارش.
                                 </f:facet>
                                 <h:outputText value="شماره سفارش" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>                                <h:outputText value="زمینه" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>                                <h:outputText value="زمینه" />
                                 <p:outputLabel value="تاریخ و ساعت درخواستی "  ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.translate.endDateTime}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ ثبت سفارش " ></p:outputLabel>
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.dateTime}" style="color: red" ></p:outputLabel>
                                 <h:outputText value="زبان مبدا و مقصد" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.languageText()}" style="color: red" ></p:outputLabel>
                                 <h:outputText value="موضوع" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.title}" style="color: red" ></p:outputLabel>
                                 <h:outputText value="ترجمه جداول انجام شود" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.hasOption1()}" style="color: red" ></p:outputLabel>
                                 <h:outputText value= "ترجمه زیر جداول انجام شود" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.hasOption2()}" style="color: red" ></p:outputLabel>
                                 <h:outputText value= "مطالب داخل شکل ترجمه شود" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.hasOption3()}" style="color: red" ></p:outputLabel>
                                 <h:outputText value= "نمودار ها رسم شوند" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.hasOption4()}" style="color: red" ></p:outputLabel>
                                 <h:outputText value="توضیحات" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-                                <h:outputText value="توضیحات مدیر" />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.explain}" style="color: red" ></p:outputLabel>
                                 <h:outputText value="فایل سفارش" />
                                 <h:outputText value="تحویل حضوری " />
-                                <p:outputLabel value="ندارد " style="color: red" ></p:outputLabel>
-                                <h:outputText value="وضحیت سفارش" />
-                                <p:outputLabel value="در حال بررسی " style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.translate.hasDelivery()}" style="color: red" ></p:outputLabel>
+                                <h:outputText value="وضعیت سفارش" />
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                             </p:panelGrid>
 
 
