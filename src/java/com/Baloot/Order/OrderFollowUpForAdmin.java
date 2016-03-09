@@ -119,8 +119,9 @@ public class OrderFollowUpForAdmin {
         return selectedOreder;
     }
 
-    public void setSelectedOreder(Order selectedOreder) {
+    public void setSelectedOreder(Order selectedOreder) throws SQLException {
         this.selectedOreder = selectedOreder;
+        selectedOrderAction();
     }
 
     public Design getDesign() {

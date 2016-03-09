@@ -110,7 +110,17 @@ public class Type implements Serializable {
     public void setField(Integer field) {
         this.field = field;
     }
-
+/**
+     * زمینه به صورت فارسی
+     *
+     * @return
+     */
+    public String fieldText() {
+        if (field != null) {
+            return CodingServices.getCodings(field).getText();
+        }
+        return "نامشخص";
+    }
     public String getTitle() {
         return title;
     }
