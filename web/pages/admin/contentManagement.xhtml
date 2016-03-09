@@ -28,16 +28,16 @@
 
             <h:panelGrid columns="2" >
 
-
-                <p:commandButton value="ثبت" action="#{editorView.createFile()}"  style="background: #4EA2D0" icon="ui-icon-disk" />
-
-                <p:commandButton value="پاک کردن محتوا" type="button" icon="ui-icon-close" style="background:#ff3333" onclick="PF('editorWidget').clear();" >
+                <p:commandButton value="پاک کردن محتوا" type="button" icon="ui-icon-close" style="" onclick="PF('editorWidget').clear();" >
                     <p:confirm header="هشدار!!" message="از پاک کردن محتویات صفحه اطمینان دارید؟"   />
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                         <p:commandButton value="بله"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Dialog2').show()" />
                         <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                     </p:confirmDialog>
                 </p:commandButton>
+                <p:commandButton value="ثبت" action="#{editorView.createFile()}"  style="background: #4EA2D0" icon="ui-icon-disk" />
+
+
             </h:panelGrid>
 
 

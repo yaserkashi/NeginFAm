@@ -6,7 +6,7 @@
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
         <h:head>
-            <title>پیگیری سفارش</title>
+            <title>پیگیری سفارش کاربران</title>
         </h:head>
         <h:body>
             <p:dataTable value="#{orderFollowUpForAdmin.listOfOrdreForAdmin()}" 
@@ -42,7 +42,7 @@
             <p:remoteCommand name="cancel" action="#{orderFollowUpForAdmin.yaser()}" />
             <p:remoteCommand name="showFactor" action="#{orderFollowUpForAdmin.showFactorForSelectedOrder()}" />
 
-            <p:dialog header="سفارش کاربر" position="center" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+            <p:dialog header="سفارش کاربر" position="center" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true" width="60%">
                 <p:outputPanel id="orderDialogPanel" style="text-align:center;">
                     <p:outputPanel  rendered="#{not empty orderFollowUpForAdmin.selectedOreder}">
                         <p:panel rendered="#{orderFollowUpForAdmin.selectedOreder.tableName=='design'}" >
@@ -65,17 +65,16 @@
                                         padding: 4px 10px;
                                     }
                                 </style>
-                                <title>پیگیری سفارش طراحی</title>
+                              
                             </h:head>
                             <h:body>
                                 <p:messages autoUpdate="true"/>
-                                <h:outputText value="سفارش شما با موفقیت ثبت شد و به زودی توسط اپراتورهای سایت بررسی و نتیجه به اطلاع شما خواهد رسید."  styleClass="form" style="background: #00cc00"/>
-                                <p:panelGrid id="paneldesign" columns="4" styleClass="form border"  style="margin-right: 26%" >
+                                <p:panelGrid id="paneldesign" columns="4" style="width: 100%;text-align: right;direction: rtl;font-size: 14px" >
                                     <f:facet name="header" >
-                                        جزئیات سفارش.
+                                    جزئیات سفارش طراحی
                                     </f:facet>
                                     <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                    <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red" ></p:outputLabel>
+                                    <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                     <p:outputLabel value="نوع طراحی "  ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.designTypeFarsi()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
@@ -92,16 +91,18 @@
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.printOption}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="تحویل حضوری " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.designTypeFarsi()}" style="color: red" ></p:outputLabel>
-                                    <p:outputLabel value="توضیحات " ></p:outputLabel>
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.design.explain}" style="color: red" ></p:outputLabel>
+                                   
                                     <p:outputLabel value="فایل سفارش " ></p:outputLabel>
+                                    <h:outputText value="" />
                                     <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
+                                     <p:outputLabel value="توضیحات " ></p:outputLabel>
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.design.explain}" style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
-                                <p:panelGrid columns="3" styleClass="form">
-                                    <p:commandButton value="کنسل کردن سفارش"  onclick="
+                                <p:panelGrid columns="3" >
+                                    <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);"
-                                                     style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
+                                                     style=";float: left ; font-size: 14px ;">
                                         <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                             <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -109,9 +110,9 @@
                                         </p:confirmDialog>
                                     </p:commandButton>  
                                     <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);" 
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
                                     <p:commandButton value="آپلود فایل نهایی"  disabled="true"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                 </p:panelGrid>
                             </h:body>
                         </p:panel>
@@ -135,17 +136,16 @@
                                         padding: 4px 10px;
                                     }
                                 </style>
-                                <title>پيگيري سفارش مقاله</title>
+                               
                             </h:head>
                             <h:body>
                                 <p:messages autoUpdate="true"/>
-                                <h:outputText value="سفارش شما با موفقيت ثبت شد و به زودي توسط اپراتورهاي سايت بررسي و نتيجه به اطلاع شما خواهد رسيد."  styleClass="form" style="background: #00cc00"/>
-                                <p:panelGrid id="panelpaper" columns="4" styleClass="form border" >
+                                <p:panelGrid id="panelpaper" columns="4" style="width: 100%;text-align: right;direction: rtl;font-size: 14px" >
                                     <f:facet name="header" >
-                                        جزئيات سفارش.
+                                      جزئیات سفارش مقاله
                                     </f:facet>
                                     <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red" ></p:outputLabel>
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                     <p:outputLabel value="موضوع " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.paper.title}" style="color: red" ></p:outputLabel>   
                                     <p:outputLabel value="گروه" ></p:outputLabel>
@@ -174,18 +174,20 @@
                                     <p:outputLabel value="#{orderFollowUpForAdmin.paper.hasOption7()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value=" طرح دريافت خدمات " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.paper.hasOption8()}" style="color: red" ></p:outputLabel>
+                                    
+                                    <p:outputLabel value=" فايل سفارش" ></p:outputLabel>
+                                    <h:outputText value="" />
+                                    <p:outputLabel value=" وضعيت سفارش" ></p:outputLabel>
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()} " style="color: red" ></p:outputLabel> 
                                     <p:outputLabel value="توضيحات "  ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.paper.explain}" style="color: red" ></p:outputLabel>
-                                    <p:outputLabel value=" فايل سفارش" ></p:outputLabel>
-                                    <p:outputLabel value=" وضعيت سفارش" ></p:outputLabel>
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()} " style="color: red" ></p:outputLabel>   
                                 </p:panelGrid>
 
 
-                                <p:panelGrid columns="3" styleClass="form">
-                                    <p:commandButton value="کنسل کردن سفارش"  onclick="
+                                <p:panelGrid columns="3" >
+                                    <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);"
-                                                     style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
+                                                     style="float: left ; font-size: 14px">
                                         <p:confirm header="هشدار!!" message="از انصراف اطمينان داريد؟"   />
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                             <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -193,9 +195,9 @@
                                         </p:confirmDialog>
                                     </p:commandButton>  
                                     <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);" disabled="false"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                     <p:commandButton value="آپلود فایل نهایی"  disabled="true"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                 </p:panelGrid>
                             </h:body>
                         </p:panel>
@@ -219,18 +221,17 @@
                                         padding: 4px 10px;
                                     }
                                 </style>
-                                <title>پيگيري سفارش تايپ</title>
+                               
                             </h:head>
                             <h:body>
 
                                 <p:messages autoUpdate="true"/>
-                                <h:outputText value="سفارش شما با موفقيت ثبت شد و به زودي توسط اپراتورهاي سايت بررسي و نتيجه به اطلاع شما خواهد رسيد."  styleClass="form" style="background: #00cc00"/>
-                                <p:panelGrid id="paneltype" columns="4" styleClass="form border"  style="margin-right: 26%" >
+                                <p:panelGrid id="paneltype" columns="4" style="width: 100%;text-align: right;direction: rtl;font-size: 14px" >
                                     <f:facet name="header" >
-                                        جزئيات سفارش.
+                                        جزئیات سفارش تایپ
                                     </f:facet>
                                     <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red" ></p:outputLabel>
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                     <p:outputLabel value="زبان " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.type.languageText()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="تاريخ و ساعت درخواستي " ></p:outputLabel>
@@ -257,17 +258,19 @@
                                     <p:outputLabel value="#{orderFollowUpForAdmin.type.option7()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value=" تحويل حضوري" ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.type.hasDelivery()}" style="color: red" ></p:outputLabel>
-                                    <p:outputLabel value=" توضيحات " ></p:outputLabel>
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.type.explain}" style="color: red" ></p:outputLabel>
+                                    
                                      <p:outputLabel value="فايل سفارش " ></p:outputLabel>
+                                     <h:outputText value="" />
                                     <p:outputLabel value="وضعيت سفارش " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
+                                    <p:outputLabel value=" توضيحات " ></p:outputLabel>
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.type.explain}" style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
 
-                                <p:panelGrid columns="3" styleClass="form">
-                                    <p:commandButton value="کنسل کردن سفارش"  onclick="
+                                <p:panelGrid columns="3">
+                                    <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);"
-                                                     style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
+                                                     style=";float: left ; font-size: 14px">
                                         <p:confirm header="هشدار!!" message="از انصراف اطمينان داريد؟"   />
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                             <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -275,9 +278,9 @@
                                         </p:confirmDialog>
                                     </p:commandButton>  
                                     <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);" disabled="false"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                     <p:commandButton value="آپلود فایل نهایی"  disabled="true"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                 </p:panelGrid>
                             </h:body>
                         </p:panel>
@@ -301,17 +304,18 @@
                                         padding: 4px 10px;
                                     }
                                 </style>
-                                <title>پيگيري سفارش ترجمه</title>
+                               
                             </h:head>
                             <h:body>
                                 <p:messages autoUpdate="true"/>
-                                <h:outputText value="سفارش شما با موفقيت ثبت شد و به زودي توسط اپراتورهاي سايت بررسي و نتيجه به اطلاع شما خواهد رسيد."  styleClass="form" style="background: #00cc00"/>
-                                <p:panelGrid id="paneltrans" columns="4" styleClass="form border"  >
+                                <p:panelGrid id="paneltrans" columns="4" style="width: 100%;text-align: right;direction: rtl;font-size: 14px" >
                                     <f:facet name="header" >
-                                        جزئيات سفارش.
+                                       جزئیات سفارش ترجمه
                                     </f:facet>
                                     <h:outputText value="شماره سفارش" />
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red" ></p:outputLabel>                                <h:outputText value="زمينه" />
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel> 
+                                    <h:outputText value="زمينه" />
+                                    <h:outputLabel value="" />
                                     <p:outputLabel value="تاريخ و ساعت درخواستي "  ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.translate.endDateTime}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="تاريخ ثبت سفارش " ></p:outputLabel>
@@ -328,20 +332,22 @@
                                     <p:outputLabel value="#{orderFollowUpForAdmin.translate.hasOption3()}" style="color: red" ></p:outputLabel>
                                     <h:outputText value= "نمودار ها رسم شوند" />
                                     <p:outputLabel value="#{orderFollowUpForAdmin.translate.hasOption4()}" style="color: red" ></p:outputLabel>
-                                    <h:outputText value="توضيحات" />
-                                    <p:outputLabel value="#{orderFollowUpForAdmin.translate.explain}" style="color: red" ></p:outputLabel>
+                                    
                                     <h:outputText value="فايل سفارش" />
+                                    <h:outputText value="" />
                                     <h:outputText value="تحويل حضوري " />
                                     <p:outputLabel value="#{orderFollowUpForAdmin.translate.hasDelivery()}" style="color: red" ></p:outputLabel>
                                     <h:outputText value="وضحيت سفارش" />
                                     <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
+                                    <h:outputText value="توضيحات" />
+                                    <p:outputLabel value="#{orderFollowUpForAdmin.translate.explain}" style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
 
 
-                                <p:panelGrid columns="3" styleClass="form">
-                                    <p:commandButton value="کنسل کردن سفارش"  onclick="
+                                <p:panelGrid columns="3" >
+                                    <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);"
-                                                     style="color: #FFF ;background:#ff0033;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px;direction: rtl">
+                                                     style=";;float: left ; font-size: 14px">
                                         <p:confirm header="هشدار!!" message="از انصراف اطمينان داريد؟"   />
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                             <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -349,9 +355,9 @@
                                         </p:confirmDialog>
                                     </p:commandButton>  
                                     <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);" disabled="false"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                     <p:commandButton value="آپلود فایل نهایی"  disabled="true"
-                                                     style="color: #FFF ;background:#0066ff;float: right ; font-size: 14px ;margin: 35px;margin-top: 10px"/>
+                                                     style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                 </p:panelGrid>
                             </h:body>
 

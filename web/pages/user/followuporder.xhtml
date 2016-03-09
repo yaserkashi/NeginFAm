@@ -66,7 +66,7 @@
                                     جزئیات سفارش طراحی
                                 </f:facet>
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                 <p:outputLabel value="نوع طراحی "  ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.design.designTypeFarsi()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
@@ -90,10 +90,10 @@
                                 <p:outputLabel value="توضیحات " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.design.explain} " style="color: red" ></p:outputLabel>
                             </p:panelGrid>
-                            <p:panelGrid columns="3" styleClass="form">
+                            <p:panelGrid columns="3" >
                                 <p:commandButton value="انصراف"  onclick="
                                         cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
-                                                 style="color: #FFF ;background:#ff0033;float: left ; font-size: 14px ">
+                                                 style="float: left ; font-size: 14px ">
                                     <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                         <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -136,7 +136,7 @@
                                     جزئیات سفارش مقاله
                                 </f:facet>
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                 <p:outputLabel value="موضوع " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.paper.title}" style="color: red" ></p:outputLabel>   
                                 <p:outputLabel value="گروه" ></p:outputLabel>
@@ -174,10 +174,10 @@
                             </p:panelGrid>
 
 
-                            <p:panelGrid columns="3" styleClass="form">
+                            <p:panelGrid columns="3" >
                                 <p:commandButton value="انصراف"  onclick="
                                         cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
-                                                 style="color: #FFF ;background:#ff0033;float:left ; font-size: 14px ;">
+                                                 style=";float:left ; font-size: 14px ;">
                                     <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                         <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -221,7 +221,7 @@
                                      جزئیات سفارش تایپ
                                 </f:facet>
                                 <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
-                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                 <p:outputLabel value="زبان " ></p:outputLabel>
                                 <p:outputLabel value="#{orderFollowUpForUser.type.languageText()}" style="color: red" ></p:outputLabel>
                                 <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
@@ -256,10 +256,10 @@
                                 <p:outputLabel value="#{orderFollowUpForUser.type.explain}" style="color: red" ></p:outputLabel>
                             </p:panelGrid>
 
-                            <p:panelGrid columns="3" styleClass="form">
+                            <p:panelGrid columns="3" >
                                 <p:commandButton value="انصراف"  onclick="
                                         cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
-                                                 style="color: #FFF ;background:#ff0033;float:left ; font-size: 14px ;">
+                                                 style=";float:left ; font-size: 14px ;">
                                     <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                         <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
@@ -302,7 +302,7 @@
                                     جزئیات سفارش ترجمه
                                 </f:facet>
                                 <h:outputText value="شماره سفارش" />
-                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red" ></p:outputLabel>  
+                                <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>  
                                 <h:outputText value="زمینه" />
                                 <h:outputLabel value="" />
                                 <p:outputLabel value="تاریخ و ساعت درخواستی "  ></p:outputLabel>
@@ -332,10 +332,10 @@
                             </p:panelGrid>
 
 
-                            <p:panelGrid columns="3" styleClass="form">
+                            <p:panelGrid columns="3" >
                                 <p:commandButton value="انصراف"  onclick="
                                         cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
-                                                 style="color: #FFF ;background:#ff0033;float: left ; font-size: 14px ;">
+                                                 style=";float: left ; font-size: 14px ;">
                                     <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                         <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
