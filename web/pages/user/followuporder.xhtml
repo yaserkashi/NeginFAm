@@ -7,12 +7,13 @@
     <ui:define name="content">
         <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser()}" var="followup"
                      styleClass="dataTable" id="followtb11" rowKey="#{followup.id}">
+             <p:column headerText="ردیف">
+                <h:outputText value="#{orderFollowUpForUser.listOfOrdreForUser().indexOf(followup)+1}" />
+            </p:column> 
             <p:column headerText="نوع سفارش" filterBy="#{followup.tablePersianName()}">
                 <h:outputText value="#{followup.tablePersianName()}" />
             </p:column> 
-            <p:column headerText="ردیف">
-                <h:outputText value="#{orderFollowUpForUser.listOfOrdreForUser().indexOf(followup)+1}" />
-            </p:column>  
+            
             <p:column headerText="شماره سفارش">
                 <h:outputText value="#{followup.id}" />
             </p:column>  
