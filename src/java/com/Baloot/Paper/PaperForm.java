@@ -23,17 +23,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -49,12 +52,48 @@ public class PaperForm {
     private Integer orientation;
     private List<Coding> orientations = CodingServices.getCodings(OrderTypesEnum.paper.ordinal(), CombosEnum.orientation.ordinal());
     private String title;
-    private List<Boolean> options;
     private String plan;
     private String explain;
     private Date dateTime;
     private boolean delivery;
     private UploadedFile attachFile;
+    private List<SelectItem> options;
+    private String[] selectedOptions;
+    
+    @PostConstruct
+    public void init() {
+        options = new ArrayList<>();
+        options.add(new SelectItem(" ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی",
+                " ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی"));
+        options.add(new SelectItem(" ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی",
+                " ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی"));
+        options.add(new SelectItem(" ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله ",
+                " ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله "));
+        options.add(new SelectItem("ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی",
+                "ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی"));
+        options.add(new SelectItem(" استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری",
+                " استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری"));
+        options.add(new SelectItem(" استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری ",
+                " استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری "));
+        options.add(new SelectItem(" نگارش مقاله بدون دریافت اطلاعات اولیه",
+                " نگارش مقاله بدون دریافت اطلاعات اولیه"));
+    }
+
+    public List<SelectItem> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<SelectItem> options) {
+        this.options = options;
+    }
+
+    public String[] getSelectedOptions() {
+        return selectedOptions;
+    }
+
+    public void setSelectedOptions(String[] selectedOptions) {
+        this.selectedOptions = selectedOptions;
+    }
 
     public List<Coding> getGroups() {
         return groups;
@@ -132,14 +171,6 @@ public class PaperForm {
         return orientations;
     }
 
-    public List<Boolean> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Boolean> options) {
-        this.options = options;
-    }
-
     public String getPlan() {
         return plan;
     }
@@ -160,7 +191,7 @@ public class PaperForm {
             }
         }
         else{
-            System.out.println("eror null file");
+            System.out.println(PaperForm.class.getName() + ": eror null file");
         
         }
     }
@@ -184,17 +215,6 @@ public class PaperForm {
         }
     }
     
-    public String getOption(List<Boolean> opt) {
-        String opts = "";
-        for (Boolean opt1 : opt) {
-            if (opt1)
-                opts += '1';
-            else
-                opts += '0';
-        }
-        return opts;
-    }
-    
     public void submit() throws Exception {
         System.out.println(PaperForm.class.getName() + ":Submit Function!");
         Paper paper = new Paper();
@@ -211,7 +231,7 @@ public class PaperForm {
             paper.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
         else
             paper.setEndDateTime("");
-        paper.setOption(getOption(options)+plan);
+        paper.setOption(Arrays.toString(selectedOptions) + "," + plan);
         if(attachFile != null)
             paper.setAttachFile(attachFile.getFileName());
         paper.setDeliveryType(delivery);

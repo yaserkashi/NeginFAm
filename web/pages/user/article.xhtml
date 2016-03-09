@@ -44,32 +44,15 @@
                 <p:selectOneMenu id="orientation" value="#{paperForm.orientation}" styleClass="input">
                     <f:selectItems value="#{paperForm.orientations}" var="orientation" itemLabel="#{orientation.text}" itemValue="#{orientation.id}"/>
                 </p:selectOneMenu>
-
-                <p:outputLabel value=" ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی" ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(1)}"  />
-
-                <p:outputLabel value=" ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی"></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(2)}"  />
-
-                <p:outputLabel value=" ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله " ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(3)}" />
-
-                <p:outputLabel value="ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی" ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(4)}"  />
-
-                <p:outputLabel value=" استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری" ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(5)}"  />
-
-                <p:outputLabel value=" استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری " ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(6)}" />
-
-                <p:outputLabel value=" نگارش مقاله بدون دریافت اطلاعات اولیه" ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.options.get(7)}"  />
-
+                
                 <p:outputLabel value=" مایل به انتخاب کدام یک از طرح های زیر برای دریافت خدمات هستید؟ *" ></p:outputLabel>
                 <p:outputLabel value=" "></p:outputLabel>
 
-
+                <p:selectManyCheckbox id="grid2" layout="grid" value="#{paperForm.selectedOptions}"  columns="1">
+                    <f:selectItems value="#{paperForm.options}" />                  
+                </p:selectManyCheckbox>
+                <p:outputLabel value=" "></p:outputLabel>
+                
                 <p:selectOneRadio id="console15" columns="3" value="#{paperForm.plan}" >
                     <f:selectItem itemLabel="متون عمومی" itemValue="0" />
                     <f:selectItem itemLabel="متون تخصصی" itemValue="1" />
