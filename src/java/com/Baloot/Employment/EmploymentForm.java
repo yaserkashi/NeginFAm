@@ -7,6 +7,7 @@ package com.Baloot.Employment;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,39 +43,61 @@ public class EmploymentForm {
     private String lastEducationField;
     private String lastEducationUniversity;
     private Integer lastEducationAverage;
-    private List<Boolean> languages;
-    private List<Boolean> fields;
     private String otherField;
     private String bankCardNum;
     private String bankName;
     private UploadedFile birthCertificate;
     private UploadedFile image;
-    private List<SelectItem> items;
-    private String[] selectedItems;
+    private List<SelectItem> languages;
+    private String[] selectedLanguages;
+    private List<SelectItem> fields;
+    private String[] selectedFields;
 
     @PostConstruct
     public void init() {
-        items = new ArrayList<>();
-        items.add(new SelectItem("Miami1", "valueMiami1"));
-        items.add(new SelectItem("Miami2", "valueMiami2"));
-        items.add(new SelectItem("Miami3", "valueMiami3"));
-        items.add(new SelectItem("Miami11", "valueMiami31"));
+        languages = new ArrayList<>();
+        languages.add(new SelectItem("انگلیسی به فارسی", "انگلیسی به فارسی"));
+        languages.add(new SelectItem("فارسی به انگلیسی", "فارسی به انگلیسی"));
+        languages.add(new SelectItem("فرانسه به فارسی", "فرانسه به فارسی"));
+        languages.add(new SelectItem("فارسی به فرانسه", "فارسی به فرانسه"));
+        
+        fields = new ArrayList<>();
+        fields.add(new SelectItem("علوم پایه", "علوم پایه"));
+        fields.add(new SelectItem("مهندسی", "مهندسی"));
+        fields.add(new SelectItem("پزشکی", "پزشکی"));
+        fields.add(new SelectItem("علوم انسانی", "علوم انسانی"));
     }
 
-    public List<SelectItem> getItems() {
-        return items;
+    public List<SelectItem> getLanguages() {
+        return languages;
     }
 
-    public void setItems(List<SelectItem> items) {
-        this.items = items;
+    public void setLanguages(List<SelectItem> items) {
+        this.languages = items;
     }
 
-    public String[] getSelectedItems() {
-        return selectedItems;
+    public String[] getSelectedLanguages() {
+        return selectedLanguages;
     }
 
-    public void setSelectedItems(String[] selectedItems) {
-        this.selectedItems = selectedItems;
+    public void setSelectedLanguges(String[] selectedItems) {
+        this.selectedLanguages = selectedItems;
+    }
+
+    public List<SelectItem> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<SelectItem> fields) {
+        this.fields = fields;
+    }
+
+    public String[] getSelectedFields() {
+        return selectedFields;
+    }
+
+    public void setSelectedFields(String[] selectedFields) {
+        this.selectedFields = selectedFields;
     }
 
     public String getName() {
@@ -181,22 +204,6 @@ public class EmploymentForm {
         this.lastEducationAverage = lastEducationAverage;
     }
 
-    public List<Boolean> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<Boolean> languages) {
-        this.languages = languages;
-    }
-
-    public List<Boolean> getFields() {
-        return fields;
-    }
-
-    public void setFields(List<Boolean> fields) {
-        this.fields = fields;
-    }
-
     public String getOtherField() {
         return otherField;
     }
@@ -237,30 +244,6 @@ public class EmploymentForm {
         this.birthCertificate = birthCertificate;
     }
 
-    public String getLanguege(List<Boolean> languages) {
-        String language = "";
-        for (Boolean lang : languages) {
-            if (lang) {
-                language += "1";
-            } else {
-                language += "0";
-            }
-        }
-        return language;
-    }
-
-    public String getField(List<Boolean> fields) {
-        String field = "";
-        for (Boolean f : fields) {
-            if (f) {
-                field += "1";
-            } else {
-                field += "0";
-            }
-        }
-        return field;
-    }
-
     public void submit() {
         System.out.println(EmploymentForm.class.getName() + ":Submit Function!");
         Employment empl = new Employment();
@@ -288,11 +271,11 @@ public class EmploymentForm {
             s = true;
         }
         empl.setSex(s);
-        if (fields != null) {
-            empl.setField(getField(fields));
+        if (selectedFields != null) {
+            empl.setField(Arrays.toString(selectedFields));
         }
-        if (languages != null) {
-            empl.setTranslateLanguage(getLanguege(languages));
+        if (selectedLanguages != null) {
+            empl.setTranslateLanguage(Arrays.toString(selectedLanguages));
         }
 
         try {

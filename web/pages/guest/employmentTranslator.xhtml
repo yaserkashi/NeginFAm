@@ -101,8 +101,15 @@
                 <h:outputText value="زبان های ترجمه"  />
               
 
-                <p:selectManyCheckbox id="grid2" layout="grid" value="#{employmentForm.selectedItems}"  columns="3">
-                    <f:selectItems value="#{employmentForm.items}" />                  
+                <p:selectManyCheckbox id="grid2" layout="grid" value="#{employmentForm.selectedLanguages}"  columns="3">
+                    <f:selectItems value="#{employmentForm.languages}" />                  
+                </p:selectManyCheckbox>
+                
+                <h:outputText value="زمینه ها"  />
+              
+
+                <p:selectManyCheckbox id="grid3" layout="grid" value="#{employmentForm.selectedFields}"  columns="3">
+                    <f:selectItems value="#{employmentForm.fields}" />                  
                 </p:selectManyCheckbox>
 
                 <h:outputText value="سایر زمینه ها"  />
