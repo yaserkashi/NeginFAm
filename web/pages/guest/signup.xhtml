@@ -21,110 +21,80 @@
             <title>ثبت نام</title>
         </h:head>
         <p:messages autoUpdate="true" closable="true"/>
-        <p:panelGrid id="panel" styleClass="form border" style="float: right">
-            <p:row>
-                <p:column>
+        <p:panelGrid columns="2" id="panel" styleClass="form border" style="float: right;width: 70%;padding: 20px">
+            <f:facet name="header">
+                 ثبت نام
+                </f:facet>
+            
                     <p:outputLabel value="نام کاربری*"/>
-                </p:column>
-                <p:column>
+               
                     <p:inputText id="firstname" value="#{signUp.userName}" required="true" requiredMessage="نام کاربری را وارد کنید."/>
-                </p:column>                
-            </p:row>
-            <p:row>
-                <p:column>
+              
+                
                     <p:outputLabel value="رمز عبور*"/>
-                </p:column>
-                <p:column>
+                
+               
                     <p:password id="pass1" value="#{signUp.password}" match="pass2" validatorMessage="رمز عبور و تکرار آن مطابقت ندارند." required="true" requiredMessage="رمز عبور را وارد کنید."/>
-                </p:column>                
-            </p:row>
-            <p:row>
-                <p:column>
+                             
+            
                     <p:outputLabel value="تکرار رمز عبور*"/>
-                </p:column>
-                <p:column>
+               
                     <p:password id="pass2" value="#{signUp.password}" required="true" requiredMessage="رمز عبور را تکرار کنید."/>
-                </p:column>                
-            </p:row>
-            <p:row>
-                <p:column>
+               
+               
                     <p:outputLabel value="رایانامه*:"/>
-                </p:column>
-                <p:column>
+                
                     <p:inputText id="mail" value="#{signUp.email}" required="true" requiredMessage="رایانامه را وارد کنید."/>
-                </p:column>                
-            </p:row>
-            <p:row>
-                <p:column>
+                           
+         
                     <p:outputLabel value="نام*"/>
-                </p:column>
-                <p:column>
+              
                     <p:inputText id="name" value="#{signUp.name}"/>
-                </p:column>                
-            </p:row>                    
-            <p:row>
-                <p:column>
+               
                     <p:outputLabel value="نام خانوادگی*"/>
-                </p:column>
-                <p:column>
+               
                     <p:inputText value="#{signUp.lastname}"/>
-                </p:column>                
-            </p:row>
-            <p:row>
-                <p:column>
+               
                     <p:outputLabel value="تلفن*"/>
-                </p:column>
-                <p:column>
+              
                     <p:inputText id="mobile" value="#{signUp.mobile}"/>
-                </p:column>                
-            </p:row>
-            <p:row>
+                
 <!--                <p:column>
                     <p:outputLabel value="نحوه اشنایی با سایت "/>
                 </p:column>
                 <p:column>
                     <p:inputText value="#{signUp.introduction}"/>
                 </p:column>                -->
-            </p:row>                    
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="کد امنیتی"/>
-                    <h:form prependId="false">
+            <h:form prependId="false">
                         <botDetect:jsfCaptcha id="faceletsExampleCaptcha" 
                                               binding="#{signUp.captcha}"  />
                     </h:form>
-                </p:column>
-                <p:column>
+                    <p:outputLabel value="کد امنیتی"/>
+                   
+                
                     <p:inputText id="captcha" value="#{signUp.secCode}"/>
-                </p:column>                
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="قوانین سایت*"/>
-                </p:column>
-                <p:column>
+               
+                    
+                <p:outputLabel value="تمامی قوانین نگین فام راخوانده و قبول دارم"/>
                     <p:selectBooleanCheckbox value="#{signUp.lowCheck}" ></p:selectBooleanCheckbox>
-                    <p:outputLabel value="تمامی قوانین نگین فام راخوانده و قبول دارم"/>
-                    <br/>
+                   
+                    
                     <h:form>
                      <p:commandButton value="دانلود قوانین سایت"  onclick="PF('rules').show()" style="font-size: 14px;font-weight: normal;background: white;color: red;">
                     </p:commandButton>
                         </h:form>
-                </p:column>                
-            </p:row>                    
-            <p:row>
-                <p:column>
-                    <p:commandButton value="ثبت" update="panel" actionListener="#{signUp.submit()}" ajax="false" ></p:commandButton>
-                </p:column>
-                <p:column>
-                </p:column>
-            </p:row>
+              
+              
+                    <p:commandButton value="ثبت" update="panel" actionListener="#{signUp.submit()}" ajax="false" style=";float: left;background: #4EA2D0;margin-top: 40px;margin-left: 20px" ></p:commandButton>
+                
+           
         </p:panelGrid>
         
         
           <p:dialog widgetVar="rules" dynamic="true" header="قوانین سایت"
                   style="direction: rtl" id="dg1"
                   resizable="false" closable="true" position="center" width="30%">
+               <ui:include src="/pages/guest/siteRules.xhtml" />
             
         </p:dialog> 
     </ui:define>
