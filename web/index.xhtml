@@ -8,6 +8,8 @@
     <h:head>
         <ui:composition template="/template/template.xhtml">
             <ui:define name="header">
+               
+                
                 <title> صفحه اصلی </title>
                 <style>
                     .ui-panelgrid td {
@@ -33,13 +35,13 @@
             <ui:define name="sidePanel"  >
                 <div style="width:100%;height: 173.5%;padding-top: 5px;background: none" class="border">
                     <h:link outcome="/pages/guest/signup.xhtml?faces-redirect=true" >
-                      
+
                         <p:graphicImage  width="90%" style="padding-right: 15px;margin-top: 12px;margin-bottom: 20px;"
-                                             url="/resources/images/singupGIF.gif"></p:graphicImage>
-                        
+                                         url="/resources/images/singupGIF.gif"></p:graphicImage>
+
                     </h:link>
 
-                    <p:panelGrid columns="1" styleClass="border" style="margin-top:25px; width: 88%"  >
+                    <p:panelGrid columns="1" styleClass="border" style="margin-top:25px; width: 88%;border-width: 1px !important"  >
                         <f:facet name="header" >
                             ورود به حساب کاربری
                         </f:facet>
@@ -54,21 +56,21 @@
                                     value="#{login.pwd}"/>
                         <p:outputLabel></p:outputLabel>
 
-                       
+
 
                         <p:commandButton id="login" action="#{login.validateUsernamePassword}"
                                          style="margin-right: 70px" styleClass="loginPanelBtn" value="ورود" actionListener="fdfdf" />
-                       
+
                         <p:commandButton action="/pages/guest/forgotPass.xhtml?faces-redirect=true"
-                                             style="width: 90%;color: red;font-size: small;text-align: center;background: none;border: none;margin-right: 5%;"
-                                             value="کلمه عبور را فراموش کردم"/>
-                        
-                       
+                                         style="width: 90%;color: red;font-size: small;text-align: center;background: none;border: none;margin-right: 5%;"
+                                         value="کلمه عبور را فراموش کردم"/>
+
+
                     </p:panelGrid>
-                   
 
 
-                 
+
+
 
 
                     <p:panelGrid columns="1" styleClass="font border" style="width: 90%;margin-top: 30px" >
@@ -112,15 +114,15 @@
             <ui:define name="content">
                 <!--here is place of code-->
 
-                <div style="background-color: #fff;margin-top: 50px; padding: 20px; text-align: center;margin-right: 10px   " class="border">
+                <div style="background-color: #fff;margin-top: 50px; padding: 20px;padding-bottom: 30px; text-align: center;margin-right: 10px   " class="border">
 
 
 
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
-                        <h:outputLabel value="دانلود فایل نهایی" styleClass="helpfont" style="padding-right: 50px"/>
+                        <h:outputLabel value="دانلود فایل نهایی" styleClass="helpfont " style="padding-right: 50px"/>
 
-                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
-                                        url="/resources/images/arrow-down-icon.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="70px" style="position: relative"  
+                                        url="/resources/images/download.png"></p:graphicImage>
 
                     </h:link>
 
@@ -128,8 +130,8 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="پرداخت فاکتور"  styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
-                                        url="/resources/images/payment.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="70px" style="position: relative"
+                                        url="/resources/images/payment_1.png"></p:graphicImage>
 
 
                     </h:link>
@@ -139,7 +141,7 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="براورد زمان و هزینه"  styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/time1.jpg"/>
+                        <p:graphicImage styleClass="registerImg" width="70px" url="/resources/images/time.png"/>
 
                     </h:link>
 
@@ -148,8 +150,8 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="ثبت سفارش" styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="80px"
-                                        url="/resources/images/Apply-Now-icon.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="70px"
+                                        url="/resources/images/order1.png"></p:graphicImage>
                     </h:link>
 
 
@@ -158,8 +160,8 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="ثبت نام در سایت"  styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="80px"
-                                        url="/resources/images/register.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="70px"
+                                        url="/resources/images/singup1.png"></p:graphicImage>
 
                     </h:link>
 
@@ -172,7 +174,7 @@
                                             }
                                         </script>
                                         <div dir="ltr" style="float: right;" id="myeditable" ></div>-->
-                    <iframe class="iFrameClass border"  src="resources/html/test.html" scrolling="no" height="1100" />
+                    <iframe class="iFrameClass border"  src="resources/html/test.html" scrolling="no" height="650" />
                 </div>
 
             </ui:define>
