@@ -9,6 +9,7 @@ import com.Baloot.Enum.StepsOfOrder;
 import com.Baloot.TextSmsMessage.TextSmsMessage;
 import com.Baloot.TextSmsMessage.TextSmsMessageServices;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
 
@@ -16,12 +17,15 @@ import javax.validation.constraints.Size;
  *کلاس برای صفحه پیام های پیش فرض
  * @author mohammad
  */
+@ManagedBean
 public class DefulteSMS {
 public DefulteSMS()
 {
     try {
         message1=TextSmsMessageServices.getDefultSMS(StepsOfOrder.registrationFactor.ordinal());
         message2=TextSmsMessageServices.getDefultSMS(StepsOfOrder.EndOrder.ordinal());
+        System.out.println("SMS1:"+message1.getText());
+        System.out.println("SMS4:"+message2.getText());
     } catch (Exception e) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("پیام پیش فرضی وجود ندارد"));
     }
@@ -58,9 +62,9 @@ private TextSmsMessage message2;
         TextSmsMessageServices.updateDefultSMS(message2);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("پیام ها با موفقیت ویرایش شد"));
             } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("ویرایش پیام ها با مشکل مواجه شده لطفا صفحه را رفرش کنید و دوباره سعی کنید"));
             }
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("ویرایش پیام ها با مشکل مواجه شده لطفا صفحه را رفرش کنید و دوباره سعی کنید"));
-        }
+              }
             
 
     }
