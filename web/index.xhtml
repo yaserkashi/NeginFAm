@@ -5,7 +5,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
+    <h:head >
+         </h:head>
+    <h:body style="background: #999999">
         <ui:composition template="/template/template.xhtml">
             <ui:define name="header">
                
@@ -19,11 +21,14 @@
                         padding: 4px 10px;
                     }
                 </style>
+                
+    
             </ui:define>
             <script type="text/javascript">
                 onload perView();
             </script>
-
+             
+           
             <ui:define name="galleria" >
                 <div  >
                     <p:galleria value="#{imagesForm.selectedImages}" var="image" panelHeight="360"  
@@ -33,11 +38,11 @@
                 </div>
             </ui:define>
             <ui:define name="sidePanel"  >
-                <div style="width:100%;height: 173.5%;padding-top: 5px;background: none" class="border">
+                <div style="width:100%;height: 173.5%;padding-top: 5px;background: #fff" class="border">
                     <h:link outcome="/pages/guest/signup.xhtml?faces-redirect=true" >
 
-                        <p:graphicImage  width="90%" style="padding-right: 15px;margin-top: 12px;margin-bottom: 20px;"
-                                         url="/resources/images/singupGIF.gif"></p:graphicImage>
+                        <p:graphicImage  width="90%" style="padding-right: 15px;margin-top: 20px;margin-bottom: 20px;"
+                                         url="/resources/images/sign2.jpg"></p:graphicImage>
 
                     </h:link>
 
@@ -73,7 +78,7 @@
 
 
 
-                    <p:panelGrid columns="1" styleClass="font border" style="width: 90%;margin-top: 30px" >
+                    <p:panelGrid columns="1" styleClass="font border" style="width: 90%;margin-top: 30px;margin-right: 15px" >
                         <f:facet name="header">
                             آخرین اخبار سایت
                         </f:facet>
@@ -122,7 +127,7 @@
                         <h:outputLabel value="دانلود فایل نهایی" styleClass="helpfont " style="padding-right: 50px"/>
 
                         <p:graphicImage styleClass="registerImg" width="70px" style="position: relative"  
-                                        url="/resources/images/download.png"></p:graphicImage>
+                                        url="/resources/images/download2.png"></p:graphicImage>
 
                     </h:link>
 
@@ -130,8 +135,8 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="پرداخت فاکتور"  styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="70px" style="position: relative"
-                                        url="/resources/images/payment_1.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="80px" style="position: relative"
+                                        url="/resources/images/payment2.png"></p:graphicImage>
 
 
                     </h:link>
@@ -141,7 +146,7 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="براورد زمان و هزینه"  styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="70px" url="/resources/images/time.png"/>
+                        <p:graphicImage styleClass="registerImg" width="80px" url="/resources/images/time2.png"/>
 
                     </h:link>
 
@@ -150,8 +155,8 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="ثبت سفارش" styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="70px"
-                                        url="/resources/images/order1.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/order2.png"></p:graphicImage>
                     </h:link>
 
 
@@ -160,8 +165,8 @@
                     <h:link outcome="/pages/guest/signup.xhtml" value="">
                         <h:outputLabel value="ثبت نام در سایت"  styleClass="helpfont"/>
 
-                        <p:graphicImage styleClass="registerImg" width="70px"
-                                        url="/resources/images/singup1.png"></p:graphicImage>
+                        <p:graphicImage styleClass="registerImg" width="80px"
+                                        url="/resources/images/signup2.png"></p:graphicImage>
 
                     </h:link>
 
@@ -174,12 +179,13 @@
                                             }
                                         </script>
                                         <div dir="ltr" style="float: right;" id="myeditable" ></div>-->
-                    <iframe class="iFrameClass border"  src="resources/html/test.html" scrolling="no" height="650" />
+                    <iframe class="iFrameClass border"  src="resources/html/test.html" scrolling="no" height="650" style="background: #fff" />
                 </div>
 
             </ui:define>
 
         </ui:composition>
-    </h:head>
+        </h:body>
+  
 
 </html>

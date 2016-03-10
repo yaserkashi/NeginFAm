@@ -382,7 +382,7 @@
             <ui:include src="/template/commonContent.xhtml"/>
         </ui:insert>
     </h:head>
-    <h:body style="background-color: #fffffe">
+    <h:body style="background-color:  #e3e3e3">
         <h:form enctype="multipart/form-data" id="userForm" prependId="false" >
             <div id="header" class="header">
                 <div class="logo">
@@ -525,12 +525,29 @@
 
                     </ui:insert>
                 </div>
+<!--                 <footer>
+                      <div class="footer" style=";text-align: center;z-index: 2" >
+                          <p:panelGrid id="footer" columns="1" style="width: 100%;" >
+                                    <p:outputLabel  >
+                                        آدرس: تهران، خیابان پیروزی، خیابان پرستار، کوچه مریم شرقی، پلاک16، واحد 2 
+                                    </p:outputLabel>
+                                    <p:outputLabel style="text-align: center;">
+                                        تمامی خدمات این سایت، حسب مورد دارای مجوزهای لازم از مراجع مربوطه می‌باشند و فعالیت‌های این سایت تابع قوانین و مقررات جمهوری اسلامی ایران است
+                                    </p:outputLabel>
+                                    <p:outputLabel >
+                                       . تمامی حقوق این وب سایت برای گروه طیف  محفوظ می باشد
+                                    </p:outputLabel>
+            
+                                </p:panelGrid> 
+                            </div>
+                        </footer>-->
             </div>
 
-
+        </h:form>
 
             
               <!--<script src="/resources/js/jquery-2.1.4.min" type="text/javascript"></script>-->
+              
         <script type="text/javascript">
             (function($) {
                 $(document).ready(function() {
@@ -554,26 +571,18 @@
                     });
                 });
             })(jQuery);
+        </script>                           
+     <script type="text/javascript">
+        (function($) {
+                $(document).ready(function() {
+                    var h=$(document).height()/2-80;
+                    var hsp=$(document).height()-250;
+                    $("#footer").css("margin-top",h);
+                    $(".usersidePanel").css("height",hsp);
+                    console.debug(" ha ha : "+$(document).height())
+                    });
+        })(jQuery);
         </script>
-              
-               <footer>
-                      <div class="footer" style=";text-align: center;" >
-                          <p:panelGrid id="footer" columns="1" style="width: 100%;" >
-                                    <p:outputLabel  >
-                                        آدرس: تهران، خیابان پیروزی، خیابان پرستار، کوچه مریم شرقی، پلاک16، واحد 2 
-                                    </p:outputLabel>
-                                    <p:outputLabel style="text-align: center;">
-                                        تمامی خدمات این سایت، حسب مورد دارای مجوزهای لازم از مراجع مربوطه می‌باشند و فعالیت‌های این سایت تابع قوانین و مقررات جمهوری اسلامی ایران است
-                                    </p:outputLabel>
-                                    <p:outputLabel >
-                                       . تمامی حقوق این وب سایت برای گروه طیف  محفوظ می باشد
-                                    </p:outputLabel>
-            
-                                </p:panelGrid> 
-                            </div>
-                        </footer>
-        </h:form>
-     
     </h:body>
 
 </html>
