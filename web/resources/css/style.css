@@ -58,7 +58,7 @@ body a:hover {
     height: inherit;
     display: inline-block;
     position: absolute;
-   
+
 }
 
 .headerMenu {
@@ -70,7 +70,7 @@ body a:hover {
     font-family: BYekan,'BYekan',tahoma;
     padding-left: 2px;
     font-size: 14px;
-   min-width: 900px;
+    min-width: 900px;
 }
 
 submenu .ui-menu-child{
@@ -147,12 +147,12 @@ submenu .ui-menu-child{
     width: 100%;
     padding-top: 10px;
     float: right;
-     min-width: 900px;
+    min-width: 900px;
 
 }
 
 .singupcontent {
-     width: 72%;
+    width: 72%;
     height: 500px;
     display: inline-block;
     margin-top: 50px;
@@ -161,9 +161,9 @@ submenu .ui-menu-child{
     padding-left: 5%;
     font-size: 14px;
     padding-right: 3% !important;
-   
-     min-width: 625px;
-   
+
+    min-width: 625px;
+
 }
 
 
@@ -171,8 +171,9 @@ submenu .ui-menu-child{
 .sidePanel {
 
     width: 20%;
-    height: 100%;
-    padding-top: 45px;
+    
+    height: 114% !important;
+    padding-top: 20px;
     display: inline-block;
     position: absolute;
     font: -moz-info;
@@ -217,9 +218,9 @@ submenu .ui-menu-child{
     padding-left: 5%;
     font-size: 14px;
     padding-right: 2% !important;
-     margin-top: -30px;
-     min-width: 625px;
-     
+    margin-top: -30px;
+    min-width: 625px;
+
 }
 
 
@@ -234,8 +235,8 @@ submenu .ui-menu-child{
     padding-left: 5%;
     font-size: 14px;
     padding-right: 3% !important;
-     margin-top: -30px;
-     min-width: 625px;
+    margin-top: -30px;
+    min-width: 625px;
 }
 
 .footer {
@@ -332,14 +333,14 @@ submenu .ui-menu-child{
     min-width: 240px;
 }
 .mainpanel1{
-     margin-top:25px; 
-      width: 89%;
-      min-width: 210px;
+    margin-top:25px; 
+    width: 89%;
+    min-width: 210px;
 }
 .mainpane12{
-   width: 90%;
-   margin-top: 30px;
-   min-width: 210px;
+    width: 90%;
+    margin-top: 30px;
+    min-width: 210px;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
