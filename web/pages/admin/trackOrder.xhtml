@@ -18,7 +18,7 @@
         </h:head>
         <h:body>
             <p:dataTable value="#{orderFollowUpForAdmin.listOfOrdreForAdmin}" 
-                         rowKey="#{trackorder.id}"
+                         rowKey="#{trackorder.id}" rows="10"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                          paginator="true" id="tborder" rowsPerPageTemplate="6,12,16"
                          var="trackorder" styleClass="dataTable" style="direction: rtl">
@@ -33,7 +33,7 @@
                 <p:column headerText="نوع سفارش" >
                     <h:outputText value="#{trackorder.tablePersianName()}" />
                 </p:column> 
-                 <p:column headerText="تاریخ سفارش">
+                <p:column headerText="تاریخ سفارش" filterBy="#{trackorder.orderDate}">
                      <h:outputText value="#{trackorder.orderDate}" />
                 </p:column>  
 
@@ -97,7 +97,7 @@
                                     <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
                                     <p:outputLabel value="نوع طراحی "  ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.designTypeFarsi()}" style="color: red" ></p:outputLabel>
-                                    <p:outputLabel value="تاریخ و ساعت درخواستی " ></p:outputLabel>
+                                    <p:outputLabel value="تاریخ و درخواستی " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.endDate}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="تاریخ ثبت سفارش" ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.registerDate}" style="color: red" ></p:outputLabel>
@@ -113,7 +113,9 @@
                                     <p:outputLabel value="#{orderFollowUpForAdmin.design.designTypeFarsi()}" style="color: red" ></p:outputLabel>
 
                                     <p:outputLabel value="فایل سفارش " ></p:outputLabel>
-                                    <h:outputText value="" />
+                                    <h:commandLink actionListener="#{orderFollowUpForAdmin.design.downloadUploadedFile()}" >
+                                        <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                                    </h:commandLink>
                                     <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="توضیحات " ></p:outputLabel>
