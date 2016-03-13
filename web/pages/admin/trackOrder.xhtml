@@ -24,7 +24,7 @@
                          var="trackorder" styleClass="dataTable" style="direction: rtl">
                
                 <p:column headerText="ردیف">
-                    <h:outputText value="#{orderFollowUpForAdmin.listOfOrdreForAdmin.indexOf(trackorder)}" />
+                    <h:outputText value="#{orderFollowUpForAdmin.listOfOrdreForAdmin.indexOf(trackorder)+1}" />
                 </p:column> 
                 <p:column headerText="نام کاربری">
                     <h:outputText value="#{trackorder.userId.username}" />

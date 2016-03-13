@@ -36,8 +36,30 @@ import javax.servlet.http.HttpServletRequest;
 public class OrderFollowUpForUser {
 
     public OrderFollowUpForUser() {
+        System.out.println("Creatde");
+         try {
+            userId = UserServices.getUserByUsername(SessionBean.getUserName()).getId();
+
+            List<Order> list = OrderServices.listOfOrderForUser(userId);
+
+            listOfOrdreForUser= list;
+
+        } catch (Exception e) {
+
+            List<Order> list = new ArrayList<>();
+            System.out.println(e.getMessage());
+                      listOfOrdreForUser= list;
+        }
+    }
+    private List<Order> listOfOrdreForUser;
+
+    public List<Order> getListOfOrdreForUser() {
+        return listOfOrdreForUser;
     }
 
+    public void setListOfOrdreForUser(List<Order> listOfOrdreForUser) {
+        this.listOfOrdreForUser = listOfOrdreForUser;
+    }
     private Order selectedOreder;
     private Design design;
     private Type type;
@@ -75,6 +97,7 @@ public class OrderFollowUpForUser {
     }
 
     public void setSelectedOreder(Order selectedOreder) {
+        System.out.println("Selected");
         this.selectedOreder = selectedOreder;
         selectedOrderAction();
     }
@@ -101,23 +124,6 @@ public class OrderFollowUpForUser {
 
     public void setPaper(Paper paper) {
         this.paper = paper;
-    }
-
-    public List<Order> listOfOrdreForUser() {
-        try {
-            userId = UserServices.getUserByUsername(SessionBean.getUserName()).getId();
-
-            List<Order> list = OrderServices.listOfOrderForUser(userId);
-
-            return list;
-
-        } catch (Exception e) {
-
-            List<Order> list = new ArrayList<>();
-            System.out.println(e.getMessage());
-            return list;
-        }
-
     }
 
     public void selectedOrderAction() {
