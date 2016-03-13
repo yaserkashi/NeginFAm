@@ -176,7 +176,7 @@ public class DesignForm {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                submit();
+                submit();                
             } catch (IOException ex) {
                 Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -209,7 +209,6 @@ public class DesignForm {
     }
 
     public void submit() throws Exception {
-
         Design design = new Design();
         Order order = new Order();
         design.setDesignType(designType);
@@ -235,7 +234,6 @@ public class DesignForm {
             design.setAttachFile(attachFile.getFileName());
         }
         design.setDeliveryType(delivery);
-
         order.setTableName("design");
         order.setCondition(0);
         order.setOrderDate(currentDate);
@@ -243,11 +241,12 @@ public class DesignForm {
         try {
             int id = DesignServices.insertRecordIntoTable(design);
             order.setTableId(id);
-            save("order"+id, attachFile.getInputstream());
+            save("order"+id+FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             OrderServices.insertRecordIntoTable(order);
             com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("سفارش شما ثبت شد."));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("succes.xhtml");
         } catch (SQLException ex) {
             Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
         }

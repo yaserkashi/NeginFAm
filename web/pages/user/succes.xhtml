@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/usertemplate.xhtml">
+    <ui:define name="content">
+        <header>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+        </header>
+        <h:head>
+            <script type="text/javascript"
+            src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
+            <title>ثبت سفارش</title>
+        </h:head>
+        <h:body>
+            <p:panel styleClass="form border" header="وضعیت سفارش">
+                <p:outputLabel style="direction: rtl" value="سفارش شما با موفقیت ثبت شد."/><br/>
+                <p:outputLabel style="direction: rtl" value="منتظر تایید سفارش توسط مدیر سایت باشید."/>
+            </p:panel>
+        </h:body>
+    </ui:define>
+</ui:composition> 
