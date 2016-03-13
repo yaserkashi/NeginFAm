@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Image;
 
 import com.Baloot.util.DataConnect;
@@ -19,21 +18,24 @@ import java.util.List;
  * @author FK
  */
 public class ImageServices {
+
     public static List<Image> getALLImages() {
         Connection con = null;
         PreparedStatement ps;
         List<Image> list = new ArrayList<>();
- 
+
         try {
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from image");
- 
+
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Image img = new Image();
                 img.setId(rs.getInt("id"));
                 img.setAddress(rs.getString("address"));
+                /*kashi add this code*/
+                img.setSelected(rs.getBoolean("selected"));
                 list.add(img);
             }
             return list;
@@ -44,18 +46,18 @@ public class ImageServices {
             DataConnect.close(con);
         }
     }
-    
+
     public static List<Image> getSelectedImages() {
         Connection con = null;
         PreparedStatement ps;
         List<Image> list = new ArrayList<>();
- 
+
         try {
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from image WHERE selected = TRUE");
- 
+
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Image img = new Image();
                 img.setId(rs.getInt("id"));
@@ -70,30 +72,31 @@ public class ImageServices {
             DataConnect.close(con);
         }
     }
-    
+
     public static void updateSelected(List<Image> selected) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String updateTableSQL = "UPDATE image SET selected = false";
-
+//        String updateTableSQL = "UPDATE image SET selected = false";
         try {
             dbConnection = DataConnect.getConnection();
-            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+//            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
 
             // execute update SQL stetement
-            preparedStatement.executeUpdate();
-            
-            updateTableSQL = "UPDATE image SET selected = true where id = ?";
+//            preparedStatement.executeUpdate();
+            String updateTableSQL = "UPDATE image SET selected = ? where id = ?";
             preparedStatement = dbConnection.prepareStatement(updateTableSQL);
             for (Image i : selected) {
-                preparedStatement.setInt(1, i.getId());
+                preparedStatement.setBoolean(1, i.getSelected());
+
+                preparedStatement.setInt(2, i.getId());
+
                 // execute update SQL stetement
                 preparedStatement.executeUpdate();
             }
             System.out.println("Records updated in image table!");
-                      
+
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -111,7 +114,7 @@ public class ImageServices {
         }
 
     }
-    
+
     public static void insertRecordIntoTable(Image image) throws SQLException {
 
         Connection dbConnection = null;

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Design;
 
 import com.Baloot.Coding.Coding;
@@ -41,6 +40,7 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 public class DesignForm {
+
     private Integer designType;
     private List<Coding> designTypes = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.design_type.ordinal());
     private String size;
@@ -76,7 +76,7 @@ public class DesignForm {
     public List<Coding> getDesignOptions() {
         return designOptions;
     }
-      
+
     public void setDesignType(Integer designType) {
         this.designType = designType;
     }
@@ -104,7 +104,7 @@ public class DesignForm {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
+
     public Integer getDesignType() {
         return designType;
     }
@@ -132,7 +132,7 @@ public class DesignForm {
     public Date getEndDate() {
         return endDate;
     }
-    
+
     public String getDesignOption() {
         return designOption;
     }
@@ -156,39 +156,39 @@ public class DesignForm {
     public void setDelivery(Boolean delivery) {
         this.delivery = delivery;
     }
-          
+
     public void upload(FileUploadEvent event) {
-        attachFile=event.getFile();
-        if (attachFile != null) {
-            try {
-                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());                
-            } catch (IOException ex) {
-                Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-    }
-    public void uploaded() throws Exception {
+        attachFile = event.getFile();
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-                submit();
             } catch (IOException ex) {
                 Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else{
+
+    }
+
+    public void uploaded() throws Exception {
+        if (attachFile != null) {
+            try {
+                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                submit();
+            } catch (IOException ex) {
+                Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
             System.out.println("eror null file");
-        
+
         }
     }
 
     private void save(String filename, InputStream input) {
-        try {
+        try {           
+            System.out.println("in save file name is :" + filename);
             String filePath = "\\web\\resources\\downloadfile";
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest httpServletRequest = (HttpServletRequest) context
@@ -202,38 +202,40 @@ public class DesignForm {
             }
             File finalFile = new File(filePath, filename);
             Files.copy(input, finalFile.toPath());
-            System.out.println(DesignForm.class.getName() + ":Done!");
+
         } catch (IOException e) {
             Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    public void submit() throws Exception {        
-        System.out.println(DesignForm.class.getName() + ":SUBMIT FUNCTION!");
-        System.out.println("+++++++++++++++++++++++++++++"+attachFile.getFileName());        
+
+    public void submit() throws Exception {
+
         Design design = new Design();
         Order order = new Order();
         design.setDesignType(designType);
         design.setSize(size);
-        if (!optionalSize.equals(""))
+        if (!optionalSize.equals("")) {
             design.setSize(optionalSize);
+        }
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         design.setRegisterDate(currentDate);
         design.setPrintType(printType);
         design.setDesignOption(designOption);
         design.setPrintOption(printOption);
-        if (endDate != null)
+        if (endDate != null) {
             design.setEndDate(pc.DateToString(pc.getIranianDateFromDate(endDate)));
-        else
+        } else {
             design.setEndDate("");
+        }
         design.setExplain(explian);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         design.setUserId(user);
-        if(attachFile != null)
+        if (attachFile != null) {
             design.setAttachFile(attachFile.getFileName());
+        }
         design.setDeliveryType(delivery);
-        
+
         order.setTableName("design");
         order.setCondition(0);
         order.setOrderDate(currentDate);
@@ -241,10 +243,11 @@ public class DesignForm {
         try {
             int id = DesignServices.insertRecordIntoTable(design);
             order.setTableId(id);
+            save("order"+id, attachFile.getInputstream());
             OrderServices.insertRecordIntoTable(order);
-           com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
+            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("سفارش شما ثبت شد."));
+                    new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {
             Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
         }

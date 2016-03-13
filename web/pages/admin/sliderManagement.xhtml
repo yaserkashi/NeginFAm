@@ -5,37 +5,36 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/adminTemplate.xhtml">
     <ui:define name="content">
-       
-          
-            
-            <!--value : listy as image ha ke adreseshon ro az DB mikhne-->
-            <!--selection : listy ke bayad jaye ImagesView.image set beshe-->
-            <!--dar vage liste dovom hamone=ie ke to slider neshon mide-->
-             <h:head>
+
+
+
+        <!--value : listy as image ha ke adreseshon ro az DB mikhne-->
+        <!--selection : listy ke bayad jaye ImagesView.image set beshe-->
+        <!--dar vage liste dovom hamone=ie ke to slider neshon mide-->
+        <h:head>
             <title>مدیریت اسلایدر</title>
         </h:head>
-            <h:body>
-             <p:messages id="messages"  autoUpdate="true" closable="true" />
-            <p:dataTable id="basicDT" var="image" value="#{imagesForm.images}" 
-                         styleClass="dataTable"                       
-                         selection="#{imagesForm.selectedList}" rowKey="#{image.id}">
+        <h:body>
+            <p:messages id="messages"  autoUpdate="true" closable="true" />   
+            <p:dataGrid var="image" value="#{imagesForm.images}" columns="3" styleClass="dataTable"           
+                        rows="9" paginator="true" id="tb1" rowIndexVar="index" 
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                        rowsPerPageTemplate="6,12,16">
                 <f:facet name="header">
-                    عکس اسلایدر
+                    عکس اسلايدر
                 </f:facet>
-                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                <p:column headerText="تصویر" >
-                    <p:graphicImage width="100" height="100"
-                                    value="../../resources/#{image.address}"/>
-                </p:column>
-                <p:column headerText="نام تصویر">
-                    <h:outputText value="#{image.address}" />
-                </p:column>                               
-            </p:dataTable>
+
+                <p:panel header="#{image.id}" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <p:graphicImage width="100" height="100"
+                                        value="../../resources/#{image.address}"/>
+                        <p:selectBooleanCheckbox value="#{image.selected}" />
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
             <p:commandButton action="#{imagesForm.submit()}" value="ذخیره" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
-            <h:form enctype="multipart/form-data" styleClass="font">
-                <p:fileUpload  value="#{imagesForm.attachFile}" mode="simple" style="margin-left: 100px"/>
-                <p:commandButton value="اضافه نمودن تصویر" update=":adminform:basicDT" ajax="false" actionListener="#{imagesForm.uploaded}"  style="margin-top: 30px;background: #4EA2D0"/>
-            </h:form>
-      </h:body>
+        </h:body>
     </ui:define>
 </ui:composition>  

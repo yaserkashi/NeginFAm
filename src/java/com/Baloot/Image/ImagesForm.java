@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Image;
 
 /**
@@ -28,31 +27,31 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
- 
+
 @ManagedBean
 public class ImagesForm {
-     
+
     private List<Image> images = ImageServices.getALLImages();
     private List<Image> selectedImages = ImageServices.getSelectedImages();
-    private List<Image> selectedList;
+//    private List<Image> selectedList;
     private UploadedFile attachFile;
- 
+
     public List<Image> getImages() {
         return images;
     }
-    
+
     public List<Image> getSelectedImages() {
         return selectedImages;
     }
+//
+//    public List<Image> getSelectedList() {
+//        return selectedList;
+//    }
+//
+//    public void setSelectedList(List<Image> selectedList) {
+//        this.selectedList = selectedList;
+//    }
 
-    public List<Image> getSelectedList() {
-        return selectedList;
-    }
-
-    public void setSelectedList(List<Image> selectedList) {
-        this.selectedList = selectedList;
-    }
-    
     public UploadedFile getAttachFile() {
         return attachFile;
     }
@@ -60,7 +59,7 @@ public class ImagesForm {
     public void setAttachFile(UploadedFile attachFile) {
         this.attachFile = attachFile;
     }
-    
+
     public void uploaded() throws Exception {
         if (attachFile != null) {
             try {
@@ -74,10 +73,9 @@ public class ImagesForm {
             } catch (IOException ex) {
                 Logger.getLogger(ImagesForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else{
+        } else {
             System.out.println("eror null file");
-           
+
         }
     }
 
@@ -101,13 +99,13 @@ public class ImagesForm {
             Logger.getLogger(ImagesForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-        
+
     public void submit() {
         System.out.println(ImagesForm.class.getName() + " : Submit Function!");
-        try {
-            ImageServices.updateSelected(selectedList);
-            FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("تغییرات ذخیره شد."));
+        try {        
+        ImageServices.updateSelected(images);
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("تغییرات ذخیره شد."));
         } catch (SQLException ex) {
             Logger.getLogger(ImagesForm.class.getName()).log(Level.SEVERE, null, ex);
         }
