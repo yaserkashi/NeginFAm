@@ -33,9 +33,17 @@ import javax.faces.context.FacesContext;
  * @author Ali-M
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class OrderFollowUpForAdmin {
+private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
 
+    public List<Order> getListOfOrdreForAdmin() {
+        return listOfOrdreForAdmin;
+    }
+
+    public void setListOfOrdreForAdmin(List<Order> listOfOrdreForAdmin) {
+        this.listOfOrdreForAdmin = listOfOrdreForAdmin;
+    }
     private Order selectedOreder;
     private Design design;
     private Type type;
@@ -49,7 +57,7 @@ public class OrderFollowUpForAdmin {
     private Double finalPrice;
 
     public OrderFollowUpForAdmin() {
-
+        System.out.println("OrderFollowUpForAdmin CReated");
     }
 
     public Double getSumPrice() {
@@ -120,6 +128,7 @@ public class OrderFollowUpForAdmin {
     }
 
     public void setSelectedOreder(Order selectedOreder) throws SQLException {
+        System.out.println("SeTOrder");
         this.selectedOreder = selectedOreder;
         selectedOrderAction();
     }
@@ -148,9 +157,7 @@ public class OrderFollowUpForAdmin {
         this.paper = paper;
     }
 
-    public List<Order> listOfOrdreForAdmin() {
-        return OrderServices.AllOfOrder();
-    }
+   
 
     public void confirmationPayFactor() throws SQLException {
         OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.ConfirmationPayFactor.ordinal());

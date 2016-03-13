@@ -30,6 +30,7 @@ public DefulteSMS()
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("پیام پیش فرضی وجود ندارد"));
     }
 }
+
 private TextSmsMessage message1;
 private TextSmsMessage message2;
 

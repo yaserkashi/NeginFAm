@@ -17,14 +17,14 @@
             <title>پیگیری سفارش کاربران</title>
         </h:head>
         <h:body>
-            <p:dataTable value="#{orderFollowUpForAdmin.listOfOrdreForAdmin()}" 
+            <p:dataTable value="#{orderFollowUpForAdmin.listOfOrdreForAdmin}" 
                          rowKey="#{trackorder.id}"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                          paginator="true" id="tborder" rowsPerPageTemplate="6,12,16"
                          var="trackorder" styleClass="dataTable" style="direction: rtl">
                
                 <p:column headerText="ردیف">
-                    <h:outputText value="#{orderFollowUpForAdmin.listOfOrdreForAdmin().indexOf(trackorder)+1}" />
+                    <h:outputText value="#{orderFollowUpForAdmin.listOfOrdreForAdmin.indexOf(trackorder)}" />
                 </p:column> 
                 <p:column headerText="نام کاربری">
                     <h:outputText value="#{trackorder.userId.username}" />
