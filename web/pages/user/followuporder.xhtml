@@ -5,6 +5,17 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="../../template/usertemplate.xhtml">
     <ui:define name="content">
+        <h:head>
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+            <title>پیگیری سفارش </title>
+        </h:head>
         <h:body>
             <div>
                 <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser}" var="followup"
@@ -30,7 +41,7 @@
                     </p:column>
                 </p:dataTable>    
             </div>
-           <p:remoteCommand name="cancel" action="#{orderFollowUpForUser.yaser()}" />
+            <p:remoteCommand name="cancel" action="#{orderFollowUpForUser.yaser()}" />
             <p:remoteCommand name="showFactor" action="#{orderFollowUpForUser.showFactorForSelectedOrder()}" />
             <p:dialog header="سفارش کاربر" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="60%">
                 <p:outputPanel id="orderDialogPanel" style="text-align:center;">

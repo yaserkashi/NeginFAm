@@ -18,6 +18,7 @@ import com.Baloot.User.UserServices;
 import com.Baloot.User.Users;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,7 +37,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class OrderFollowUpForAdmin {
-private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
+
+    private List<Order> listOfOrdreForAdmin = OrderServices.AllOfOrder();
 
     public List<Order> getListOfOrdreForAdmin() {
         return listOfOrdreForAdmin;
@@ -61,16 +64,16 @@ private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
     }
 
     public Double getSumPrice() {
-        if (!(unitPrice == null || number == null)) {
-            return sumPrice = (unitPrice * number);
-        }
+//        if (!(unitPrice == null || number == null)) {
+//            return sumPrice = (unitPrice * number);
+//        }
         return sumPrice;
     }
 
     public Double getFinalPrice() {
-        if (!(unitPrice == null || number == null || off == null)) {
-            return finalPrice = (unitPrice - (unitPrice * off)) * number;
-        }
+//        if (!(unitPrice == null || number == null || off == null)) {
+//            return finalPrice = (unitPrice - (unitPrice * off)) * number;
+//        }
         return finalPrice;
     }
 
@@ -124,11 +127,17 @@ private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
     }
 
     public Order getSelectedOreder() {
+        if (selectedOreder == null) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+        }
         return selectedOreder;
     }
 
-    public void setSelectedOreder(Order selectedOreder) throws SQLException {
-        System.out.println("SeTOrder");
+    public void setSelectedOreder(Order selectedOreder) {
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("selectedOreder", selectedOreder);
         this.selectedOreder = selectedOreder;
         selectedOrderAction();
     }
@@ -157,63 +166,15 @@ private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
         this.paper = paper;
     }
 
-   
-
     public void confirmationPayFactor() throws SQLException {
         OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.ConfirmationPayFactor.ordinal());
     }
 
-    public void cancelOrder() throws SQLException {
-
-        OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
-    }
-
-//    public void insertNewFactor() {
-//        System.out.println("hi");
-//        if (selectedOreder != null && selectedOreder.getCondition() == 0) {
-//
-//            Factor factor = new Factor();
-//            PersianCalendar pc = new PersianCalendar();
-//            String currentDate = pc.getIranianDateTime();
-//            factor.setDateTime(currentDate);
-//            Users user = selectedOreder.getUserId();
-//            factor.setUserId(user);
-//            factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
-//            factor.setPFactor(true);
-//            factor.setPayCondition(0);
-//            factor.setOff(off);
-//            try {
-//                Integer factorId = FactorServices.insertRecordIntoTable(factor);
-//                factor.setId(factorId);
-//
-//            } catch (SQLException ex) {
-//                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
-//                System.out.println(ex.getMessage());
-//            }
-//            try {
-//                FactorItem factorItem = new FactorItem();
-//                System.out.println(" facto ID : " + factor.getId());
-//                factorItem.setFactorId(factor);
-//                factorItem.setOrderId(selectedOreder.getId());
-//                factorItem.setUnit(unit);
-//                factorItem.setNumber(number);
-//                factorItem.setUnitPrice(unitPrice);
-//                OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.registrationFactor.ordinal());
-//                FactorItemServices.insertRecordIntoTable(factorItem);
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//
-//        }
-//    }
     public void insertNewFactor() {
-        Integer id;
-        FacesContext context = FacesContext.getCurrentInstance();
-        Map map = context.getExternalContext().getRequestParameterMap();
-        String msg = (String) map.get("msg");
-        id = Integer.valueOf(msg);
-        System.out.println("hi"+id+unitPrice);
-        selectedOreder = OrderServices.selectOrderById(id);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        selectedOreder = (Order) session.getAttribute("selectedOreder");
+        System.out.println("here in insert factor " + selectedOreder);
         if (selectedOreder != null && selectedOreder.getCondition() == 0) {
             Factor factor = new Factor();
             PersianCalendar pc = new PersianCalendar();
@@ -224,16 +185,12 @@ private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
             factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
             factor.setPFactor(true);
             factor.setPayCondition(0);
-            factor.setOff(off);
+            if (off != null) {
+                factor.setOff(off);
+            }
             try {
                 Integer factorId = FactorServices.insertRecordIntoTable(factor);
                 factor.setId(factorId);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println(ex.getMessage());
-            }
-            try {
                 FactorItem factorItem = new FactorItem();
                 System.out.println(" facto ID : " + factor.getId());
                 factorItem.setFactorId(factor);
@@ -243,75 +200,59 @@ private List<Order> listOfOrdreForAdmin=OrderServices.AllOfOrder();;
                 factorItem.setUnitPrice(unitPrice);
                 OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.registrationFactor.ordinal());
                 FactorItemServices.insertRecordIntoTable(factorItem);
-            } catch (Exception e) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("trackOrder.xhtml");
+            } catch (SQLException e) {
                 System.out.println(e.getMessage());
+                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, e);
+
+            } catch (IOException ex) {
+                Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }
 
-    public String selectedOrderAction() throws SQLException {
-        String pageOut = new String();
+    public void selectedOrderAction() {
         String typeOforder;
-
         try {
             typeOforder = selectedOreder.getTableName();
-            System.out.println("hereeeeeeeeeeee" + typeOforder);
             switch (typeOforder) {
                 case "type":
                     type = TypeServices.getTypeById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/type1.xhtml";
                     break;
                 case "design":
                     design = DesignServices.getDesignById(selectedOreder.getTableId());
-                    pageOut = "/pages/admin/preparefactor.xhtml";
-                    System.out.println("ok" + design.getEndDate() + pageOut);
                     break;
                 case "translate":
                     translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/translate1.xhtml";
                     break;
                 case "paper":
                     paper = PaperServices.getPaperById(selectedOreder.getTableId());
-                    pageOut = "/pages/user/article1.xhtml";
                     break;
             }
         } catch (Exception e) {
             System.out.println("here in exeption " + e.getMessage());
         }
-        return pageOut;
     }
 
-    public String showFactorForSelectedOrder() {
+    public void showFactorForSelectedOrder() {
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            Map map = context.getExternalContext().getRequestParameterMap();
-            String msg = (String) map.get("msg");
-            int id = Integer.valueOf(msg);
-            System.out.println(id + "---------------------------------");
-            selectedOreder = OrderServices.selectOrderById(id);
-            return "/pages/admin/factor.xhtml?faces-redirect=true";
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("factor.xhtml");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/pages/admin/factor.xhtml";
-
     }
 
-    public String yaser2() {
-        return "/pages/admin/factor.xhtml";
-    }
-
-    public void yaser() {
+    public void cancel() {
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            Map map = context.getExternalContext().getRequestParameterMap();
-            String msg = (String) map.get("msg");
-            int id = Integer.valueOf(msg);
-            System.out.println("id" + id);
-            selectedOreder = OrderServices.selectOrderById(id);
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
-            System.out.println("selected ");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("trackOrder.xhtml");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,7 +7,6 @@ package com.Baloot.Order;
 
 import com.Baloot.Design.*;
 import com.Baloot.Enum.StepsOfOrder;
-import com.Baloot.Factor.Factor;
 import com.Baloot.Factor.FactorServices;
 import com.Baloot.FactorItem.FactorItem;
 import com.Baloot.FactorItem.FactorItemServices;
@@ -17,38 +16,36 @@ import com.Baloot.Type.*;
 import com.Baloot.User.UserServices;
 import com.Baloot.util.PayLine;
 import com.Baloot.util.SessionBean;
-import com.sun.xml.fastinfoset.EncodingConstants;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Ali-M
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class OrderFollowUpForUser {
 
     public OrderFollowUpForUser() {
         System.out.println("Creatde");
-         try {
+        try {
             userId = UserServices.getUserByUsername(SessionBean.getUserName()).getId();
-
             List<Order> list = OrderServices.listOfOrderForUser(userId);
-
-            listOfOrdreForUser= list;
-
+            listOfOrdreForUser = list;
         } catch (Exception e) {
-
             List<Order> list = new ArrayList<>();
             System.out.println(e.getMessage());
-                      listOfOrdreForUser= list;
+            listOfOrdreForUser = list;
         }
     }
     private List<Order> listOfOrdreForUser;
@@ -93,11 +90,17 @@ public class OrderFollowUpForUser {
     }
 
     public Order getSelectedOreder() {
+        if (selectedOreder == null) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+        }
         return selectedOreder;
     }
 
     public void setSelectedOreder(Order selectedOreder) {
-        System.out.println("Selected");
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("selectedOreder", selectedOreder);
         this.selectedOreder = selectedOreder;
         selectedOrderAction();
     }
@@ -127,65 +130,51 @@ public class OrderFollowUpForUser {
     }
 
     public void selectedOrderAction() {
-       
-        String pageOut = new String();
         String typeOforder;
         try {
             typeOforder = selectedOreder.getTableName();
-
             switch (typeOforder) {
                 case "type":
                     type = TypeServices.getTypeById(selectedOreder.getTableId());
-                   
                     break;
                 case "design":
                     design = DesignServices.getDesignById(selectedOreder.getTableId());
-                   
                     break;
                 case "translate":
                     translate = TranslateServices.getTranslateById(selectedOreder.getTableId());
-                   
                     break;
                 case "paper":
                     paper = PaperServices.getPaperById(selectedOreder.getTableId());
-                 
                     break;
-            }
-
-            System.out.println("in end " + pageOut);
-            if (pageOut.isEmpty()) {
-                pageOut = "/pages/user/" + selectedOreder.getTableName() + "1.xhtml";
             }
         } catch (Exception e) {
             System.out.println("here in exeption " + e.getMessage());
         }
-       
     }
+
     /**
      * <b> تابع برای بدست آوردن فاکتور برای</b>
      * <b> سفارش انتخاب شده توسط کابر</b>
      *
      * @return page factor
      */
-    public String showFactorForSelectedOrder() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Map map = context.getExternalContext().getRequestParameterMap();
-        String msg = (String) map.get("msg");
-        int id = Integer.valueOf(msg);
-        System.out.println("ojhgsahIASGKFHDJ" + id);
-        selectedOreder = OrderServices.selectOrderById(id);
-        factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
-        System.out.println("herrrrrrrrrrrrrrrrrreeeeeeeeeeeee" + factorItemForSelectedOrder.getFactorId().getSumPrice());
-        return "/pages/user/factor.xhtml?faces-redirect=true";
+    public void showFactorForSelectedOrder() {
+        try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+            factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("factor.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(OrderFollowUpForUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void cancelOrder() {
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            Map map = context.getExternalContext().getRequestParameterMap();
-            String msg = (String) map.get("msg");
-            int id = Integer.valueOf(msg);
-            selectedOreder = OrderServices.selectOrderById(id);
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,12 +189,11 @@ public class OrderFollowUpForUser {
      */
     public String payLink() {
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            Map map = context.getExternalContext().getRequestParameterMap();
-            String msg = (String) map.get("msg");
-            int id = Integer.valueOf(msg);
+             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+            int id = selectedOreder.getId();
             FactorItem item = FactorItemServices.selectFactorItemByOrderId(id);
-
             try {
                 PayLine pay = new PayLine();
 
@@ -261,14 +249,10 @@ public class OrderFollowUpForUser {
 
     public void yaser() {
         try {
-            FacesContext context = FacesContext.getCurrentInstance();
-            Map map = context.getExternalContext().getRequestParameterMap();
-            String msg = (String) map.get("msg");
-            int id = Integer.valueOf(msg);
-            System.out.println("id" + id);
-            selectedOreder = OrderServices.selectOrderById(id);
+             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
-            System.out.println("selected ");
         } catch (Exception e) {
             e.printStackTrace();
         }

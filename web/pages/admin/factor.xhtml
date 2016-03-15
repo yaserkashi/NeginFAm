@@ -20,18 +20,13 @@
         </h:head>
         <h:body>
             <p:panelGrid columns="1" styleClass="form border font" style="float: right;margin-bottom: 25px;width: 90%">
-
                 <p:panelGrid columns="3"  style="float: right;margin-bottom: 25px;margin-top: 0px;width: 100%">
-
-
-                    <p:outputLabel value="شماره فاکتور:1" style="padding: 10px" /> 
+                    <p:outputLabel value="شماره فاکتور: #{orderFollowUpForAdmin.selectedOreder.get_id}" style="padding: 10px" /> 
                     <p:outputLabel value="فاکتور فروش" style="padding: 50px;font-size: 24px;"  />
-
-                    <p:outputLabel value="تاریخ: 4/12/94"  style="padding: 10px"/>
+                    <p:outputLabel value="تاریخ: #{orderFollowUpForAdmin.selectedOreder.orderDate}"  style="padding: 10px"/>
                 </p:panelGrid>
 
                 <p:panelGrid columns="2" style="float: right;margin-bottom: 25px;margin-top: 0px;width: 100%">
-
                     <f:facet name="header">
                         مشخصات فروشنده
                     </f:facet>
@@ -45,7 +40,7 @@
                     <f:facet name="header">
                         مشخصات خریدار
                     </f:facet>
-                    <p:outputLabel value="نام شخص: آقای ..." style="padding: 10px" /> 
+                    <p:outputLabel value="نام شخص: #{login.user}" style="padding: 10px" /> 
                     <p:outputLabel value="شماره تلفن: 0912111111111" style="padding: 10px" />
                     <p:outputLabel value="آدرس: یزد- خیابان کاشانی- کو چه ی الهام- پلاک 12"  style="padding: 10px"/>
                     <p:outputLabel value=""  style="padding: 40px"/>
@@ -56,10 +51,10 @@
                         <p:row>
                             <p:column colspan="1" >ردیف</p:column>
                             <p:column colspan="1"  > شرح کالا یا خدمات</p:column>
-                            <p:column colspan="1"  >واحد</p:column>
-                            <p:column colspan="1" >قیمت واحد</p:column>
-                            <p:column colspan="1">تعداد</p:column>
-                            <p:column colspan="1" >جمع (ریال)</p:column>                      
+                            <p:column colspan="1"  >واحد*</p:column>
+                            <p:column colspan="1" >قیمت واحد*</p:column>
+                            <p:column colspan="1">تعداد*</p:column>
+                            <p:column colspan="1" >جمع (ریال)*</p:column>                      
                         </p:row>
                     </f:facet>
 
@@ -69,11 +64,14 @@
                         </p:column>  <p:column>
                             <h:outputText value="#{orderFollowUpForAdmin.selectedOreder.tableName}"  />
                         </p:column>  <p:column>
-                            <p:inputText value="#{orderFollowUpForAdmin.unit}" style="width: 60px"/>
+                            <p:inputText required="true" requiredMessage="لطفا واحد کالا را بدرستی وارد کنید"
+                                         value="#{orderFollowUpForAdmin.unit}" style="width: 60px"/>
                         </p:column>  <p:column>
-                            <p:inputText value="#{orderFollowUpForAdmin.unitPrice}" style="width: 60px" />
+                            <p:inputText required="true" requiredMessage="لطفا قیمت کالا را بدرستی وارد کنید"
+                                         value="#{orderFollowUpForAdmin.unitPrice}" style="width: 60px" />
                         </p:column>  <p:column>
-                            <p:inputText value="#{orderFollowUpForAdmin.number}" style="width: 60px" />
+                            <p:inputText required="true" requiredMessage="لطفا تعداد کالا را بدرستی وارد کنید"
+                                         value="#{orderFollowUpForAdmin.number}" style="width: 60px" />
                         </p:column>  <p:column>
                             <h:outputText value="#{orderFollowUpForAdmin.sumPrice}"/>
                         </p:column>
@@ -83,9 +81,10 @@
 
                             <p:column  colspan="2"  style="text-align: right;">
                                 <h:outputText value="   درصد تخفیف" />
-                                <p:inputText value="#{orderFollowUpForAdmin.off}" style="width: 45px"/>
+                                <p:inputText required="true" requiredMessage="لطفا درصدتخفیف کالا را بدرستی وارد کنید"
+                                             value="#{orderFollowUpForAdmin.off}" style="width: 45px"/>
                             </p:column>
-                            
+
                             <p:column  colspan="2"  style="text-align: center;">
                             </p:column>
 
@@ -96,12 +95,10 @@
 
                         </p:row>
                     </f:facet>
-                </p:panelGrid>
-                
-                <p:remoteCommand name="factorSubmit" action="#{orderFollowUpForAdmin.insertNewFactor()}" />
-                <p:commandButton value="ثبت" onclick="factorSubmit([{name: 'msg', value: document.getElementById('adminform:idOfOrderForAdmin').value}]);" style="float: left;float: left;background: #4EA2D0"/>
+                </p:panelGrid>                
+            <p:commandButton value="ثبت" action="#{orderFollowUpForAdmin.insertNewFactor()}" style="float: left;float: left;background: #4EA2D0"/>
             </p:panelGrid>
-            <p:inputText style="display: none;"  id="idOfOrderForAdmin" value="#{orderFollowUpForAdmin.selectedOreder.id}" />
+            <p:inputText style="" id="idOfOrderForfactor" value="#{orderFollowUpForAdmin.selectedOreder.id}" />
 
         </h:body>  
     </ui:define>
