@@ -313,7 +313,7 @@ public class OrderFollowUpForAdmin {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
-            save(selectedOreder.getTableName()+selectedOreder.getId()+FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            save("final"+selectedOreder.getTableName()+selectedOreder.getId()+FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             OrderServices.insertFinalFile(selectedOreder.getId(), fileName);
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.EndOrder.ordinal());
         } catch (SQLException | IOException ex) {

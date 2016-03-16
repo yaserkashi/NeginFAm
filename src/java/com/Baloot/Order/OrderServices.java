@@ -158,6 +158,7 @@ public class OrderServices {
                 item.setOrderDate(rs.getString("order_date"));
                 item.setTableId(rs.getInt("table_id"));
                 item.setTableName(rs.getString("table_name"));
+                 item.setFinalFile(rs.getString("final_file"));
                 Users user = UserServices.getUserById(userId);
                 item.setUserId(user);
                 orderList.add(item);
@@ -191,7 +192,9 @@ public class OrderServices {
                 item.setTableName(rs.getString("table_name"));
                 Users user = UserServices.getUserById(rs.getInt("user_id"));
                 item.setUserId(user);
+                System.out.println(rs.getString("final_file"));
                 item.setFinalFile(rs.getString("final_file"));
+                System.out.println(item.getFinalFile());
 
             } else {
                 return null;
@@ -221,6 +224,7 @@ public class OrderServices {
                 item.setOrderDate(rs.getString("order_date"));
                 item.setTableId(rs.getInt("table_id"));
                 item.setTableName(rs.getString("table_name"));
+                 item.setFinalFile(rs.getString("final_file"));
                 Users user = UserServices.getUserById(rs.getInt("user_id"));
                 item.setUserId(user);
                 orderList.add(item);
@@ -251,6 +255,7 @@ public class OrderServices {
                 item.setOrderDate(rs.getString("order_date"));
                 item.setTableId(rs.getInt("table_id"));
                 item.setTableName(rs.getString("table_name"));
+                 item.setFinalFile(rs.getString("final_file"));
                 item.setGet_id(getId);
                 Users user = UserServices.getUserById(rs.getInt("user_id"));
                 item.setUserId(user);

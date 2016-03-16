@@ -112,7 +112,8 @@
                                     </p:commandButton>  
                                             <p:commandButton value="مشاهده فاکتور"   action="#{orderFollowUpForUser.showFactorForSelectedOrder()}" disabled="false"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px ;"/>
-                                    <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
+                                            <p:commandButton value="دانلود فایل پاسخ"  disabled="false" ajax="false"
+                                                             action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
                                                      style="color: #FFF ;background:#0066ff;float:left ; font-size: 14px ;"/>
                                 </p:panelGrid>
                             </h:body>
