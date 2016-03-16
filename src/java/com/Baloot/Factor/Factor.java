@@ -74,6 +74,7 @@ public class Factor implements Serializable {
     }
 
     public Double getSumPrice() {
+        System.out.println("here"+ sumPrice);
         return sumPrice;
     }
 

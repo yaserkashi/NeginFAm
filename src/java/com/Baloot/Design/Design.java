@@ -248,6 +248,7 @@ public class Design implements Serializable {
 
     public void downloadUploadedFile() {
         try {            
+            System.out.println("id and attach file is "+ id + attachFile );
             String filename="design"+this.id+this.attachFile;            
             String filePath = "\\web\\resources\\downloadfile";
             FacesContext context = FacesContext.getCurrentInstance();

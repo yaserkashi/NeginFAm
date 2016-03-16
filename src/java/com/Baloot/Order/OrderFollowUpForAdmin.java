@@ -64,16 +64,16 @@ public class OrderFollowUpForAdmin {
     }
 
     public Double getSumPrice() {
-//        if (!(unitPrice == null || number == null)) {
-//            return sumPrice = (unitPrice * number);
-//        }
+        if (unitPrice != null && number != null) {
+            return sumPrice = (unitPrice * number);
+        }
         return sumPrice;
     }
 
     public Double getFinalPrice() {
-//        if (!(unitPrice == null || number == null || off == null)) {
-//            return finalPrice = (unitPrice - (unitPrice * off)) * number;
-//        }
+        if (!(unitPrice == null || number == null || off == null)) {
+            return finalPrice = (unitPrice - (unitPrice * (off / 100))) * number;
+        }
         return finalPrice;
     }
 
@@ -131,6 +131,7 @@ public class OrderFollowUpForAdmin {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
+            selectedOrderAction();
         }
         return selectedOreder;
     }
@@ -182,7 +183,7 @@ public class OrderFollowUpForAdmin {
             factor.setDateTime(currentDate);
             Users user = selectedOreder.getUserId();
             factor.setUserId(user);
-            factor.setSumPrice((unitPrice - (unitPrice * off)) * number);
+            factor.setSumPrice((unitPrice - (unitPrice * (off / 100))) * number);
             factor.setPFactor(true);
             factor.setPayCondition(0);
             if (off != null) {
@@ -256,6 +257,18 @@ public class OrderFollowUpForAdmin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void uploadFile() {
+        try {
+            String fileName="a.jpg";
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");            
+            OrderServices.insertFinalFile(selectedOreder.getId(),fileName);
+            OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.EndOrder.ordinal());
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

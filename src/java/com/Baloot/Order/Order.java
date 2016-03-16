@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Order;
 
 import com.Baloot.Enum.StepsOfOrder;
@@ -38,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Order1.findByOrderDate", query = "SELECT o FROM Order1 o WHERE o.orderDate = :orderDate"),
     @NamedQuery(name = "Order1.findByCondition", query = "SELECT o FROM Order1 o WHERE o.condition = :condition")})
 public class Order implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,22 +55,31 @@ public class Order implements Serializable {
     @Column(name = "condition")
     private Integer condition;
     /*
-    /آیدی برای چک پرداخت آنلاین
-    */
-     @Column(name = "get_id")
+     /آیدی برای چک پرداخت آنلاین
+     */
+    @Column(name = "get_id")
     private Integer get_id;
 
-   
+    /*
+     /آیدی برای چک پرداخت آنلاین
+     */
+    @Size(max = 250)
+    @Column(name = "final_file")
+    private String finalFile;
+
+    
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private Users userId;
- public Integer getGet_id() {
+
+    public Integer getGet_id() {
         return get_id;
     }
 
     public void setGet_id(Integer get_id) {
         this.get_id = get_id;
     }
+
     public Order() {
     }
 
@@ -125,6 +134,15 @@ public class Order implements Serializable {
     public void setUserId(Users userId) {
         this.userId = userId;
     }
+    
+    public String getFinalFile() {
+        return finalFile;
+    }
+
+    public void setFinalFile(String finalFile) {
+        this.finalFile = finalFile;
+    }
+
 
     @Override
     public int hashCode() {
@@ -150,8 +168,10 @@ public class Order implements Serializable {
     public String toString() {
         return "Entity.Order1[ id=" + id + " ]";
     }
+
     /**
      * وضعیت یک سفارش
+     *
      * @return وضعیت سفارش را به صورت یک استرینگ فارسی برمیگرداند
      */
     public String conditionView() {
@@ -170,9 +190,11 @@ public class Order implements Serializable {
         }
         return "نا مشخص";
     }
+
     /**
      * نام فارسی جداول یا همان عنوان فارسی سفارشات
-     * @return یک استرینگ فارسی 
+     *
+     * @return یک استرینگ فارسی
      */
     public String tablePersianName() {
         if (tableName.equals("type")) {

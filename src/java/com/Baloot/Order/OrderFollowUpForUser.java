@@ -65,6 +65,11 @@ public class OrderFollowUpForUser {
     private FactorItem factorItemForSelectedOrder;
 
     public FactorItem getFactorItemForSelectedOrder() {
+        if (factorItemForSelectedOrder == null) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            factorItemForSelectedOrder = (FactorItem) session.getAttribute("factorItemForSelectedOrder");
+        }
         return factorItemForSelectedOrder;
     }
 
@@ -94,6 +99,7 @@ public class OrderFollowUpForUser {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
+            selectedOrderAction();
         }
         return selectedOreder;
     }
@@ -164,6 +170,8 @@ public class OrderFollowUpForUser {
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
             factorItemForSelectedOrder = FactorItemServices.selectFactorItemByOrderId(selectedOreder.getId());
+            HttpSession session1 = SessionBean.getSession();
+            session1.setAttribute("factorItemForSelectedOrder", factorItemForSelectedOrder);
             FacesContext.getCurrentInstance().getExternalContext().redirect("factor.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(OrderFollowUpForUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,17 +197,19 @@ public class OrderFollowUpForUser {
      */
     public String payLink() {
         try {
-             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
             int id = selectedOreder.getId();
             FactorItem item = FactorItemServices.selectFactorItemByOrderId(id);
+            System.out.println(item.getNumber());
             try {
                 PayLine pay = new PayLine();
-
-                String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "http://localhost:12841/neginLast/pages/user/resultPayFactor.xhtml");
+                System.out.println("HERE IS PAY");
+                String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "http://localhost:8080/NeginFAm4/pages/user/resultPayFactor.xhtml");
+                System.out.println(result);
                 if (Integer.parseInt(result) > 0) {
-                    OrderServices.InsertGetId(id, Integer.parseInt(result));
+                    OrderServices.InsertGetId(id, Integer.parseInt(result));                  
                     return "http://payline.ir/payment-test/gateway-" + result;
                 }
             } catch (Exception e) {
@@ -249,13 +259,21 @@ public class OrderFollowUpForUser {
 
     public void yaser() {
         try {
-             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.dissuasion.ordinal());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+    }
+     public void download() {
+        try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

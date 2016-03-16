@@ -67,13 +67,15 @@
                             <p:inputText required="true" requiredMessage="لطفا واحد کالا را بدرستی وارد کنید"
                                          value="#{orderFollowUpForAdmin.unit}" style="width: 60px"/>
                         </p:column>  <p:column>
-                            <p:inputText required="true" requiredMessage="لطفا قیمت کالا را بدرستی وارد کنید"
+                            <p:inputText id="unitPrice" required="true" requiredMessage="لطفا قیمت کالا را بدرستی وارد کنید"
                                          value="#{orderFollowUpForAdmin.unitPrice}" style="width: 60px" />
                         </p:column>  <p:column>
-                            <p:inputText required="true" requiredMessage="لطفا تعداد کالا را بدرستی وارد کنید"
-                                         value="#{orderFollowUpForAdmin.number}" style="width: 60px" />
+                            <p:inputText id="number" required="true" requiredMessage="لطفا تعداد کالا را بدرستی وارد کنید"
+                                         value="#{orderFollowUpForAdmin.number}" style="width: 60px" >
+                                <p:ajax event="blur" process="unitPrice,number" update="sumText"/>
+                            </p:inputText>
                         </p:column>  <p:column>
-                            <h:outputText value="#{orderFollowUpForAdmin.sumPrice}"/>
+                            <p:outputLabel id="sumText" value="#{orderFollowUpForAdmin.sumPrice}"/>
                         </p:column>
                     </p:row>
                     <f:facet name="footer" >
@@ -81,8 +83,10 @@
 
                             <p:column  colspan="2"  style="text-align: right;">
                                 <h:outputText value="   درصد تخفیف" />
-                                <p:inputText required="true" requiredMessage="لطفا درصدتخفیف کالا را بدرستی وارد کنید"
-                                             value="#{orderFollowUpForAdmin.off}" style="width: 45px"/>
+                                <p:inputText id="off" required="true" requiredMessage="لطفا درصدتخفیف کالا را بدرستی وارد کنید"
+                                             value="#{orderFollowUpForAdmin.off}" style="width: 45px">
+                                    <p:ajax event="blur" process="off,sumText" update="final"/>
+                                </p:inputText>
                             </p:column>
 
                             <p:column  colspan="2"  style="text-align: center;">
@@ -90,13 +94,13 @@
 
                             <p:column  colspan="2"  style="text-align: right;">
                                 <h:outputText value="مبلغ نهایی: " />
-                                <h:outputText value="#{orderFollowUpForAdmin.finalPrice}" />   
+                                <h:outputText id="final" value="#{orderFollowUpForAdmin.finalPrice}" />   
                             </p:column>
 
                         </p:row>
                     </f:facet>
                 </p:panelGrid>                
-            <p:commandButton value="ثبت" action="#{orderFollowUpForAdmin.insertNewFactor()}" style="float: left;float: left;background: #4EA2D0"/>
+                <p:commandButton value="ثبت" action="#{orderFollowUpForAdmin.insertNewFactor()}" style="float: left;float: left;background: #4EA2D0"/>
             </p:panelGrid>
             <p:inputText style="" id="idOfOrderForfactor" value="#{orderFollowUpForAdmin.selectedOreder.id}" />
 

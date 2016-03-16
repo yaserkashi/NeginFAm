@@ -93,15 +93,16 @@
                                     <p:outputLabel value="تحویل حضوری " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.design.hasDelevry()}" style="color: red" ></p:outputLabel>                           
                                     <p:outputLabel value="فایل سفارش " ></p:outputLabel>
-                                    <p:outputLabel value="" ></p:outputLabel>
+                                    <h:commandLink actionListener="#{orderFollowUpForUser.design.downloadUploadedFile()}" >
+                                        <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                                    </h:commandLink>
                                     <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="توضیحات " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.design.explain} " style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
                                 <p:panelGrid columns="3" >
-                                    <p:commandButton value="انصراف"  onclick="
-                                            cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
+                                    <p:commandButton value="انصراف"  action="#{orderFollowUpForUser.cancelOrder()}"
                                                      style="float: left ; font-size: 14px ">
                                         <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
@@ -109,7 +110,7 @@
                                             <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                                         </p:confirmDialog>
                                     </p:commandButton>  
-                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="false"
+                                            <p:commandButton value="مشاهده فاکتور"   action="#{orderFollowUpForUser.showFactorForSelectedOrder()}" disabled="false"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px ;"/>
                                     <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
                                                      style="color: #FFF ;background:#0066ff;float:left ; font-size: 14px ;"/>

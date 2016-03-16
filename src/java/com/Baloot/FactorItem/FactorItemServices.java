@@ -79,12 +79,9 @@ public class FactorItemServices {
          try {
              con = DataConnect.getConnection();
              ps = con.prepareStatement("Select * from factor_item where order_id= ?");
-             ps.setInt(1, orderId);
-             ResultSet rs = ps.executeQuery();
-             
+             ps.setInt(1,orderId);
+             ResultSet rs = ps.executeQuery();             
              while (rs.next()) {
-
-                 //factor_id,order_id,unit,numbers,unit_price
                  factorItem.setId(rs.getInt("id"));
                  factorItem.setOrderId(orderId);
                  factorItem.setUnit(rs.getString("unit"));
