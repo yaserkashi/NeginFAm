@@ -63,7 +63,7 @@
             <p:remoteCommand name="showFactor" action="#{orderFollowUpForAdmin.showFactorForSelectedOrder()}" />
             <p:dialog header="سفارش کاربر" position="center" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true" width="60%">
                 <p:outputPanel id="orderDialogPanel" style="text-align:center;">
-                    <h:form id="ss" enctype="multipart/form-data" >
+                    
                         <p:outputPanel  rendered="#{not empty orderFollowUpForAdmin.selectedOreder}">
                             <p:panel rendered="#{orderFollowUpForAdmin.selectedOreder.tableName=='design'}" >
                                 <header>
@@ -198,9 +198,10 @@
                                         <p:outputLabel value="#{orderFollowUpForAdmin.paper.hasOption7()}" style="color: red" ></p:outputLabel>
                                         <p:outputLabel value=" طرح دريافت خدمات " ></p:outputLabel>
                                         <p:outputLabel value="#{orderFollowUpForAdmin.paper.hasOption8()}" style="color: red" ></p:outputLabel>
-
-                                        <p:outputLabel value=" فايل سفارش" ></p:outputLabel>
-                                        <h:outputText value="" />
+                                        <p:outputLabel value=" فایل سفارش" ></p:outputLabel>
+                                        <h:commandLink actionListener="#{orderFollowUpForAdmin.paper.downloadUploadedFile()}" >
+                                            <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                                        </h:commandLink>  
                                         <p:outputLabel value=" وضعيت سفارش" ></p:outputLabel>
                                         <p:outputLabel value="#{orderFollowUpForAdmin.selectedOreder.conditionView()} " style="color: red" ></p:outputLabel> 
                                         <p:outputLabel value="توضيحات "  ></p:outputLabel>
@@ -208,22 +209,20 @@
                                     </p:panelGrid>
 
 
-                                    <p:panelGrid columns="3" >
-                                        <p:commandButton value="انصراف"  onclick="
-                                            cancel([{name: 'msg', value:
-                                                            document.getElementById('idOfOrderForAdmin').value}]);"
-                                                         style="float: left ; font-size: 14px">
-                                            <p:confirm header="هشدار!!" message="از انصراف اطمينان داريد؟"   />
+                                    <p:panelGrid columns="6" >
+                                        <p:commandButton value="انصراف"  action="#{orderFollowUpForAdmin.cancel()}" 
+                                                         style=";float: left ; font-size: 14px ;" disabled="#{ orderFollowUpForAdmin.selectedOreder.condition gt 2}">
+                                            <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
                                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
                                                 <p:commandButton value="بله" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('orderDialog').hide()" />
-                                                <p:commandButton value="خير" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
+                                                <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                                             </p:confirmDialog>
-                                        </p:commandButton>  
-                                        <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value:
-                                                            document.getElementById('idOfOrderForAdmin').value}]);" disabled="false"
-                                                         style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
-                                        <p:commandButton value="آپلود فایل نهایی"  disabled="true"
-                                                         style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
+                                        </p:commandButton>            
+                                        <p:commandButton value="صدور فاکتور"   action="#{orderFollowUpForAdmin.showFactorForSelectedOrder()}" disabled="#{ orderFollowUpForAdmin.selectedOreder.condition gt 1}"
+                                                         style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
+                                        <p:commandButton value="تایید پرداخت"   action="#{orderFollowUpForAdmin.confirm()}" disabled="#{ orderFollowUpForAdmin.selectedOreder.condition lt 2}"
+                                                         style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
+
                                     </p:panelGrid>
                                 </h:body>
                             </p:panel>
@@ -295,8 +294,8 @@
 
                                     <p:panelGrid columns="3">
                                         <p:commandButton value="انصراف"  onclick="
-                                            cancel([{name: 'msg', value:
-                                                            document.getElementById('idOfOrderForAdmin').value}]);"
+                                                cancel([{name: 'msg', value:
+                                                                document.getElementById('idOfOrderForAdmin').value}]);"
                                                          style=";float: left ; font-size: 14px">
                                             <p:confirm header="هشدار!!" message="از انصراف اطمينان داريد؟"   />
                                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
@@ -305,7 +304,7 @@
                                             </p:confirmDialog>
                                         </p:commandButton>  
                                         <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value:
-                                                            document.getElementById('idOfOrderForAdmin').value}]);" disabled="false"
+                                                                document.getElementById('idOfOrderForAdmin').value}]);" disabled="false"
                                                          style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                         <p:commandButton value="آپلود فایل نهایی"  disabled="true"
                                                          style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
@@ -374,8 +373,8 @@
 
                                     <p:panelGrid columns="3" >
                                         <p:commandButton value="انصراف"  onclick="
-                                            cancel([{name: 'msg', value:
-                                                            document.getElementById('idOfOrderForAdmin').value}]);"
+                                                cancel([{name: 'msg', value:
+                                                                document.getElementById('idOfOrderForAdmin').value}]);"
                                                          style=";;float: left ; font-size: 14px">
                                             <p:confirm header="هشدار!!" message="از انصراف اطمينان داريد؟"   />
                                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
@@ -384,7 +383,7 @@
                                             </p:confirmDialog>
                                         </p:commandButton>  
                                         <p:commandButton value="صدور فاکتور"   onclick="showFactor([{name: 'msg', value:
-                                                            document.getElementById('idOfOrderForAdmin').value}]);" disabled="false"
+                                                                document.getElementById('idOfOrderForAdmin').value}]);" disabled="false"
                                                          style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                         <p:commandButton value="آپلود فایل نهایی"  disabled="true"
                                                          style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
@@ -396,7 +395,6 @@
                         </p:outputPanel>
 
 
-                    </h:form>
                 </p:outputPanel>
             </p:dialog>
         </h:body>        

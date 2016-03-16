@@ -3,11 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Paper;
 
 import com.Baloot.Coding.CodingServices;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.faces.context.FacesContext;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +24,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -41,13 +50,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Paper.findByEndDateTime", query = "SELECT p FROM Paper p WHERE p.endDateTime = :endDateTime"),
     @NamedQuery(name = "Paper.findByDate", query = "SELECT p FROM Paper p WHERE p.date = :date")})
 public class Paper implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "group")
+    @Column(name = "groups")
     private Integer group;
     @Column(name = "field")
     private Integer field;
@@ -92,9 +102,11 @@ public class Paper implements Serializable {
     public Integer getGroup() {
         return group;
     }
+
     /**
      * گروه فارسی
-     * @return 
+     *
+     * @return
      */
     public String groupText() {
         if (group != null) {
@@ -102,6 +114,7 @@ public class Paper implements Serializable {
         }
         return "نامشخص";
     }
+
     public void setGroup(Integer group) {
         this.group = group;
     }
@@ -109,6 +122,7 @@ public class Paper implements Serializable {
     public Integer getField() {
         return field;
     }
+
     /**
      * رشته به صورت فارسی
      *
@@ -120,6 +134,7 @@ public class Paper implements Serializable {
         }
         return "نامشخص";
     }
+
     public void setField(Integer field) {
         this.field = field;
     }
@@ -131,7 +146,8 @@ public class Paper implements Serializable {
     public void setOrientationOfField(Integer orientationOfField) {
         this.orientationOfField = orientationOfField;
     }
-/**
+
+    /**
      * گرایش به صورت فارسی
      *
      * @return
@@ -142,6 +158,7 @@ public class Paper implements Serializable {
         }
         return "نامشخص";
     }
+
     public String getOption() {
         return option;
     }
@@ -222,22 +239,26 @@ public class Paper implements Serializable {
     public String toString() {
         return "Entity.Paper[ id=" + id + " ]";
     }
-   /**
- * ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی
- * @return دارد یا ندارد بر میگرداند
- */
+
+    /**
+     * ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption1() {
-        
+
         if (option.charAt(0) == 0) {
             return "ندارد";
         } else {
             return "دارد";
         }
     }
-/**
- *  ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی
- * @return دارد یا ندارد بر میگرداند
- */
+
+    /**
+     * ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption2() {
         if (option.charAt(1) == 0) {
             return "ندارد";
@@ -245,10 +266,13 @@ public class Paper implements Serializable {
             return "دارد";
         }
     }
-/**
- *  ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله 
- * @return دارد یا ندارد بر میگرداند
- */
+
+    /**
+     * ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی
+     * مقاله
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption3() {
         if (option.charAt(2) == 0) {
             return "ندارد";
@@ -257,10 +281,11 @@ public class Paper implements Serializable {
         }
     }
 
-/**
- * ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی
- * @return دارد یا ندارد بر میگرداند
- */
+    /**
+     * ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption4() {
         if (option.charAt(3) == 0) {
             return "ندارد";
@@ -268,10 +293,12 @@ public class Paper implements Serializable {
             return "دارد";
         }
     }
-/**
- *  استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری
- * @return دارد یا ندارد بر میگرداند
- */
+
+    /**
+     * استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption5() {
         if (option.charAt(4) == 0) {
             return "ندارد";
@@ -279,10 +306,12 @@ public class Paper implements Serializable {
             return "دارد";
         }
     }
-/**
- *  استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری 
- * @return دارد یا ندارد بر میگرداند
- */
+
+    /**
+     * استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption6() {
         if (option.charAt(5) == 0) {
             return "ندارد";
@@ -290,34 +319,40 @@ public class Paper implements Serializable {
             return "دارد";
         }
     }
-/**
- *  نگارش مقاله بدون دریافت اطلاعات اولیه
- * @return دارد یا ندارد بر میگرداند
- */
+
+    /**
+     * نگارش مقاله بدون دریافت اطلاعات اولیه
+     *
+     * @return دارد یا ندارد بر میگرداند
+     */
     public String hasOption7() {
-        
+
         if (option.charAt(6) == 0) {
             return "ندارد";
         } else {
             return "دارد";
         }
     }
+
     /**
-     * تحویل حضوری 
+     * تحویل حضوری
+     *
      * @return دارد یا ندارد بر میگرداند
      */
-      public String hasDelevry() {
+    public String hasDelevry() {
         if (!deliveryType) {
             return "ندارد";
         } else {
             return "دارد";
         }
     }
-      /**
-       * نوع متون
-       * @return نوع متون شامل عمومی، تخصصی یا تخصصی وژه را برمیگرداند
-       */
-public String hasOption8() {
+
+    /**
+     * نوع متون
+     *
+     * @return نوع متون شامل عمومی، تخصصی یا تخصصی وژه را برمیگرداند
+     */
+    public String hasOption8() {
         if (option.charAt(7) == 0) {
             return "متون عمومی";
         } else if (option.charAt(7) == 1) {
@@ -325,6 +360,49 @@ public String hasOption8() {
         } else {
             return "متون تخصصی ویژه";
         }
-        
-    } 
+
+    }
+    
+        public void downloadUploadedFile() {
+        try {            
+            System.out.println("id and attach file is "+ id + attachFile );
+            String filename="paper"+this.id+this.attachFile;            
+            String filePath = "\\web\\resources\\downloadfile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;  
+            File file =new File(filePath, filename);
+            FileInputStream stream = new FileInputStream(file);
+            HttpServletResponse response = (HttpServletResponse) context
+                    .getExternalContext().getResponse();
+            response.reset();
+            response.setBufferSize(5120000);
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+            BufferedInputStream input = null;
+            BufferedOutputStream output = null;
+            try {
+                input = new BufferedInputStream(stream);
+                output = new BufferedOutputStream(response.getOutputStream(),
+                        5120000);
+                byte[] buffer = new byte[5120000];
+                int length;
+                while ((length = input.read(buffer)) > 0) {
+                    output.write(buffer, 0, length);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                input.close();
+                output.close();
+            }
+            context.responseComplete();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Paper;
 
 import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
+import com.Baloot.Design.DesignForm;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
 import com.Baloot.Order.Order;
@@ -22,6 +22,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +48,7 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 public class PaperForm {
+
     private Integer group;
     private List<Coding> groups = CodingServices.getCodings(OrderTypesEnum.paper.ordinal(), CombosEnum.group.ordinal());
     private Integer field;
@@ -59,7 +63,7 @@ public class PaperForm {
     private UploadedFile attachFile;
     private List<SelectItem> options;
     private String[] selectedOptions;
-    
+
     @PostConstruct
     public void init() {
         options = new ArrayList<>();
@@ -102,7 +106,7 @@ public class PaperForm {
     public List<Coding> getFields() {
         return fields;
     }
-    
+
     public void setGroup(Integer group) {
         this.group = group;
     }
@@ -114,7 +118,7 @@ public class PaperForm {
     public void setTitle(String title) {
         this.title = title;
     }
-   
+
     public void setExplain(String explain) {
         this.explain = explain;
     }
@@ -178,43 +182,44 @@ public class PaperForm {
     public void setPlan(String plan) {
         this.plan = plan;
     }
-           
+
     public void uploaded() throws Exception {
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
                 submit();
             } catch (IOException ex) {
                 Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else{
+        } else {
             System.out.println(PaperForm.class.getName() + ": eror null file");
-        
+
         }
     }
-    
-    private static void save(String filename, InputStream input) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest httpServletRequest = (HttpServletRequest) context
-                .getExternalContext().getRequest();
-        String path = httpServletRequest.getSession().getServletContext()
-                .getRealPath("/resources/downloadFile/");
+
+    private void save(String filename, InputStream input) {
         try {
-            OutputStream output = new FileOutputStream(new File(path, filename));
-            IOUtils.copy(input, output);
-            
-            System.out.println(PaperForm.class.getName() + "Done!");
+            System.out.println("in save file name is :" + filename);
+            String filePath = "\\web\\resources\\downloadfile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;
+            if (!Files.exists(Paths.get(filePath))) {
+                Files.createDirectories(Paths.get(filePath));
+            }
+            File finalFile = new File(filePath, filename);
+            Files.copy(input, finalFile.toPath());
 
         } catch (IOException e) {
-            System.out.println(PaperForm.class.getName() + e.getMessage());
-        } finally {
-            IOUtils.closeQuietly(input);
+            Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     public void submit() throws Exception {
         System.out.println(PaperForm.class.getName() + ":Submit Function!");
         Paper paper = new Paper();
@@ -227,13 +232,15 @@ public class PaperForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         paper.setDate(currentDate);
-        if (dateTime != null)
+        if (dateTime != null) {
             paper.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
-        else
+        } else {
             paper.setEndDateTime("");
+        }
         paper.setOption(Arrays.toString(selectedOptions) + "," + plan);
-        if(attachFile != null)
-            paper.setAttachFile(attachFile.getFileName());
+        if (attachFile != null) {
+            paper.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
+        }
         paper.setDeliveryType(delivery);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         order.setTableName("paper");
@@ -243,13 +250,15 @@ public class PaperForm {
         try {
             int id = PaperServices.insertRecordIntoTable(paper);
             order.setTableId(id);
+            System.out.println("heree ");
+            save("paper" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             OrderServices.insertRecordIntoTable(order);
-               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
+            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("سفارش شما ثبت شد."));
+                    new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

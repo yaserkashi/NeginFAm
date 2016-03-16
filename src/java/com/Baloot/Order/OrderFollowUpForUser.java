@@ -206,7 +206,7 @@ public class OrderFollowUpForUser {
             try {
                 PayLine pay = new PayLine();
                 System.out.println("HERE IS PAY");
-                String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "http://localhost:8080/NeginFAm4/pages/user/resultPayFactor.xhtml");
+                        String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "http://localhost:12841/NeginFAm4/pages/user/resultPayFactor.xhtml");
                 System.out.println(result);
                 if (Integer.parseInt(result) > 0) {
                     OrderServices.InsertGetId(id, Integer.parseInt(result));                  

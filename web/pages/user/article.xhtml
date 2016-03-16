@@ -15,79 +15,83 @@
                 }
             </style>
         </header>
-        
+
         <h:head>
             <script type="text/javascript"
-                src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
+            src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
             <title>سفارش مقاله</title>
         </h:head>
         <h:body>
+            <h:form enctype="multipart/form-data" styleClass="font">
+
+                <p:messages id="messages"  autoUpdate="true" closable="true" />
+                <p:panelGrid id="panel" columns="2"  styleClass="form border" style="width: 90%">
+                    <f:facet name="header" >
+                        ثبت سفارش مقاله
+                    </f:facet>
+
+                    <p:outputLabel value="انتخاب گروه *"  ></p:outputLabel>
+                    <p:selectOneMenu id="group" value="#{paperForm.group}" styleClass="input">
+                        <f:selectItems value="#{paperForm.groups}" var="group" itemLabel="#{group.text}" itemValue="#{group.id}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="انتخاب رشته *" ></p:outputLabel>
+                    <p:selectOneMenu id="feild" value="#{paperForm.field}" styleClass="input">
+                        <f:selectItems value="#{paperForm.fields}" var="field" itemLabel="#{field.text}" itemValue="#{field.id}"/>
+                    </p:selectOneMenu>            
+
+                    <p:outputLabel value=" انتخاب گرایش*" ></p:outputLabel>
+                    <p:selectOneMenu id="orientation" value="#{paperForm.orientation}" styleClass="input">
+                        <f:selectItems value="#{paperForm.orientations}" var="orientation" itemLabel="#{orientation.text}" itemValue="#{orientation.id}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value=" مایل به انتخاب کدام یک از طرح های زیر برای دریافت خدمات هستید؟ *" ></p:outputLabel>
+                    <p:outputLabel value=" "></p:outputLabel>
+
+                    <p:selectManyCheckbox id="grid2" layout="grid" value="#{paperForm.selectedOptions}"  columns="1">
+                        <f:selectItems value="#{paperForm.options}" />                  
+                    </p:selectManyCheckbox>
+                    <p:outputLabel value=" "></p:outputLabel>
+
+                    <p:selectOneRadio id="console15" columns="3" value="#{paperForm.plan}" >
+                        <f:selectItem itemLabel="متون عمومی" itemValue="0" />
+                        <f:selectItem itemLabel="متون تخصصی" itemValue="1" />
+                        <f:selectItem itemLabel="متون تخصصی ویژه " itemValue="2" />
+
+                    </p:selectOneRadio>
+                    <p:outputLabel value=" " ></p:outputLabel>     
+
+                    <p:outputLabel value=" موضوع*" ></p:outputLabel>
+                    <p:inputText value="#{paperForm.title}" required="true" requiredMessage="لطفا موضوع را مشخص کنید." />     
+
+                    <p:outputLabel value=" توضیحات " ></p:outputLabel>
+                    <p:inputTextarea value="#{paperForm.explain}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
+
+                    <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
+                    <p:selectBooleanCheckbox value="#{paperForm.delivery}"  />
+
+                    <p:outputLabel value=" تاریخ درخواستی *"></p:outputLabel>
+                    <p:calendar value="#{paperForm.dateTime}" style="width:200px;float: right;direction: rtl" required="true" requiredMessage="لطفا  تاریخ درخواستی را مشخص کنید."/>
 
 
-            <p:messages id="messages"  autoUpdate="true" closable="true" />
-            <p:panelGrid id="panel" columns="2"  styleClass="form border" style="width: 90%">
-                <f:facet name="header" >
-                    ثبت سفارش مقاله
-                </f:facet>
 
-                <p:outputLabel value="انتخاب گروه *"  ></p:outputLabel>
-                <p:selectOneMenu id="group" value="#{paperForm.group}" styleClass="input">
-                    <f:selectItems value="#{paperForm.groups}" var="group" itemLabel="#{group.text}" itemValue="#{group.id}"/>
-                </p:selectOneMenu>
+                    <p:outputLabel value="جهت دریافت اطلاعات از طریق ایمیل خود ، علاوه بر چک کردن پوشه inbox ،پوشه spam ایمیل خود را نیز چک کنید.
+                                   ( توجه : در برخی از سرویس دهنده های ایمیل ، به جای نام spam از نام هایی نظیر Bulk , junk استفاده شده است )" 
+                                   ></p:outputLabel>
+                    <p:outputLabel value="" ></p:outputLabel>
+                    <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
+                    <p:fileUpload value="#{paperForm.attachFile}" mode="simple"  required="true" requiredMessage="لطفا فایل  را مشخص کنید."  dragDropSupport="false"
+                                  sizeLimit="100000"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:outputLabel/>
+                    <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
+                                     ajax="false" actionListener="#{paperForm.uploaded}"
+                                     process="@parent"
+                                     update="@form"/>
 
-                <p:outputLabel value="انتخاب رشته *" ></p:outputLabel>
-                <p:selectOneMenu id="feild" value="#{paperForm.field}" styleClass="input">
-                    <f:selectItems value="#{paperForm.fields}" var="field" itemLabel="#{field.text}" itemValue="#{field.id}"/>
-                </p:selectOneMenu>            
 
-                <p:outputLabel value=" انتخاب گرایش*" ></p:outputLabel>
-                <p:selectOneMenu id="orientation" value="#{paperForm.orientation}" styleClass="input">
-                    <f:selectItems value="#{paperForm.orientations}" var="orientation" itemLabel="#{orientation.text}" itemValue="#{orientation.id}"/>
-                </p:selectOneMenu>
-                
-                <p:outputLabel value=" مایل به انتخاب کدام یک از طرح های زیر برای دریافت خدمات هستید؟ *" ></p:outputLabel>
-                <p:outputLabel value=" "></p:outputLabel>
-
-                <p:selectManyCheckbox id="grid2" layout="grid" value="#{paperForm.selectedOptions}"  columns="1">
-                    <f:selectItems value="#{paperForm.options}" />                  
-                </p:selectManyCheckbox>
-                <p:outputLabel value=" "></p:outputLabel>
-                
-                <p:selectOneRadio id="console15" columns="3" value="#{paperForm.plan}" >
-                    <f:selectItem itemLabel="متون عمومی" itemValue="0" />
-                    <f:selectItem itemLabel="متون تخصصی" itemValue="1" />
-                    <f:selectItem itemLabel="متون تخصصی ویژه " itemValue="2" />
-
-                </p:selectOneRadio>
-                <p:outputLabel value=" " ></p:outputLabel>     
-
-                <p:outputLabel value=" موضوع*" ></p:outputLabel>
-                <p:inputText value="#{paperForm.title}"  />     
-
-                <p:outputLabel value=" توضیحات " ></p:outputLabel>
-                <p:inputTextarea value="#{paperForm.explain}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
-
-                <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{paperForm.delivery}"  />
-
-                <p:outputLabel value=" تاریخ و ساعت درخواستی *"></p:outputLabel>
-                <p:calendar value="#{paperForm.dateTime}" style="width:200px;float: right;direction: rtl"/>
-                
-               
-
-                <p:outputLabel value="جهت دریافت اطلاعات از طریق ایمیل خود ، علاوه بر چک کردن پوشه inbox ،پوشه spam ایمیل خود را نیز چک کنید.
-                               ( توجه : در برخی از سرویس دهنده های ایمیل ، به جای نام spam از نام هایی نظیر Bulk , junk استفاده شده است )" 
-                               ></p:outputLabel>
-                <p:outputLabel value="" ></p:outputLabel>
-                
-                 <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
-                <h:form enctype="multipart/form-data" styleClass="font">
-                    <p:fileUpload  value="#{typeForm.attachFile}" mode="simple"/>
-                    <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left" ajax="false" actionListener="#{paperForm.uploaded}"  />
-                </h:form>
-
-            </p:panelGrid>
-            </h:body>
+                </p:panelGrid>
+            </h:form>
+        </h:body>
 
 
     </ui:define>

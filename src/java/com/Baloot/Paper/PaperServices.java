@@ -25,7 +25,7 @@ public class PaperServices {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         int id = 0;
-        String insertTableSQL = "INSERT INTO translate (group,field,orientation_of_field,title,date,end_date_time,explain,option,delivery_type,attach_file) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String insertTableSQL = "INSERT INTO paper (groups,field,orientation_of_field,title,date,end_date_time,explain,option,delivery_type,attach_file) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             dbConnection = DataConnect.getConnection();
@@ -85,7 +85,7 @@ public class PaperServices {
                 paper.setDeliveryType(rs.getBoolean("delivery_type"));
                 paper.setExplain(rs.getString("explain"));
                 paper.setField(rs.getInt("field"));
-                paper.setGroup(rs.getInt("group"));
+                paper.setGroup(rs.getInt("groups"));
                 paper.setOrientationOfField(rs.getInt("orientation_of_field"));
                 paper.setTitle(rs.getString("title"));
                 paper.setOption(rs.getString("option"));
@@ -121,7 +121,7 @@ public class PaperServices {
                 paper.setDeliveryType(rs.getBoolean("delivery_type"));
                 paper.setExplain(rs.getString("explain"));
                 paper.setField(rs.getInt("field"));
-                paper.setGroup(rs.getInt("group"));
+                paper.setGroup(rs.getInt("groups"));
                 paper.setOrientationOfField(rs.getInt("orientation_of_field"));
                 paper.setTitle(rs.getString("title"));
                 paper.setOption(rs.getString("option"));
