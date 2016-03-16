@@ -14,21 +14,27 @@ import com.Baloot.FactorItem.FactorItemServices;
 import com.Baloot.Paper.*;
 import com.Baloot.Translate.*;
 import com.Baloot.Type.*;
-import com.Baloot.User.UserServices;
 import com.Baloot.User.Users;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.io.FilenameUtils;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -58,6 +64,7 @@ public class OrderFollowUpForAdmin {
     private Integer number;
     private Double sumPrice;
     private Double finalPrice;
+    private UploadedFile attachFile;
 
     public OrderFollowUpForAdmin() {
         System.out.println("OrderFollowUpForAdmin CReated");
@@ -124,6 +131,14 @@ public class OrderFollowUpForAdmin {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public UploadedFile getAttachFile() {
+        return attachFile;
+    }
+
+    public void setAttachFile(UploadedFile attachFile) {
+        this.attachFile = attachFile;
     }
 
     public Order getSelectedOreder() {
@@ -258,17 +273,62 @@ public class OrderFollowUpForAdmin {
             e.printStackTrace();
         }
     }
+    
+    public void uploaded(){
+        if (attachFile != null) {
+            FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            uploadFile();
+        } else {
+            System.out.println("eror null file");
+
+        }
+    }
+
+    private void save(String filename, InputStream input) {
+        try {           
+            System.out.println("in save file name is :" + filename);
+            String filePath = "\\web\\resources\\downloadfile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;
+            if (!Files.exists(Paths.get(filePath))) {
+                Files.createDirectories(Paths.get(filePath));
+            }
+            File finalFile = new File(filePath, filename);
+            Files.copy(input, finalFile.toPath());
+
+        } catch (IOException e) {
+            Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 
     public void uploadFile() {
         try {
-            String fileName="a.jpg";
+            String fileName = FilenameUtils.getName(attachFile.getFileName());
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
-            selectedOreder = (Order) session.getAttribute("selectedOreder");            
-            OrderServices.insertFinalFile(selectedOreder.getId(),fileName);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+            save(selectedOreder.getTableName()+selectedOreder.getId()+FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            OrderServices.insertFinalFile(selectedOreder.getId(), fileName);
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.EndOrder.ordinal());
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     public void confirm() {
+        try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
+            OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.ConfirmationPayFactor.ordinal());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("trackOrder.xhtml");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
