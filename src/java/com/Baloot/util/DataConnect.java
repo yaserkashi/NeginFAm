@@ -19,7 +19,7 @@ public class DataConnect {
         try {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection(
-                    "jdbc:postgresql://127.0.0.1:5432/neginfam", "postgres", "1234");
+                    "jdbc:postgresql://127.0.0.1:5432/neginfam?useUnicode=true&amp;characterEncoding=utf-8", "postgres", "1234");         
             return con;
         } catch (Exception ex) {
             System.out.println("Database.getConnection() Error -->"

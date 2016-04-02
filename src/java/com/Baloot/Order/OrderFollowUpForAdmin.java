@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -273,8 +274,8 @@ public class OrderFollowUpForAdmin {
             e.printStackTrace();
         }
     }
-    
-    public void uploaded(){
+
+    public void uploaded() {
         if (attachFile != null) {
             FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -286,7 +287,7 @@ public class OrderFollowUpForAdmin {
     }
 
     private void save(String filename, InputStream input) {
-        try {           
+        try {
             System.out.println("in save file name is :" + filename);
             String filePath = "\\web\\resources\\downloadfile";
             FacesContext context = FacesContext.getCurrentInstance();
@@ -313,14 +314,15 @@ public class OrderFollowUpForAdmin {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
             selectedOreder = (Order) session.getAttribute("selectedOreder");
-            save("final"+selectedOreder.getTableName()+selectedOreder.getId()+FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            save("final" + selectedOreder.getTableName() + selectedOreder.getId() + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             OrderServices.insertFinalFile(selectedOreder.getId(), fileName);
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.EndOrder.ordinal());
         } catch (SQLException | IOException ex) {
             Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public void confirm() {
+
+    public void confirm() {
         try {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
@@ -330,5 +332,10 @@ public class OrderFollowUpForAdmin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void handleFileUpload(FileUploadEvent event) {
+        System.out.println(event.getFile().getFileName());
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }

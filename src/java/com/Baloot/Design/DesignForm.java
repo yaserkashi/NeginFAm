@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,6 +31,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -40,6 +42,10 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 public class DesignForm {
+
+    public DesignForm() {
+        System.out.println("created");
+    }
 
     private Integer designType;
     private List<Coding> designTypes = CodingServices.getCodings(OrderTypesEnum.design.ordinal(), CombosEnum.design_type.ordinal());
@@ -159,12 +165,14 @@ public class DesignForm {
 
     public void upload(FileUploadEvent event) {
         attachFile = event.getFile();
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("attachFile", attachFile);
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-            } catch (IOException ex) {
+                //submit();
+            } catch (Exception ex) {
                 Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -176,7 +184,7 @@ public class DesignForm {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                submit();                
+                submit();
             } catch (IOException ex) {
                 Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -187,7 +195,7 @@ public class DesignForm {
     }
 
     private void save(String filename, InputStream input) {
-        try {           
+        try {
             System.out.println("in save file name is :" + filename);
             String filePath = "\\web\\resources\\downloadfile";
             FacesContext context = FacesContext.getCurrentInstance();
@@ -222,14 +230,21 @@ public class DesignForm {
         design.setPrintType(printType);
         design.setDesignOption(designOption);
         design.setPrintOption(printOption);
-        if (endDate != null) {
-            design.setEndDate(pc.DateToString(pc.getIranianDateFromDate(endDate)));
-        } else {
-            design.setEndDate("");
-        }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+        
+        System.out.println("gvhgvjhgj;gjgjhgkjj;h" + format.format(endDate));
+        String irandate = pc.getStrIranianDateFromDate(endDate);
+        System.out.println("gvhgvjhgj;gjgjhgkjj;h" + irandate);       
+        String pEndDate = "";
+        design.setEndDate(pEndDate);
+        
         design.setExplain(explian);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         design.setUserId(user);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        attachFile = (UploadedFile) session.getAttribute("attachFile");
         if (attachFile != null) {
             design.setAttachFile(attachFile.getFileName());
         }
@@ -241,7 +256,7 @@ public class DesignForm {
         try {
             int id = DesignServices.insertRecordIntoTable(design);
             order.setTableId(id);
-            save("design"+id+FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            save("design" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             OrderServices.insertRecordIntoTable(order);
             com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
