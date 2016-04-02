@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+
+
+
+        <!--value : listy as image ha ke adreseshon ro az DB mikhne-->
+        <!--selection : listy ke bayad jaye ImagesView.image set beshe-->
+        <!--dar vage liste dovom hamone=ie ke to slider neshon mide-->
+        <h:head>
+            <title>آپلود اسلایدر</title>
+        </h:head>
+        <h:body>
+            <p:panelGrid id="thispanel" columns="2"  styleClass="form border"  style="margin: auto;margin-top: 100px;width:50%"> 
+                 <f:facet name="header" >
+                    عکس اسلایدر
+                </f:facet>
+                <h:form enctype="multipart/form-data" > 
+                    <p:messages id="messages"  autoUpdate="true" closable="true" />         
+                    <p:outputLabel value="لطفا فایل که میخواهید برای اسلایدر آپ کنید را انتخاب کنید"/>
+                    <p:fileUpload fileUploadListener="#{imagesForm.upload}" mode="advanced" dragDropSupport="false"
+                                  update="messages" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                </h:form>
+            </p:panelGrid>
+        </h:body>
+    </ui:define>
+</ui:composition>  

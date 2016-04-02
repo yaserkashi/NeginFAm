@@ -17,7 +17,7 @@
         <h:body>
             <p:messages id="messages"  autoUpdate="true" closable="true" />   
             <p:dataGrid var="image" value="#{imagesForm.images}" columns="3" styleClass="dataTable"           
-                        rows="9" paginator="true" id="tb1" rowIndexVar="index" 
+                        rows="12" paginator="true" id="tb1" rowIndexVar="index" 
                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
                         rowsPerPageTemplate="6,12,16">
                 <f:facet name="header">
@@ -28,13 +28,15 @@
                     <h:panelGrid columns="1" style="width:100%">
 
                         <p:graphicImage width="100" height="100"
-                                        value="../../resources/#{image.address}"/>
+                                        value="../../resources/images/slider/#{image.address}"/>
                         <p:selectBooleanCheckbox value="#{image.selected}" />
 
                     </h:panelGrid>
                 </p:panel>
             </p:dataGrid>
             <p:commandButton action="#{imagesForm.submit()}" value="ذخیره" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
+            <p:commandButton action="sliderupload" value="آپلود عکس اسلایدر" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/>
+
         </h:body>
     </ui:define>
 </ui:composition>  
