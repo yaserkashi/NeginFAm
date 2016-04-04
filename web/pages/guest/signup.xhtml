@@ -23,80 +23,74 @@
         <p:messages autoUpdate="true" closable="true"/>
         <p:panelGrid columns="2" id="panel" styleClass="form border" style="float: right;width: 70%;padding: 20px">
             <f:facet name="header">
-                 ثبت نام
-                </f:facet>
-            
-                    <p:outputLabel value="نام کاربری*"/>
-               
-                    <p:inputText id="firstname" value="#{signUp.userName}" required="true" requiredMessage="نام کاربری را وارد کنید."/>
-              
-                
-                    <p:outputLabel value="رمز عبور*"/>
-                
-               
-                    <p:password id="pass1" value="#{signUp.password}" match="pass2" validatorMessage="رمز عبور و تکرار آن مطابقت ندارند." required="true" requiredMessage="رمز عبور را وارد کنید."/>
-                             
-            
-                    <p:outputLabel value="تکرار رمز عبور*"/>
-               
-                    <p:password id="pass2" value="#{signUp.password}" required="true" requiredMessage="رمز عبور را تکرار کنید."/>
-               
-               
-                    <p:outputLabel value="رایانامه*:"/>
-                
-                    <p:inputText id="mail" value="#{signUp.email}" required="true" requiredMessage="رایانامه را وارد کنید."/>
-                           
-         
-                    <p:outputLabel value="نام*"/>
-              
-                    <p:inputText id="name" value="#{signUp.name}"/>
-               
-                    <p:outputLabel value="نام خانوادگی*"/>
-               
-                    <p:inputText value="#{signUp.lastname}"/>
-               
-                    <p:outputLabel value="تلفن*"/>
-              
-                    <p:inputText id="mobile" value="#{signUp.mobile}"/>
-                
-<!--                <p:column>
-                    <p:outputLabel value="نحوه اشنایی با سایت "/>
-                </p:column>
-                <p:column>
-                    <p:inputText value="#{signUp.introduction}"/>
-                </p:column>                -->
-            <h:form prependId="false">
-                        <botDetect:jsfCaptcha id="faceletsExampleCaptcha" 
-                                              binding="#{signUp.captcha}"  />
-                    </h:form>
-                    <p:outputLabel value="کد امنیتی"/>
-                   
-                
-                    <p:inputText id="captcha" value="#{signUp.secCode}"/>
-               
-                    
-                <p:outputLabel value="تمامی قوانین نگین فام راخوانده و قبول دارم"/>
-                    <p:selectBooleanCheckbox value="#{signUp.lowCheck}" ></p:selectBooleanCheckbox>
-                   
-                    
-                    <h:form>
-                     <p:commandButton value="دانلود قوانین سایت"  onclick="PF('rules').show()" style="font-size: 14px;font-weight: normal;background: white;color: red;">
-                    </p:commandButton>
-                        </h:form>
-              
-              
-                    <p:commandButton value="ثبت" update="panel" actionListener="#{signUp.submit()}" ajax="false" style=";float: left;background: #4EA2D0;margin-top: 40px;margin-left: 20px" ></p:commandButton>
-                
-           
+                ثبت نام
+            </f:facet>
+
+            <p:outputLabel value="نام کاربری*"/>
+
+            <p:inputText id="firstname" value="#{signUp.userName}" required="true" requiredMessage="نام کاربری را وارد کنید."/>
+
+
+            <p:outputLabel value="رمز عبور*"/>
+
+
+            <p:password id="pass1" value="#{signUp.password}" match="pass2" validatorMessage="رمز عبور و تکرار آن مطابقت ندارند." required="true" requiredMessage="رمز عبور را وارد کنید."/>
+
+
+            <p:outputLabel value="تکرار رمز عبور*"/>
+
+            <p:password id="pass2" value="#{signUp.password}" required="true" requiredMessage="رمز عبور را تکرار کنید."/>
+
+
+            <p:outputLabel value="رایانامه*:"/>
+
+            <p:inputText id="mail" value="#{signUp.email}" required="true" requiredMessage="رایانامه را وارد کنید."/>
+
+
+            <p:outputLabel value="نام*"/>
+
+            <p:inputText id="name" value="#{signUp.name}"/>
+
+            <p:outputLabel value="نام خانوادگی*"/>
+
+            <p:inputText value="#{signUp.lastname}"/>
+
+            <p:outputLabel value="تلفن*"/>
+
+            <p:inputText id="mobile" value="#{signUp.mobile}"/>
+
+            <p:row>
+                <p:outputLabel value="کد امنیتی"/>
+                <p:graphicImage id="image" value="#{signUp.image}" width="150" height="75" ></p:graphicImage>
+            </p:row>
+
+            <p:inputText id="captcha" value="#{signUp.secCode}"/>
+
+
+            <p:outputLabel value="تمامی قوانین نگین فام راخوانده و قبول دارم"/>
+            <p:row>
+                <p:commandButton id="imageBtn" value="مشاهده قوانین" type="button"  style="font-size: 14px;font-weight: normal;background: white;color: red;" />
+                <p:overlayPanel id="imagePanel" for="imageBtn" showCloseIcon="true"  >
+                    <p:panel style="overflow-y: auto;height: 200px; width: 500px; direction: rtl ">
+                        <ui:include src="/pages/guest/siteRules.xhtml" />
+                    </p:panel>
+                </p:overlayPanel>
+                <p:outputLabel value="    "/>
+                <p:selectBooleanCheckbox value="#{signUp.lowCheck}" ></p:selectBooleanCheckbox>
+            </p:row>
+            <p:outputLabel/>
+            <p:commandButton value="ثبت" update="image" actionListener="#{signUp.submit()}" ajax="false" oncomplete="f();" style=";float: left;background: #4EA2D0;margin-top: 40px;margin-left: 20px" ></p:commandButton>
+
+
         </p:panelGrid>
-        
-        
-          <p:dialog widgetVar="rules" dynamic="true" header="قوانین سایت"
-                  style="direction: rtl" id="dg1"
-                  resizable="false" closable="true" position="center" width="30%">
-               <ui:include src="/pages/guest/siteRules.xhtml" />
-            
-        </p:dialog> 
+        <script>
+            function f() {
+                location.reload();
+            }
+        </script>
+
+
+
     </ui:define>
 </ui:composition>   
 
