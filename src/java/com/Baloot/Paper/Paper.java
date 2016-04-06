@@ -246,12 +246,17 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption1() {
-
-        if (option.contains("1")) {
-            return "ندارد";
-        } else {
-            return "دارد";
+        try {
+            System.out.println(option.contains("1"));
+            if (option.contains("1")) {
+                return "ندارد";
+            } else {
+                return "دارد";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**

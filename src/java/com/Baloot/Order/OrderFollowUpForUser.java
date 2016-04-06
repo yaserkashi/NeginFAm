@@ -206,10 +206,10 @@ public class OrderFollowUpForUser {
             try {
                 PayLine pay = new PayLine();
                 System.out.println("HERE IS PAY");
-                        String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "http://localhost:12841/NeginFAm4/pages/user/resultPayFactor.xhtml");
+                String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "localhost:8080/NeginFAm4/pages/user/resultPayFactor.xhtml");
                 System.out.println(result);
                 if (Integer.parseInt(result) > 0) {
-                    OrderServices.InsertGetId(id, Integer.parseInt(result));                  
+                    OrderServices.InsertGetId(id, Integer.parseInt(result));
                     return "http://payline.ir/payment-test/gateway-" + result;
                 }
             } catch (Exception e) {
@@ -227,7 +227,7 @@ public class OrderFollowUpForUser {
     /**
      * تابع چک پرداخت آنلاین که در لود صفحه باید صدا زده شود
      */
-    public String checkPay() throws SQLException {
+    public String checkPay() {
         try {
             String id_get = null;
             String trans_id = null;
@@ -236,7 +236,9 @@ public class OrderFollowUpForUser {
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
             if (request != null) {
                 id_get = request.getParameter("id_get");
+                System.out.println(id_get);
                 trans_id = request.getParameter("trans_id");
+                System.out.println(id_get);
                 Order order = OrderServices.selectOrderByGetId(Integer.parseInt(id_get));
                 if (order != null) {
                     result = pay.Get("http://payline.ir/payment-test/gateway-result-second", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", trans_id, id_get);
@@ -267,11 +269,12 @@ public class OrderFollowUpForUser {
             e.printStackTrace();
         }
     }
-     public void download() {
+
+    public void download() {
         try {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
-            selectedOreder = (Order) session.getAttribute("selectedOreder");            
+            selectedOreder = (Order) session.getAttribute("selectedOreder");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -362,7 +362,7 @@
                                     </p:commandButton>  
                                     <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="false"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
-                                    <p:commandButton value="دانلود فایل پاسخ"  disabled="true"
+                                    <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 3 }"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                 </p:panelGrid>
                             </h:body>
