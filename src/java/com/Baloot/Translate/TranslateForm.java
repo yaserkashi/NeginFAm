@@ -12,6 +12,7 @@ import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
 import com.Baloot.Order.Order;
 import com.Baloot.Order.OrderServices;
+import com.Baloot.Paper.PaperForm;
 import com.Baloot.Type.TypeForm;
 import com.Baloot.User.Users;
 import com.Baloot.User.UserServices;
@@ -22,6 +23,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +35,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
@@ -152,39 +157,41 @@ public class TranslateForm {
         return attachFile;
     }
     
-    public void uploaded() throws Exception {
+   public void upload(FileUploadEvent event) {
+        attachFile = event.getFile();
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("attachFile", attachFile);
         if (attachFile != null) {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-                submit();
-            } catch (IOException ex) {
-                Logger.getLogger(TranslateForm.class.getName()).log(Level.SEVERE, null, ex);
+                //submit();
+            } catch (Exception ex) {
+                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else{
-            System.out.println("eror null file");
-        
-        }
+
     }
-    
-    private static void save(String filename, InputStream input) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest httpServletRequest = (HttpServletRequest) context
-                .getExternalContext().getRequest();
-        String path = httpServletRequest.getSession().getServletContext()
-                .getRealPath("/resources/downloadFile/");
+
+     private void save(String filename, InputStream input) {
         try {
-            OutputStream output = new FileOutputStream(new File(path, filename));
-            IOUtils.copy(input, output);
-            
-            System.out.println(TranslateForm.class.getName()+":Done!");
+            System.out.println("in save file name is :" + filename);
+            String filePath = "\\web\\resources\\downloadfile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;
+            if (!Files.exists(Paths.get(filePath))) {
+                Files.createDirectories(Paths.get(filePath));
+            }
+            File finalFile = new File(filePath, filename);
+            Files.copy(input, finalFile.toPath());
 
         } catch (IOException e) {
-            System.out.println(TranslateForm.class.getName() + e.getMessage());
-        } finally {
-            IOUtils.closeQuietly(input);
+            Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
@@ -209,7 +216,7 @@ public class TranslateForm {
         return options;
     }
     
-    public void submit() throws Exception {
+    public void submit()  {
         System.out.println(TranslateForm.class.getName()+":Submit Function!");
         Translate translate = new Translate();
         Order order = new Order();
@@ -225,8 +232,13 @@ public class TranslateForm {
         else
             translate.setEndDateTime("");
         translate.setOption(getOption(table, subtable, chart, shape));
-        if(attachFile != null)
-            translate.setAttachFile(attachFile.getFileName());
+         //------------------------------------------
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        attachFile = (UploadedFile) session.getAttribute("attachFile");
+        if (attachFile != null) {
+            translate.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
+        }
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         translate.setUserId(user);
         translate.setDeliveryType(delivery);
@@ -239,7 +251,12 @@ public class TranslateForm {
             int id = TranslateServices.insertRecordIntoTable(translate);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
-               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
+              try {
+                save("trans" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            } catch (IOException ex) {
+                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {

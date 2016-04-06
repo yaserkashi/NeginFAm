@@ -263,7 +263,9 @@
                                     <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.type.hasDelivery()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="فایل سفارش " ></p:outputLabel>
-                                    <p:outputLabel value="" ></p:outputLabel>
+                                    <h:commandLink actionListener="#{orderFollowUpForUser.type.downloadUploadedFile()}" >
+                                        <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                                    </h:commandLink>
                                     <p:outputLabel value="وضعیت سفارش " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.conditionView()}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value=" توضیحات " ></p:outputLabel>
@@ -318,7 +320,7 @@
                                     <h:outputText value="شماره سفارش" />
                                     <p:outputLabel value="#{orderFollowUpForUser.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>  
                                     <h:outputText value="زمینه" />
-                                    <h:outputLabel value="" />
+                                    <h:outputLabel value="#{orderFollowUpForUser.translate.fieldText()}"  style="color: red"/>
                                     <p:outputLabel value="تاریخ و ساعت درخواستی "  ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.translate.endDateTime}" style="color: red" ></p:outputLabel>
                                     <p:outputLabel value="تاریخ ثبت سفارش " ></p:outputLabel>
@@ -335,8 +337,10 @@
                                     <p:outputLabel value="#{orderFollowUpForUser.translate.hasOption3()}" style="color: red" ></p:outputLabel>
                                     <h:outputText value= "نمودار ها رسم شوند" />
                                     <p:outputLabel value="#{orderFollowUpForUser.translate.hasOption4()}" style="color: red" ></p:outputLabel>
-                                    <h:outputText value="فایل سفارش" />
-                                    <h:outputText value="" />
+                                    <p:outputLabel value="فایل سفارش " ></p:outputLabel>
+                                    <h:commandLink actionListener="#{orderFollowUpForUser.translate.downloadUploadedFile()}" >
+                                        <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                                    </h:commandLink>
                                     <h:outputText value="تحویل حضوری " />
                                     <p:outputLabel value="#{orderFollowUpForUser.translate.hasDelivery()}" style="color: red" ></p:outputLabel>
                                     <h:outputText value="وضعیت سفارش" />

@@ -247,7 +247,7 @@ public class Paper implements Serializable {
      */
     public String hasOption1() {
 
-        if (option.charAt(0) == 0) {
+        if (option.contains("1")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -260,7 +260,7 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption2() {
-        if (option.charAt(1) == 0) {
+        if (option.contains("2")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -274,7 +274,7 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption3() {
-        if (option.charAt(2) == 0) {
+        if (option.contains("3")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -287,7 +287,7 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption4() {
-        if (option.charAt(3) == 0) {
+        if (option.contains("4")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -300,7 +300,7 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption5() {
-        if (option.charAt(4) == 0) {
+        if (option.contains("5")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -313,7 +313,7 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption6() {
-        if (option.charAt(5) == 0) {
+        if (option.contains("6")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -326,8 +326,7 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption7() {
-
-        if (option.charAt(6) == 0) {
+        if (option.contains("7")) {
             return "ندارد";
         } else {
             return "دارد";
@@ -362,11 +361,11 @@ public class Paper implements Serializable {
         }
 
     }
-    
-        public void downloadUploadedFile() {
-        try {            
-            System.out.println("id and attach file is "+ id + attachFile );
-            String filename="paper"+this.id+this.attachFile;            
+
+    public void downloadUploadedFile() {
+        try {
+            System.out.println("id and attach file is " + id + attachFile);
+            String filename = "paper" + this.id + this.attachFile;
             String filePath = "\\web\\resources\\downloadfile";
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest httpServletRequest = (HttpServletRequest) context
@@ -374,8 +373,8 @@ public class Paper implements Serializable {
             String stringPath = httpServletRequest.getSession().getServletContext()
                     .getRealPath("/");
             Path path = Paths.get(stringPath);
-            filePath = path.getParent().getParent().toString() + filePath;  
-            File file =new File(filePath, filename);
+            filePath = path.getParent().getParent().toString() + filePath;
+            File file = new File(filePath, filename);
             FileInputStream stream = new FileInputStream(file);
             HttpServletResponse response = (HttpServletResponse) context
                     .getExternalContext().getResponse();

@@ -9,7 +9,15 @@ package com.Baloot.Translate;
 import com.Baloot.Coding.CodingServices;
 import com.Baloot.User.Users;
 import com.Baloot.util.UtilForDecode;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.faces.context.FacesContext;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +29,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -256,6 +266,49 @@ public class Translate implements Serializable {
     @Override
     public String toString() {
         return "Entity.Translate[ id=" + id + " ]";
+    }
+    
+    public void downloadUploadedFile() {
+        try {
+            System.out.println("id and attach file is " + id + attachFile);
+            String filename = "trans" + this.id + this.attachFile;
+            String filePath = "\\web\\resources\\downloadfile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;
+            File file = new File(filePath, filename);
+            FileInputStream stream = new FileInputStream(file);
+            HttpServletResponse response = (HttpServletResponse) context
+                    .getExternalContext().getResponse();
+            response.reset();
+            response.setBufferSize(5120000);
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+            BufferedInputStream input = null;
+            BufferedOutputStream output = null;
+            try {
+                input = new BufferedInputStream(stream);
+                output = new BufferedOutputStream(response.getOutputStream(),
+                        5120000);
+                byte[] buffer = new byte[5120000];
+                int length;
+                while ((length = input.read(buffer)) > 0) {
+                    output.write(buffer, 0, length);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                input.close();
+                output.close();
+            }
+            context.responseComplete();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }

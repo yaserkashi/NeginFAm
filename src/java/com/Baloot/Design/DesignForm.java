@@ -258,7 +258,7 @@ public class DesignForm {
             order.setTableId(id);
             save("design" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             OrderServices.insertRecordIntoTable(order);
-            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
+//            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("سفارش شما ثبت شد."));
             FacesContext.getCurrentInstance().getExternalContext().redirect("succes.xhtml");

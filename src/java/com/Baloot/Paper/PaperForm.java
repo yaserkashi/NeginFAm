@@ -38,8 +38,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -67,20 +69,20 @@ public class PaperForm {
     @PostConstruct
     public void init() {
         options = new ArrayList<>();
-        options.add(new SelectItem(" ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی",
-                " ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی"));
-        options.add(new SelectItem(" ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی",
-                " ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی"));
-        options.add(new SelectItem(" ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله ",
-                " ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله "));
-        options.add(new SelectItem("ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی",
-                "ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی"));
-        options.add(new SelectItem(" استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری",
-                " استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری"));
-        options.add(new SelectItem(" استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری ",
-                " استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری "));
-        options.add(new SelectItem(" نگارش مقاله بدون دریافت اطلاعات اولیه",
-                " نگارش مقاله بدون دریافت اطلاعات اولیه"));
+        options.add(new SelectItem(
+                "1"," ادیت علمی، نگارشی و مفهومی مقالات فارسی به شیوه نامه مجلات داخلی"));
+        options.add(new SelectItem("2"," ساب میت و گرفتن اکسپت مقاله فارسی در مجلات داخلی"
+                ));
+        options.add(new SelectItem("3"," ترجمه فارسی به انگلیسی و ادیت علمی، گرامری، نگارشی و مفهومی متن انگلیسی مقاله "
+                ));
+        options.add(new SelectItem("4","ساب میت و گرفتن پذیرش مقاله انگلیسی از ژورنال های بین المللی"
+                ));
+        options.add(new SelectItem("5"," استخراج مقاله فارسی از پایان نامه کارشناسی ارشد یا دکتری"
+                ));
+        options.add(new SelectItem( "6"," استخراج مقاله انگلیسی از پایان نامه کارشناسی ارشد یا دکتری "
+               ));
+        options.add(new SelectItem("7"," نگارش مقاله بدون دریافت اطلاعات اولیه"
+                ));
     }
 
     public List<SelectItem> getOptions() {
@@ -185,20 +187,31 @@ public class PaperForm {
 
     public void uploaded() throws Exception {
         if (attachFile != null) {
-            try {
-                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                submit();
-            } catch (IOException ex) {
-                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             System.out.println(PaperForm.class.getName() + ": eror null file");
 
         }
     }
+    
+    public void upload(FileUploadEvent event) {
+        attachFile = event.getFile();
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("attachFile", attachFile);
+        if (attachFile != null) {
+            try {
+                FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                //submit();
+            } catch (Exception ex) {
+                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
-    private void save(String filename, InputStream input) {
+    }
+
+     private void save(String filename, InputStream input) {
         try {
             System.out.println("in save file name is :" + filename);
             String filePath = "\\web\\resources\\downloadfile";
@@ -216,11 +229,11 @@ public class PaperForm {
             Files.copy(input, finalFile.toPath());
 
         } catch (IOException e) {
-            Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-    public void submit() throws Exception {
+    public void submit()  {
         System.out.println(PaperForm.class.getName() + ":Submit Function!");
         Paper paper = new Paper();
         Order order = new Order();
@@ -238,9 +251,14 @@ public class PaperForm {
             paper.setEndDateTime("");
         }
         paper.setOption(Arrays.toString(selectedOptions) + "," + plan);
+        //------------------------------------------
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        attachFile = (UploadedFile) session.getAttribute("attachFile");
         if (attachFile != null) {
             paper.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
         }
+        //----------------------------
         paper.setDeliveryType(delivery);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         order.setTableName("paper");
@@ -251,9 +269,14 @@ public class PaperForm {
             int id = PaperServices.insertRecordIntoTable(paper);
             order.setTableId(id);
             System.out.println("heree ");
-            save("paper" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            //----------------------
+            try {
+                save("paper" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+            } catch (IOException ex) {
+                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             OrderServices.insertRecordIntoTable(order);
-            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
+//            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("سفارش شما ثبت شد."));
         } catch (SQLException ex) {

@@ -17,8 +17,8 @@
         </header>
 
         <h:head>
-              <script type="text/javascript"
-                src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
+            <script type="text/javascript"
+            src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
             <title>سفارش ترجمه</title>
         </h:head>
         <h:body>
@@ -51,11 +51,7 @@
 
 
                 <h:outputText value="موضوع*" />
-                <h:inputText value="#{translateForm.title}"  style="font-weight: bold;" required="true" />
-
-
-
-
+                <h:inputText value="#{translateForm.title}" required="true" requiredMessage="لطفا موضوع را مشخص کنید."  style="font-weight: bold;"  />
 
 
                 <h:outputText value="ترجمه جداول انجام شود" />
@@ -76,22 +72,24 @@
 
 
                 <h:outputText value="توضیحات" />
-                <p:inputTextarea value="#{translateForm.explain}" style="font-weight: bold" required="true" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
+                <p:inputTextarea value="#{translateForm.explain}" style="font-weight: bold" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
 
                 <h:outputText value="تحویل حضوری " />
                 <p:selectBooleanCheckbox value="#{translateForm.delivery}" />
 
-                <h:outputText value="آپلود فایل*" />
-                <h:form enctype="multipart/form-data" >
-                    <p:fileUpload value="#{translateForm.attachFile}" mode="simple"/>
-                    <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left" ajax="false" actionListener="#{translateForm.uploaded}"  />
-                </h:form>
-
-                <p:outputLabel value="" ></p:outputLabel>
+                <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
+                <p:fileUpload fileUploadListener="#{translateForm.upload}" mode="advanced" dragDropSupport="false"
+                              update="messages" auto="true" sizeLimit="10000000" fileLimit="3" 
+                              required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                <p:outputLabel/> 
+                <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
+                                 ajax="false" actionListener="#{translateForm.submit()}"
+                                 process="@parent"
+                                 update="@form"/>
 
             </p:panelGrid>
 
-           
+
 
         </h:body>
 

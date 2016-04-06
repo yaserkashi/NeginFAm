@@ -80,11 +80,12 @@
                                    ></p:outputLabel>
                     <p:outputLabel value="" ></p:outputLabel>
                     <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
-                    <p:fileUpload value="#{paperForm.attachFile}" mode="simple"  required="true" requiredMessage="لطفا فایل  را مشخص کنید."  dragDropSupport="false"
-                                  sizeLimit="100000"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:outputLabel/>
+                    <p:fileUpload fileUploadListener="#{paperForm.upload}" mode="advanced" dragDropSupport="false"
+                                  update="messages" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:outputLabel/> 
                     <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
-                                     ajax="false" actionListener="#{paperForm.uploaded}"
+                                     ajax="false" actionListener="#{paperForm.submit()}"
                                      process="@parent"
                                      update="@form"/>
 
