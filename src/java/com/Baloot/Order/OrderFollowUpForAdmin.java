@@ -275,17 +275,6 @@ public class OrderFollowUpForAdmin {
         }
     }
 
-    public void uploaded() {
-        if (attachFile != null) {
-            FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            uploadFile();
-        } else {
-            System.out.println("eror null file");
-
-        }
-    }
-
     private void save(String filename, InputStream input) {
         try {
             System.out.println("in save file name is :" + filename);
@@ -309,7 +298,7 @@ public class OrderFollowUpForAdmin {
     }
 
     public void upload(FileUploadEvent event) {
-        attachFile = event.getFile();       
+        attachFile = event.getFile();
         if (attachFile != null) {
             uploadFile();
         }
@@ -326,7 +315,7 @@ public class OrderFollowUpForAdmin {
             OrderServices.insertFinalFile(selectedOreder.getId(), fileName);
             OrderServices.updateCondition(selectedOreder.getId(), StepsOfOrder.EndOrder.ordinal());
             FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (SQLException | IOException ex) {
             Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
