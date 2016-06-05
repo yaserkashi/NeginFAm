@@ -58,7 +58,6 @@ public final class SignUp {
     private String answer;
     private Captcha captcha;
     private StreamedContent image;
-    private Boolean newfirst;
 
     public SignUp() {
 //        generateNewCaptcha();
@@ -166,7 +165,9 @@ public final class SignUp {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         String a = (String) session.getAttribute("ans");
+        System.out.println("a is "+a+"seccode is "+secCode);
         if (!(a.equals(secCode))) {
+            System.out.println("eshtebah code amniati");
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("signup.xhtml?faces-redirect=true");
                 FacesContext.getCurrentInstance().addMessage(null,
@@ -183,6 +184,7 @@ public final class SignUp {
                     new FacesMessage("کاربری با این رایانامه در سایت ثبت نام کرده است!"));
         } else {
             try {
+                System.out.println("shoroe sabt");
                 Users user = new Users();
                 user.setName(name);
                 user.setFamily(lastname);
@@ -190,32 +192,60 @@ public final class SignUp {
                 user.setUsername(userName);
                 user.setPasword(password);
                 user.setPhoneNum(mobile);
-                UserServices.insertRecordIntoTable(user);
+                UserServices.insertRecordIntoTable(user);                
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("ثبت نام شما با موفقیت انجام شد."));
 //                HttpSession session = SessionBean.getSession();
-                session.setAttribute("username", userName);
+                session.setAttribute("username", userName);                
+                 FacesContext.getCurrentInstance().getExternalContext().redirect("signupsucces.xhtml");
+//                 signUpLogin(userName, password);
                 return "/pages/user/user.xhtml";
             } catch (SQLException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("eroor dar sabt");
+            } catch (IOException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return "/";
     }
+    
+    public void signUpLogin(String user,String pwd) {
+        Integer valid = UserServices.validate(user, pwd);
+        switch (valid) {
+            case 0 : {
+                FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "نام کاربری و رمز عبور اشتباه",
+                            "لطفا رمزعبور و نام کاربری درست را وارد کنید."));
+                
+            }
+          case 1 : {
+                HttpSession session = SessionBean.getSession();
+                session.setAttribute("username", user);
+              
+            }
+            case 2 : {
+                HttpSession session = SessionBean.getSession();
+                session.setAttribute("username", user);
+              
+            }
+        }
+       
+    }
 
     public void generateNewCaptcha() {
         try {
-
             captcha = CaptchaUtil.generateNewCaptcha();
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             ImageIO.write(captcha.getImage(), "png", os);
             image = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");
             HttpSession session = SessionBean.getSession();
             answer = captcha.getAnswer();
-            session.setAttribute("ans", answer);
-            newfirst = false;
-            System.out.println("answer =.... " + answer);
-
+            session.setAttribute("ans", answer);            
+            System.out.println("in generate answer =.... " + answer);
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("image");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

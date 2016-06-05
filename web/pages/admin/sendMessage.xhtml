@@ -16,78 +16,81 @@
             </style>
         </header>
         <!--<h:form id="form">--> 
-         <h:head>
-           
+        <h:head>
+
             <title>ارسال پیام به اعضا</title>
         </h:head>
         <h:body>
-        <p:messages autoUpdate="true"/>
-        <p:panelGrid id="panel" columns="2" styleClass="panel border" style="width: 70%;float: right">
-            <f:facet name="header">
-           ارسال پیام به کاربران
-        </f:facet>
-            <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" style="float: right">
-                <f:selectItem itemLabel="ایمیل" itemValue="#{true}" />
-                <f:selectItem itemLabel="تلفن" itemValue="#{false}" />
-                <f:selectItem itemLabel="صندوق پیام" itemValue="#{false}" />
-            </p:selectOneRadio>
-            <h:outputText value="نوع پیام"  style="float: right"/>
-            <h:inputText id="selectedStr" value="#{sendMessageFromAdmin.selectedStr}" style="font-weight: bold;width: 320px;float: right" required="true" />
-            <p:commandButton value="انتخاب مخاطب"  onclick="PF('multiUserserDialog').show()" style="width: 130px;float: right" />
-
-            <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;float: right"/>
-            <h:outputText value="موضوع" style="float: right"/>
-
-            <p:inputTextarea value="#{sendMessageFromAdmin.text}" style="font-weight: bold;float: right" required="true" requiredMessage="متن پیام را وارد نکرده اید." rows="5" cols="30" maxlength="1000" counterTemplate="{0} characters remaining." autoResize="false" />
-            <h:outputText value="پیام" style="float: right"/>
-             <p:commandButton action="#{sendMessageFromAdmin.submit()}"  value="ذخیره"  style=";float: left;background: #4EA2D0"/>
-
-        </p:panelGrid>
-
-        <p:dialog widgetVar="multiUserserDialog" dynamic="true"
-                  style="direction:rtl"
-                  header="انتخاب مخاطب" resizable="false" closable="true" position="center" width="56%">
-            <!--            <p:dataTable id="basicDT" var="user" value="" 
-                                     styleClass="dataTable"                       
-                                     selection="rowKey="">
-                            <f:facet name="header">
-                               انتخاب مخاطب
-                            </f:facet>
-                            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                            
-                            <p:column headerText="نام مخاطب">
-                                <h:outputText value="]" />
-                            </p:column>                               
-                        </p:dataTable>-->
-            <p:dataTable id="checkboxDT" var="car" value="#{usersManagement.list}" selection="#{sendMessageFromAdmin.selected}" rowKey="#{car.id}" style="margin-bottom:0">
+            <p:messages autoUpdate="true"/>
+            <p:panelGrid id="panel" columns="2" styleClass="panel border" style="width: 70%;float: right">
                 <f:facet name="header">
-                    Checkbox
+                    ارسال پیام به کاربران
                 </f:facet>
-                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                <p:column headerText="Id">
-                    <h:outputText value="#{car.id}" />
-                </p:column>
-                <p:column headerText="Year">
-                    <h:outputText value="#{car.username}" />
-                </p:column>
+                <p:selectOneRadio value="#{sendMessageFromAdmin.type}" id="m" style="float: right">
+                    <f:selectItem itemLabel="ایمیل" itemValue="#{true}" />
+                    <f:selectItem itemLabel="تلفن" itemValue="#{false}" />
+                    <f:selectItem itemLabel="صندوق پیام" itemValue="#{false}" />
+                </p:selectOneRadio>
+                <h:outputText value="نوع پیام"  style="float: right"/>
+                <h:inputText id="selectedStr" value="#{sendMessageFromAdmin.selectedStr}" style="font-weight: bold;width: 320px;float: right" required="true" />
+                <p:commandButton value="انتخاب مخاطب"  onclick="PF('multiUserserDialog').show()" style="width: 130px;float: right" />
 
-                <f:facet name="footer">
-                    <p:commandButton process="checkboxDT" update=":adminform:selectedStr" icon="ui-icon-search" value="View" oncomplete="PF('multiUserserDialog').hide()" />
-                </f:facet>
-            </p:dataTable>
-            <p:dialog header="Selected Cars" widgetVar="multiCarDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false" width="200">
-                <p:outputPanel id="multiCarDetail" style="text-align:center;">
-                    <ui:repeat value="#{sendMessageFromAdmin.selected}" var="car">
-                        <h:outputText value="#{car.id} - #{car.name}" style="display:block"/>
-                    </ui:repeat>
-                </p:outputPanel>
+                <h:inputText value="#{sendMessageFromAdmin.title}" style="font-weight: bold;width: 320px;float: right"/>
+                <h:outputText value="موضوع" style="float: right"/>
+
+                <p:inputTextarea value="#{sendMessageFromAdmin.text}" style="font-weight: bold;float: right" required="true" requiredMessage="متن پیام را وارد نکرده اید." rows="5" cols="30" maxlength="1000" counterTemplate="{0} characters remaining." autoResize="false" />
+                <h:outputText value="پیام" style="float: right"/>
+                <p:commandButton action="#{sendMessageFromAdmin.submit()}"  value="ذخیره"  style=";float: left;background: #4EA2D0"/>
+
+            </p:panelGrid>
+
+            <p:dialog widgetVar="multiUserserDialog" dynamic="true"
+                      style="direction:rtl"
+                      header="انتخاب مخاطب" resizable="false" closable="true" position="center" width="56%">
+                <!--            <p:dataTable id="basicDT" var="user" value="" 
+                                         styleClass="dataTable"                       
+                                         selection="rowKey="">
+                                <f:facet name="header">
+                                   انتخاب مخاطب
+                                </f:facet>
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                
+                                <p:column headerText="نام مخاطب">
+                                    <h:outputText value="]" />
+                                </p:column>                               
+                            </p:dataTable>-->
+                <p:dataTable id="checkboxDT" var="car" value="#{usersManagement.list}" selection="#{sendMessageFromAdmin.selected}" rowKey="#{car.id}" style="margin-bottom:0">
+                    <f:facet name="header">
+                        مخاطب پیام
+                    </f:facet>
+                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                   
+                    <p:column headerText="نام">
+                        <h:outputText value="#{car.username}" />
+                    </p:column>
+                     <p:column headerText="ایمیل">
+                        <h:outputText value="#{car.email}" />
+                    </p:column>
+                     <p:column headerText="موبایل">
+                         <h:outputText value="#{car.phoneNum}" />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton process="checkboxDT" update=":adminform:selectedStr" style="background: #4EA2D0" value="انتخاب" oncomplete="PF('multiUserserDialog').hide()" />
+                    </f:facet>
+                </p:dataTable>
+<!--                <p:dialog header="Selected Cars" widgetVar="multiCarDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false" width="200">
+                    <p:outputPanel id="multiCarDetail" style="text-align:center;">
+                        <ui:repeat value= var="car">
+                            <h:outputText value="" style="display:block"/>
+                        </ui:repeat>
+                    </p:outputPanel>
+                </p:dialog>-->
+<!--                <p:commandButton value="ذخیره" update=":adminform:selectedStr" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/> -->
             </p:dialog>
-            <p:commandButton value="ذخیره" update=":adminform:selectedStr" icon="ui-icon-start" style="margin-top: 30px;margin-left: 100px;background: #4EA2D0"/> 
-        </p:dialog>
-        <!--</p:dialog>-->
+            <!--</p:dialog>-->
 
-       
-        <!--</h:form>-->
+
+            <!--</h:form>-->
         </h:body>
     </ui:define>
 </ui:composition>  

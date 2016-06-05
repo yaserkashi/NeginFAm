@@ -70,9 +70,13 @@
                 <p:outputLabel value="#{employmentList.selected.bankName}" style="color: red" ></p:outputLabel>
 
                 <p:outputLabel value="مشاهده کارت ملی"/>
-                <p:commandButton icon="ui-icon-document"/>
+                <h:commandLink actionListener="#{employmentList.selected.downloadImage()}" >
+                    <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                </h:commandLink>
                 <p:outputLabel value="مشاهده عکس" />
-                <p:commandButton icon="ui-icon-document"/>
+                <h:commandLink actionListener="#{employmentList.selected.downloadImage()}" >
+                    <p:graphicImage value="../../resources/images/download2.png" width="48" title="دانلود فایل مشتری "/>                                        
+                </h:commandLink>
             </p:panelGrid>
         </p:outputPanel>
     </h:body>

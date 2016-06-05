@@ -259,8 +259,12 @@ public class TranslateForm {
 //               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("سفارش شما ثبت شد."));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("succes.xhtml");
+            
         } catch (SQLException ex) {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TranslateForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

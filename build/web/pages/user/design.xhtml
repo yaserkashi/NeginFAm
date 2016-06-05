@@ -18,83 +18,102 @@
             </style>
         </header>
         <h:head>
-              <script type="text/javascript"
-                src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
+            <script type="text/javascript"
+            src="../../resources/js/jquery.ui.datepicker-cc.all.min.js"></script>
             <title>سفارش طراحی</title>
         </h:head>
-        <h:body>
-
-           <p:messages id="messages"  autoUpdate="true" closable="true" />
-            <p:panelGrid id="panel" columns="2" style="float: right" styleClass="form border" >
-                <f:facet name="header" >
-                    فرم طراحی
-                </f:facet>
-
-                <p:outputLabel value="نوع طراحی *" ></p:outputLabel>
-                <p:selectOneMenu id="lang" value="#{designForm.designType}" styleClass="input">
-                    <f:selectItems value="#{designForm.designTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
-                </p:selectOneMenu>
-
+        <h:body>    
+            <h:form enctype="multipart/form-data" styleClass="font">
+                <p:messages id="messages"  autoUpdate="true" closable="true" />
+                <p:panelGrid id="panel" columns="2" style="float: right;width: 90%" styleClass="form border" >
+                    <f:facet name="header" >
+                        فرم طراحی
+                    </f:facet>
+                    <p:outputLabel value="نوع طراحی *" ></p:outputLabel>
+                    <p:selectOneMenu id="lang" value="#{designForm.designType}" styleClass="input">
+                        <f:selectItems value="#{designForm.designTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                    </p:selectOneMenu>
 
 
-                <p:outputLabel value="سایز*" ></p:outputLabel>
-                <p:selectOneMenu id="feild" value="#{designForm.size}" styleClass="input">
-                    <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
-                </p:selectOneMenu> 
 
+                    <p:outputLabel value="سایز*" ></p:outputLabel>
+                    <p:selectOneMenu id="feild" value="#{designForm.size}" styleClass="input">
+                        <f:selectItems value="#{designForm.sizes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.text}"/>
+                    </p:selectOneMenu> 
 
 
 
 
-                <p:outputLabel value="سایزدلخواه" ></p:outputLabel>
-                <p:inputText value="#{designForm.optionalSize}"   />
-                
-                <p:outputLabel value="" ></p:outputLabel>
-                <p:outputLabel value="  توجه: در صورت انتخاب سایز دلخواه، سایز قبلی درنظر گرفته نخواهد شد" style="font-size: 12px;color: red" ></p:outputLabel>
-                
+
+                    <p:outputLabel value="سایزدلخواه" ></p:outputLabel>
+                    <p:inputText value="#{designForm.optionalSize}"   />
 
 
-                <p:outputLabel value="رنگ چاپ*" ></p:outputLabel>
-                <p:selectOneMenu id="feild1" value="#{designForm.printType}" styleClass="input" >
-                    <f:selectItems value="#{designForm.printTypes}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
-                </p:selectOneMenu>  
+                    <p:outputLabel value="" ></p:outputLabel>
+                    <p:outputLabel value="  توجه: در صورت انتخاب سایز دلخواه، سایز قبلی درنظر گرفته نخواهد شد" style="font-size: 12px;color: red" ></p:outputLabel>
 
-                <p:outputLabel value="نوع چاپ*" ></p:outputLabel>
-                <p:selectOneMenu id="feild2" value="#{designForm.designOption}" styleClass="input" >
-                    <f:selectItems value="#{designForm.designOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
+                    <p:outputLabel value="رنگ چاپ" ></p:outputLabel>
+                    <p:selectOneMenu id="feild1" value="#{designForm.printType}" styleClass="input" >
+                        <f:selectItem  itemLabel="آیتم اول" itemValue="1"/>
+                        <f:selectItem  itemLabel="آیتم دوم" itemValue="2"/>
+                        <f:selectItem  itemLabel="آیتم سوم" itemValue="3"/>
+                    </p:selectOneMenu>  
 
-                </p:selectOneMenu>            
-
-
-
-                <p:outputLabel value="مشخصات چاپ*" ></p:outputLabel> 
-                <p:selectOneMenu id="feild3" value="#{designForm.printOption}" styleClass="input">
-                    <f:selectItems value="#{designForm.printOptions}" var="coding" itemLabel="#{coding.text}" itemValue="#{coding.id}"/>
-
-                </p:selectOneMenu>
-
-
-                <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" ></p:outputLabel>
-                <p:inputTextarea value="#{designForm.explian}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
-
-                <p:outputLabel value=" تاریخ و ساعت درخواستی *" ></p:outputLabel>
-                <p:calendar value="#{designForm.endDate}" />
+                    <p:outputLabel value="نوع چاپ" ></p:outputLabel>
+                    <p:selectOneMenu id="feild2" value="#{designForm.designOption}" styleClass="input" >
+                        <f:selectItem  itemLabel="آیتم اول" itemValue="1"/>
+                        <f:selectItem  itemLabel="آیتم دوم" itemValue="2"/>
+                        <f:selectItem  itemLabel="آیتم سوم" itemValue="3"/>
+                    </p:selectOneMenu>            
 
 
 
+                    <p:outputLabel value="مشخصات چاپ" ></p:outputLabel> 
+                    <p:selectOneMenu id="feild3" value="#{designForm.printOption}" styleClass="input">
+                        <f:selectItem  itemLabel="آیتم اول" itemValue="1"/>
+                        <f:selectItem  itemLabel="آیتم دوم" itemValue="2"/>
+                        <f:selectItem  itemLabel="آیتم سوم" itemValue="3"/>
+                    </p:selectOneMenu>
 
-                <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
 
 
+                    <p:outputLabel value=" توضیحات به تایپیست یا صفحه آرا" ></p:outputLabel>
+                    <p:inputTextarea required="true" requiredMessage="توضیحات را باید وارد کنید ." value="#{designForm.explian}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
 
-                <h:form enctype="multipart/form-data" >
-                    <p:fileUpload value="#{designForm.attachFile}" mode="simple"/>
+                    <p:outputLabel value=" تاریخ درخواستی *" ></p:outputLabel>
+                    <p:calendar value="#{designForm.endDate}" dir="ltr"
+                                pattern="yyyy/mm/dd" style="width:200px;float: right;direction: rtl" 
+                                required="true" requiredMessage="لطفا  تاریخ درخواستی را مشخص کنید."/>
 
-                    <p:commandButton value="Submit" ajax="false" actionListener="#{designForm.uploaded}"  />
-                </h:form>
-                <p:outputLabel value="" ></p:outputLabel>
-            </p:panelGrid>
-           
+                    <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
+                    <p:commandButton value="آپلود" oncomplete="PF('upload').show();" />
+
+                    <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
+                                     actionListener="#{designForm.submit()}"
+                                     process="@parent"
+                                     update="@form"/>
+                </p:panelGrid>
+
+                <p:dialog widgetVar="upload" width="500" height="500" >
+                    <h:form enctype="multipart/form-data" id="formUp">
+                        <p:messages id="message" closable="true"/>
+                        <p:panelGrid columns="1" style="float: right;margin-top: 50px;direction: rtl;width: 70%" styleClass="form border">
+                            <f:facet name="header">
+                                <h:outputText value="آپلود"  /> 
+                            </f:facet>                  
+                            <p:fileUpload fileUploadListener="#{designForm.upload}" mode="advanced" dragDropSupport="false"
+                                          update="message" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                          required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            <p:outputLabel/> 
+                            <p:commandButton  oncomplete="PF('upload').hide();"
+                                              process="@parent"
+                                              update="@form"                
+                                              value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </h:form>
+
         </h:body>
     </ui:define>
 </ui:composition> 

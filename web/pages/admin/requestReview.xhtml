@@ -10,13 +10,10 @@
             <title>بررسی درخواست های استخدام</title>
         </h:head>
         <h:body>
-
             <p:dataTable value="#{employmentList.list}" var="empl" id="listofEmpl"
                          rowKey="#{empl.id}"
                          style="direction: rtl" styleClass="form"
-                         >
-                <!--                <p:ajax event="rowSelect" oncomplete="PF('list').show()" process="listofEmpl"
-                                        update=":adminform:panelview,:adminform:selectedEmpl"/>                -->
+                         >              
                 <f:facet name="header">
                     لیست
                 </f:facet>

@@ -298,10 +298,14 @@ public class OrderFollowUpForAdmin {
     }
 
     public void upload(FileUploadEvent event) {
-        attachFile = event.getFile();
+        try {
+              attachFile = event.getFile();
         if (attachFile != null) {
             uploadFile();
         }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }     
 
     }
 

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Employment;
 
 import com.Baloot.util.DataConnect;
@@ -19,6 +18,7 @@ import java.util.List;
  * @author FK
  */
 public class EmploymentServices {
+
     public static void insertRecordIntoTable(Employment empl) throws SQLException {
 
         Connection dbConnection = null;
@@ -72,18 +72,41 @@ public class EmploymentServices {
         }
 
     }
-    
+
+    public static void updateUpload(Employment e,Integer id) {
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        String updateTableSQL = "UPDATE public.employment SET image =?,birth_certificate =? WHERE id = ?";
+
+        try {
+            dbConnection = DataConnect.getConnection();
+            preparedStatement = dbConnection.prepareStatement(updateTableSQL);
+
+            preparedStatement.setString(1, e.getImage());
+            preparedStatement.setString(2, e.getBirthCertificate());
+            preparedStatement.setInt(3, id);
+
+            // execute insert SQL stetement
+            preparedStatement.executeUpdate();
+            System.out.println("upload updated in DBOrder table!");
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        } 
+    }
+
     public static List<Employment> getALLEmployments() {
         Connection con = null;
         PreparedStatement ps;
         List<Employment> list = new ArrayList<>();
- 
+
         try {
             con = DataConnect.getConnection();
             ps = con.prepareStatement("Select * from employment");
- 
+
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Employment empl = new Employment();
                 empl.setId(rs.getInt("id"));

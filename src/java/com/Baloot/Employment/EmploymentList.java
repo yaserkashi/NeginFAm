@@ -6,8 +6,12 @@
 
 package com.Baloot.Employment;
 
+import com.Baloot.Order.Order;
+import com.Baloot.util.SessionBean;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,10 +31,17 @@ public class EmploymentList {
     }
 
     public Employment getSelected() {
+        if (selected == null) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            selected = (Employment) session.getAttribute("selected");        
+        }
         return selected;
     }
 
     public void setSelected(Employment selected) {
+         HttpSession session = SessionBean.getSession();
+        session.setAttribute("selected", selected);
         this.selected = selected;
     }
     

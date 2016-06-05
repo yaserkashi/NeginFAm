@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      template="../../template/signuptemplate.xhtml">
-
-
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <h:outputStylesheet library="css" name="style.css"/>
         <link href="../resources/css/style.css"/>
-        <link href="../resources/css/styles.css"/>
-        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-        <script src="../resources/js/script.js"></script>
+        <f:facet name="first">
+            <meta content='test/html; charset=UTF-8' http-equiv="Content-Type" />
+        </f:facet>
 
         <style type="text/css">
             .ui-panelgrid > * > tr,
@@ -28,7 +26,39 @@
                 direction: rtl !important;
                 margin-right: 5px;
             }
+            .ui-menuitem-text {
+                float: right;
+            }
+            .ui-panelmenu .ui-icon {
+                display: inline-block;
+                float: right;
+            }
+            .ui-panelgrid .ui-panelgrid-header {
+                text-align: center;
+                padding: 4px 10px;
+                height: 40px;
 
+            }ّ
+            header .ui-icon {
+                position: absolute;
+                right: 0.5em;
+                top: 50%;
+                margin-top: -8px;
+            }
+            .ui-panelmenu .ui-panelmenu-header a {
+                display: block;
+                font-size: 1em;
+                padding: 0.5em 1.7em 0.5em 2.2em;
+            }
+            .ui-panelmenu .ui-panelmenu-header .ui-icon {
+                position: absolute;
+                right:  0.5em;
+                top: 50%;
+                margin-top: -8px;
+            }
+            .ui-menuitem-text {
+                float: right  !important;
+            }
             .ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-text {
                 margin-left: 0.4em;
                 float: right;
@@ -43,12 +73,12 @@
                 padding: 0.3em 0px;
                 width: 100%;
                 border-width: 1px 0px;
-                padding: 3px -1px 3px 15px;
+                padding: 3px;
             }
-            .ui-icon-triangle-1-e {
-                background-position: -95px -16px;
-            }
-               .ui-dialog {
+
+
+
+            .ui-dialog {
                 position: fixed;
                 padding: 0;
                 overflow: hidden;
@@ -117,31 +147,33 @@
                 display: none !important;
             }
 
- 
+
 
             #nav {
                 background-color: #222;
             }
-            #nav *{
-                z-index: 9999;
-            }
 
             #nav_wrapper > ul > li:first-child {
-                margin-right: 10px;
+                width: 18%;
+                padding: 0px 0%;
+                border-left: none;
+                min-width: 210px;
             }
 
-
-            .ui-panelgrid .ui-panelgrid-header {
-                text-align: center;
-                padding: 4px 10px;
-                height: 40px;
-
-            }ّ
+            #nav_wrapper > ul > li:first-child > a {
+                font: -moz-info; 
+                font-family: BYekan,'BYekan',tahoma;
+                text-transform: uppercase;
+                text-align:center;
+                color: #FFFFFF;
+                font-size:120%;
+                padding-top: 4px;
+            }
+            +
 
             #nav_wrapper {
 
                 margin: 0 auto;
-                padding: 3px;
 
             }
             #nav ul {
@@ -151,6 +183,7 @@
                 position: relative;
                 //min-width: 200px;
                 direction:rtl;
+                z-index: 100;
             }
             #nav ul li {
                 display: inline-block;
@@ -183,28 +216,7 @@
 
 
             }
-            .ui-galleria {
-                overflow: hidden;
-                width:99.85% !important;
-                visibility: visible;
-                position: relative;
 
-            }
-            .ui-galleria-caption {
-                position: absolute;
-                left: 1px;
-                background-color: rgba(0,0,0,0.5);
-                display: none !important;
-                color: #FFFFFF;
-                padding: 0.2em 1em;
-            }
-
-            .ui-galleria-filmstrip-wrapper {
-                overflow: hidden;
-                margin: 5px auto;
-                position: relative;
-                display: none;
-            }
 
             #nav ul ul  .submenu {
                 display: none !important;
@@ -225,17 +237,160 @@
             #nav ul ul li a:hover {
                 color: #699;
             }
+            #cssmenu,
+            #cssmenu ul,
+            #cssmenu li,
+            #cssmenu a {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                list-style: none;
+                font-weight: normal;
+                text-decoration: none;
+                line-height: 1;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: small;
+
+            }
+            #cssmenu a {
+                line-height: 1.3;
+            }
+
+            #cssmenu {
+                width: 100%;
+                float:right;
+                direction:rtl;
+
+            }
+            #cssmenu > ul > li > ul > li > a > span  {
+                padding-right:40px;
+                ont: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 13px;
+
+            }
+
+            #cssmenu > ul > li {
+                margin: 0 0 2px 0;
+            }
+            #cssmenu > ul > li:last-child {
+                margin: 0;
+            }
+
+            #cssmenu > ul > li:first-child {
+                margin-top: 20px;
+            }
+            #cssmenu > ul > li > a {
+                font-size: 15px;
+                display: block;
+                color: #ffffff;
+                text-shadow: 0 1px 1px #000;
+                background: #354a5f;
+
+            }
+            #cssmenu > ul > li > a > span {
+                display: block;
+                border: 1px solid #354a5f;
+                padding: 6px 10px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                //font-weight: bold;
+                padding-right:33px;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 14px;
+
+            }
+            #cssmenu > ul > li > a:hover {
+                text-decoration: none;
+
+            }
+            #cssmenu > ul > li.active {
+                border-bottom: none;
+            }
+            #cssmenu > ul > li.active > a {
+                background: #000;
+                color: #fff;
+                text-shadow: 0 1px 1px #000;
+            }
+            #cssmenu > ul > li.active > a span {
+                border: 1px solid #000;
+            }
+            #cssmenu > ul > li.has-sub > a span {
+                background: url(images/icon_plus.png) 98% center no-repeat;
+                padding-right:33px;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 14px;
+            }
+            #cssmenu > ul > li.has-sub.active > a span {
+                background: url(images/icon_minus.png) 98% center no-repeat;
+                padding-right:33px;
+
+            }
+            /* Sub menu */
+            #cssmenu ul ul {
+                padding: 5px 12px;
+                display: none;
+            }
+            #cssmenu ul ul li {
+                padding: 3px 0;
+            }
+            #cssmenu ul ul a {
+                display: block;
+                color: #fff;
+                font-size: 14px !important;
+                //font-weight: bold;
+            }
+            #cssmenu ul ul a:hover {
+            }
+            #cssmenu ul > li.has-sub > a span {
+                background: url(../../resources/images/icon_plus.png) 98% center no-repeat; 
+                padding-right: 33px;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 14px;
+            }
+
+
+
+
+            #cssmenu ul > li.has-sub > a span {
+                background: url(../../resources/images/icon_plus.png) 98% center no-repeat; 
+                padding-right: 33px;
+                font: -moz-info;
+                font-family: BYekan,'BYekan',tahoma;
+                font-size: 14px;
+            }
+
+
+            #cssmenu > ul > li.has-sub.active > a span {
+                background: url(../../resources/images/icon_minus.png) 98% center no-repeat;
+                padding-right: 33px;
+            }
+
+            #footer tr{
+                background-color: #222 !important;
+                color: #FFFFFF;
+            }
+
+            #footer td{
+                border:none !important;
+            }
+
         </style>
         <link rel="SHORTCUT ICON" href="#{resource['images:logo.jpg']}"/>
         <ui:insert name="header">
             <ui:include src="/template/commonContent.xhtml"/>
         </ui:insert>
     </h:head>
-    <h:body style="background-color:  #e3e3e3" >
-        <h:form prependId="false" >
+    <h:body style="background-color:  #e3e3e3">
+        <h:form enctype="multipart/form-data" id="signupForm" prependId="false" acceptcharset="UTF-8" >
             <div id="header" class="header">
                 <div class="logo">
-                    <p:graphicImage style="height: inherit;min-height: 70px"
+                    <p:graphicImage style="height: inherit;"
                                     url="/resources/images/ac.jpg"></p:graphicImage>
                 </div>
                 <div class="company">
@@ -244,16 +399,16 @@
 
                 </div>
 
-
-
-
-
             </div>
 
             <div id="nav">
+
+
+
                 <div id="nav_wrapper">
                     <ul>
-
+                        <li><a href="#">گروه تبلیغاتی طیف</a>
+                        </li>
                         <li> <a href="/NeginFAm4/index.xhtml">صفحه اصلی</a>
                         </li>
                         <li> <a href="#">خدمات ترجمه</a>
@@ -305,33 +460,33 @@
                         </li>
                         <li> <a href="/NeginFAm4/pages/guest/contactus.xhtml">تماس با ما</a>
                         </li>
-                          <li style="float: left;font-size: 16px !important;padding-left: 70px"  >
+                        <li style="float: left;margin-left: 70px;" >
                             <a href="" >#{login.user}</a>
-                             <ul>
-                                 <li ><a href="/NeginFAm4/pages/user/index1.xhtml">خانه ی من</a>
+                            <ul>
+                                <li ><a href="/NeginFAm4/pages/user/index1.xhtml">خانه ی من</a>
                                 </li>
                                 <li ><a href="/NeginFAm4/pages/user/profile.xhtml">مشخصات فردی</a>
                                 </li>
-                                 
-                                 <li ><a href="">خروج از سایت</a>
+
+                                <li ><a href="">خروج از سایت</a>
                                 </li>
-                               
-                               
+
+
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="content">
 
-                <div class="maincontentPanel">
+
+            <div class="content">
+                <div class="contentPanel">
                     <ui:insert name="content">
                         <ui:include src="/template/commonContent.xhtml"/>
                     </ui:insert>
                 </div>
-
-                <div class="sidePanel">
+                <div  class="sidePanel" >
                     <ui:insert name="sidePanel">
                         <ui:include src="/template/commonContent.xhtml"/>
                         <div style="width:100%;;padding-top: 5px; background: #fff" class="border">
@@ -341,23 +496,23 @@
                                                 url="/resources/images/sign2.jpg"></p:graphicImage>
 
                             </h:link>
-                            
-                              <h:link outcome="/pages/guest/contactus.xhtml?faces-redirect=true" >
+
+                            <h:link outcome="/pages/guest/contactus.xhtml?faces-redirect=true" >
 
                                 <p:graphicImage width="90%" style="padding-right: 15px;margin-top: 12px;border-radius: 7%"
                                                 url="/resources/images/ertebat.jpg"></p:graphicImage>
 
                             </h:link>
 
-<!--                            <p:panelGrid columns="1" styleClass="border"  style="background: #fff !important" >
-                                <f:facet name="header">
-                                    با ما تماس بگیرید
-                                </f:facet>
-                                <h:link outcome="/pages/guest/contactus.xhtml?faces-redirect=true" >
-                                <p:graphicImage  style="width: 100%;"
-                                                 url="/resources/images/us.jpg"></p:graphicImage>
-                                </h:link>
-                            </p:panelGrid>-->
+                            <!--                            <p:panelGrid columns="1" styleClass="border"  style="background: #fff !important" >
+                                                            <f:facet name="header">
+                                                                با ما تماس بگیرید
+                                                            </f:facet>
+                                                            <h:link outcome="/pages/guest/contactus.xhtml?faces-redirect=true" >
+                                                            <p:graphicImage  style="width: 100%;"
+                                                                             url="/resources/images/us.jpg"></p:graphicImage>
+                                                            </h:link>
+                                                        </p:panelGrid>-->
 
 
 
@@ -402,29 +557,66 @@
                         </div>
                     </ui:insert>
                 </div>
-
+                <!--                 <footer>
+                                      <div class="footer" style=";text-align: center;z-index: 2" >
+                                          <p:panelGrid id="footer" columns="1" style="width: 100%;" >
+                                                    <p:outputLabel  >
+                                                        آدرس: تهران، خیابان پیروزی، خیابان پرستار، کوچه مریم شرقی، پلاک16، واحد 2 
+                                                    </p:outputLabel>
+                                                    <p:outputLabel style="text-align: center;">
+                                                        تمامی خدمات این سایت، حسب مورد دارای مجوزهای لازم از مراجع مربوطه می‌باشند و فعالیت‌های این سایت تابع قوانین و مقررات جمهوری اسلامی ایران است
+                                                    </p:outputLabel>
+                                                    <p:outputLabel >
+                                                       . تمامی حقوق این وب سایت برای گروه طیف  محفوظ می باشد
+                                                    </p:outputLabel>
+                            
+                                                </p:panelGrid> 
+                                            </div>
+                                        </footer>-->
             </div>
-            
-<!--             <footer>
-                      <div class="footer" style=";text-align: center;" >
-                                <p:panelGrid columns="1" style="width: 100%;" >
-                                    <p:outputLabel  >
-                                        آدرس: تهران، خیابان پیروزی، خیابان پرستار، کوچه مریم شرقی، پلاک16، واحد 2 
-                                    </p:outputLabel>
-                                    <p:outputLabel style="text-align: center;">
-                                        تمامی خدمات این سایت، حسب مورد دارای مجوزهای لازم از مراجع مربوطه می‌باشند و فعالیت‌های این سایت تابع قوانین و مقررات جمهوری اسلامی ایران است
-                                    </p:outputLabel>
-                                    <p:outputLabel >
-                                       . تمامی حقوق این وب سایت برای گروه طیف  محفوظ می باشد
-                                    </p:outputLabel>
-            
-                                </p:panelGrid> 
-                            </div>
-                        </footer>-->
-
-
 
         </h:form>
+
+
+        <!--<script src="/resources/js/jquery-2.1.4.min" type="text/javascript"></script>-->
+
+<!--        <script type="text/javascript">
+            (function($) {
+                $(document).ready(function() {
+                    $('#cssmenu > ul > li > a').click(function() {
+                        $('#cssmenu li').removeClass('active');
+                        $(this).closest('li').addClass('active');
+                        var checkElement = $(this).next();
+                                if ((checkElement.is('ul')) & amp; & amp; (checkElement.is(':visible'))
+                                ) {
+                        $(this).closest('li').removeClass('active');
+                        checkElement.slideUp('normal');
+                        }
+                        if ((checkElement.is('ul')) & amp; & amp; (!checkElement.is(':visible'))
+                        ) {
+                        $('#cssmenu ul ul:visible').slideUp('normal');
+                        checkElement.slideDown('normal');
+                        }
+                        if ($(this).closest('li').find('ul').children().length === 0) {
+                            return true;
+                        } else {
+                        return false;
+                    }
+                    });
+                });
+            })(jQuery);
+        </script>                           
+        <script type="text/javascript">
+            (function($) {
+                $(document).ready(function() {
+                    var h = $(document).height() / 2 - 80;
+                    var hsp = $(document).height() - 250;
+                    $("#footer").css("margin-top", h);
+                    $(".usersidePanel").css("height", hsp);
+
+                });
+            })(jQuery);
+        </script>-->
     </h:body>
 
 </html>

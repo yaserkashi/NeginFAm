@@ -13,6 +13,11 @@
                     border-color: inherit;
                     padding: 4px 10px;
                 }
+
+                #p_commandButtonid{
+                    background: #4EA2D0;
+                    float: left;
+                }
             </style>
         </header>
 
@@ -22,8 +27,7 @@
             <title>سفارش مقاله</title>
         </h:head>
         <h:body>
-            <h:form enctype="multipart/form-data" styleClass="font">
-
+            <h:form  styleClass="font">
                 <p:messages id="messages"  autoUpdate="true" closable="true" />
                 <p:panelGrid id="panel" columns="2"  styleClass="form border" style="width: 90%">
                     <f:facet name="header" >
@@ -71,26 +75,41 @@
                     <p:selectBooleanCheckbox value="#{paperForm.delivery}"  />
 
                     <p:outputLabel value=" تاریخ درخواستی *"></p:outputLabel>
-                    <p:calendar value="#{paperForm.dateTime}" style="width:200px;float: right;direction: rtl" required="true" requiredMessage="لطفا  تاریخ درخواستی را مشخص کنید."/>
-
-
-
+                    <p:calendar value="#{paperForm.dateTime}" dir="ltr"
+                                pattern="yyyy/mm/dd" style="width:200px;float: right;direction: rtl" 
+                                required="true" requiredMessage="لطفا  تاریخ درخواستی را مشخص کنید."/>
                     <p:outputLabel value="جهت دریافت اطلاعات از طریق ایمیل خود ، علاوه بر چک کردن پوشه inbox ،پوشه spam ایمیل خود را نیز چک کنید.
                                    ( توجه : در برخی از سرویس دهنده های ایمیل ، به جای نام spam از نام هایی نظیر Bulk , junk استفاده شده است )" 
                                    ></p:outputLabel>
                     <p:outputLabel value="" ></p:outputLabel>
                     <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
-                    <p:fileUpload fileUploadListener="#{paperForm.upload}" mode="advanced" dragDropSupport="false"
-                                  update="messages" auto="true" sizeLimit="10000000" fileLimit="3" 
-                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:commandButton value="آپلود" oncomplete="PF('upload').show();" />
                     <p:outputLabel/> 
-                    <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
-                                     ajax="false" actionListener="#{paperForm.submit()}"
-                                     process="@parent"
-                                     update="@form"/>
+                    <p:commandButton value="ذخیره" id="p_commandButtonid"
+                                     actionListener="#{paperForm.submit()}"                                    
+                                     />
 
 
                 </p:panelGrid>
+
+                <p:dialog widgetVar="upload" width="500" height="500" >
+                    <h:form enctype="multipart/form-data" id="formUp">
+                        <p:messages id="message" closable="true"/>
+                        <p:panelGrid columns="1" style="float: right;margin-top: 50px;direction: rtl;width: 70%" styleClass="form border">
+                            <f:facet name="header">
+                                <h:outputText value="آپلود"  /> 
+                            </f:facet>                  
+                            <p:fileUpload fileUploadListener="#{paperForm.upload}" mode="advanced" dragDropSupport="false"
+                                          update="message" label="آپلود" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                          required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            <p:commandButton  oncomplete="PF('upload').hide();"
+                                              process="@parent"
+                                              update="@form"                
+                                              value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+
             </h:form>
         </h:body>
 

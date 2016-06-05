@@ -15,128 +15,142 @@
                 }
             </style>
         </header>
-
         <h:head>
             <title>استخدام مترجم</title>
-        </h:head>
-       
+        </h:head>       
 
-            <p:messages autoUpdate="true"/>
+
+        <h:form>
+
+            <p:messages id="messages" autoUpdate="true" closable="true"/>
             <p:panelGrid columns="1" style="float: right;margin-top: 50px;direction: rtl;width: 70%" styleClass="form border">
-            <p:panelGrid columns="2" style="float: right;;direction: rtl;width: 100%" styleClass="">
-                <f:facet name="header">
-                    <h:outputText value="اطلاعات شخصی"  /> 
-                </f:facet>
+                <p:panelGrid columns="2" style="float: right;;direction: rtl;width: 100%" styleClass="">
+                    <f:facet name="header">
+                        <h:outputText value="اطلاعات شخصي"  /> 
+                    </f:facet>
 
-                <h:outputText value="نام*"  />
-                
-                <h:inputText value="#{employmentForm.name}" style="font-weight: bold" required="true" requiredMessage="نام را وارد نکرده اید."/>
+                    <h:outputText value="نام*"  />
 
-                <h:outputText value="نام خانوادگی*"  />
-                
-                <h:inputText value="#{employmentForm.lastName}" style="font-weight: bold" required="true" requiredMessage="نام خانوادگی را وارد نکرده اید."/>
+                    <h:inputText value="#{employmentForm.name}" style="font-weight: bold" required="true" requiredMessage="نام را وارد نکرده ايد."/>
 
-                <h:outputText value="جنسیت*"  />
-               
-                <p:selectOneRadio id="console15" value="#{employmentForm.sex}" required="true" requiredMessage="جنسیت را وارد نکرده اید.">
-                    <f:selectItem itemLabel="مرد" itemValue="men" />
-                    <f:selectItem itemLabel="زن" itemValue="woman" />
-                </p:selectOneRadio>
+                    <h:outputText value="نام خانوادگي*"  />
 
-                <h:outputText value="پست الکترونیکی*"  />
-              
-                <h:inputText value="#{employmentForm.email}" style="font-weight: bold" required="true" requiredMessage="پست الکترونیکی را وارد نکرده اید."/>
+                    <h:inputText value="#{employmentForm.lastName}" style="font-weight: bold" required="true" requiredMessage="نام خانوادگي را وارد نکرده ايد."/>
 
-                <h:outputText value="شماره موبایل*"  />
-                
-                <h:inputText value="#{employmentForm.mobile}" style="font-weight: bold" required="true" requiredMessage="شماره موبایل را وارد نکرده اید."/>
+                    <h:outputText value="جنسيت*"  />
 
-                <h:outputText value="تلفن ثابت*"  />
-                
-                <h:inputText value="#{employmentForm.phone}" style="font-weight: bold" required="true" requiredMessage="شماره تلفن را وارد نکرده اید."/>
+                    <p:selectOneRadio id="console15" value="#{employmentForm.sex}" required="true" requiredMessage="جنسيت را وارد نکرده ايد.">
+                        <f:selectItem itemLabel="مرد" itemValue="men" />
+                        <f:selectItem itemLabel="زن" itemValue="woman" />
+                    </p:selectOneRadio>
 
-                <h:outputText value="آدرس محل سکونت*"  />
-                
-                <h:inputTextarea value="#{employmentForm.address}" style="font-weight: bold" required="true" requiredMessage="آدرس را وارد نکرده اید."/>
+                    <h:outputText value="پست الکترونيکي*"  />
 
-                <h:outputText value="کدملی ده رقمی*"  />
-               
-                <h:inputText value="#{employmentForm.nationalCode}" style="font-weight: bold" required="true" requiredMessage="کد ملی را وارد نکرده اید."/>
+                    <h:inputText value="#{employmentForm.email}" style="font-weight: bold" required="true" requiredMessage="پست الکترونيکي را وارد نکرده ايد."/>
 
-                <h:outputText value="ایا توانایی ترجمه همزمان را دارید؟"  />
-               
-                <p:selectOneRadio value="#{employmentForm.onlineTranslate}" id="console17" >
-                    <f:selectItem itemLabel="بله" itemValue="yes" />
-                    <f:selectItem itemLabel="خیر" itemValue="no" />
-                </p:selectOneRadio>
+                    <h:outputText value="شماره موبايل*"  />
 
-                <h:outputText value="سوابق نحصیلی و کاری مرتبط با ترجمه*"  />
-               
-                <h:inputTextarea value="#{employmentForm.records}" style="font-weight: bold" required="true" requiredMessage="سوابق را وارد نکرده اید."/>
+                    <h:inputText value="#{employmentForm.mobile}" style="font-weight: bold" required="true" requiredMessage="شماره موبايل را وارد نکرده ايد."/>
 
+                    <h:outputText value="تلفن ثابت*"  />
+
+                    <h:inputText value="#{employmentForm.phone}" style="font-weight: bold" required="true" requiredMessage="شماره تلفن را وارد نکرده ايد."/>
+
+                    <h:outputText value="آدرس محل سکونت*"  />
+
+                    <h:inputTextarea value="#{employmentForm.address}" style="font-weight: bold" required="true" requiredMessage="آدرس را وارد نکرده ايد."/>
+
+                    <h:outputText value="کدملي ده رقمي*"  />
+
+                    <h:inputText value="#{employmentForm.nationalCode}" style="font-weight: bold" required="true" requiredMessage="کد ملي را وارد نکرده ايد."/>
+
+                    <h:outputText value="ايا توانايي ترجمه همزمان را داريد؟"  />
+
+                    <p:selectOneRadio value="#{employmentForm.onlineTranslate}" id="console17" >
+                        <f:selectItem itemLabel="بله" itemValue="yes" />
+                        <f:selectItem itemLabel="خير" itemValue="no" />
+                    </p:selectOneRadio>
+
+                    <h:outputText value="سوابق نحصيلي و کاري مرتبط با ترجمه*"  />
+
+                    <h:inputTextarea value="#{employmentForm.records}" style="font-weight: bold" required="true" requiredMessage="سوابق را وارد نکرده ايد."/>
+
+                </p:panelGrid>
+                <p:panelGrid columns="4" style="float: right;direction: rtl;margin-top: 20px;width: 100%"  styleClass="">
+
+                    <f:facet name="header">
+                        <h:outputText value="اخرين مدارک تحصيلي"  /> 
+                    </f:facet>
+                    <h:outputText value="رشته تحصيلي"  />
+                    <h:outputText value="مقطع"  />
+                    <h:outputText value="دانشگاه/اموزشگاه"  />
+                    <h:outputText value="معدل"  />
+
+                    <h:inputText value="#{employmentForm.lastEducationField}" style="font-weight: bold;width: 120px" required="true" requiredMessage="رشته تحصيلي را وارد نکرده ايد."/>
+                    <h:inputText  style="font-weight: bold;width: 100px" />
+                    <h:inputText value="#{employmentForm.lastEducationUniversity}" style="font-weight: bold;width: 120px" required="true" requiredMessage="دانشگاه محل تحصيل را وارد نکرده ايد."/>
+                    <h:inputText value="#{employmentForm.lastEducationAverage}" style="font-weight: bold;width: 100px" required="true" requiredMessage="معدل را وارد نکرده ايد."/>
+                </p:panelGrid>
+                <p:panelGrid columns="2" style="float: right;direction: rtl;margin-top: 20px;width: 100%" styleClass="" >
+                    <f:facet name="header">
+                        <h:outputText value="مهارت"  /> 
+                    </f:facet>
+                    <h:outputText value="زبان هاي ترجمه"  />
+                    <p:selectManyCheckbox id="grid2" layout="grid" value="#{employmentForm.selectedLanguages}"  columns="3">
+                        <f:selectItems value="#{employmentForm.languages}" />                  
+                    </p:selectManyCheckbox>
+                    
+                     <h:outputText value="ضمینه"  />
+                    <p:selectManyCheckbox id="grid3" layout="grid" value="#{employmentForm.selectedFields}"  columns="3">
+                        <f:selectItems value="#{employmentForm.fields}" />                  
+                    </p:selectManyCheckbox>
+                   
+                    <h:outputText value="ساير زمينه ها"  />
+
+                    <h:inputText value="#{employmentForm.otherField}" style="font-weight: bold"/>
+
+                    <h:outputText value="شماره کارت بانکي*"  />
+
+                    <h:inputText value="#{employmentForm.bankCardNum}" style="font-weight: bold" required="true" requiredMessage="شماره کارت بانکي را وارد نکرده ايد."/>
+
+                    <h:outputText value="نام بانک*"  />
+
+
+                    <h:inputText value="#{employmentForm.bankName}" style="font-weight: bold" required="true" requiredMessage="نام بانک را وارد نکرده ايد."/>
+                    <h:outputText value="آپلود مدارک*"  />
+
+                    <p:commandButton value="آپلود" oncomplete="PF('uploadImage').show();" />
+                </p:panelGrid>
+                <p:commandButton actionListener="#{employmentForm.submit()}"
+                                 process="@parent"
+                                 update="@form,messages"                
+                                 value="ثبت" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
             </p:panelGrid>
 
-            <p:panelGrid columns="4" style="float: right;direction: rtl;margin-top: 20px;width: 100%"  styleClass="">
+        </h:form>
 
-                <f:facet name="header">
-                    <h:outputText value="اخرین مدارک تحصیلی"  /> 
-                </f:facet>
-
-                <h:outputText value="رشته تحصیلی"  />
-                <h:outputText value="مقطع"  />
-                <h:outputText value="دانشگاه/اموزشگاه"  />
-                <h:outputText value="معدل"  />
-
-                <h:inputText value="#{employmentForm.lastEducationField}" style="font-weight: bold;width: 120px" required="true" requiredMessage="رشته تحصیلی را وارد نکرده اید."/>
-                <h:inputText  style="font-weight: bold;width: 100px" />
-                <h:inputText value="#{employmentForm.lastEducationUniversity}" style="font-weight: bold;width: 120px" required="true" requiredMessage="دانشگاه محل تحصیل را وارد نکرده اید."/>
-                <h:inputText value="#{employmentForm.lastEducationAverage}" style="font-weight: bold;width: 100px" required="true" requiredMessage="معدل را وارد نکرده اید."/>
-
-            </p:panelGrid>
-
-            <p:panelGrid columns="2" style="float: right;direction: rtl;margin-top: 20px;width: 100%" styleClass="" >
-                <f:facet name="header">
-                    <h:outputText value="مهارت"  /> 
-                </f:facet>
-                <h:outputText value="زبان های ترجمه"  />
-              
-
-                <p:selectManyCheckbox id="grid2" layout="grid" value="#{employmentForm.selectedLanguages}"  columns="3">
-                    <f:selectItems value="#{employmentForm.languages}" />                  
-                </p:selectManyCheckbox>
-                
-                <h:outputText value="زمینه ها"  />
-              
-
-                <p:selectManyCheckbox id="grid3" layout="grid" value="#{employmentForm.selectedFields}"  columns="3">
-                    <f:selectItems value="#{employmentForm.fields}" />                  
-                </p:selectManyCheckbox>
-
-                <h:outputText value="سایر زمینه ها"  />
-               
-                <h:inputText value="#{employmentForm.otherField}" style="font-weight: bold"/>
-
-                <h:outputText value="شماره کارت بانکی*"  />
-                
-                <h:inputText value="#{employmentForm.bankCardNum}" style="font-weight: bold" required="true" requiredMessage="شماره کارت بانکی را وارد نکرده اید."/>
-
-                <h:outputText value="نام بانک*"  />
-               
-                <h:inputText value="#{employmentForm.bankName}" style="font-weight: bold" required="true" requiredMessage="نام بانک را وارد نکرده اید."/>
-
-                <h:outputText value="تصویر کارت ملی یاشناسنامه*"  />
-               
-                <p:fileUpload value="" mode="simple" />
-
-                <h:outputText value="3*4تصویر*"  />
-                
-                <p:fileUpload value="" mode="simple" />
-
-            </p:panelGrid>
-
-            <p:commandButton action="#{employmentForm.submit()}" value="ثبت" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
-    
-        </p:panelGrid>
-
+        <p:dialog widgetVar="uploadImage" width="500" height="500" >
+            <h:form enctype="multipart/form-data" id="formUp">
+                <p:messages id="message" closable="true"/>
+                <p:panelGrid columns="2" style="float: right;margin-top: 50px;direction: rtl;width: 70%" styleClass="form border">
+                    <f:facet name="header">
+                        <h:outputText value="آپلود"  /> 
+                    </f:facet>
+                    <h:outputText value="عکس:*"  />
+                    <p:fileUpload id="up1" fileUploadListener="#{employmentForm.meliUpload}" mode="advanced" dragDropSupport="false"
+                                  update="message" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <h:outputText value="کارت ملی*"  />
+                    <p:fileUpload id="up2" fileUploadListener="#{employmentForm.imgUpload}" mode="advanced" dragDropSupport="false"
+                                  update="message" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <h:outputText/>
+                    <p:commandButton  oncomplete="PF('uploadImage').hide();"
+                                      process="@parent"
+                                      update="@form"                
+                                      value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 </ui:composition>  

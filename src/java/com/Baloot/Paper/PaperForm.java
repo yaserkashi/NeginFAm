@@ -7,7 +7,6 @@ package com.Baloot.Paper;
 
 import com.Baloot.Coding.Coding;
 import com.Baloot.Coding.CodingServices;
-import com.Baloot.Design.DesignForm;
 import com.Baloot.Enum.CombosEnum;
 import com.Baloot.Enum.OrderTypesEnum;
 import com.Baloot.Order.Order;
@@ -15,13 +14,12 @@ import com.Baloot.Order.OrderServices;
 import com.Baloot.Type.TypeForm;
 import com.Baloot.User.UserServices;
 import com.Baloot.User.Users;
+import com.Baloot.util.DateHandle;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +38,6 @@ import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -61,6 +58,7 @@ public class PaperForm {
     private String plan;
     private String explain;
     private Date dateTime;
+    private String date;
     private boolean delivery;
     private UploadedFile attachFile;
     private List<SelectItem> options;
@@ -86,6 +84,8 @@ public class PaperForm {
     }
 
     public List<SelectItem> getOptions() {
+         options.add(new SelectItem("7"," نگارش مقاله بدون دریافت اطلاعات اولیه"
+                ));
         return options;
     }
 
@@ -127,6 +127,9 @@ public class PaperForm {
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
+        DateHandle datehandle = new DateHandle();
+        this.date = datehandle.DateToString(dateTime);
+        System.out.println("++++++++++++++++++++++++++++++++++++++"+date);
     }
 
     public void setDelivery(boolean delivery) {
@@ -233,7 +236,7 @@ public class PaperForm {
         }
     }
 
-    public void submit()  {
+    public void submit()  {        
         System.out.println(PaperForm.class.getName() + ":Submit Function!");
         Paper paper = new Paper();
         Order order = new Order();
@@ -245,8 +248,8 @@ public class PaperForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         paper.setDate(currentDate);
-        if (dateTime != null) {
-            paper.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
+        if (date != null) {
+            paper.setEndDateTime(date);
         } else {
             paper.setEndDateTime("");
         }
@@ -279,8 +282,11 @@ public class PaperForm {
 //            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("سفارش شما ثبت شد."));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("succes.xhtml");
         } catch (SQLException ex) {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

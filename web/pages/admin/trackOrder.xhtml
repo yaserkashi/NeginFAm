@@ -38,7 +38,7 @@
                     <h:outputText value="#{trackorder.orderDate}" />
                 </p:column>  
 
-                <p:column headerText="شماره سفارش">
+                <p:column headerText="شماره سفارش" filterBy="#{trackorder.id}">
                     <h:outputText value="#{trackorder.id}" />
                 </p:column>  
 
@@ -298,11 +298,8 @@
                             </h:form>
                         </p:panelGrid>
                     </p:outputPanel>
-
-
                 </p:outputPanel>
             </p:dialog>
-
         </h:body>        
     </ui:define>
 </ui:composition>  

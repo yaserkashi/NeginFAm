@@ -5,6 +5,17 @@
  */
 package com.Baloot.Employment;
 
+import com.Baloot.Image.ImagesForm;
+import com.Baloot.util.SessionBean;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,8 +27,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Digits;
+import org.apache.commons.io.FilenameUtils;
 import org.hibernate.validator.constraints.Email;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -46,42 +63,71 @@ public class EmploymentForm {
     private String otherField;
     private String bankCardNum;
     private String bankName;
-    private UploadedFile birthCertificate;
-    private UploadedFile image;
+    private String birthCertificate;
+    private String image;
     private List<SelectItem> languages;
     private String[] selectedLanguages;
     private List<SelectItem> fields;
     private String[] selectedFields;
+    private String[] selectedCities;
+    private List<String> cities;
 
     @PostConstruct
     public void init() {
-        languages = new ArrayList<>();
-        languages.add(new SelectItem("انگلیسی به فارسی", "انگلیسی به فارسی"));
-        languages.add(new SelectItem("فارسی به انگلیسی", "فارسی به انگلیسی"));
-        languages.add(new SelectItem("فرانسه به فارسی", "فرانسه به فارسی"));
-        languages.add(new SelectItem("فارسی به فرانسه", "فارسی به فرانسه"));
-        
-        fields = new ArrayList<>();
-        fields.add(new SelectItem("علوم پایه", "علوم پایه"));
-        fields.add(new SelectItem("مهندسی", "مهندسی"));
-        fields.add(new SelectItem("پزشکی", "پزشکی"));
-        fields.add(new SelectItem("علوم انسانی", "علوم انسانی"));
+        languages = new ArrayList<SelectItem>();
+        languages.add(new SelectItem("ENtoFA", "انگلیسی به فارسی"));
+        languages.add(new SelectItem("FAtoEN", "فارسی به انگلیسی"));
+        languages.add(new SelectItem("FRtoRA", "فرانسه به فارسی"));
+        languages.add(new SelectItem("FAtoEN", "فارسی به فرانسه"));
+
+        fields = new ArrayList<SelectItem>();
+        fields.add(new SelectItem("aloomPa", "علوم پایه"));
+        fields.add(new SelectItem("mohandesi", "مهندسی"));
+        fields.add(new SelectItem("pezashki", "پزشکی"));
+        fields.add(new SelectItem("aloomEn", "علوم انسانی"));
+ 
+        cities = new ArrayList<String>();
+        cities.add("Miami");
+        cities.add("London");
+        cities.add("Paris");
+        cities.add("Istanbul");
+        cities.add("Berlin");
+        cities.add("Barcelona");
+        cities.add("Rome");
+        cities.add("Brasilia");
+        cities.add("Amsterdam");
     }
 
-    public List<SelectItem> getLanguages() {
-        return languages;
+    public List<String> getCities() {
+        return cities;
     }
 
-    public void setLanguages(List<SelectItem> items) {
-        this.languages = items;
+    public void setCities(List<String> cities) {
+        this.cities = cities;
+    }
+
+    public String[] getSelectedCities() {
+        return selectedCities;
+    }
+
+    public void setSelectedCities(String[] selectedCities) {
+        this.selectedCities = selectedCities;
     }
 
     public String[] getSelectedLanguages() {
         return selectedLanguages;
     }
 
-    public void setSelectedLanguges(String[] selectedItems) {
-        this.selectedLanguages = selectedItems;
+    public void setSelectedLanguages(String[] selectedLanguages) {
+        this.selectedLanguages = selectedLanguages;
+    }
+
+    public List<SelectItem> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<SelectItem> languages) {
+        this.languages = languages;
     }
 
     public List<SelectItem> getFields() {
@@ -92,6 +138,7 @@ public class EmploymentForm {
         this.fields = fields;
     }
 
+ 
     public String[] getSelectedFields() {
         return selectedFields;
     }
@@ -228,20 +275,82 @@ public class EmploymentForm {
         this.bankName = bankName;
     }
 
-    public UploadedFile getImage() {
-        return image;
-    }
-
-    public void setImage(UploadedFile image) {
-        this.image = image;
-    }
-
-    public UploadedFile getBirthCertificate() {
+    public String getBirthCertificate() {
         return birthCertificate;
     }
 
-    public void setBirthCertificate(UploadedFile birthCertificate) {
+    public void setBirthCertificate(String birthCertificate) {
         this.birthCertificate = birthCertificate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void imgUpload(FileUploadEvent event) {
+        UploadedFile attachFile = event.getFile();
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("meliAttachFile", attachFile);
+//        if (attachFile != null) {
+//            try {
+        FacesMessage message = new FacesMessage("Done..", attachFile.getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+////                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+//                Image img = new Image();
+//                img.setAddress(attachFile.getFileName());
+//                img.setSelected(false);
+//                ImageServices.insertRecordIntoTable(img);
+//            } catch (Exception ex) {
+//                Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+
+    }
+
+    public void meliUpload(FileUploadEvent event) {
+        UploadedFile attachFile = event.getFile();
+        HttpSession session = SessionBean.getSession();
+        session.setAttribute("imgAttachFile", attachFile);
+//        if (attachFile != null) {
+//            try {
+        FacesMessage message = new FacesMessage("Done.11.", attachFile.getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+////                save(FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+//                Image img = new Image();
+//                img.setAddress(attachFile.getFileName());
+//                img.setSelected(false);
+//                ImageServices.insertRecordIntoTable(img);
+//            } catch (Exception ex) {
+//                Logger.getLogger(DesignForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+
+    }
+
+    private void save(String filename, InputStream input) {
+        try {
+            System.out.println("hereeeeeeeeeeeeeeee");
+            String filePath = "\\web\\resources\\images\\empinfo";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) context
+                    .getExternalContext().getRequest();
+            String stringPath = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/");
+            Path path = Paths.get(stringPath);
+            filePath = path.getParent().getParent().toString() + filePath;
+            if (!Files.exists(Paths.get(filePath))) {
+                Files.createDirectories(Paths.get(filePath));
+            }
+            File finalFile = new File(filePath, filename);
+            Files.copy(input, finalFile.toPath());
+            System.out.println(ImagesForm.class.getName() + ":Done!");
+        } catch (IOException e) {
+            Logger.getLogger(ImagesForm.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     public void submit() {
@@ -258,6 +367,25 @@ public class EmploymentForm {
         empl.setMobile(mobile);
         empl.setName(name);
         empl.setNationalCode(nationalCode);
+//        HttpSession session = SessionBean.getSession();
+//        session.setAttribute("nationalCode", nationalCode);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        try {
+            UploadedFile imgAttachFile = (UploadedFile) session.getAttribute("imgAttachFile");
+            UploadedFile meliAttachFile = (UploadedFile) session.getAttribute("meliAttachFile");
+            if (imgAttachFile != null) {
+                empl.setImage(FilenameUtils.getName(imgAttachFile.getFileName()));
+                save(nationalCode + "img" + FilenameUtils.getName(imgAttachFile.getFileName()), imgAttachFile.getInputstream());
+            }
+            if (meliAttachFile != null) {
+                empl.setBirthCertificate(FilenameUtils.getName(meliAttachFile.getFileName()));
+                save(nationalCode + "meli" + FilenameUtils.getName(meliAttachFile.getFileName()), meliAttachFile.getInputstream());
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Employment.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Boolean ot = false;
         if (onlineTranslate.equals("yes")) {
             ot = true;
@@ -277,13 +405,38 @@ public class EmploymentForm {
         if (selectedLanguages != null) {
             empl.setTranslateLanguage(Arrays.toString(selectedLanguages));
         }
-
         try {
             EmploymentServices.insertRecordIntoTable(empl);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("اطلاعات شما با موفقیت ثبت شد."));
+//            FacesContext.getCurrentInstance().getExternalContext().redirect("uploadPage.xhtml");
         } catch (SQLException ex) {
             Logger.getLogger(EmploymentForm.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
+
+//    public void submit2() {
+//        Employment empl = new Employment();
+//        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+//                .getExternalContext().getSession(false);
+//        nationalCode=  (String) session.getAttribute("nationalCode");
+//        try {
+//            UploadedFile imgAttachFile = (UploadedFile) session.getAttribute("imgAttachFile");
+//            UploadedFile meliAttachFile = (UploadedFile) session.getAttribute("meliAttachFile");
+//            if (imgAttachFile != null) {
+//                empl.setImage(FilenameUtils.getName(imgAttachFile.getFileName()));
+//                save(nationalCode + "img" + FilenameUtils.getName(imgAttachFile.getFileName()), imgAttachFile.getInputstream());
+//            }
+//            if (meliAttachFile != null) {
+//                empl.setBirthCertificate(FilenameUtils.getName(meliAttachFile.getFileName()));
+//                save(nationalCode + "meli" + FilenameUtils.getName(meliAttachFile.getFileName()), meliAttachFile.getInputstream());
+//            }
+//
+//            EmploymentServices.insertRecordIntoTable(empl);
+//            FacesContext.getCurrentInstance().addMessage(null,
+//                    new FacesMessage("آپلود شما با موفقیت انجام شد."));
+//        } catch (IOException | SQLException ex) {
+//            Logger.getLogger(Employment.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 }

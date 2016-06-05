@@ -13,6 +13,7 @@ import com.Baloot.Order.Order;
 import com.Baloot.Order.OrderServices;
 import com.Baloot.User.UserServices;
 import com.Baloot.User.Users;
+import com.Baloot.util.DateHandle;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
@@ -62,6 +63,7 @@ public class DesignForm {
     private Date endDate;
     private UploadedFile attachFile;
     private Boolean delivery;
+    private String date;
 
     public List<Coding> getDesignTypes() {
         return designTypes;
@@ -108,6 +110,8 @@ public class DesignForm {
     }
 
     public void setEndDate(Date endDate) {
+        DateHandle datehandle = new DateHandle();
+        this.date = datehandle.DateToString(endDate);
         this.endDate = endDate;
     }
 
@@ -231,13 +235,11 @@ public class DesignForm {
         design.setDesignOption(designOption);
         design.setPrintOption(printOption);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
         
-        System.out.println("gvhgvjhgj;gjgjhgkjj;h" + format.format(endDate));
-        String irandate = pc.getStrIranianDateFromDate(endDate);
-        System.out.println("gvhgvjhgj;gjgjhgkjj;h" + irandate);       
-        String pEndDate = "";
-        design.setEndDate(pEndDate);
+        System.out.println("gvhgvjhgj;gjgjhgkjj;h"+date);
+         
+     
+        design.setEndDate(date);
         
         design.setExplain(explian);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());

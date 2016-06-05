@@ -54,7 +54,7 @@
 
                     <p:outputLabel value="رنگ چاپ" ></p:outputLabel>
                     <p:selectOneMenu id="feild1" value="#{designForm.printType}" styleClass="input" >
-                         <f:selectItem  itemLabel="آیتم اول" itemValue="1"/>
+                        <f:selectItem  itemLabel="آیتم اول" itemValue="1"/>
                         <f:selectItem  itemLabel="آیتم دوم" itemValue="2"/>
                         <f:selectItem  itemLabel="آیتم سوم" itemValue="3"/>
                     </p:selectOneMenu>  
@@ -81,22 +81,37 @@
                     <p:inputTextarea required="true" requiredMessage="توضیحات را باید وارد کنید ." value="#{designForm.explian}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
 
                     <p:outputLabel value=" تاریخ درخواستی *" ></p:outputLabel>
-                    <p:calendar required="true" requiredMessage="لطفا تاریخ تخویل را مشخص کنید." value="#{designForm.endDate}" style="direction: rtl;" />
+                    <p:calendar value="#{designForm.endDate}" dir="ltr"
+                                pattern="yyyy/mm/dd" style="width:200px;float: right;direction: rtl" 
+                                required="true" requiredMessage="لطفا  تاریخ درخواستی را مشخص کنید."/>
 
                     <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
+                    <p:commandButton value="آپلود" oncomplete="PF('upload').show();" />
 
-
-                    <p:fileUpload fileUploadListener="#{designForm.upload}" mode="advanced" dragDropSupport="false"
-                                  update="messages" auto="true" sizeLimit="10000000" fileLimit="3" 
-                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                    <p:outputLabel/> 
                     <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
-                                     ajax="false" actionListener="#{designForm.submit()}"
+                                     actionListener="#{designForm.submit()}"
                                      process="@parent"
                                      update="@form"/>
                 </p:panelGrid>
 
-
+                <p:dialog widgetVar="upload" width="500" height="500" >
+                    <h:form enctype="multipart/form-data" id="formUp">
+                        <p:messages id="message" closable="true"/>
+                        <p:panelGrid columns="1" style="float: right;margin-top: 50px;direction: rtl;width: 70%" styleClass="form border">
+                            <f:facet name="header">
+                                <h:outputText value="آپلود"  /> 
+                            </f:facet>                  
+                            <p:fileUpload fileUploadListener="#{designForm.upload}" mode="advanced" dragDropSupport="false"
+                                          update="message" auto="true" sizeLimit="10000000" fileLimit="3" 
+                                          required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            <p:outputLabel/> 
+                            <p:commandButton  oncomplete="PF('upload').hide();"
+                                              process="@parent"
+                                              update="@form"                
+                                              value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
             </h:form>
 
         </h:body>

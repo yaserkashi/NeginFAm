@@ -51,14 +51,14 @@ public class FactorServices {
     public static List<ReportList> getReportListById(int id) {
         List<ReportList> list = new ArrayList<>();
         Connection dbConnection;
-        PreparedStatement ps;
+        Statement ps;
 
-        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and f.user_id=? and fitem.order_id=public.order.id";
+        String select = "select * from factor_item fitem, factor f,public.order  where fitem.factor_id=f.id and f.user_id="+id+" and fitem.order_id=public.order.id";
         
         try {
             dbConnection = DataConnect.getConnection();
-            ps = dbConnection.prepareStatement(select);
-            ps.setInt(1, id);
+            ps = dbConnection.createStatement();
+            
             ResultSet rs= ps.executeQuery(select);
             while (rs.next()){
                 ReportList item = new ReportList();

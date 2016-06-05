@@ -188,7 +188,7 @@ public class Order implements Serializable {
         if (condition == StepsOfOrder.registrationOrder.ordinal()) {
             return "سفارش ثبت شده";
         } else if (condition == StepsOfOrder.registrationFactor.ordinal()) {
-            return "پیش فاکتور صادر شده";
+            return " فاکتور صادر شده";
         } else if (condition == StepsOfOrder.payFactor.ordinal()) {
             return "فاکتور توسط مشتری پرداخت شده";
         } else if (condition == StepsOfOrder.ConfirmationPayFactor.ordinal()) {

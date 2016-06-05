@@ -110,7 +110,7 @@
                                             <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                                         </p:confirmDialog>
                                     </p:commandButton>  
-                                    <p:commandButton value="مشاهده فاکتور"   action="#{orderFollowUpForUser.showFactorForSelectedOrder()}" disabled="false"
+                                    <p:commandButton value="مشاهده فاکتور"   action="#{orderFollowUpForUser.showFactorForSelectedOrder()}" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px ;"/>
                                     <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
@@ -198,7 +198,7 @@
                                             <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                                         </p:confirmDialog>
                                     </p:commandButton>  
-                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="false"
+                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px ;"/>
                                      <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
@@ -283,7 +283,7 @@
                                             <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                                         </p:confirmDialog>
                                     </p:commandButton>  
-                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="false"
+                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
                                        <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
@@ -362,7 +362,7 @@
                                             <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
                                         </p:confirmDialog>
                                     </p:commandButton>  
-                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="false"
+                                    <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
                                        <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 

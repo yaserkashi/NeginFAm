@@ -265,11 +265,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption2() {
-        if (option.contains("2")) {
-            return "ندارد";
-        } else {
-            return "دارد";
-        }
+          return "دارد";
+//        if (option.contains("2")) {
+//            return "ندارد";
+//        } else {
+//            return "دارد";
+//        }
     }
 
     /**
@@ -279,11 +280,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption3() {
-        if (option.contains("3")) {
-            return "ندارد";
-        } else {
-            return "دارد";
-        }
+          return "دارد";
+//        if (option.contains("3")) {
+//            return "ندارد";
+//        } else {
+//            return "دارد";
+//        }
     }
 
     /**
@@ -292,11 +294,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption4() {
-        if (option.contains("4")) {
-            return "ندارد";
-        } else {
-            return "دارد";
-        }
+          return "دارد";
+//        if (option.contains("4")) {
+//            return "ندارد";
+//        } else {
+//            return "دارد";
+//        }
     }
 
     /**
@@ -305,11 +308,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption5() {
-        if (option.contains("5")) {
-            return "ندارد";
-        } else {
-            return "دارد";
-        }
+          return "دارد";
+//        if (option.contains("5")) {
+//            return "ندارد";
+//        } else {
+//            return "دارد";
+//        }
     }
 
     /**
@@ -318,11 +322,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption6() {
-        if (option.contains("6")) {
-            return "ندارد";
-        } else {
-            return "دارد";
-        }
+          return "دارد";
+//        if (option.contains("6")) {
+//            return "ندارد";
+//        } else {
+//            return "دارد";
+//        }
     }
 
     /**
@@ -331,11 +336,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption7() {
-        if (option.contains("7")) {
-            return "ندارد";
-        } else {
-            return "دارد";
-        }
+          return "دارد";
+//        if (option.contains("7")) {
+//            return "ندارد";
+//        } else {
+//            return "دارد";
+//        }
     }
 
     /**
@@ -357,13 +363,14 @@ public class Paper implements Serializable {
      * @return نوع متون شامل عمومی، تخصصی یا تخصصی وژه را برمیگرداند
      */
     public String hasOption8() {
-        if (option.charAt(7) == 0) {
-            return "متون عمومی";
-        } else if (option.charAt(7) == 1) {
-            return "متون تخصصی";
-        } else {
-            return "متون تخصصی ویژه";
-        }
+          return "متون عمومی";
+//        if (option.charAt(7) == 0) {
+//            return "متون عمومی";
+//        } else if (option.charAt(7) == 1) {
+//            return "متون تخصصی";
+//        } else {
+//            return "متون تخصصی ویژه";
+//        }
 
     }
 
