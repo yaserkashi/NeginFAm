@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Type;
 
 import com.Baloot.Coding.Coding;
@@ -15,6 +14,7 @@ import com.Baloot.Order.OrderServices;
 import com.Baloot.Paper.PaperForm;
 import com.Baloot.User.UserServices;
 import com.Baloot.User.Users;
+import com.Baloot.util.DateHandle;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
@@ -46,6 +46,7 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 public class TypeForm {
+
     private Integer language;
     private List<Coding> languges = CodingServices.getCodings(OrderTypesEnum.type.ordinal(), CombosEnum.language.ordinal());
     private Integer field;
@@ -62,6 +63,7 @@ public class TypeForm {
     private Date dateTime;
     private boolean delivery;
     private UploadedFile attachFile;
+    private String date;
 
     public List<Coding> getLanguges() {
         return languges;
@@ -70,7 +72,7 @@ public class TypeForm {
     public List<Coding> getFields() {
         return fields;
     }
-    
+
     public void setLanguage(Integer language) {
         this.language = language;
     }
@@ -116,6 +118,8 @@ public class TypeForm {
     }
 
     public void setDateTime(Date dateTime) {
+        DateHandle datehandle = new DateHandle();
+        this.date = datehandle.DateToString(dateTime);
         this.dateTime = dateTime;
     }
 
@@ -182,40 +186,48 @@ public class TypeForm {
     public UploadedFile getAttachFile() {
         return attachFile;
     }
-    
-    public String getOption(boolean f,boolean l,boolean i, boolean t, boolean c, boolean s, boolean e) {
+
+    public String getOption(boolean f, boolean l, boolean i, boolean t, boolean c, boolean s, boolean e) {
         String options = "";
-        if (f)
+        if (f) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (l)
+        }
+        if (l) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (i)
+        }
+        if (i) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (t)
+        }
+        if (t) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (c)
+        }
+        if (c) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (s)
+        }
+        if (s) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (e)
+        }
+        if (e) {
             options += '1';
-        else
+        } else {
             options += '0';
+        }
         return options;
     }
-   public void upload(FileUploadEvent event) {
+
+    public void upload(FileUploadEvent event) {
         attachFile = event.getFile();
         HttpSession session = SessionBean.getSession();
         session.setAttribute("attachFile", attachFile);
@@ -223,7 +235,7 @@ public class TypeForm {
             try {
                 FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-       
+
             } catch (Exception ex) {
                 Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -231,7 +243,7 @@ public class TypeForm {
 
     }
 
-     private void save(String filename, InputStream input) {
+    private void save(String filename, InputStream input) {
         try {
             System.out.println("in save file name is :" + filename);
             String filePath = "\\web\\resources\\downloadfile";
@@ -253,7 +265,6 @@ public class TypeForm {
         }
     }
 
-    
     public void submit() throws Exception {
         System.out.println(TypeForm.class.getName() + ":Submit Function!");
         Type type = new Type();
@@ -265,35 +276,37 @@ public class TypeForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         type.setDateTime(currentDate);
-        if (dateTime != null)
-            type.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
-        else
+        if (date != null) {
+            type.setEndDateTime(date);
+        } else {
             type.setEndDateTime("");
-        type.setOption(getOption(formulation,layout,illustrations,table, charts, shape, editorial));
+        }
+        type.setOption(getOption(formulation, layout, illustrations, table, charts, shape, editorial));
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         type.setUserId(user);
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         attachFile = (UploadedFile) session.getAttribute("attachFile");
-        if(attachFile != null)
-             type.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
-        type.setDeliveryType(delivery); 
+        if (attachFile != null) {
+            type.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
+        }
+        type.setDeliveryType(delivery);
         order.setTableName("type");
-        order.setCondition(0);        
+        order.setCondition(0);
         order.setOrderDate(currentDate);
         order.setUserId(user);
         try {
             int id = TypeServices.insertRecordIntoTable(type);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
-             try {
+            try {
                 save("type" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             } catch (IOException ex) {
                 Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
             }
 //               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("سفارش شما ثبت شد."));
+                    new FacesMessage("سفارش شما ثبت شد."));
             FacesContext.getCurrentInstance().getExternalContext().redirect("succes.xhtml");
         } catch (SQLException ex) {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);

@@ -59,12 +59,7 @@
 
             <p:inputText id="mobile" value="#{signUp.mobile}"/>
 
-            <p:row>
-                <p:outputLabel value="کد امنیتی"/>
-                <p:graphicImage id="image" value="#{signUp.image}" width="150" height="75" ></p:graphicImage>
-            </p:row>
-
-            <p:inputText id="captcha" value="#{signUp.secCode}"/>
+        
 
 
             <p:outputLabel value="تمامی قوانین نگین فام راخوانده و قبول دارم"/>
@@ -79,15 +74,10 @@
                 <p:selectBooleanCheckbox value="#{signUp.lowCheck}" ></p:selectBooleanCheckbox>
             </p:row>
             <p:outputLabel/>
-            <p:commandButton value="ثبت" update="image" actionListener="#{signUp.submit()}" ajax="false" oncomplete="f();" style=";float: left;background: #4EA2D0;margin-top: 40px;margin-left: 20px" ></p:commandButton>
+            <p:commandButton value="ثبت" actionListener="#{signUp.preSubmit()}" style=";float: left;background: #4EA2D0;margin-top: 40px;margin-left: 20px" ></p:commandButton>
 
 
         </p:panelGrid>
-        <script>
-            function f() {
-                location.reload();
-            }
-        </script>
 
 
 

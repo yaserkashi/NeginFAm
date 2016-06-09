@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.Baloot.Translate;
 
 import com.Baloot.Coding.Coding;
@@ -16,13 +15,12 @@ import com.Baloot.Paper.PaperForm;
 import com.Baloot.Type.TypeForm;
 import com.Baloot.User.Users;
 import com.Baloot.User.UserServices;
+import com.Baloot.util.DateHandle;
 import com.Baloot.util.PersianCalendar;
 import com.Baloot.util.SessionBean;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +45,7 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 public class TranslateForm {
+
     private Integer language;
     private List<Coding> languges = CodingServices.getCodings(OrderTypesEnum.translate.ordinal(), CombosEnum.language.ordinal());
     private Integer field;
@@ -60,6 +59,7 @@ public class TranslateForm {
     private Date dateTime;
     private boolean delivery;
     private UploadedFile attachFile;
+    private String date;
 
     public List<Coding> getLanguges() {
         return languges;
@@ -68,7 +68,7 @@ public class TranslateForm {
     public List<Coding> getFields() {
         return fields;
     }
-    
+
     public void setLanguage(Integer language) {
         this.language = language;
     }
@@ -84,7 +84,7 @@ public class TranslateForm {
     public void setTable(boolean table) {
         this.table = table;
     }
-    
+
     public void setSubtable(boolean subtable) {
         this.subtable = subtable;
     }
@@ -102,6 +102,8 @@ public class TranslateForm {
     }
 
     public void setDateTime(Date dateTime) {
+        DateHandle datehandle = new DateHandle();
+        this.date = datehandle.DateToString(dateTime);
         this.dateTime = dateTime;
     }
 
@@ -128,7 +130,7 @@ public class TranslateForm {
     public boolean isTable() {
         return table;
     }
-    
+
     public boolean isSubtable() {
         return subtable;
     }
@@ -156,8 +158,8 @@ public class TranslateForm {
     public UploadedFile getAttachFile() {
         return attachFile;
     }
-    
-   public void upload(FileUploadEvent event) {
+
+    public void upload(FileUploadEvent event) {
         attachFile = event.getFile();
         HttpSession session = SessionBean.getSession();
         session.setAttribute("attachFile", attachFile);
@@ -173,7 +175,7 @@ public class TranslateForm {
 
     }
 
-     private void save(String filename, InputStream input) {
+    private void save(String filename, InputStream input) {
         try {
             System.out.println("in save file name is :" + filename);
             String filePath = "\\web\\resources\\downloadfile";
@@ -194,30 +196,34 @@ public class TranslateForm {
             Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     public String getOption(boolean t, boolean st, boolean c, boolean s) {
         String options = "";
-        if (t)
+        if (t) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (st)
+        }
+        if (st) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (c)
+        }
+        if (c) {
             options += '1';
-        else
+        } else {
             options += '0';
-        if (s)
+        }
+        if (s) {
             options += '1';
-        else
+        } else {
             options += '0';
+        }
         return options;
     }
-    
-    public void submit()  {
-        System.out.println(TranslateForm.class.getName()+":Submit Function!");
+
+    public void submit() {
+        System.out.println(TranslateForm.class.getName() + ":Submit Function!");
         Translate translate = new Translate();
         Order order = new Order();
         translate.setLanguage(language);
@@ -227,12 +233,13 @@ public class TranslateForm {
         PersianCalendar pc = new PersianCalendar();
         String currentDate = pc.getIranianDateTime();
         translate.setDateTime(currentDate);
-        if (dateTime != null)
-            translate.setEndDateTime(pc.DateToString(pc.getIranianDateFromDate(dateTime)));
-        else
+        if (date != null) {
+            translate.setEndDateTime(date);
+        } else {
             translate.setEndDateTime("");
+        }
         translate.setOption(getOption(table, subtable, chart, shape));
-         //------------------------------------------
+        //------------------------------------------
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         attachFile = (UploadedFile) session.getAttribute("attachFile");
@@ -242,7 +249,7 @@ public class TranslateForm {
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
         translate.setUserId(user);
         translate.setDeliveryType(delivery);
-        
+
         order.setTableName("translate");
         order.setCondition(0);
         order.setOrderDate(currentDate);
@@ -251,16 +258,16 @@ public class TranslateForm {
             int id = TranslateServices.insertRecordIntoTable(translate);
             order.setTableId(id);
             OrderServices.insertRecordIntoTable(order);
-              try {
+            try {
                 save("trans" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
             } catch (IOException ex) {
                 Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
             }
 //               com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(),"سفارش شما باموفقیت ثبت شد","false");
             FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("سفارش شما ثبت شد."));
+                    new FacesMessage("سفارش شما ثبت شد."));
             FacesContext.getCurrentInstance().getExternalContext().redirect("succes.xhtml");
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(TypeForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

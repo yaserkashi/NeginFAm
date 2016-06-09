@@ -18,8 +18,12 @@
         </h:head>
         <h:body>
             <div>
-                <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser}" var="followup"
-                             styleClass="dataTable" id="followtb11" rowKey="#{followup.id}" >
+                     <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser}" var="followup"
+                             styleClass="dataTable" id="followtb11" rowKey="#{followup.id}" rows="10"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         paginator="true"  rowsPerPageTemplate="6,12,16"
+                 style="direction: rtl">
+                
                     <p:column headerText="ردیف">
                         <h:outputText value="#{orderFollowUpForUser.listOfOrdreForUser.indexOf(followup)+1}" />
                     </p:column> 
@@ -30,7 +34,9 @@
                     <p:column headerText="شماره سفارش">
                         <h:outputText value="#{followup.id}" />
                     </p:column>  
-
+                    <p:column headerText="تاریخ سفارش" sortBy="#{followup.orderDate}">
+                        <h:outputText value="#{followup.orderDate}" />
+                    </p:column>  
                     <p:column headerText="وضعیت" filterBy="#{followup.conditionView()}">
                         <h:outputText value="#{followup.conditionView()}"/>
                     </p:column>
@@ -200,7 +206,7 @@
                                     </p:commandButton>  
                                     <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px ;"/>
-                                     <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
+                                    <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
                                                      style="color: #FFF ;background:#0066ff;float:left ; font-size: 14px ;"/>
                                 </p:panelGrid>
@@ -285,7 +291,7 @@
                                     </p:commandButton>  
                                     <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
-                                       <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
+                                    <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
                                                      style="color: #FFF ;background:#0066ff;float:left ; font-size: 14px ;"/>
                                 </p:panelGrid>
@@ -364,7 +370,7 @@
                                     </p:commandButton>  
                                     <p:commandButton value="مشاهده فاکتور"   onclick="showFactor([{name: 'msg', value: document.getElementById('idOfOrder').value}]);" disabled="#{orderFollowUpForUser.selectedOreder.condition lt 1}"
                                                      style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px"/>
-                                       <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
+                                    <p:commandButton value="دانلود فایل پاسخ"  disabled="#{orderFollowUpForUser.selectedOreder.condition lt 4 }" ajax="false"
                                                      action="#{orderFollowUpForUser.selectedOreder.downloadFinalFile()}" 
                                                      style="color: #FFF ;background:#0066ff;float:left ; font-size: 14px ;"/>
                                 </p:panelGrid>

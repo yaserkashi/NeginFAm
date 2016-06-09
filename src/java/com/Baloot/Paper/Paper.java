@@ -246,17 +246,11 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption1() {
-          return "دارد";
-//        try {          
-//            if (option.contains("1")) {
-//                return "ندارد";
-//            } else {
-//                return "دارد";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
+        if (!option.contains("1")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -265,12 +259,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption2() {
-          return "دارد";
-//        if (option.contains("2")) {
-//            return "ندارد";
-//        } else {
-//            return "دارد";
-//        }
+//          return "دارد";
+        if (!option.contains("2")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -280,12 +274,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption3() {
-          return "دارد";
-//        if (option.contains("3")) {
-//            return "ندارد";
-//        } else {
-//            return "دارد";
-//        }
+//          return "دارد";
+        if (!option.contains("3")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -294,12 +288,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption4() {
-          return "دارد";
-//        if (option.contains("4")) {
-//            return "ندارد";
-//        } else {
-//            return "دارد";
-//        }
+//          return "دارد";
+        if (!option.contains("4")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -308,12 +302,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption5() {
-          return "دارد";
-//        if (option.contains("5")) {
-//            return "ندارد";
-//        } else {
-//            return "دارد";
-//        }
+//        return "دارد";
+        if (!option.contains("5")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -322,12 +316,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption6() {
-          return "دارد";
-//        if (option.contains("6")) {
-//            return "ندارد";
-//        } else {
-//            return "دارد";
-//        }
+//        return "دارد";
+        if (!option.contains("6")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -336,12 +330,12 @@ public class Paper implements Serializable {
      * @return دارد یا ندارد بر میگرداند
      */
     public String hasOption7() {
-          return "دارد";
-//        if (option.contains("7")) {
-//            return "ندارد";
-//        } else {
-//            return "دارد";
-//        }
+//          return "دارد";
+        if (!option.contains("7")) {
+            return "ندارد";
+        } else {
+            return "دارد";
+        }
     }
 
     /**
@@ -363,14 +357,15 @@ public class Paper implements Serializable {
      * @return نوع متون شامل عمومی، تخصصی یا تخصصی وژه را برمیگرداند
      */
     public String hasOption8() {
-          return "متون عمومی";
-//        if (option.charAt(7) == 0) {
-//            return "متون عمومی";
-//        } else if (option.charAt(7) == 1) {
-//            return "متون تخصصی";
-//        } else {
-//            return "متون تخصصی ویژه";
-//        }
+//        return "متون عمومی";
+        if (option.contains("8")) {
+            return "متون عمومی";
+        } else if (option.contains("9")) {
+            return "متون تخصصی";
+        } else if (option.contains("10")) {
+            return "متون تخصصی ویژه";
+        }      
+        return "";
 
     }
 

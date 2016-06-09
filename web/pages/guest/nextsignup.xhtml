@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:botDetect="botDetectFacelets"
+                template="../../template/signuptemplate.xhtml">
+    <ui:define name="content">
+        <header >
+            <style>
+                .ui-panelgrid td {
+                    border-width: 0px;
+                    border-style: solid;
+                    border-color: inherit;
+                    padding: 4px 10px;
+                }
+            </style>
+
+        </header>
+
+        <h:head>
+            <title>ثبت نام</title>
+        </h:head>
+        <p:messages autoUpdate="true" closable="true"/>
+        <p:panelGrid columns="2" id="panel" styleClass="form border" style="float: right;width: 70%;padding: 20px">
+            <f:facet name="header">
+                ادامه ثبت نام
+            </f:facet>
+            <p:row>            
+                <p:outputLabel value="کد امنیتی"/>
+                <p:graphicImage id="image" value="#{signUp.image}" width="150" height="75" ></p:graphicImage>
+            </p:row>
+            <p:inputText id="captcha" value="#{signUp.secCode}"/>
+            <p:outputLabel/>
+            <p:commandButton value="ثبت" actionListener="#{signUp.submit()}"  style=";float: left;background: #4EA2D0;margin-top: 40px;margin-left: 20px" ></p:commandButton>
+        </p:panelGrid>
+        <script>
+            function reload() {
+                location.reload();
+            }
+        </script>
+    </ui:define>
+</ui:composition>   

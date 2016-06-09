@@ -5,8 +5,6 @@
  */
 package com.Baloot.User;
 
-import botdetect.web.jsf.JsfCaptcha;
-import com.Baloot.Order.Order;
 import com.Baloot.util.CaptchaUtil;
 import com.Baloot.util.SessionBean;
 import java.io.ByteArrayInputStream;
@@ -17,9 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertTrue;
@@ -36,7 +32,6 @@ import org.primefaces.model.StreamedContent;
  * @author Yaser
  */
 @ManagedBean
-
 public final class SignUp {
 
     @Size(min = 4, message = "نام کاربری نباید کمتر از چهار حرف باشد.")
@@ -160,23 +155,11 @@ public final class SignUp {
         this.lowCheck = lowCheck;
     }
 
-    public String submit() {
+    public void preSubmit() {
         System.out.println("Submit Function");
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
-        String a = (String) session.getAttribute("ans");
-        System.out.println("a is "+a+"seccode is "+secCode);
-        if (!(a.equals(secCode))) {
-            System.out.println("eshtebah code amniati");
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("signup.xhtml?faces-redirect=true");
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("کدامنیتی را اشتباه وارد کرده اید!"));
-                return "/";
-            } catch (IOException ex) {
-                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (UserServices.isUsernameUsed(userName)) {
+        if (UserServices.isUsernameUsed(userName)) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("نام کاربری که انتخاب کرده اید قبلا استفاده شده است!"));
         } else if (UserServices.isEmailUsed(email)) {
@@ -184,7 +167,6 @@ public final class SignUp {
                     new FacesMessage("کاربری با این رایانامه در سایت ثبت نام کرده است!"));
         } else {
             try {
-                System.out.println("shoroe sabt");
                 Users user = new Users();
                 user.setName(name);
                 user.setFamily(lastname);
@@ -192,14 +174,35 @@ public final class SignUp {
                 user.setUsername(userName);
                 user.setPasword(password);
                 user.setPhoneNum(mobile);
-                UserServices.insertRecordIntoTable(user);                
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("ثبت نام شما با موفقیت انجام شد."));
-//                HttpSession session = SessionBean.getSession();
-                session.setAttribute("username", userName);                
-                 FacesContext.getCurrentInstance().getExternalContext().redirect("signupsucces.xhtml");
-//                 signUpLogin(userName, password);
-                return "/pages/user/user.xhtml";
+                session.setAttribute("username", userName);
+                session.setAttribute("user", user);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("nextsignup.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    public String submit() {
+        System.out.println("Submit Function");
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        String a = (String) session.getAttribute("ans");
+        System.out.println("a is " + a + "seccode is " + secCode);
+        if (!(a.equals(secCode))) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("کدامنیتی را اشتباه وارد کرده اید!"));
+            System.out.println("eshtebah code amniati");
+            RequestContext.getCurrentInstance().execute("reload();");
+        } else {
+            try {
+                System.out.println("shoroe sabt");
+                Users user = (Users) session.getAttribute("user");
+                UserServices.insertRecordIntoTable(user);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("signupsucces.xhtml");
             } catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("eroor dar sabt");
@@ -209,30 +212,27 @@ public final class SignUp {
         }
         return "/";
     }
-    
-    public void signUpLogin(String user,String pwd) {
+
+    public void signUpLogin(String user, String pwd) {
         Integer valid = UserServices.validate(user, pwd);
         switch (valid) {
-            case 0 : {
+            case 0: {
                 FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "نام کاربری و رمز عبور اشتباه",
-                            "لطفا رمزعبور و نام کاربری درست را وارد کنید."));
-                
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                "نام کاربری و رمز عبور اشتباه",
+                                "لطفا رمزعبور و نام کاربری درست را وارد کنید."));
             }
-          case 1 : {
+            case 1: {
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username", user);
-              
             }
-            case 2 : {
+            case 2: {
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username", user);
-              
             }
         }
-       
+
     }
 
     public void generateNewCaptcha() {
@@ -243,7 +243,7 @@ public final class SignUp {
             image = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");
             HttpSession session = SessionBean.getSession();
             answer = captcha.getAnswer();
-            session.setAttribute("ans", answer);            
+            session.setAttribute("ans", answer);
             System.out.println("in generate answer =.... " + answer);
             FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("image");
         } catch (IOException e) {
@@ -262,9 +262,9 @@ public final class SignUp {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("کدامنیتی را درست وارد کرده اید!"));
         } else {
-            try {               
+            try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("signup.xhtml?faces-redirect=true");
-                 FacesContext.getCurrentInstance().addMessage(null,
+                FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("کدامنیتی را درستاشتباه وارد کرده اید!"));
             } catch (IOException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);

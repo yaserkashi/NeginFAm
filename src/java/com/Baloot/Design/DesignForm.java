@@ -234,11 +234,9 @@ public class DesignForm {
         design.setPrintType(printType);
         design.setDesignOption(designOption);
         design.setPrintOption(printOption);
-
-        
+       
         System.out.println("gvhgvjhgj;gjgjhgkjj;h"+date);
-         
-     
+              
         design.setEndDate(date);
         
         design.setExplain(explian);

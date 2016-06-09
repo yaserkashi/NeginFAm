@@ -68,25 +68,43 @@
                 <p:inputTextarea value="#{typeForm.explain}" rows="5" cols="30" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" />
 
                 <p:outputLabel value=" تاریخ و ساعت درخواستی *" ></p:outputLabel>
-                <p:calendar value="#{typeForm.dateTime}" />
+                <p:calendar value="#{typeForm.dateTime}" dir="ltr"
+                            pattern="yyyy/mm/dd" style="width:200px;float: right;direction: rtl" 
+                            required="true" requiredMessage="لطفا  تاریخ درخواستی را مشخص کنید."/>
 
                 <p:outputLabel value=" تحویل حضوری" ></p:outputLabel>
                 <p:selectBooleanCheckbox value="#{typeForm.delivery}"  />
 
 
                 <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
-                <p:fileUpload fileUploadListener="#{typeForm.upload}" mode="advanced" dragDropSupport="false"
-                              update="messages" auto="true" sizeLimit="10000000" fileLimit="3" 
-                              required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                <p:outputLabel/> 
+                <p:commandButton value="آپلود" oncomplete="PF('upload').show();" />
+                <p:outputLabel/>
                 <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
-                                 ajax="false" actionListener="#{typeForm.submit()}"
+                                 actionListener="#{typeForm.submit()}"
                                  process="@parent"
                                  update="@form"/>
 
                 <p:outputLabel value="" ></p:outputLabel>
 
             </p:panelGrid>
+            <p:dialog widgetVar="upload" width="300" height="110" header="آپلود" >
+                <h:form enctype="multipart/form-data" id="formUp">
+                    <p:messages id="message" closable="true"/>
+
+                    <f:facet name="header">
+                        <h:outputText value="آپلود"  /> 
+                    </f:facet>               
+                    <p:fileUpload fileUploadListener="#{typeForm.upload}" mode="advanced" dragDropSupport="false" style="direction: ltr" label="آپلود"
+                                  update="message" auto="true" sizeLimit="10000000" fileLimit="3"  oncomplete="PF('upload').hide();"
+                                  required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:outputLabel/> 
+                    <p:commandButton  oncomplete="PF('upload').hide();"
+                                      process="@parent"
+                                      update="@form"                
+                                      value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+
+                </h:form>
+            </p:dialog>          
 
         </h:body>
     </ui:define>

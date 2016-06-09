@@ -129,8 +129,7 @@ public class PaperForm {
         this.dateTime = dateTime;
         DateHandle datehandle = new DateHandle();
         this.date = datehandle.DateToString(dateTime);
-        System.out.println("++++++++++++++++++++++++++++++++++++++"+date);
-    }
+     }
 
     public void setDelivery(boolean delivery) {
         this.delivery = delivery;
@@ -237,6 +236,7 @@ public class PaperForm {
     }
 
     public void submit()  {        
+           try {
         System.out.println(PaperForm.class.getName() + ":Submit Function!");
         Paper paper = new Paper();
         Order order = new Order();
@@ -268,7 +268,7 @@ public class PaperForm {
         order.setCondition(0);
         order.setOrderDate(currentDate);
         order.setUserId(user);
-        try {
+
             int id = PaperServices.insertRecordIntoTable(paper);
             order.setTableId(id);
             System.out.println("heree ");

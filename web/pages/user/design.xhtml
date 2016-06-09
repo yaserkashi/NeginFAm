@@ -87,29 +87,26 @@
 
                     <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
                     <p:commandButton value="آپلود" oncomplete="PF('upload').show();" />
-
+                    <p:outputLabel/>
                     <p:commandButton value="ذخیره" style="background: #4EA2D0 ;float: left"
                                      actionListener="#{designForm.submit()}"
                                      process="@parent"
                                      update="@form"/>
                 </p:panelGrid>
-
-                <p:dialog widgetVar="upload" width="500" height="500" >
+                <p:dialog widgetVar="upload" width="300" height="110" header="آپلود" >
                     <h:form enctype="multipart/form-data" id="formUp">
                         <p:messages id="message" closable="true"/>
-                        <p:panelGrid columns="1" style="float: right;margin-top: 50px;direction: rtl;width: 70%" styleClass="form border">
-                            <f:facet name="header">
-                                <h:outputText value="آپلود"  /> 
-                            </f:facet>                  
-                            <p:fileUpload fileUploadListener="#{designForm.upload}" mode="advanced" dragDropSupport="false"
-                                          update="message" auto="true" sizeLimit="10000000" fileLimit="3" 
-                                          required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                            <p:outputLabel/> 
-                            <p:commandButton  oncomplete="PF('upload').hide();"
-                                              process="@parent"
-                                              update="@form"                
-                                              value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
-                        </p:panelGrid>
+
+
+                        <p:fileUpload fileUploadListener="#{designForm.upload}" mode="advanced" dragDropSupport="false" style="direction: ltr"
+                                      update="message" label="آپلود" auto="true" sizeLimit="10000000" fileLimit="3" oncomplete="PF('upload').hide();"
+                                      required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        <p:outputLabel/> 
+                        <p:commandButton  oncomplete="PF('upload').hide();"
+                                          process="@parent"
+                                          update="@form"                
+                                          value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
+
                     </h:form>
                 </p:dialog>
             </h:form>
