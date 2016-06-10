@@ -257,10 +257,10 @@ public class PaperForm {
         //------------------------------------------
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
-        attachFile = (UploadedFile) session.getAttribute("attachFile");
-        if (attachFile != null) {
-            paper.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
-        }
+//        attachFile = (UploadedFile) session.getAttribute("attachFile");
+//        if (attachFile != null) {
+//            paper.setAttachFile(FilenameUtils.getName(attachFile.getFileName()));
+//        }
         //----------------------------
         paper.setDeliveryType(delivery);
         Users user = UserServices.getUserByUsername(SessionBean.getUserName());
@@ -273,11 +273,11 @@ public class PaperForm {
             order.setTableId(id);
             System.out.println("heree ");
             //----------------------
-            try {
-                save("paper" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
-            } catch (IOException ex) {
-                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                save("paper" + id + FilenameUtils.getName(attachFile.getFileName()), attachFile.getInputstream());
+//            } catch (IOException ex) {
+//                Logger.getLogger(PaperForm.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             OrderServices.insertRecordIntoTable(order);
 //            com.Baloot.util.SendSMS.sendSms(user.getPhoneNum(), "سفارش شما باموفقیت ثبت شد", "false");
             FacesContext.getCurrentInstance().addMessage(null,

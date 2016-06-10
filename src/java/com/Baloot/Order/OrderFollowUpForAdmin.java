@@ -63,24 +63,29 @@ public class OrderFollowUpForAdmin {
     private Double off;
     private Double unitPrice;
     private Integer number;
-    private Double sumPrice;
-    private Double finalPrice;
+    private Integer sumPrice;
+    private Integer finalPrice;
     private UploadedFile attachFile;
+    private Integer orderNumber;
 
     public OrderFollowUpForAdmin() {
         System.out.println("OrderFollowUpForAdmin CReated");
     }
 
-    public Double getSumPrice() {
+    public Integer getSumPrice() {
         if (unitPrice != null && number != null) {
-            return sumPrice = (unitPrice * number);
+            Double x = (unitPrice * number);
+            this.sumPrice = x.intValue();
+            return sumPrice;
         }
         return sumPrice;
     }
 
-    public Double getFinalPrice() {
+    public Integer getFinalPrice() {
         if (!(unitPrice == null || number == null || off == null)) {
-            return finalPrice = (unitPrice - (unitPrice * (off / 100))) * number;
+            Double x = (unitPrice - (unitPrice * (off / 100))) * number;
+            this.finalPrice = x.intValue();
+            return finalPrice;
         }
         return finalPrice;
     }
@@ -199,7 +204,8 @@ public class OrderFollowUpForAdmin {
             factor.setDateTime(currentDate);
             Users user = selectedOreder.getUserId();
             factor.setUserId(user);
-            factor.setSumPrice((unitPrice - (unitPrice * (off / 100))) * number);
+            Double x = (unitPrice - (unitPrice * (off / 100))) * number;
+            factor.setSumPrice(x.intValue());
             factor.setPFactor(true);
             factor.setPayCondition(0);
             if (off != null) {
@@ -299,13 +305,17 @@ public class OrderFollowUpForAdmin {
 
     public void upload(FileUploadEvent event) {
         try {
-              attachFile = event.getFile();
-        if (attachFile != null) {
-            uploadFile();
-        }
+            attachFile = event.getFile();
+            if (attachFile != null) {
+                uploadFile();
+//                HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+//                        .getExternalContext().getSession(false);
+//                selectedOreder = (Order) session.getAttribute("selectedOreder");
+//                System.out.println("here " + selectedOreder.getTableName() + selectedOreder.getId() + FilenameUtils.getName(attachFile.getFileName()));
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }     
+        }
 
     }
 
@@ -321,6 +331,7 @@ public class OrderFollowUpForAdmin {
             FacesMessage message = new FacesMessage("Succesful", attachFile.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         } catch (SQLException | IOException ex) {
+//        } catch (SQLException ex) {
             Logger.getLogger(OrderFollowUpForAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -342,4 +353,22 @@ public class OrderFollowUpForAdmin {
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        try {
+            System.out.println(orderNumber + "hereeeeeeeeeeee---------------------------------------" + OrderServices.selectOrderById(orderNumber));
+            System.out.println("here");
+            this.selectedOreder = OrderServices.selectOrderById(orderNumber);
+            HttpSession session = SessionBean.getSession();
+            session.setAttribute("selectedOreder", selectedOreder);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        this.orderNumber = orderNumber;
+    }
+
 }

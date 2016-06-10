@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/adminTemplate.xhtml">
+    <ui:define name="content">
+        <style>
+            .ui-icon-pdficon{
+                background-image: url(../../resources/images/pdf.png);
+            }
+            .ui-panelgrid td {
+                border-width: 0px;
+                border-style: solid;
+                border-color: inherit;
+                padding: 4px 10px;
+            }
+            .excelicon{
+                background-image: url('../../recources/images/excel.jpg');
+            }
+        </style>
+        <h:head>
+            <title>تحویل کار</title>
+        </h:head>
+        <h:body>     
+            <p:messages id="messages"  autoUpdate="true" closable="true" />
+
+            <p:panelGrid columns="2" styleClass="profile border" style="float: right;" >
+                <f:facet name="header" >
+                    جستجوی سفارش
+                </f:facet>
+                <p:row>
+                    <p:column>
+                        <h:outputText value="شماره سفارش" /> 
+                    </p:column>
+                    <p:column>
+                        <h:inputText id="ordernum" value="#{orderFollowUpForAdmin.orderNumber}" style="font-weight: bold;" required="true" requiredMessage="شماره سفارش  نمیتواند خالی باشد"/>
+                    </p:column>               
+                </p:row>
+                <p:row>
+                    <p:commandButton update=":adminform:orderDialogPanel" value="نمایش" onclick="PF('orderDialog').show()" title="نمایش">
+                    </p:commandButton>
+                </p:row>
+                <p:outputLabel/>
+            </p:panelGrid>
+            <p:dialog header="سفارش کاربر" position="center" widgetVar="orderDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true" width="50%">
+                <p:outputPanel id="orderDialogPanel" style="text-align:center;">
+                    <p:outputPanel  rendered="#{not empty orderFollowUpForAdmin.selectedOreder}">
+                        <p:panelGrid id="paneldesign" columns="4" style="width: 100%;text-align: right;direction: rtl;font-size: 14px" >
+                            <p:outputLabel value="شماره سفارش "  ></p:outputLabel>
+                            <p:outputLabel id="paperIdOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.id}" style="color: red;margin-left: 150px" ></p:outputLabel>
+                            <p:outputLabel value="نوع سفارش "  ></p:outputLabel>
+                            <p:outputLabel id="paperTypeOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.tablePersianName()}" style="color: red;margin-left: 150px" ></p:outputLabel>
+                            <p:outputLabel value="تاریخ سفارش "  ></p:outputLabel>
+                            <p:outputLabel id="paperDateOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.orderDate}" style="color: red;margin-left: 150px" ></p:outputLabel>
+                            <p:outputLabel value="شخص سفارش "  ></p:outputLabel>
+                            <p:outputLabel id="paperUserOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.nameOfUser()}" style="color: red;margin-left: 150px" ></p:outputLabel>
+                            <p:outputLabel value="وضعیت سفارش "  ></p:outputLabel>
+                            <p:outputLabel id="paperConOfOrder" value="#{orderFollowUpForAdmin.selectedOreder.conditionView()}" style="color: red;margin-left: 150px" ></p:outputLabel>
+                            <p:outputLabel/>
+                            <p:outputLabel/>
+                            <p:outputLabel/>
+                            <p:outputLabel value="تحویل کار"  rendered="#{orderFollowUpForAdmin.selectedOreder.condition gt 2}"/>
+                            <h:form enctype="multipart/form-data">
+                                <p:fileUpload fileUploadListener="#{orderFollowUpForAdmin.upload}" mode="advanced" dragDropSupport="false" label="آپلود" style="direction: ltr"
+                                              auto="true" sizeLimit="10000000" fileLimit="3" rendered="#{orderFollowUpForAdmin.selectedOreder.condition gt 2}"
+                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            </h:form>
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </p:dialog>
+
+        </h:body>        
+    </ui:define>
+</ui:composition>  

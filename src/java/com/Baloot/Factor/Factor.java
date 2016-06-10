@@ -45,7 +45,7 @@ public class Factor implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "sum_price")
-    private Double sumPrice;
+    private Integer sumPrice;
     @Column(name = "off")
     private Double off;
     @Column(name = "pay_condition")
@@ -73,12 +73,12 @@ public class Factor implements Serializable {
         this.id = id;
     }
 
-    public Double getSumPrice() {
+    public Integer getSumPrice() {
         System.out.println("here"+ sumPrice);
         return sumPrice;
     }
 
-    public void setSumPrice(Double sumPrice) {
+    public void setSumPrice(Integer sumPrice) {
         this.sumPrice = sumPrice;
     }
 

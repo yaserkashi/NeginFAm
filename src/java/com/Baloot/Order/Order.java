@@ -207,16 +207,25 @@ public class Order implements Serializable {
      * @return یک استرینگ فارسی
      */
     public String tablePersianName() {
-        if (tableName.equals("type")) {
-            return "تایپ";
-        } else if (tableName.equals("design")) {
-            return "طراحی";
-        } else if (tableName.equals("translate")) {
-            return "ترجمه";
-        } else if (tableName.equals("paper")) {
-            return "مقاله";
+        switch (tableName) {
+            case "type":
+                return "تایپ";
+            case "design":
+                return "طراحی";
+            case "translate":
+                return "ترجمه";
+            case "paper":
+                return "مقاله";
         }
         return "نامشخص";
+    }
+     /**
+     * نام فارسی اشخاص
+     *
+     * @return یک استرینگ فارسی
+     */
+    public String nameOfUser() {
+       return userId.getName();
     }
     
      public void downloadFinalFile() {

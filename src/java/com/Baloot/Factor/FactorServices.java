@@ -136,7 +136,7 @@ public class FactorServices {
 
                  //user_id,sum_price,off,pay_condition,p_factor,date_time
                  factor.setId(rs.getInt("id"));
-                 factor.setSumPrice(rs.getDouble("sum_price"));
+                 factor.setSumPrice(rs.getInt("sum_price"));
                  factor.setOff(rs.getDouble("off"));
                  factor.setPayCondition(rs.getInt("pay_condition"));
                  factor.setPFactor(rs.getBoolean("p_factor"));

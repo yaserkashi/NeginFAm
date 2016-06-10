@@ -450,6 +450,16 @@
                         </li>
                         <li> <a href="/NeginFAm4/pages/guest/contactus.xhtml">تماس با ما</a>
                         </li>
+                        <li style="float: left;margin-left: 70px;"  >
+                            <a href="" >#{login.user}</a>
+                            <ul>
+                                <li ><a href="/NeginFAm4/pages/admin/contentManagement.xhtml">خانه ی من</a>
+                                </li>                                
+                                <li >
+                                    <h:commandLink actionListener="#{login.logout()}" >خروج از سایت</h:commandLink>                                  
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -489,6 +499,7 @@
                                         <li ><a href="/NeginFAm4/pages/admin/financialManagement.xhtml"><span>مدیریت مالی کاربران</span></a></li>
                                         <li ><a href="/NeginFAm4/pages/admin/trackOrder.xhtml"><span>پیگیری سفارشات</span></a></li>
                                         <li ><a href="/NeginFAm4/pages/admin/requestReview.xhtml"><span>درخواست های استخدام</span></a></li>
+                                         <li ><a href="/NeginFAm4/pages/admin/finish.xhtml"><span>تحویل کار</span></a></li>
                                         <li ><a href="/NeginFAm4/pages/user/index1.xhtml"><span>ورود به پنل کاربری</span></a></li>
                                         
 

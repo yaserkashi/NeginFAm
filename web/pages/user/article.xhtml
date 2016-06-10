@@ -82,9 +82,7 @@
                                    ></p:outputLabel>
                     <p:outputLabel value="" ></p:outputLabel>
 
-                    <p:outputLabel value="آپلود فایل سفارش*" ></p:outputLabel>
-                    <p:commandButton value="آپلود" oncomplete="PF('upload').show();" />
-
+                
                     <p:outputLabel/> 
                     <p:commandButton value="ذخیره" id="p_commandButtonid"
                                      actionListener="#{paperForm.submit()}"                                    
@@ -93,24 +91,7 @@
 
                 </p:panelGrid>
 
-                <p:dialog widgetVar="upload" width="300" height="110" header="آپلود" >
-                    <h:form enctype="multipart/form-data" id="formUp">
-                        <p:messages id="message" closable="true"/>
-
-                        <f:facet name="header">
-                            <h:outputText value="آپلود"  /> 
-                        </f:facet>               
-                        <p:fileUpload fileUploadListener="#{paperForm.upload}" mode="advanced" dragDropSupport="false" style="direction: ltr" 
-                                      update="message" label="آپلود" auto="true" sizeLimit="10000000" fileLimit="3" 
-                                      required="true" requiredMessage="لطفا فایل طراحی را مشخص کنید." allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                        <p:outputLabel/> 
-                        <p:commandButton  oncomplete="PF('upload').hide();"
-                                          process="@parent"
-                                          update="@form"                
-                                          value="بستن پنجره" style="background: #2F84B1; color: window ; float: left ; font-size: 16px"/>
-
-                    </h:form>
-                </p:dialog>  
+              
             </h:form>
         </h:body>
 

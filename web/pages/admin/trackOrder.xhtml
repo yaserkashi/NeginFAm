@@ -31,7 +31,7 @@
                     <h:outputText value="#{trackorder.userId.username}" />
                 </p:column> 
 
-                <p:column headerText="نوع سفارش" >
+                <p:column headerText="نوع سفارش"  >
                     <h:outputText value="#{trackorder.tablePersianName()}" />
                 </p:column> 
                 <p:column headerText="تاریخ سفارش" sortBy="#{trackorder.orderDate}">
@@ -291,11 +291,7 @@
                                              style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
                             <p:commandButton value="تایید پرداخت"   action="#{orderFollowUpForAdmin.confirm()}" disabled="#{orderFollowUpForAdmin.selectedOreder.condition lt 2}"
                                              style="color: #FFF ;background:#0066ff;float: left ; font-size: 14px "/>
-                            <h:form enctype="multipart/form-data">
-                                <p:fileUpload fileUploadListener="#{orderFollowUpForAdmin.upload}" mode="advanced" dragDropSupport="false"
-                                              auto="true" sizeLimit="10000000" fileLimit="3" rendered="#{orderFollowUpForAdmin.selectedOreder.condition gt 2}"
-                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                            </h:form>
+                       
                         </p:panelGrid>
                     </p:outputPanel>
                 </p:outputPanel>
