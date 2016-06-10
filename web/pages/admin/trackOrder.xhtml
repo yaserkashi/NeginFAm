@@ -46,7 +46,7 @@
                     <h:outputText value="#{trackorder.conditionView()}"/>
                 </p:column> 
                 <p:column headerText="مشاهده سفارش"  style="width:32px;text-align: center">
-                    <p:commandButton update=":adminform:orderDialogPanel" icon="ui-icon-search" onclick="PF('orderDialog').show()" title="View">
+                    <p:commandButton update=":adminform:orderDialogPanel,:adminform:panelzirsefaresh" icon="ui-icon-search" onclick="PF('orderDialog').show()" title="View">
                         <f:setPropertyActionListener value="#{trackorder}" target="#{orderFollowUpForAdmin.selectedOreder}" />
                     </p:commandButton>
                 </p:column>
@@ -276,9 +276,9 @@
                                 </p:panelGrid>
                             </h:body>
 
-                        </p:panel>
+                        </p:panel  >
                         <p:inputText style="" id="idOfOrderForAdmin" value="#{orderFollowUpForAdmin.selectedOreder.id}" />
-                        <p:panelGrid columns="6" >
+                        <p:panelGrid columns="6" id="panelzirsefaresh" rendered="#{orderFollowUpForUser.selectedOreder.condition != 5 }">
                             <p:commandButton value="انصراف"  action="#{orderFollowUpForAdmin.cancel()}" 
                                              style=";float: left ; font-size: 14px ;" disabled="#{ orderFollowUpForAdmin.selectedOreder.condition gt 2}">
                                 <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />

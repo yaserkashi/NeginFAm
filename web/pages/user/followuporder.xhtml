@@ -18,12 +18,12 @@
         </h:head>
         <h:body>
             <div>
-                     <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser}" var="followup"
+                <p:dataTable value="#{orderFollowUpForUser.listOfOrdreForUser}" var="followup"
                              styleClass="dataTable" id="followtb11" rowKey="#{followup.id}" rows="10"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                         paginator="true"  rowsPerPageTemplate="6,12,16"
-                 style="direction: rtl">
-                
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true"  rowsPerPageTemplate="6,12,16"
+                             style="direction: rtl">
+
                     <p:column headerText="ردیف">
                         <h:outputText value="#{orderFollowUpForUser.listOfOrdreForUser.indexOf(followup)+1}" />
                     </p:column> 
@@ -107,7 +107,7 @@
                                     <p:outputLabel value="توضیحات " ></p:outputLabel>
                                     <p:outputLabel value="#{orderFollowUpForUser.design.explain} " style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
-                                <p:panelGrid columns="3" >
+                                <p:panelGrid columns="3" rendered="#{orderFollowUpForUser.selectedOreder.condition != 5 }">
                                     <p:commandButton value="انصراف"  action="#{orderFollowUpForUser.cancelOrder()}"
                                                      style="float: left ; font-size: 14px ">
                                         <p:confirm header="هشدار!!" message="از انصراف اطمینان دارید؟"   />
@@ -194,7 +194,7 @@
                                 </p:panelGrid>
 
 
-                                <p:panelGrid columns="3" >
+                                <p:panelGrid columns="3" rendered="#{orderFollowUpForUser.selectedOreder.condition != 5 }">
                                     <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
                                                      style=";float:left ; font-size: 14px ;">
@@ -279,7 +279,7 @@
                                     <p:outputLabel value="#{orderFollowUpForUser.type.explain}" style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
 
-                                <p:panelGrid columns="3" >
+                                <p:panelGrid columns="3" rendered="#{orderFollowUpForUser.selectedOreder.condition != 5 }">
                                     <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
                                                      style=";float:left ; font-size: 14px ;">
@@ -357,8 +357,7 @@
                                     <p:outputLabel value="#{orderFollowUpForUser.translate.explain}" style="color: red" ></p:outputLabel>
                                 </p:panelGrid>
 
-
-                                <p:panelGrid columns="3" >
+                                <p:panelGrid columns="3"  rendered="#{orderFollowUpForUser.selectedOreder.condition != 5 }">
                                     <p:commandButton value="انصراف"  onclick="
                                             cancel([{name: 'msg', value: document.getElementById('idOfOrder').value}]);"
                                                      style=";float: left ; font-size: 14px ;">
