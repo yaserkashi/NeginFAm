@@ -40,8 +40,8 @@
                     <f:facet name="header">
                         مشخصات خریدار
                     </f:facet>
-                    <p:outputLabel value="نام شخص: #{login.user}" style="padding: 10px" /> 
-                    <p:outputLabel value="شماره تلفن: 0912111111111" style="padding: 10px" />
+                    <p:outputLabel value="نام شخص: #{orderFollowUpForAdmin.selectedOreder.userId.name}#{orderFollowUpForAdmin.selectedOreder.userId.family}" style="padding: 10px" /> 
+                    <p:outputLabel value="شماره تلفن: #{orderFollowUpForAdmin.selectedOreder.userId.phoneNum}" style="padding: 10px" />
                     <p:outputLabel value="آدرس: یزد- خیابان کاشانی- کو چه ی الهام- پلاک 12"  style="padding: 10px"/>
                     <p:outputLabel value=""  style="padding: 40px"/>
                 </p:panelGrid>

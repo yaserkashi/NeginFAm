@@ -41,8 +41,8 @@
                     <f:facet name="header">
                         مشخصات خریدار
                     </f:facet>
-                    <p:outputLabel value="نام شخص: #{login.user}" style="padding: 10px" /> 
-                    <p:outputLabel value="شماره تلفن: 0912111111111" style="padding: 10px" />
+                    <p:outputLabel value="نام شخص: #{orderFollowUpForUser.selectedOreder.userId.name}#{orderFollowUpForUser.selectedOreder.userId.family}" style="padding: 10px" /> 
+                    <p:outputLabel value="شماره تلفن: #{orderFollowUpForUser.selectedOreder.userId.phoneNum}" style="padding: 10px" />
                     <p:outputLabel value="آدرس: یزد- خیابان کاشانی- کو چه ی الهام- پلاک 12"  style="padding: 10px"/>
                     <p:outputLabel value=""  style="padding: 40px"/>
                 </p:panelGrid>
@@ -104,11 +104,6 @@
                 <a href="#{orderFollowUpForUser.payLink()}" >پرداخت</a>
               
             </p:panelGrid>
-
-            <p:inputText value="#{orderFollowUpForUser.factorItemForSelectedOrder.factorId.sumPrice}" />
-            <p:inputText value="#{orderFollowUpForUser.selectedOreder}" />
-
-
             
 
         </h:body>
