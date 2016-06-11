@@ -196,6 +196,7 @@ public class OrderFollowUpForUser {
      * @return لینک پرداخت
      */
     public String payLink() {
+        
         try {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                     .getExternalContext().getSession(false);
@@ -205,7 +206,9 @@ public class OrderFollowUpForUser {
             System.out.println(item.getNumber());
             try {
                 PayLine pay = new PayLine();
-                System.out.println("HERE IS PAY");
+               
+            double price;
+                price = item.getFactorId().getSumPrice();
                 String result = pay.Send("http://payline.ir/payment-test/gateway-send", "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567", item.getFactorId().getSumPrice(), "localhost:8080/NeginFAm4/pages/user/resultPayFactor.xhtml?faces-redirect=true");
                 System.out.println(result);
                 if (Integer.parseInt(result) > 0) {
